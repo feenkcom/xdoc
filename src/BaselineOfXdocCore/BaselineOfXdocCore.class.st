@@ -1,11 +1,11 @@
 Class {
-	#name : #BaselineOfFeenkXdocCore,
+	#name : #BaselineOfXdocCore,
 	#superclass : #BaselineOf,
-	#category : #BaselineOfFeenkXdocCore
+	#category : #BaselineOfXdocCore
 }
 
 { #category : #baseline }
-BaselineOfFeenkXdocCore >> baseline: spec [
+BaselineOfXdocCore >> baseline: spec [
 	<baseline>
 	spec for: #common do: [ spec
 		configuration: 'NeoJSON' with: [ spec
