@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'title',
 		'description',
-		'author'
+		'author',
+		'documents'
 	],
 	#category : #'XDoc-Core-Model'
 }
@@ -37,12 +38,27 @@ XdManifest >> description: aString [
 	description := aString
 ]
 
+{ #category : #accessing }
+XdManifest >> documents [
+	<return: #Array of: #XdDocument>
+	^ documents
+]
+
+{ #category : #accessing }
+XdManifest >> documents: anArrayOfDocuments [
+	self 
+		assert: [ anArrayOfDocuments notNil ] 
+		description: [ 'Documents must be non-nil' ].
+	documents := anArrayOfDocuments
+]
+
 { #category : #initialization }
 XdManifest >> initialize [
 	super initialize.
 	author := ''.
 	description := ''.
 	title := ''.
+	documents := #()
 ]
 
 { #category : #accessing }

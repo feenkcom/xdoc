@@ -176,6 +176,18 @@ XdReaderWriterExamples >> reader [
 	^ aReader
 ]
 
+{ #category : #accessing }
+XdReaderWriterExamples >> textFileContent [
+	<gtExample>
+	^ 'UNICODE příliš žluťoučký kůň úpěl ďábelské ódy'
+]
+
+{ #category : #accessing }
+XdReaderWriterExamples >> textFileName [
+	<gtExample>
+	^ 'text-document.txt'
+]
+
 { #category : #writing }
 XdReaderWriterExamples >> writeBasicDocument [
 	<gtExample>
@@ -188,7 +200,6 @@ XdReaderWriterExamples >> writeBasicDocument [
 		write.
 	self assert: aXdFile notNil.
 	self assert: aXdFile manifest notNil.
-	"^^^ manifest was document before, I think manifest is better name"
 	self assert: aXdFile manifest title equals: self documentTitle.
 	self
 		assert: aXdFile manifest description
@@ -197,11 +208,41 @@ XdReaderWriterExamples >> writeBasicDocument [
 		assert: aXdFile manifest author
 		equals: self documentAuthorName.
 	self assert: aXdFile reference notNil.
-	"^^^ maybe we want also in-memory bytes (instead of disk files)
-	then it could be called aXdFile reference (this could be XdFileReference or XdBytesReference)"
 	self assert: aXdFile exists.
-	"^^^ means reference (file or bytes) exists, it should be delegated to the Xd... 
-	if we follow this idea"
+	^ aXdFile
+]
+
+{ #category : #writing }
+XdReaderWriterExamples >> writeTextDocument [
+	<gtExample>
+	| aWriter aXdFile |
+	aWriter := self writer.
+	aXdFile := aWriter
+		text;
+		attachment: self textFileName text: self textFileContent;
+		write.
+	self assert: aXdFile notNil.
+	self assert: aXdFile manifest notNil.
+	self assert: aXdFile manifest documents size equals: 1.
+	self
+		assert: aXdFile manifest documents first type
+		equals: XdType text.
+	self
+		assert: aXdFile manifest documents first components size
+		equals: 1.
+	self
+		assert: aXdFile manifest documents first components first id
+		equals: 1.
+	self assert: aXdFile manifest attachments size equals: 1.
+	self assert: aXdFile manifest attachments first link equals: 1.
+	self
+		assert: aXdFile manifest attachments first fileName
+		equals: self textFileName.
+	self
+		assert: aXdFile manifest attachments first fileSize
+		equals: self textFileContent size.
+	self assert: aXdFile reference notNil.
+	self assert: aXdFile exists.
 	^ aXdFile
 ]
 
