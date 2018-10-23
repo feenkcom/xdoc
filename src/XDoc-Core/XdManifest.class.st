@@ -1,5 +1,5 @@
 Class {
 	#name : #XdManifest,
-	#superclass : #XdObject,
+	#superclass : #Object,
 	#category : #'XDoc-Core-Model'
 }
