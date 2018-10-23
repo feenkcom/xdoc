@@ -1,6 +1,8 @@
 Class {
 	#name : #XdReaderWriterExamples,
 	#superclass : #Object,
+	#traits : 'XdJsonMappingTrait',
+	#classTraits : 'XdJsonMappingTrait classTrait',
 	#category : #'XDoc-Core-Examples'
 }
 
@@ -36,6 +38,26 @@ XdReaderWriterExamples >> documentDescription [
 XdReaderWriterExamples >> documentTitle [
 	<gtExample>
 	^ 'Title of a document'
+]
+
+{ #category : #'basic objects' }
+XdReaderWriterExamples >> emptyManifest [
+	<gtExample>
+	| aManifest |
+	aManifest := XdManifest new.
+	self assert: aManifest title equals: ''.
+	self assert: aManifest description equals: ''.
+	self assert: aManifest author equals: ''.
+	^ aManifest
+]
+
+{ #category : #'json mapping' }
+XdReaderWriterExamples >> emptyManifestJsonString [
+	<gtExample>
+	| aJsonString |
+	aJsonString := self json writeManifest: self emptyManifest.
+	self assert: aJsonString equals: '{"title":"","description":"","author":""}'.
+	^ aJsonString
 ]
 
 { #category : #'basic objects' }
@@ -95,6 +117,33 @@ XdReaderWriterExamples >> fileReference [
 	^ aReference
 ]
 
+{ #category : #'basic objects' }
+XdReaderWriterExamples >> manifest [
+	<gtExample>
+	| aManifest |
+	aManifest := self emptyManifest.
+	aManifest title: self documentTitle.
+	aManifest description: self documentDescription.
+	aManifest author: self documentAuthorName.
+	self assert: aManifest title equals: self documentTitle.
+	self assert: aManifest description equals: self documentDescription.
+	self assert: aManifest author equals: self documentAuthorName.
+	^ aManifest
+]
+
+{ #category : #'json mapping' }
+XdReaderWriterExamples >> manifestJsonString [
+	<gtExample>
+	| aJsonString |
+	aJsonString := self json writeManifest: self manifest.
+	self 
+		assert: aJsonString 
+		equals: '{"title":"', self documentTitle, 
+			'","description":"', self documentDescription,
+			'","author":"', self documentAuthorName, '"}'.
+	^ aJsonString
+]
+
 { #category : #reading }
 XdReaderWriterExamples >> readBasicDocument [
 	<gtExample>
@@ -150,9 +199,9 @@ XdReaderWriterExamples >> writeBasicDocument [
 		assert: aXdFile manifest description
 		equals: self documentDescription.
 	self
-		assert: aXdFile manifest authorName
+		assert: aXdFile manifest author
 		equals: self documentAuthorName.
-	self assert: aXdFile fileReference notNil.
+	self assert: aXdFile reference notNil.
 	"^^^ maybe we want also in-memory bytes (instead of disk files)
 	then it could be called aXdFile reference (this could be XdFileReference or XdBytesReference)"
 	self assert: aXdFile exists.

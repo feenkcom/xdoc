@@ -12,6 +12,11 @@ XdReference class >> bytes [
 ]
 
 { #category : #requirements }
+XdReference class >> bytes: aByteArray [
+	^ self bytes bytes: aByteArray
+]
+
+{ #category : #requirements }
 XdReference class >> empty [
 	^ XdEmptyReference uniqueInstance
 ]

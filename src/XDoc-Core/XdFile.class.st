@@ -8,6 +8,12 @@ Class {
 	#category : #'XDoc-Core-Model'
 }
 
+{ #category : #testing }
+XdFile >> exists [
+	<return: #Boolean>
+	^ self reference exists
+]
+
 { #category : #initialization }
 XdFile >> initialize [
 	super initialize.
