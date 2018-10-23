@@ -14,7 +14,7 @@ XdReaderWriterExamples >> bytes [
 XdReaderWriterExamples >> bytesReference [
 	<gtExample>
 	| aReference |
-	aReference := XdBytesReference new.
+	aReference := XdReference bytes.
 	self assert: aReference bytes isNil.
 	self assert: aReference exists not.
 	^ aReference
@@ -39,6 +39,15 @@ XdReaderWriterExamples >> documentTitle [
 ]
 
 { #category : #'basic objects' }
+XdReaderWriterExamples >> emptyReference [
+	<gtExample>
+	| aReference |
+	aReference := XdReference empty.
+	self assert: aReference exists not.
+	^ aReference
+]
+
+{ #category : #'basic objects' }
 XdReaderWriterExamples >> existingBytesReference [
 	<gtExample>
 	| aReference |
@@ -54,14 +63,24 @@ XdReaderWriterExamples >> existingFileReference [
 	<gtExample>
 	| aReference |
 	aReference := self fileReference.
-	aReference file: self file.
-	self assert: aReference file equals: self file.
+	aReference file: self fileLocator.
+	self assert: aReference file equals: self fileLocator.
 	self assert: aReference exists.
 	^ aReference
 ]
 
-{ #category : #accessing }
+{ #category : #'reader / writer' }
 XdReaderWriterExamples >> file [
+	<gtExample>
+	| aFile |
+	aFile := XdFile new.
+	self assert: aFile manifest notNil.
+	self assert: aFile reference notNil.
+	^ aFile
+]
+
+{ #category : #accessing }
+XdReaderWriterExamples >> fileLocator [
 	<gtExample>
 	^ FileLocator image
 ]
@@ -70,7 +89,7 @@ XdReaderWriterExamples >> file [
 XdReaderWriterExamples >> fileReference [
 	<gtExample>
 	| aReference |
-	aReference := XdFileReference new.
+	aReference := XdReference file.
 	self assert: aReference file isNil.
 	self assert: aReference exists not.
 	^ aReference
