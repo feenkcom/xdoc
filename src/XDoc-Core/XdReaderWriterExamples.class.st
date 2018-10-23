@@ -155,20 +155,15 @@ XdReaderWriterExamples >> readBasicDocument [
 		read.
 	self assert: aXdReadFile notNil.
 	self assert: aXdReadFile manifest notNil.
-	"^^^ manifest was document before, I think manifest is better name"
 	self assert: aXdReadFile manifest title equals: self documentTitle.
 	self
 		assert: aXdReadFile manifest description
 		equals: self documentDescription.
 	self
-		assert: aXdReadFile manifest authorName
+		assert: aXdReadFile manifest author
 		equals: self documentAuthorName.
-	self assert: aXdReadFile fileReference notNil.
-	"^^^ maybe we want also in-memory bytes (instead of disk files)
-	then it could be called aXdFile reference (this could be XdFileReference or XdBytesReference)"
+	self assert: aXdReadFile reference notNil.
 	self assert: aXdReadFile exists.
-	"^^^ means reference (file or bytes) exists, it should be delegated to the Xd... 
-	if we follow this idea"
 	^ aXdReadFile
 ]
 

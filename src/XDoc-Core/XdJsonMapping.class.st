@@ -13,6 +13,21 @@ XdJsonMapping class >> manifestMappingFor: aNeoJSONMapper [
 			mapping mapAccessor: #author ].
 ]
 
+{ #category : #reading }
+XdJsonMapping class >> read: aJsonSchema withMapping: aMessageSymbol on: aReadStream [ 
+	"Read a JSON string using json schema and return an object.
+	The messageSymbol variable is a message to configure mapping between JSON and objects."
+	| reader |
+	reader := (NeoJSONReader on: aReadStream).
+	self perform: aMessageSymbol with: reader.
+	^ reader nextAs: aJsonSchema
+]
+
+{ #category : #reading }
+XdJsonMapping class >> readManifest: aJsonManifest [
+	^ self read: XdManifest withMapping: #manifestMappingFor: on: aJsonManifest readStream
+]
+
 { #category : #writing }
 XdJsonMapping class >> write: aXdObject mappedTo: mappingSymbol [ 
 	"Return a JSON string representation of the XD object."

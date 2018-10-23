@@ -26,3 +26,11 @@ XdBytesReference >> exists [
 	<return: #Boolean>
 	^ self bytes notNil
 ]
+
+{ #category : #streams }
+XdBytesReference >> readStream [
+	self 
+		assert: [ self exists ]
+		description: [ 'Bytes must be defined before reading them' ].
+	^ self bytes readStream
+]

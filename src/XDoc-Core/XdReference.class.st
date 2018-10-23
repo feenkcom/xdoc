@@ -3,6 +3,9 @@ Class {
 	#superclass : #Object,
 	#traits : 'GtAssertingTrait',
 	#classTraits : 'GtAssertingTrait classTrait',
+	#instVars : [
+		'aStream'
+	],
 	#category : #'XDoc-Core-Model'
 }
 
@@ -30,4 +33,17 @@ XdReference class >> file [
 XdReference >> exists [
 	<return: #Boolean>
 	^ self subclassResponsibility
+]
+
+{ #category : #streams }
+XdReference >> readStream [
+	"Return a binary read stream"
+	^ self subclassResponsibility
+]
+
+{ #category : #streams }
+XdReference >> readStreamDo: aBlock [
+	aStream := self readStream.
+	^ [ aBlock value: aStream ]
+		ensure: [ aStream close ]
 ]
