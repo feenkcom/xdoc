@@ -19,9 +19,7 @@ XdReader >> initialize [
 XdReader >> read [
 	<return: #XdFile>
 	| aZip |
-	aZip := ZipArchive new.
-	self reference readStreamDo: [ :anInput | 
-		aZip readFrom: anInput ].
+	aZip := self reference zip.
 	^ aZip members 
 		detect: [ :eachMember | eachMember fileName = self constants manifestFileName ]
 		ifFound: [ :aMember | 

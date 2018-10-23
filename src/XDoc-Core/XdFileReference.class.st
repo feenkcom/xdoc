@@ -26,3 +26,9 @@ XdFileReference >> file: aFileReference [
 		description: [ 'File reference must be non-nil' ].
 	file := aFileReference
 ]
+
+{ #category : #streams }
+XdFileReference >> readStream [
+	"Return a binary read stream"
+	^ self file binaryReadStream
+]

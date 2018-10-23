@@ -27,3 +27,9 @@ XdEmptyReference >> exists [
 	<return: #Boolean>
 	^ false
 ]
+
+{ #category : #streams }
+XdEmptyReference >> readStream [
+	"Return a binary read stream"
+	^ ByteArray new readStream
+]

@@ -1,11 +1,8 @@
 Class {
 	#name : #XdReference,
 	#superclass : #Object,
-	#traits : 'GtAssertingTrait',
-	#classTraits : 'GtAssertingTrait classTrait',
-	#instVars : [
-		'aStream'
-	],
+	#traits : 'GtAssertingTrait + XdConstantsTrait + XdJsonMappingTrait',
+	#classTraits : 'GtAssertingTrait classTrait + XdConstantsTrait classTrait + XdJsonMappingTrait classTrait',
 	#category : #'XDoc-Core-Model'
 }
 
@@ -35,6 +32,15 @@ XdReference >> exists [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'gt-extension' }
+XdReference >> gtFilesFor: aView [
+	<gtView>
+	self exists ifFalse: [ ^ aView empty ].
+	^ aView list
+		title: 'Files';
+		items: [ self zip members ]
+]
+
 { #category : #streams }
 XdReference >> readStream [
 	"Return a binary read stream"
@@ -43,7 +49,20 @@ XdReference >> readStream [
 
 { #category : #streams }
 XdReference >> readStreamDo: aBlock [
+	| aStream |
 	aStream := self readStream.
 	^ [ aBlock value: aStream ]
 		ensure: [ aStream close ]
+]
+
+{ #category : #accessing }
+XdReference >> zip [
+	<return: #ZipArchive>
+	| aZip |
+	aZip := ZipArchive new.
+	self readStreamDo: [ :anInput | 
+		[ aZip readFrom: anInput ] 
+			on: Error 
+			do: [ :anError | "aZip addString: anError printString as: 'error.txt'" ] ].
+	^ aZip
 ]

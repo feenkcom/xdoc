@@ -14,6 +14,22 @@ XdFile >> exists [
 	^ self reference exists
 ]
 
+{ #category : #'gt-extension' }
+XdFile >> gitReferenceFor: aView [
+	<gtView>
+	^ aView list
+		title: 'Files';
+		items: [ self reference zip members ]
+]
+
+{ #category : #'gt-extension' }
+XdFile >> gtManifestFor: aView [
+	<gtView>
+	^ (self manifest gtRawFor: aView)
+		title: 'Manifest';
+		priority: 1
+]
+
 { #category : #initialization }
 XdFile >> initialize [
 	super initialize.
