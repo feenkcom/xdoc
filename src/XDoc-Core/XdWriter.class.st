@@ -5,7 +5,8 @@ Class {
 	#classTraits : 'XdJsonMappingTrait classTrait + XdConstantsTrait classTrait',
 	#instVars : [
 		'manifest',
-		'zip'
+		'zip',
+		'idGenerator'
 	],
 	#category : #'XDoc-Core-Writer'
 }
@@ -17,14 +18,14 @@ XdWriter >> attachment: aFileNameString text: aContentString [
 		assert: [ self manifest documents notEmpty ]
 		description: [ 'A document must be defined before adding attachments' ].
 	anAttachment := XdAttachment new.
-	anAttachment id: self nextId.
+	anAttachment id: idGenerator nextId.
 	anAttachment fileName: aFileNameString.
 	anAttachment fileSize: aContentString size.
 	aComponent := XdComponent new.
 	aComponent link: anAttachment id.
 	aDocument := self manifest documents last.
 	aDocument components: (aDocument components copyWith: aComponent).
-	self manifest documents: (self manifest documents copyWith: aDocument).
+	self manifest attachments: (self manifest attachments copyWith: anAttachment).
 
 	"add file"
 	zip addString: aContentString as: aFileNameString
@@ -48,7 +49,7 @@ XdWriter >> documentType: aXdDocumentType [
 		description: [ 'Document type must be non-nil' ].
 	aDocument := XdDocument new.
 	aDocument type: aXdDocumentType.
-	self manifest documents: (self manifest copyWith: aDocument).
+	self manifest documents: (self manifest documents copyWith: aDocument).
 ]
 
 { #category : #initialization }
@@ -56,6 +57,7 @@ XdWriter >> initialize [
 	super initialize.
 	manifest := XdManifest new.
 	zip := ZipArchive new.
+	idGenerator := XdSequenceNumberGenerator new.
 ]
 
 { #category : #accessing }

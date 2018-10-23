@@ -5,10 +5,25 @@ Class {
 		'title',
 		'description',
 		'author',
-		'documents'
+		'documents',
+		'attachments'
 	],
 	#category : #'XDoc-Core-Model'
 }
+
+{ #category : #accessing }
+XdManifest >> attachments [
+	<return: #Array of: #XdAttachment>
+	^ attachments
+]
+
+{ #category : #accessing }
+XdManifest >> attachments: anArrayOfAttachments [
+	self 
+		assert: [ anArrayOfAttachments notNil ] 
+		description: [ 'Attachments must be non-nil' ].
+	attachments := anArrayOfAttachments
+]
 
 { #category : #accessing }
 XdManifest >> author [
@@ -58,7 +73,8 @@ XdManifest >> initialize [
 	author := ''.
 	description := ''.
 	title := ''.
-	documents := #()
+	documents := #().
+	attachments := #().
 ]
 
 { #category : #accessing }

@@ -167,6 +167,41 @@ XdReaderWriterExamples >> readBasicDocument [
 	^ aXdReadFile
 ]
 
+{ #category : #reading }
+XdReaderWriterExamples >> readTextDocument [
+	<gtExample>
+	| aWrittenXdFile aReader aXdReadFile |
+	aWrittenXdFile := self writeTextDocument.
+	aReader := self reader.
+	aXdReadFile := aReader
+		reference: aWrittenXdFile reference;
+		read.
+	self assert: aXdReadFile notNil.
+	self assert: aXdReadFile manifest notNil.
+	self assert: aXdReadFile manifest documents size equals: 1.
+	self
+		assert: aXdReadFile manifest documents first type
+		equals: XdType text.
+	self
+		assert: aXdReadFile manifest documents first components size
+		equals: 1.
+	self
+		assert: aXdReadFile manifest documents first components first link
+		equals: '1'.
+	self assert: aXdReadFile manifest attachments size equals: 1.
+	self assert: aXdReadFile manifest attachments first id equals: '1'.
+	self
+		assert: aXdReadFile manifest attachments first fileName
+		equals: self textFileName.
+	self
+		assert: aXdReadFile manifest attachments first fileSize
+		equals: self textFileContent size.
+	self assert: aXdReadFile reference notNil.
+	self assert: aXdReadFile exists.
+	^ aXdReadFile
+	
+]
+
 { #category : #'reader / writer' }
 XdReaderWriterExamples >> reader [
 	<gtExample>
@@ -231,10 +266,10 @@ XdReaderWriterExamples >> writeTextDocument [
 		assert: aXdFile manifest documents first components size
 		equals: 1.
 	self
-		assert: aXdFile manifest documents first components first id
-		equals: 1.
+		assert: aXdFile manifest documents first components first link
+		equals: '1'.
 	self assert: aXdFile manifest attachments size equals: 1.
-	self assert: aXdFile manifest attachments first link equals: 1.
+	self assert: aXdFile manifest attachments first id equals: '1'.
 	self
 		assert: aXdFile manifest attachments first fileName
 		equals: self textFileName.
