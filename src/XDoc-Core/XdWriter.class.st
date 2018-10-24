@@ -98,12 +98,10 @@ XdWriter >> write [
 
 { #category : #'private - writing' }
 XdWriter >> writeTo: aWriteStream [
-	| aZip |
-	aZip := ZipArchive new.
-	aZip 
+	zip 
 		addString: (self json writeManifest: self manifest) utf8Encoded
 		as: self constants manifestFileName.
 	"self document attachments do: [ :eachAttachment | 
 		self writeAttachment: eachAttachment to: aZip ]."
-	aZip writeTo: aWriteStream.
+	zip writeTo: aWriteStream.
 ]

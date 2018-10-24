@@ -278,6 +278,7 @@ XdReaderWriterExamples >> writeTextDocument [
 		equals: self textFileContent size.
 	self assert: aXdFile reference notNil.
 	self assert: aXdFile exists.
+	self assert: aXdFile reference zip members size equals: 2.
 	^ aXdFile
 ]
 
