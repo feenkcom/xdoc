@@ -1,8 +1,8 @@
 Class {
 	#name : #XdReader,
 	#superclass : #Object,
-	#traits : 'XdJsonMappingTrait + XdConstantsTrait',
-	#classTraits : 'XdJsonMappingTrait classTrait + XdConstantsTrait classTrait',
+	#traits : 'XdManifestJsonMappingTrait + XdConstantsTrait',
+	#classTraits : 'XdManifestJsonMappingTrait classTrait + XdConstantsTrait classTrait',
 	#instVars : [
 		'reference'
 	],
@@ -13,6 +13,11 @@ Class {
 XdReader >> initialize [
 	super initialize.
 	reference := XdReference empty.
+]
+
+{ #category : #accessing }
+XdReader >> json [
+	^ XdManifestJsonMapping
 ]
 
 { #category : #reading }

@@ -1,8 +1,8 @@
 Class {
 	#name : #XdWriter,
 	#superclass : #Object,
-	#traits : 'XdJsonMappingTrait + XdConstantsTrait',
-	#classTraits : 'XdJsonMappingTrait classTrait + XdConstantsTrait classTrait',
+	#traits : 'XdManifestJsonMappingTrait + XdConstantsTrait + XdPlayBookJsonMappingTrait',
+	#classTraits : 'XdManifestJsonMappingTrait classTrait + XdConstantsTrait classTrait + XdPlayBookJsonMappingTrait classTrait',
 	#instVars : [
 		'manifest',
 		'zip',
@@ -61,6 +61,11 @@ XdWriter >> initialize [
 ]
 
 { #category : #accessing }
+XdWriter >> json [
+	^ XdManifestJsonMapping
+]
+
+{ #category : #accessing }
 XdWriter >> manifest [
 	<return: #XdManifest>
 	^ manifest
@@ -72,6 +77,15 @@ XdWriter >> manifest: aXdManifest [
 		assert: [ aXdManifest notNil ] 
 		description: [ 'Manifest must be non-nil' ].
 	manifest := aXdManifest
+]
+
+{ #category : #writing }
+XdWriter >> playbook: aPlayBook [
+	| aJsonString |
+	aJsonString := self playBookJsonMapper writePlayBook: aPlayBook.
+	self 
+		documentType: XdPlayBookType;
+		attachment: 'main', self constants playBookExtension text: aJsonString
 ]
 
 { #category : #writing }

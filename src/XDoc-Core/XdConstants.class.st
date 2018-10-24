@@ -8,3 +8,8 @@ Class {
 XdConstants class >> manifestFileName [
 	^ 'manifest.json'
 ]
+
+{ #category : #accessing }
+XdConstants class >> playBookExtension [
+	^ '.playbook'
+]

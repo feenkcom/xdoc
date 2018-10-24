@@ -1,14 +1,11 @@
 Class {
-	#name : #XdJsonMapping,
+	#name : #XdManifestJsonMapping,
 	#superclass : #Object,
-	#classVars : [
-		'OldXdAttachment'
-	],
 	#category : #'XDoc-Core-Json'
 }
 
 { #category : #mapping }
-XdJsonMapping class >> attachmentMappingFor: aNeoJSONMapper [
+XdManifestJsonMapping class >> attachmentMappingFor: aNeoJSONMapper [
 	aNeoJSONMapper
 		for: XdAttachment do: [ :mapping |
 	      mapping mapAccessor: #id.
@@ -17,7 +14,7 @@ XdJsonMapping class >> attachmentMappingFor: aNeoJSONMapper [
 ]
 
 { #category : #'mapping - document' }
-XdJsonMapping class >> collectionOfAttachmentsMappingFor: aNeoJSONMapper [
+XdManifestJsonMapping class >> collectionOfAttachmentsMappingFor: aNeoJSONMapper [
 	aNeoJSONMapper
 		for: #CollectionOfAttachments customDo: [ :mapping |
 			mapping listOfElementSchema: XdAttachment ].
@@ -25,7 +22,7 @@ XdJsonMapping class >> collectionOfAttachmentsMappingFor: aNeoJSONMapper [
 ]
 
 { #category : #mapping }
-XdJsonMapping class >> collectionOfComponentsMappingFor: aNeoJSONMapper [
+XdManifestJsonMapping class >> collectionOfComponentsMappingFor: aNeoJSONMapper [
 	aNeoJSONMapper
 		for: #CollectionOfComponents customDo: [ :mapping |
 			mapping listOfElementSchema: XdComponent ].
@@ -34,7 +31,7 @@ XdJsonMapping class >> collectionOfComponentsMappingFor: aNeoJSONMapper [
 ]
 
 { #category : #'mapping - document' }
-XdJsonMapping class >> collectionOfDocumentsMappingFor: aNeoJSONMapper [
+XdManifestJsonMapping class >> collectionOfDocumentsMappingFor: aNeoJSONMapper [
 	aNeoJSONMapper
 		for: #CollectionOfDocuments customDo: [ :mapping |
 			mapping listOfElementSchema: XdDocument ].
@@ -42,14 +39,14 @@ XdJsonMapping class >> collectionOfDocumentsMappingFor: aNeoJSONMapper [
 ]
 
 { #category : #mapping }
-XdJsonMapping class >> componentMappingFor: aNeoJSONMapper [
+XdManifestJsonMapping class >> componentMappingFor: aNeoJSONMapper [
 	aNeoJSONMapper
 		for: XdComponent do: [ :mapping |
 	      mapping mapAccessor: #link.].
 ]
 
 { #category : #'mapping - document' }
-XdJsonMapping class >> documentMappingFor: aNeoJSONMapper [
+XdManifestJsonMapping class >> documentMappingFor: aNeoJSONMapper [
 	aNeoJSONMapper
 		for: XdDocument do: [ :mapping |
 	      (mapping mapAccessor: #type) valueSchema: #DocumentType.
@@ -60,7 +57,7 @@ XdJsonMapping class >> documentMappingFor: aNeoJSONMapper [
 ]
 
 { #category : #'mapping - document' }
-XdJsonMapping class >> documentTypeMappingFor: aNeoJSONMapper [
+XdManifestJsonMapping class >> documentTypeMappingFor: aNeoJSONMapper [
 	aNeoJSONMapper
 		for: #DocumentType customDo: [ :mapping |
 			mapping 
@@ -70,7 +67,7 @@ XdJsonMapping class >> documentTypeMappingFor: aNeoJSONMapper [
 ]
 
 { #category : #mapping }
-XdJsonMapping class >> manifestMappingFor: aNeoJSONMapper [
+XdManifestJsonMapping class >> manifestMappingFor: aNeoJSONMapper [
 	aNeoJSONMapper
 		for: XdManifest do: [ :mapping |
 	      mapping mapAccessor: #title.
@@ -85,7 +82,7 @@ XdJsonMapping class >> manifestMappingFor: aNeoJSONMapper [
 ]
 
 { #category : #reading }
-XdJsonMapping class >> read: aJsonSchema withMapping: aMessageSymbol on: aReadStream [ 
+XdManifestJsonMapping class >> read: aJsonSchema withMapping: aMessageSymbol on: aReadStream [ 
 	"Read a JSON string using json schema and return an object.
 	The messageSymbol variable is a message to configure mapping between JSON and objects."
 	| reader |
@@ -95,19 +92,19 @@ XdJsonMapping class >> read: aJsonSchema withMapping: aMessageSymbol on: aReadSt
 ]
 
 { #category : #reading }
-XdJsonMapping class >> readManifest: aJsonManifest [
+XdManifestJsonMapping class >> readManifest: aJsonManifest [
 	^ self read: XdManifest withMapping: #manifestMappingFor: on: aJsonManifest readStream
 ]
 
 { #category : #writing }
-XdJsonMapping class >> write: aXdObject mappedTo: mappingSymbol [ 
+XdManifestJsonMapping class >> write: aXdObject mappedTo: mappingSymbol [ 
 	"Return a JSON string representation of the XD object."
 	<return: #String>
 	^ self write: aXdObject mappedTo: mappingSymbol prettyPrint: false
 ]
 
 { #category : #writing }
-XdJsonMapping class >> write: aXdObject mappedTo: aMappingSymbol prettyPrint: aBoolean [
+XdManifestJsonMapping class >> write: aXdObject mappedTo: aMappingSymbol prettyPrint: aBoolean [
 	"Return a JSON string representation of the XD object."
 	<return: #String>
 	^ String streamContents: [ :aStream | | aJsonWriter |
@@ -119,6 +116,6 @@ XdJsonMapping class >> write: aXdObject mappedTo: aMappingSymbol prettyPrint: aB
 ]
 
 { #category : #writing }
-XdJsonMapping class >> writeManifest: aXdManifest [
+XdManifestJsonMapping class >> writeManifest: aXdManifest [
 	^ self write: aXdManifest mappedTo: #manifestMappingFor:
 ]

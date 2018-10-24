@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #accessing }
+XdType class >> playbook [ 
+	^ XdPlayBookType
+]
+
+{ #category : #accessing }
 XdType class >> text [
 	^ XdTextType
 ]

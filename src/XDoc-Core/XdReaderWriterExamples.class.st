@@ -1,8 +1,8 @@
 Class {
 	#name : #XdReaderWriterExamples,
 	#superclass : #Object,
-	#traits : 'XdJsonMappingTrait',
-	#classTraits : 'XdJsonMappingTrait classTrait',
+	#traits : 'XdManifestJsonMappingTrait',
+	#classTraits : 'XdManifestJsonMappingTrait classTrait',
 	#category : #'XDoc-Core-Examples'
 }
 
@@ -189,6 +189,11 @@ XdReaderWriterExamples >> fileReference [
 	^ aReference
 ]
 
+{ #category : #accessing }
+XdReaderWriterExamples >> json [
+	^ XdManifestJsonMapping
+]
+
 { #category : #'basic objects' }
 XdReaderWriterExamples >> manifest [
 	<gtExample>
@@ -240,6 +245,16 @@ XdReaderWriterExamples >> manifestWithOneAttachment [
 	aManifest documents: { self emptyDocument }.
 	aManifest attachments: { self attachment }.
 	^ aManifest
+]
+
+{ #category : #playbook }
+XdReaderWriterExamples >> playbook [
+	<gtExample>
+	
+	| aPlaybook |
+	aPlaybook := GtPlayBook newDefault.
+	aPlaybook pages first snippets first sourceCode: '1+2'.
+	^ aPlaybook.
 ]
 
 { #category : #reading }
@@ -347,6 +362,41 @@ XdReaderWriterExamples >> writeBasicDocument [
 		equals: self documentAuthorName.
 	self assert: aXdFile reference notNil.
 	self assert: aXdFile exists.
+	^ aXdFile
+]
+
+{ #category : #writing }
+XdReaderWriterExamples >> writePlaybookDocument [
+
+	<gtExample>
+	| aWriter aXdFile |
+	aWriter := self writer.
+	aXdFile := aWriter
+		playbook: self playbook;
+		write.
+	self assert: aXdFile notNil.
+	self assert: aXdFile manifest notNil.
+	self assert: aXdFile manifest documents size equals: 1.
+	self
+		assert: aXdFile manifest documents first type
+		equals: XdType playbook.
+	self
+		assert: aXdFile manifest documents first components size
+		equals: 1.
+	self
+		assert: aXdFile manifest documents first components first link
+		equals: '1'.
+	self assert: aXdFile manifest attachments size equals: 1.
+	self assert: aXdFile manifest attachments first id equals: '1'.
+	self
+		assert: aXdFile manifest attachments first fileName
+		equals: 'main.playbook'.
+	self
+		assert: aXdFile manifest attachments first fileSize
+		equals: 58.
+	self assert: aXdFile reference notNil.
+	self assert: aXdFile exists.
+	self assert: aXdFile reference zip members size equals: 2.
 	^ aXdFile
 ]
 

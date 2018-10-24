@@ -1,8 +1,8 @@
 Class {
 	#name : #XdReference,
 	#superclass : #Object,
-	#traits : 'GtAssertingTrait + XdConstantsTrait + XdJsonMappingTrait',
-	#classTraits : 'GtAssertingTrait classTrait + XdConstantsTrait classTrait + XdJsonMappingTrait classTrait',
+	#traits : 'GtAssertingTrait + XdConstantsTrait + XdManifestJsonMappingTrait',
+	#classTraits : 'GtAssertingTrait classTrait + XdConstantsTrait classTrait + XdManifestJsonMappingTrait classTrait',
 	#category : #'XDoc-Core-Model'
 }
 
@@ -39,6 +39,11 @@ XdReference >> gtFilesFor: aView [
 	^ aView list
 		title: 'Files';
 		items: [ self zip members ]
+]
+
+{ #category : #accessing }
+XdReference >> json [
+	^ XdManifestJsonMapping
 ]
 
 { #category : #streams }
