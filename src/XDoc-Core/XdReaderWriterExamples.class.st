@@ -257,13 +257,6 @@ XdReaderWriterExamples >> playbook [
 	^ aPlaybook.
 ]
 
-{ #category : #playbook }
-XdReaderWriterExamples >> playbookFileReference [
-	<gtExample>
-	
-	^ FileLocator workingDirectory / 'playbook.xdoc'.
-]
-
 { #category : #reading }
 XdReaderWriterExamples >> readBasicDocument [
 	<gtExample>
@@ -412,10 +405,13 @@ XdReaderWriterExamples >> writePlaybookDocument [
 XdReaderWriterExamples >> writePlaybookDocumentToFile [
 
 	<gtExample>
-	| aWriter aXdFile |
+	| aStorage aWriter aXdFile aPlayBookFileReference |
+	aStorage := GtFileSystemExamples new.
+	aPlayBookFileReference := aStorage rootDirectory / 'playbook.xdoc'.
+	self assert: aPlayBookFileReference exists not.
 	aWriter := self writer.
 	aXdFile := aWriter
-		reference: ( XdReference file: self playbookFileReference );
+		reference: (XdReference file: aPlayBookFileReference);
 		playbook: self playbook;
 		write.
 	self assert: aXdFile notNil.
@@ -441,6 +437,7 @@ XdReaderWriterExamples >> writePlaybookDocumentToFile [
 	self assert: aXdFile reference notNil.
 	self assert: aXdFile exists.
 	self assert: aXdFile reference zip members size equals: 2.
+	self assert: aPlayBookFileReference exists.
 	^ aXdFile
 ]
 
