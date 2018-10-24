@@ -45,7 +45,7 @@ XdJsonMapping class >> collectionOfDocumentsMappingFor: aNeoJSONMapper [
 XdJsonMapping class >> componentMappingFor: aNeoJSONMapper [
 	aNeoJSONMapper
 		for: XdComponent do: [ :mapping |
-	      mapping mapAccessor: #id.].
+	      mapping mapAccessor: #link.].
 ]
 
 { #category : #'mapping - document' }
@@ -64,9 +64,9 @@ XdJsonMapping class >> documentTypeMappingFor: aNeoJSONMapper [
 	aNeoJSONMapper
 		for: #DocumentType customDo: [ :mapping |
 			mapping 
-				encoder: [ :aXdDocumentType | aXdDocumentType typeString ];
+				encoder: [ :anXdType | anXdType typeString ];
 				decoder: [ :aStringOrNil | 
-					aStringOrNil ifNotNil: [ :aString | XdDocumentType typeFromString: aString ] ] ].
+					aStringOrNil ifNotNil: [ :aString | XdType typeFromString: aString ] ] ].
 ]
 
 { #category : #mapping }

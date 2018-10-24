@@ -217,6 +217,21 @@ XdReaderWriterExamples >> manifestJsonString [
 	^ aJsonString
 ]
 
+{ #category : #'json mapping' }
+XdReaderWriterExamples >> manifestJsonWithOneAttachmentString [
+	<gtExample>
+	| aJsonString |
+	aJsonString := self json writeManifest: self manifestWithOneAttachment.
+	self 
+		assert: aJsonString 
+		equals: '{"title":"', self documentTitle, 
+			'","description":"', self documentDescription,
+			'","author":"', self documentAuthorName,
+			'","attachments":[{"id":12,"filename":"', self textFileName, '","size":42}],',
+			'"documents":[{"type":"undefined","components":[]}]}'.
+	^ aJsonString
+]
+
 { #category : #'basic objects' }
 XdReaderWriterExamples >> manifestWithOneAttachment [
 	<gtExample>
