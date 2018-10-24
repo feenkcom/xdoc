@@ -28,7 +28,7 @@ XdWriter >> attachment: aFileNameString text: aContentString [
 	self manifest attachments: (self manifest attachments copyWith: anAttachment).
 
 	"add file"
-	zip addString: aContentString as: aFileNameString
+	zip addString: aContentString utf8Encoded as: aFileNameString
 ]
 
 { #category : #writing }
@@ -101,7 +101,5 @@ XdWriter >> writeTo: aWriteStream [
 	zip 
 		addString: (self json writeManifest: self manifest) utf8Encoded
 		as: self constants manifestFileName.
-	"self document attachments do: [ :eachAttachment | 
-		self writeAttachment: eachAttachment to: aZip ]."
 	zip writeTo: aWriteStream.
 ]

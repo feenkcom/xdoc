@@ -268,7 +268,7 @@ XdReaderWriterExamples >> readBasicDocument [
 { #category : #reading }
 XdReaderWriterExamples >> readTextDocument [
 	<gtExample>
-	| aWrittenXdFile aReader aXdReadFile |
+	| aWrittenXdFile aReader aXdReadFile aZip aTextFile |
 	aWrittenXdFile := self writeTextDocument.
 	aReader := self reader.
 	aXdReadFile := aReader
@@ -296,6 +296,11 @@ XdReaderWriterExamples >> readTextDocument [
 		equals: self textFileContent size.
 	self assert: aXdReadFile reference notNil.
 	self assert: aXdReadFile exists.
+	aZip := aXdReadFile reference zip.
+	self assert: aZip members size equals: 2.
+	aTextFile := aZip members detect: [ :eachMember | 
+		eachMember fileName = self textFileName ].
+	self assert: aTextFile contents asByteArray utf8Decoded equals: self textFileContent.
 	^ aXdReadFile
 	
 ]

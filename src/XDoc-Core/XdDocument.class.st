@@ -29,6 +29,24 @@ XdDocument >> initialize [
 	type := XdUndefinedType.
 ]
 
+{ #category : #printing }
+XdDocument >> printOn: aStream [
+	super printOn: aStream.
+	aStream 
+		nextPut: $(;
+		nextPutAll: (self type ifNotNil: #typeString ifNil: [ 'no-type' ]);
+		nextPut: $,;
+		space.
+	self components 
+		ifNotNil: [ :anArray |
+			aStream 
+				print: anArray size; 
+				space;
+				nextPutAll: ('component' asPluralBasedOn: anArray size) ]
+		ifNil: [ aStream nextPutAll: 'no-components' ].
+	aStream nextPut: $)
+]
+
 { #category : #accessing }
 XdDocument >> type [
 	<return: #XdType>

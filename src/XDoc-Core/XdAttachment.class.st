@@ -61,3 +61,15 @@ XdAttachment >> initialize [
 	fileSize := 0.
 	id := nil.
 ]
+
+{ #category : #printing }
+XdAttachment >> printOn: aStream [
+	super printOn: aStream.
+	aStream
+		nextPutAll: '(fileName: ';
+		print: self fileName;
+		nextPutAll: ', fileSize: ';
+		print: self fileSize;
+		nextPut: $)
+		
+]
