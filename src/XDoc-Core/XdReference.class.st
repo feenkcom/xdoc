@@ -26,6 +26,11 @@ XdReference class >> file [
 	^ XdFileReference new
 ]
 
+{ #category : #requirements }
+XdReference class >> file: aFileReference [
+	^ self file file: aFileReference.
+]
+
 { #category : #testing }
 XdReference >> exists [
 	<return: #Boolean>

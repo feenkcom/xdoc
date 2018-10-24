@@ -32,3 +32,9 @@ XdFileReference >> readStream [
 	"Return a binary read stream"
 	^ self file binaryReadStream
 ]
+
+{ #category : #'as yet unclassified' }
+XdFileReference >> writeStreamDo: aBlock [
+	self assert: [ file notNil ] description: ['File must be defined before writing.'].
+	^ file binaryWriteStreamDo: aBlock.
+]

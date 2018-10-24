@@ -257,6 +257,13 @@ XdReaderWriterExamples >> playbook [
 	^ aPlaybook.
 ]
 
+{ #category : #playbook }
+XdReaderWriterExamples >> playbookFileReference [
+	<gtExample>
+	
+	^ FileLocator workingDirectory / 'playbook.xdoc'.
+]
+
 { #category : #reading }
 XdReaderWriterExamples >> readBasicDocument [
 	<gtExample>
@@ -372,6 +379,43 @@ XdReaderWriterExamples >> writePlaybookDocument [
 	| aWriter aXdFile |
 	aWriter := self writer.
 	aXdFile := aWriter
+		reference: XdReference bytes;
+		playbook: self playbook;
+		write.
+	self assert: aXdFile notNil.
+	self assert: aXdFile manifest notNil.
+	self assert: aXdFile manifest documents size equals: 1.
+	self
+		assert: aXdFile manifest documents first type
+		equals: XdType playbook.
+	self
+		assert: aXdFile manifest documents first components size
+		equals: 1.
+	self
+		assert: aXdFile manifest documents first components first link
+		equals: '1'.
+	self assert: aXdFile manifest attachments size equals: 1.
+	self assert: aXdFile manifest attachments first id equals: '1'.
+	self
+		assert: aXdFile manifest attachments first fileName
+		equals: 'main.playbook'.
+	self
+		assert: aXdFile manifest attachments first fileSize
+		equals: 58.
+	self assert: aXdFile reference notNil.
+	self assert: aXdFile exists.
+	self assert: aXdFile reference zip members size equals: 2.
+	^ aXdFile
+]
+
+{ #category : #writing }
+XdReaderWriterExamples >> writePlaybookDocumentToFile [
+
+	<gtExample>
+	| aWriter aXdFile |
+	aWriter := self writer.
+	aXdFile := aWriter
+		reference: ( XdReference file: self playbookFileReference );
 		playbook: self playbook;
 		write.
 	self assert: aXdFile notNil.

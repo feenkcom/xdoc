@@ -6,7 +6,8 @@ Class {
 	#instVars : [
 		'manifest',
 		'zip',
-		'idGenerator'
+		'idGenerator',
+		'reference'
 	],
 	#category : #'XDoc-Core-Writer'
 }
@@ -58,6 +59,7 @@ XdWriter >> initialize [
 	manifest := XdManifest new.
 	zip := ZipArchive new.
 	idGenerator := XdSequenceNumberGenerator new.
+	reference := XdReference bytes.
 ]
 
 { #category : #accessing }
@@ -88,6 +90,11 @@ XdWriter >> playbook: aPlayBook [
 		attachment: 'main', self constants playBookExtension text: aJsonString
 ]
 
+{ #category : #accessing }
+XdWriter >> reference: aXdBytesReference [ 
+	reference := aXdBytesReference
+]
+
 { #category : #writing }
 XdWriter >> text [
 	self documentType: XdType text
@@ -101,13 +108,11 @@ XdWriter >> title: aString [
 { #category : #writing }
 XdWriter >> write [
 	<return: #XdFile>
-	| aWriteStream |
-	aWriteStream := WriteStream on: ByteArray streamSpecies new.
-	[ self writeTo: aWriteStream ]
-		ensure: [ aWriteStream close ].
+
+	reference writeStreamDo: [ :aWriteStream | self writeTo: aWriteStream ].
 	^ XdFile new
 		manifest: self manifest;
-		reference: (XdReference bytes: aWriteStream contents)
+		reference: reference.
 ]
 
 { #category : #'private - writing' }

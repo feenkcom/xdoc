@@ -34,3 +34,14 @@ XdBytesReference >> readStream [
 		description: [ 'Bytes must be defined before reading them' ].
 	^ self bytes readStream
 ]
+
+{ #category : #streams }
+XdBytesReference >> writeStreamDo: aValuable [
+	"Evaluates the argument with a write stream. Answers the result."	
+	| inMemoryStream result |
+
+	inMemoryStream := ByteArray new writeStream.
+	result := aValuable value: inMemoryStream binary.
+	bytes := inMemoryStream contents.
+	^ result. 
+]
