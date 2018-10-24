@@ -6,6 +6,23 @@ Class {
 	#category : #'XDoc-Core-Examples'
 }
 
+{ #category : #'basic objects' }
+XdReaderWriterExamples >> attachment [  
+	<gtExample>
+	
+	| anAttachment |
+
+	anAttachment := self emptyAttachment.
+	anAttachment fileName: self textFileName.
+	anAttachment fileSize: 42.
+	anAttachment id: 12.
+	self assert: anAttachment id equals: 12.
+	self assert: anAttachment fileName equals: self textFileName.
+	self assert: anAttachment fileSize equals: 42.
+	^ anAttachment.
+	
+]
+
 { #category : #accessing }
 XdReaderWriterExamples >> bytes [
 	<gtExample>
@@ -20,6 +37,21 @@ XdReaderWriterExamples >> bytesReference [
 	self assert: aReference bytes isNil.
 	self assert: aReference exists not.
 	^ aReference
+]
+
+{ #category : #'basic objects' }
+XdReaderWriterExamples >> document [  
+	<gtExample>
+	
+	| aDocument |
+
+	aDocument := self emptyDocument.
+	aDocument type: XdTextType.
+	aDocument components: { self emptyComponent }.
+	self assert: aDocument type equals: XdTextType .
+	self assert: aDocument components size equals: 1.
+	^ aDocument.
+	
 ]
 
 { #category : #accessing }
@@ -41,6 +73,45 @@ XdReaderWriterExamples >> documentTitle [
 ]
 
 { #category : #'basic objects' }
+XdReaderWriterExamples >> emptyAttachment [  
+	<gtExample>
+	
+	| anAttachment |
+
+	anAttachment := XdAttachment new.
+	self assert: anAttachment id isNil.
+	self assert: anAttachment fileName isNil.
+	self assert: anAttachment fileSize equals: 0.
+	^ anAttachment.
+	
+]
+
+{ #category : #'basic objects' }
+XdReaderWriterExamples >> emptyComponent [  
+	<gtExample>
+	
+	| aComponent |
+
+	aComponent := XdComponent new.
+	self assert: aComponent link isNil.
+	^ aComponent.
+	
+]
+
+{ #category : #'basic objects' }
+XdReaderWriterExamples >> emptyDocument [ 
+	<gtExample>
+	
+	| aDocument |
+
+	aDocument := XdDocument new.
+	self assert: aDocument type equals: XdUndefinedType.
+	self assert: aDocument components isEmpty.
+	^ aDocument.
+	
+]
+
+{ #category : #'basic objects' }
 XdReaderWriterExamples >> emptyManifest [
 	<gtExample>
 	| aManifest |
@@ -56,7 +127,8 @@ XdReaderWriterExamples >> emptyManifestJsonString [
 	<gtExample>
 	| aJsonString |
 	aJsonString := self json writeManifest: self emptyManifest.
-	self assert: aJsonString equals: '{"title":"","description":"","author":""}'.
+	self assert: aJsonString 
+		equals: '{"title":"","description":"","author":"","attachments":[],"documents":[]}'.
 	^ aJsonString
 ]
 
@@ -140,8 +212,34 @@ XdReaderWriterExamples >> manifestJsonString [
 		assert: aJsonString 
 		equals: '{"title":"', self documentTitle, 
 			'","description":"', self documentDescription,
-			'","author":"', self documentAuthorName, '"}'.
+			'","author":"', self documentAuthorName,
+			'","attachments":[],"documents":[]}'.
 	^ aJsonString
+]
+
+{ #category : #'json mapping' }
+XdReaderWriterExamples >> manifestJsonWithOneAttachmentString [
+	<gtExample>
+	| aJsonString |
+	aJsonString := self json writeManifest: self manifestWithOneAttachment.
+	self 
+		assert: aJsonString 
+		equals: '{"title":"', self documentTitle, 
+			'","description":"', self documentDescription,
+			'","author":"', self documentAuthorName,
+			'","attachments":[{"id":12,"filename":"', self textFileName, '","size":42}],',
+			'"documents":[{"type":"undefined","components":[]}]}'.
+	^ aJsonString
+]
+
+{ #category : #'basic objects' }
+XdReaderWriterExamples >> manifestWithOneAttachment [
+	<gtExample>
+	| aManifest |
+	aManifest := self manifest.
+	aManifest documents: { self emptyDocument }.
+	aManifest attachments: { self attachment }.
+	^ aManifest
 ]
 
 { #category : #reading }

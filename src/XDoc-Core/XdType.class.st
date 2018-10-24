@@ -8,3 +8,17 @@ Class {
 XdType class >> text [
 	^ XdTextType
 ]
+
+{ #category : #enumerating }
+XdType class >> typeFromString: aString [ 
+	self allSubclassesDo: [ :eachClass | 
+		eachClass typeString = aString ifTrue: [ ^ eachClass ] ].
+	^ self error: 'Unknown type'
+]
+
+{ #category : #accessing }
+XdType class >> typeString [
+	"Return a unique string that represents the type"
+	<return: #String>
+	^ self subclassResponsibility
+]

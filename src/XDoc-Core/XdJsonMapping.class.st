@@ -1,8 +1,73 @@
 Class {
 	#name : #XdJsonMapping,
 	#superclass : #Object,
+	#classVars : [
+		'OldXdAttachment'
+	],
 	#category : #'XDoc-Core-Json'
 }
+
+{ #category : #mapping }
+XdJsonMapping class >> attachmentMappingFor: aNeoJSONMapper [
+	aNeoJSONMapper
+		for: XdAttachment do: [ :mapping |
+	      mapping mapAccessor: #id.
+	      mapping mapAccessor: #fileName to: #filename.
+	      mapping mapAccessor: #fileSize to: #size.].
+]
+
+{ #category : #'mapping - document' }
+XdJsonMapping class >> collectionOfAttachmentsMappingFor: aNeoJSONMapper [
+	aNeoJSONMapper
+		for: #CollectionOfAttachments customDo: [ :mapping |
+			mapping listOfElementSchema: XdAttachment ].
+	self attachmentMappingFor: aNeoJSONMapper.
+]
+
+{ #category : #mapping }
+XdJsonMapping class >> collectionOfComponentsMappingFor: aNeoJSONMapper [
+	aNeoJSONMapper
+		for: #CollectionOfComponents customDo: [ :mapping |
+			mapping listOfElementSchema: XdComponent ].
+	self componentMappingFor: aNeoJSONMapper.
+
+]
+
+{ #category : #'mapping - document' }
+XdJsonMapping class >> collectionOfDocumentsMappingFor: aNeoJSONMapper [
+	aNeoJSONMapper
+		for: #CollectionOfDocuments customDo: [ :mapping |
+			mapping listOfElementSchema: XdDocument ].
+	self documentMappingFor: aNeoJSONMapper.
+]
+
+{ #category : #mapping }
+XdJsonMapping class >> componentMappingFor: aNeoJSONMapper [
+	aNeoJSONMapper
+		for: XdComponent do: [ :mapping |
+	      mapping mapAccessor: #link.].
+]
+
+{ #category : #'mapping - document' }
+XdJsonMapping class >> documentMappingFor: aNeoJSONMapper [
+	aNeoJSONMapper
+		for: XdDocument do: [ :mapping |
+	      (mapping mapAccessor: #type) valueSchema: #DocumentType.
+	      (mapping mapAccessor: #components) valueSchema: #CollectionOfComponents.].
+	self
+		documentTypeMappingFor: aNeoJSONMapper; 
+		collectionOfComponentsMappingFor: aNeoJSONMapper.
+]
+
+{ #category : #'mapping - document' }
+XdJsonMapping class >> documentTypeMappingFor: aNeoJSONMapper [
+	aNeoJSONMapper
+		for: #DocumentType customDo: [ :mapping |
+			mapping 
+				encoder: [ :anXdType | anXdType typeString ];
+				decoder: [ :aStringOrNil | 
+					aStringOrNil ifNotNil: [ :aString | XdType typeFromString: aString ] ] ].
+]
 
 { #category : #mapping }
 XdJsonMapping class >> manifestMappingFor: aNeoJSONMapper [
@@ -10,7 +75,13 @@ XdJsonMapping class >> manifestMappingFor: aNeoJSONMapper [
 		for: XdManifest do: [ :mapping |
 	      mapping mapAccessor: #title.
 	      mapping mapAccessor: #description.
-			mapping mapAccessor: #author ].
+			mapping mapAccessor: #author. 
+			(mapping mapAccessor: #attachments) valueSchema: #CollectionOfAttachments.
+			(mapping mapAccessor: #documents) valueSchema: #CollectionOfDocuments.
+			].
+	self collectionOfAttachmentsMappingFor: aNeoJSONMapper.	
+	self collectionOfDocumentsMappingFor: aNeoJSONMapper.	
+
 ]
 
 { #category : #reading }

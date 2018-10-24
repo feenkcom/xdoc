@@ -53,3 +53,11 @@ XdAttachment >> id: aString [
 		description: [ 'Attachment id must be non-nil' ].
 	id := aString
 ]
+
+{ #category : #initialization }
+XdAttachment >> initialize [
+	super initialize.
+	fileName := nil.
+	fileSize := 0.
+	id := nil.
+]
