@@ -42,13 +42,14 @@ XdXdocListPlayPage >> initialize [
 
 { #category : #converting }
 XdXdocListPlayPage >> readPlayBookFrom: eachFile [
-	| aPlayBookMember aXdFile aJsonString |
+	| aPlayBookMember aXdFile aJsonString aPlayBook |
 	aXdFile := XdFile new
 		streamingStrategy: (XdStreamingStrategy file: eachFile).
 	aPlayBookMember := aXdFile streamingStrategy zip members
 		detect: [ :aMember | aMember fileName endsWith: self constants playBookExtension ].
 	aJsonString := aPlayBookMember contents asByteArray utf8Decoded.
-	^ XdPlayBookJsonMapping readPlayBook: aJsonString
+	aPlayBook := XdPlayBookJsonMapping readPlayBook: aJsonString.
+	^ aPlayBook
 ]
 
 { #category : #testing }

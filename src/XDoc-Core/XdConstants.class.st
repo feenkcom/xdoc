@@ -16,5 +16,5 @@ XdConstants class >> playBookExtension [
 
 { #category : #accessing }
 XdConstants class >> xdocExtension [
-	^ '.xdoc'
+	^ 'xdoc'
 ]
