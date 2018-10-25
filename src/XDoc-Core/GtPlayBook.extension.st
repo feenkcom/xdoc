@@ -22,23 +22,53 @@ GtPlayBook >> gtActionXdocFor: anAction [
 ]
 
 { #category : #'*XDoc-Core' }
+GtPlayBook >> playBookNameFrom: eachXdocFile [
+	| anXdFile |
+	anXdFile := self xdocFileFrom: eachXdocFile.
+	^ anXdFile manifest title 
+		ifEmpty: [ eachXdocFile basename asRopedText ]
+		ifNotEmpty: #asRopedText.
+]
+
+{ #category : #'*XDoc-Core' }
 GtPlayBook >> readPlayBookFrom: eachFile [
 	| aPlayBookMember aXdFile aJsonString aPlayBook |
-	aXdFile := XdFile new
-		streamingStrategy: (XdStreamingStrategy file: eachFile).
+	aXdFile := self xdocFileFrom: eachFile.
 	aPlayBookMember := aXdFile streamingStrategy zip members
-		detect: [ :aMember | aMember fileName endsWith: XdConstants playBookExtension ].
+		detect:
+			[ :aMember | aMember fileName endsWith: XdConstants playBookExtension ].
 	aJsonString := aPlayBookMember contents asByteArray utf8Decoded.
 	aPlayBook := XdPlayBookJsonMapping readPlayBook: aJsonString.
+	aPlayBook subscribeExternalTools.
 	^ aPlayBook
 ]
 
 { #category : #'*XDoc-Core' }
 GtPlayBook >> storePlayBookInto: aXdFile [ 
+	| aText aTitle aDescription |
+	aText := String streamContents: [ :aStream |
+		self pages do: [ :eachPage | 
+			eachPage snippets do: [ :eachSnippet |
+				eachSnippet isUserSnippet ifTrue: [ 
+					aStream nextPutAll: eachSnippet text asString; cr ] ] ] ].
+	aTitle := aText first: (aText size min: 20).
+	aTitle := aTitle replace: [ :eachCharacter | 
+		eachCharacter isSeparator ifTrue: [ Character space ] ifFalse: [ eachCharacter ] ]. 
+	aDescription := aText first: (aText size min: 100).
+
 	aXdFile writer
 		authorName: Author name;
+		title: aTitle;
+		description: aDescription;
 		playbook: self;
 		write
+]
+
+{ #category : #'*XDoc-Core' }
+GtPlayBook >> xdocFileFrom: eachFile [
+	^ XdReader new
+		streamingStrategy: (XdStreamingStrategy file: eachFile);
+		read
 ]
 
 { #category : #'*XDoc-Core' }
@@ -54,16 +84,16 @@ GtPlayBook >> xdocPlayBookListElement [
 	aFileReference ensureCreateDirectory.
 	aList := BrSimpleList new.
 	aList 
-		stencil: [ :each :index |
+		stencil: [ :eachXdocFile :index |
 			BlTextElement new
-				text: each basename asRopedText;
+				text: (self playBookNameFrom: eachXdocFile);
 				constraintsDo: [ :c | c horizontal matchParent ];
 				padding: (BlInsets all: 5);
 				when: BlClickEvent do: [ :anEvent  |
 					anEvent consumed: true.
 					aList selectOne: index.
-					GtInspector openOnPlayBook: (self readPlayBookFrom: each) ] ];
-		display: aFileReference allFiles;
+					GtInspector openOnPlayBook: (self readPlayBookFrom: eachXdocFile) ] ];
+		display: (aFileReference allFiles sort: [ :a :b | a modificationTime > b modificationTime ]);
 		constraintsDo: [ :c | 
 			c padding: (BlInsets top: 10).
 			c vertical exact: 200.
