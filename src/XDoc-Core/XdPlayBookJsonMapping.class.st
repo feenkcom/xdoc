@@ -57,7 +57,11 @@ XdPlayBookJsonMapping class >> pharoSnippetMappingFor: aNeoJSONMapper [
 XdPlayBookJsonMapping class >> playBookMappingFor: aNeoJSONMapper [
 	aNeoJSONMapper
 		for: GtPlayBook do: [ :mapping |
-	      (mapping mapAccessor: #pages) valueSchema: #CollectionOfPages ].
+			(mapping
+				mapProperty: #pages 
+				getter: [ :aPlayBook | aPlayBook xdocPagesToPersist ]
+				setter: [ :aPlayBook :thePages | aPlayBook pages: thePages ]) 
+					valueSchema: #CollectionOfPages ].
 	self collectionOfPagesMappingFor: aNeoJSONMapper.
 ]
 

@@ -9,6 +9,18 @@ GtPlayBook >> storePlayBookInto: aXdFile [
 ]
 
 { #category : #'*XDoc-Core' }
+GtPlayBook >> xdocPagesToPersist [
+	<return: #Array of: #GtPlayPage>
+	^ self pages select: #shouldBePersisted
+]
+
+{ #category : #'*XDoc-Core' }
+GtPlayBook >> xdocPlayBookList [
+	<playBookHandler>
+	self addPlayPage: XdXdocListPlayPage new
+]
+
+{ #category : #'*XDoc-Core' }
 GtPlayBook >> xdocSaving [
 	<playBookHandler>
 	| anXdocPlaybookHandler aFileReference |
