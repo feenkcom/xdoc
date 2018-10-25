@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'manifest',
-		'reference'
+		'streamingStrategy'
 	],
 	#category : #'XDoc-Core-Model'
 }
@@ -11,7 +11,7 @@ Class {
 { #category : #testing }
 XdFile >> exists [
 	<return: #Boolean>
-	^ self reference exists
+	^ self streamingStrategy exists
 ]
 
 { #category : #'gt-extension' }
@@ -19,7 +19,7 @@ XdFile >> gitReferenceFor: aView [
 	<gtView>
 	^ aView list
 		title: 'Files';
-		items: [ self reference zip members ]
+		items: [ self streamingStrategy zip members ]
 ]
 
 { #category : #'gt-extension' }
@@ -34,7 +34,7 @@ XdFile >> gtManifestFor: aView [
 XdFile >> initialize [
 	super initialize.
 	manifest := XdEmptyManifest uniqueInstance.
-	reference := XdEmptyReference uniqueInstance.
+	streamingStrategy := XdNullStreamingStrategy uniqueInstance.
 ]
 
 { #category : #accessing }
@@ -52,15 +52,15 @@ XdFile >> manifest: aXdManifest [
 ]
 
 { #category : #accessing }
-XdFile >> reference [
-	<return: #XdReference>
-	^ reference
+XdFile >> streamingStrategy [
+	<return: #XdStreamingStrategy>
+	^ streamingStrategy
 ]
 
 { #category : #accessing }
-XdFile >> reference: aXdReference [
+XdFile >> streamingStrategy: aXdReference [
 	self 
 		assert: [ aXdReference notNil ] 
 		description: [ 'Reference must be non-nil' ].
-	reference := aXdReference
+	streamingStrategy := aXdReference
 ]

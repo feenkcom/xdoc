@@ -1,5 +1,5 @@
 Class {
-	#name : #XdReference,
+	#name : #XdStreamingStrategy,
 	#superclass : #Object,
 	#traits : 'GtAssertingTrait + XdConstantsTrait + XdManifestJsonMappingTrait',
 	#classTraits : 'GtAssertingTrait classTrait + XdConstantsTrait classTrait + XdManifestJsonMappingTrait classTrait',
@@ -7,38 +7,38 @@ Class {
 }
 
 { #category : #requirements }
-XdReference class >> bytes [
-	^ XdBytesReference new
+XdStreamingStrategy class >> bytes [
+	^ XdBytesStreamingStrategy new
 ]
 
 { #category : #requirements }
-XdReference class >> bytes: aByteArray [
+XdStreamingStrategy class >> bytes: aByteArray [
 	^ self bytes bytes: aByteArray
 ]
 
 { #category : #requirements }
-XdReference class >> empty [
-	^ XdEmptyReference uniqueInstance
+XdStreamingStrategy class >> file [
+	^ XdFileStreamingStrategy new
 ]
 
 { #category : #requirements }
-XdReference class >> file [
-	^ XdFileReference new
-]
-
-{ #category : #requirements }
-XdReference class >> file: aFileReference [
+XdStreamingStrategy class >> file: aFileReference [
 	^ self file file: aFileReference.
 ]
 
+{ #category : #requirements }
+XdStreamingStrategy class >> null [
+	^ XdNullStreamingStrategy uniqueInstance
+]
+
 { #category : #testing }
-XdReference >> exists [
+XdStreamingStrategy >> exists [
 	<return: #Boolean>
 	^ self subclassResponsibility
 ]
 
 { #category : #'gt-extension' }
-XdReference >> gtFilesFor: aView [
+XdStreamingStrategy >> gtFilesFor: aView [
 	<gtView>
 	self exists ifFalse: [ ^ aView empty ].
 	^ aView list
@@ -47,18 +47,18 @@ XdReference >> gtFilesFor: aView [
 ]
 
 { #category : #accessing }
-XdReference >> json [
+XdStreamingStrategy >> json [
 	^ XdManifestJsonMapping
 ]
 
 { #category : #streams }
-XdReference >> readStream [
+XdStreamingStrategy >> readStream [
 	"Return a binary read stream"
 	^ self subclassResponsibility
 ]
 
 { #category : #streams }
-XdReference >> readStreamDo: aBlock [
+XdStreamingStrategy >> readStreamDo: aBlock [
 	| aStream |
 	aStream := self readStream.
 	^ [ aBlock value: aStream ]
@@ -66,7 +66,7 @@ XdReference >> readStreamDo: aBlock [
 ]
 
 { #category : #accessing }
-XdReference >> zip [
+XdStreamingStrategy >> zip [
 	<return: #ZipArchive>
 	| aZip |
 	aZip := ZipArchive new.

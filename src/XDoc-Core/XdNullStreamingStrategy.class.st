@@ -1,6 +1,6 @@
 Class {
-	#name : #XdEmptyReference,
-	#superclass : #XdReference,
+	#name : #XdNullStreamingStrategy,
+	#superclass : #XdStreamingStrategy,
 	#classInstVars : [
 		'uniqueInstance'
 	],
@@ -8,28 +8,28 @@ Class {
 }
 
 { #category : #cleanup }
-XdEmptyReference class >> cleanUp [
+XdNullStreamingStrategy class >> cleanUp [
 	self reset
 ]
 
 { #category : #cleanup }
-XdEmptyReference class >> reset [
+XdNullStreamingStrategy class >> reset [
 	uniqueInstance := nil
 ]
 
 { #category : #accessing }
-XdEmptyReference class >> uniqueInstance [
+XdNullStreamingStrategy class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
 
 { #category : #testing }
-XdEmptyReference >> exists [
+XdNullStreamingStrategy >> exists [
 	<return: #Boolean>
 	^ false
 ]
 
 { #category : #streams }
-XdEmptyReference >> readStream [
+XdNullStreamingStrategy >> readStream [
 	"Return a binary read stream"
 	^ ByteArray new readStream
 ]

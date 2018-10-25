@@ -7,7 +7,7 @@ Class {
 		'manifest',
 		'zip',
 		'idGenerator',
-		'reference'
+		'streamingStrategy'
 	],
 	#category : #'XDoc-Core-Writer'
 }
@@ -59,7 +59,7 @@ XdWriter >> initialize [
 	manifest := XdManifest new.
 	zip := ZipArchive new.
 	idGenerator := XdSequenceNumberGenerator new.
-	reference := XdReference bytes.
+	streamingStrategy := XdStreamingStrategy bytes.
 ]
 
 { #category : #accessing }
@@ -91,8 +91,11 @@ XdWriter >> playbook: aPlayBook [
 ]
 
 { #category : #accessing }
-XdWriter >> reference: aXdBytesReference [ 
-	reference := aXdBytesReference
+XdWriter >> streamingStrategy: aXdStreamingStrategy [ 
+	self 
+		assert: [ aXdStreamingStrategy notNil ] 
+		description: [ 'Streaming strategy must be non-nil' ].
+	streamingStrategy := aXdStreamingStrategy
 ]
 
 { #category : #writing }
@@ -109,10 +112,10 @@ XdWriter >> title: aString [
 XdWriter >> write [
 	<return: #XdFile>
 
-	reference writeStreamDo: [ :aWriteStream | self writeTo: aWriteStream ].
+	streamingStrategy writeStreamDo: [ :aWriteStream | self writeTo: aWriteStream ].
 	^ XdFile new
 		manifest: self manifest;
-		reference: reference.
+		streamingStrategy: streamingStrategy.
 ]
 
 { #category : #'private - writing' }

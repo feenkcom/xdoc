@@ -1,6 +1,6 @@
 Class {
-	#name : #XdFileReference,
-	#superclass : #XdReference,
+	#name : #XdFileStreamingStrategy,
+	#superclass : #XdStreamingStrategy,
 	#instVars : [
 		'file'
 	],
@@ -8,19 +8,19 @@ Class {
 }
 
 { #category : #testing }
-XdFileReference >> exists [
+XdFileStreamingStrategy >> exists [
 	<return: #Boolean>
 	^ self file notNil and: [ self file exists ]
 ]
 
 { #category : #accessing }
-XdFileReference >> file [
+XdFileStreamingStrategy >> file [
 	<return: #FileReference or: nil>
 	^ file
 ]
 
 { #category : #accessing }
-XdFileReference >> file: aFileReference [
+XdFileStreamingStrategy >> file: aFileReference [
 	self 
 		assert: [ aFileReference notNil ] 
 		description: [ 'File reference must be non-nil' ].
@@ -28,13 +28,13 @@ XdFileReference >> file: aFileReference [
 ]
 
 { #category : #streams }
-XdFileReference >> readStream [
+XdFileStreamingStrategy >> readStream [
 	"Return a binary read stream"
 	^ self file binaryReadStream
 ]
 
 { #category : #writing }
-XdFileReference >> writeStreamDo: aBlock [
+XdFileStreamingStrategy >> writeStreamDo: aBlock [
 	self assert: [ file notNil ] description: ['File must be defined before writing.'].
 	^ file binaryWriteStreamDo: aBlock.
 ]

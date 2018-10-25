@@ -30,10 +30,10 @@ XdReaderWriterExamples >> bytes [
 ]
 
 { #category : #'basic objects' }
-XdReaderWriterExamples >> bytesReference [
+XdReaderWriterExamples >> bytesStreamingStrategy [
 	<gtExample>
 	| aReference |
-	aReference := XdReference bytes.
+	aReference := XdStreamingStrategy bytes.
 	self assert: aReference bytes isNil.
 	self assert: aReference exists not.
 	^ aReference
@@ -133,19 +133,10 @@ XdReaderWriterExamples >> emptyManifestJsonString [
 ]
 
 { #category : #'basic objects' }
-XdReaderWriterExamples >> emptyReference [
+XdReaderWriterExamples >> existingBytesStreamingStrategy [
 	<gtExample>
 	| aReference |
-	aReference := XdReference empty.
-	self assert: aReference exists not.
-	^ aReference
-]
-
-{ #category : #'basic objects' }
-XdReaderWriterExamples >> existingBytesReference [
-	<gtExample>
-	| aReference |
-	aReference := self bytesReference.
+	aReference := self bytesStreamingStrategy.
 	aReference bytes: self bytes.
 	self assert: aReference bytes equals: self bytes.
 	self assert: aReference exists.
@@ -153,10 +144,10 @@ XdReaderWriterExamples >> existingBytesReference [
 ]
 
 { #category : #'basic objects' }
-XdReaderWriterExamples >> existingFileReference [
+XdReaderWriterExamples >> existingFileStreamingStrategy [
 	<gtExample>
 	| aReference |
-	aReference := self fileReference.
+	aReference := self fileStreamingStrategy.
 	aReference file: self fileLocator.
 	self assert: aReference file equals: self fileLocator.
 	self assert: aReference exists.
@@ -169,7 +160,7 @@ XdReaderWriterExamples >> file [
 	| aFile |
 	aFile := XdFile new.
 	self assert: aFile manifest notNil.
-	self assert: aFile reference notNil.
+	self assert: aFile streamingStrategy notNil.
 	^ aFile
 ]
 
@@ -180,10 +171,10 @@ XdReaderWriterExamples >> fileLocator [
 ]
 
 { #category : #'basic objects' }
-XdReaderWriterExamples >> fileReference [
+XdReaderWriterExamples >> fileStreamingStrategy [
 	<gtExample>
 	| aReference |
-	aReference := XdReference file.
+	aReference := XdStreamingStrategy file.
 	self assert: aReference file isNil.
 	self assert: aReference exists not.
 	^ aReference
@@ -247,6 +238,15 @@ XdReaderWriterExamples >> manifestWithOneAttachment [
 	^ aManifest
 ]
 
+{ #category : #'basic objects' }
+XdReaderWriterExamples >> nullStreamingStrategy [
+	<gtExample>
+	| aReference |
+	aReference := XdStreamingStrategy null.
+	self assert: aReference exists not.
+	^ aReference
+]
+
 { #category : #playbook }
 XdReaderWriterExamples >> playbook [
 	<gtExample>
@@ -264,7 +264,7 @@ XdReaderWriterExamples >> readBasicDocument [
 	aWrittenXdFile := self writeBasicDocument.
 	aReader := self reader.
 	aXdReadFile := aReader
-		reference: aWrittenXdFile reference;
+		streamingStrategy: aWrittenXdFile streamingStrategy;
 		read.
 	self assert: aXdReadFile notNil.
 	self assert: aXdReadFile manifest notNil.
@@ -275,7 +275,7 @@ XdReaderWriterExamples >> readBasicDocument [
 	self
 		assert: aXdReadFile manifest author
 		equals: self documentAuthorName.
-	self assert: aXdReadFile reference notNil.
+	self assert: aXdReadFile streamingStrategy notNil.
 	self assert: aXdReadFile exists.
 	^ aXdReadFile
 ]
@@ -287,7 +287,7 @@ XdReaderWriterExamples >> readTextDocument [
 	aWrittenXdFile := self writeTextDocument.
 	aReader := self reader.
 	aXdReadFile := aReader
-		reference: aWrittenXdFile reference;
+		streamingStrategy: aWrittenXdFile streamingStrategy;
 		read.
 	self assert: aXdReadFile notNil.
 	self assert: aXdReadFile manifest notNil.
@@ -309,9 +309,9 @@ XdReaderWriterExamples >> readTextDocument [
 	self
 		assert: aXdReadFile manifest attachments first fileSize
 		equals: self textFileContent size.
-	self assert: aXdReadFile reference notNil.
+	self assert: aXdReadFile streamingStrategy notNil.
 	self assert: aXdReadFile exists.
-	aZip := aXdReadFile reference zip.
+	aZip := aXdReadFile streamingStrategy zip.
 	self assert: aZip members size equals: 2.
 	aTextFile := aZip members detect: [ :eachMember | 
 		eachMember fileName = self textFileName ].
@@ -360,7 +360,7 @@ XdReaderWriterExamples >> writeBasicDocument [
 	self
 		assert: aXdFile manifest author
 		equals: self documentAuthorName.
-	self assert: aXdFile reference notNil.
+	self assert: aXdFile streamingStrategy notNil.
 	self assert: aXdFile exists.
 	^ aXdFile
 ]
@@ -372,7 +372,7 @@ XdReaderWriterExamples >> writePlaybookDocument [
 	| aWriter aXdFile |
 	aWriter := self writer.
 	aXdFile := aWriter
-		reference: XdReference bytes;
+		streamingStrategy: XdStreamingStrategy bytes;
 		playbook: self playbook;
 		write.
 	self assert: aXdFile notNil.
@@ -395,9 +395,9 @@ XdReaderWriterExamples >> writePlaybookDocument [
 	self
 		assert: aXdFile manifest attachments first fileSize
 		equals: 58.
-	self assert: aXdFile reference notNil.
+	self assert: aXdFile streamingStrategy notNil.
 	self assert: aXdFile exists.
-	self assert: aXdFile reference zip members size equals: 2.
+	self assert: aXdFile streamingStrategy zip members size equals: 2.
 	^ aXdFile
 ]
 
@@ -411,7 +411,7 @@ XdReaderWriterExamples >> writePlaybookDocumentToFile [
 	self assert: aPlayBookFileReference exists not.
 	aWriter := self writer.
 	aXdFile := aWriter
-		reference: (XdReference file: aPlayBookFileReference);
+		streamingStrategy: (XdStreamingStrategy file: aPlayBookFileReference);
 		playbook: self playbook;
 		write.
 	self assert: aXdFile notNil.
@@ -434,9 +434,9 @@ XdReaderWriterExamples >> writePlaybookDocumentToFile [
 	self
 		assert: aXdFile manifest attachments first fileSize
 		equals: 58.
-	self assert: aXdFile reference notNil.
+	self assert: aXdFile streamingStrategy notNil.
 	self assert: aXdFile exists.
-	self assert: aXdFile reference zip members size equals: 2.
+	self assert: aXdFile streamingStrategy zip members size equals: 2.
 	self assert: aPlayBookFileReference exists.
 	^ aXdFile
 ]
@@ -470,9 +470,9 @@ XdReaderWriterExamples >> writeTextDocument [
 	self
 		assert: aXdFile manifest attachments first fileSize
 		equals: self textFileContent size.
-	self assert: aXdFile reference notNil.
+	self assert: aXdFile streamingStrategy notNil.
 	self assert: aXdFile exists.
-	self assert: aXdFile reference zip members size equals: 2.
+	self assert: aXdFile streamingStrategy zip members size equals: 2.
 	^ aXdFile
 ]
 

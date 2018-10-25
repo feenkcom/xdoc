@@ -1,6 +1,6 @@
 Class {
-	#name : #XdBytesReference,
-	#superclass : #XdReference,
+	#name : #XdBytesStreamingStrategy,
+	#superclass : #XdStreamingStrategy,
 	#instVars : [
 		'bytes'
 	],
@@ -8,13 +8,13 @@ Class {
 }
 
 { #category : #accessing }
-XdBytesReference >> bytes [
+XdBytesStreamingStrategy >> bytes [
 	<return: #ByteArray or: nil>
 	^ bytes
 ]
 
 { #category : #accessing }
-XdBytesReference >> bytes: aByteArray [
+XdBytesStreamingStrategy >> bytes: aByteArray [
 	self 
 		assert: [ aByteArray notNil ] 
 		description: [ 'Bytes must be non-nil' ].
@@ -22,13 +22,13 @@ XdBytesReference >> bytes: aByteArray [
 ]
 
 { #category : #testing }
-XdBytesReference >> exists [
+XdBytesStreamingStrategy >> exists [
 	<return: #Boolean>
 	^ self bytes notNil
 ]
 
 { #category : #streams }
-XdBytesReference >> readStream [
+XdBytesStreamingStrategy >> readStream [
 	self 
 		assert: [ self exists ]
 		description: [ 'Bytes must be defined before reading them' ].
@@ -36,7 +36,7 @@ XdBytesReference >> readStream [
 ]
 
 { #category : #streams }
-XdBytesReference >> writeStreamDo: aValuable [
+XdBytesStreamingStrategy >> writeStreamDo: aValuable [
 	"Evaluates the argument with a write stream. Answers the result."	
 	| inMemoryStream result |
 
