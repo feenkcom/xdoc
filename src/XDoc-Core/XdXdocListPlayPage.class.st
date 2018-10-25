@@ -1,8 +1,8 @@
 Class {
 	#name : #XdXdocListPlayPage,
 	#superclass : #Object,
-	#traits : 'GtAssertingTrait + GtAnnouncerTrait',
-	#classTraits : 'GtAssertingTrait classTrait + GtAnnouncerTrait classTrait',
+	#traits : 'GtAssertingTrait + GtAnnouncerTrait + XdConstantsTrait',
+	#classTraits : 'GtAssertingTrait classTrait + GtAnnouncerTrait classTrait + XdConstantsTrait classTrait',
 	#instVars : [
 		'announcer'
 	],
@@ -22,12 +22,15 @@ XdXdocListPlayPage >> asElement [
 	aFileReference ensureCreateDirectory.
 	aList := BrColumnedList new
 		display: aFileReference allFiles;
-		addEventHandler: GtInspectorListToSelectHandler new;
+		addEventHandler:
+			(GtInspectorListToSelectHandler new
+				transformation:
+					[ :eachFile | self readPlayBookFrom: eachFile ]);
 		constraintsDo: [ :c | c padding: (BlInsets top: 10) ].
 	aList column
 		title: 'Title';
-		stencil: [ :each :index |			
-			 (BrListLabelStencil matchParent: each basename) asElement. ].
+		stencil:
+				[ :each :index | (BrListLabelStencil matchParent: each basename) asElement ].
 	^ aList
 ]
 
@@ -35,6 +38,17 @@ XdXdocListPlayPage >> asElement [
 XdXdocListPlayPage >> initialize [
 	super initialize.
 	announcer := Announcer new.
+]
+
+{ #category : #converting }
+XdXdocListPlayPage >> readPlayBookFrom: eachFile [
+	| aPlayBookMember aXdFile aJsonString |
+	aXdFile := XdFile new
+		streamingStrategy: (XdStreamingStrategy file: eachFile).
+	aPlayBookMember := aXdFile streamingStrategy zip members
+		detect: [ :aMember | aMember fileName endsWith: self constants playBookExtension ].
+	aJsonString := aPlayBookMember contents asByteArray utf8Decoded.
+	^ XdPlayBookJsonMapping readPlayBook: aJsonString
 ]
 
 { #category : #testing }

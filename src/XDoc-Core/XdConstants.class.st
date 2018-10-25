@@ -13,3 +13,8 @@ XdConstants class >> manifestFileName [
 XdConstants class >> playBookExtension [
 	^ '.playbook'
 ]
+
+{ #category : #accessing }
+XdConstants class >> xdocExtension [
+	^ '.xdoc'
+]

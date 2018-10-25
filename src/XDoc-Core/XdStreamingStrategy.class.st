@@ -71,7 +71,7 @@ XdStreamingStrategy >> zip [
 	| aZip |
 	aZip := ZipArchive new.
 	self readStreamDo: [ :anInput | 
-		[ aZip readFrom: anInput ] 
+		[ aZip readFrom: anInput contents readStream ] 
 			on: Error 
 			do: [ :anError | "aZip addString: anError printString as: 'error.txt'" ] ].
 	^ aZip
