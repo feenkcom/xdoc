@@ -64,3 +64,9 @@ XdFile >> streamingStrategy: aXdReference [
 		description: [ 'Reference must be non-nil' ].
 	streamingStrategy := aXdReference
 ]
+
+{ #category : #actions }
+XdFile >> writer [
+	^ XdWriter new
+			streamingStrategy: self streamingStrategy
+]
