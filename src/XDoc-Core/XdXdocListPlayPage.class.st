@@ -22,12 +22,12 @@ XdXdocListPlayPage >> asElement [
 	aFileReference ensureCreateDirectory.
 	aList := BrColumnedList new
 		display: aFileReference allFiles;
-		addEventHandler: GtInspectorListToSelectHandler new.
+		addEventHandler: GtInspectorListToSelectHandler new;
+		constraintsDo: [ :c | c padding: (BlInsets top: 10) ].
 	aList column
 		title: 'Title';
 		stencil: [ :each :index |			
-			BrMaterialListItemStencil singleLineWithoutIcon
-				label: each basename ].
+			 (BrListLabelStencil matchParent: each basename) asElement. ].
 	^ aList
 ]
 
