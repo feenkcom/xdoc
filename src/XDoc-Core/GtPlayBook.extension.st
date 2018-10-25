@@ -79,9 +79,11 @@ GtPlayBook >> xdocPagesToPersist [
 
 { #category : #'*XDoc-Core' }
 GtPlayBook >> xdocPlayBookListElement [
-	| aFileReference aList |
+	| aFileReference aList allXdocFiles |
 	aFileReference := FileLocator localDirectory / 'xdocs'.
 	aFileReference ensureCreateDirectory.
+	allXdocFiles := aFileReference filesMatching: '*.', XdConstants xdocExtension.
+	allXdocFiles sort: [ :a :b | a modificationTime > b modificationTime ].
 	aList := BrSimpleList new.
 	aList 
 		stencil: [ :eachXdocFile :index |
@@ -93,7 +95,7 @@ GtPlayBook >> xdocPlayBookListElement [
 					anEvent consumed: true.
 					aList selectOne: index.
 					GtInspector openOnPlayBook: (self readPlayBookFrom: eachXdocFile) ] ];
-		display: (aFileReference allFiles sort: [ :a :b | a modificationTime > b modificationTime ]);
+		display: allXdocFiles;
 		constraintsDo: [ :c | 
 			c padding: (BlInsets top: 10).
 			c vertical exact: 200.
