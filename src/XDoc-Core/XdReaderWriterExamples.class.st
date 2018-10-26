@@ -112,6 +112,25 @@ XdReaderWriterExamples >> emptyDocument [
 ]
 
 { #category : #'basic objects' }
+XdReaderWriterExamples >> emptyFile [
+	<gtExample>
+	| aXdFile |
+	aXdFile := XdFile empty.
+	self assert: aXdFile notNil.
+	self assert: aXdFile exists not.
+	self assert: aXdFile manifest notNil.
+	self assert: aXdFile manifest documents size equals: 0.
+	self assert: aXdFile manifest attachments size equals: 0.
+	self assert: aXdFile streamingStrategy notNil.
+	self assert: aXdFile streamingStrategy exists not.
+	self assert: aXdFile manifest title equals: ''.
+	self assert: aXdFile manifest description equals: ''.
+	self assert: aXdFile manifest author equals: ''.
+	^ aXdFile
+	
+]
+
+{ #category : #'basic objects' }
 XdReaderWriterExamples >> emptyManifest [
 	<gtExample>
 	| aManifest |
@@ -278,6 +297,39 @@ XdReaderWriterExamples >> readBasicDocument [
 	self assert: aXdReadFile streamingStrategy notNil.
 	self assert: aXdReadFile exists.
 	^ aXdReadFile
+]
+
+{ #category : #reading }
+XdReaderWriterExamples >> readBrokenFile [
+	<gtExample>
+	| theErrors aReader aXdFile |
+	theErrors := OrderedCollection new.
+	aReader := self reader.
+	aXdFile := aReader
+		streamingStrategy: (XdStreamingStrategy bytes: self bytes);
+		onError: [ :anError | theErrors add: anError. self emptyFile ];
+		read.
+	self assert: aXdFile notNil.
+	self assert: aXdFile exists not.
+	self assert: theErrors size equals: 1.
+	^ aXdFile
+	
+]
+
+{ #category : #reading }
+XdReaderWriterExamples >> readBrokenFileAndRaiseErrorByDefault [
+	<gtExample>
+	| theErrors aReader aXdFile |
+	theErrors := OrderedCollection new.
+	aReader := self reader.
+	[ aXdFile := aReader
+		streamingStrategy: (XdStreamingStrategy bytes: self bytes);
+		read.
+	] on: Error do: [ :anError | theErrors add: anError ].
+	self assert: aXdFile isNil.
+	self assert: theErrors size equals: 1.
+	^ theErrors first
+	
 ]
 
 { #category : #reading }

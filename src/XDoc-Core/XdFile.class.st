@@ -8,6 +8,11 @@ Class {
 	#category : #'XDoc-Core-Model'
 }
 
+{ #category : #'instance creation' }
+XdFile class >> empty [
+	^ self new
+]
+
 { #category : #testing }
 XdFile >> exists [
 	<return: #Boolean>

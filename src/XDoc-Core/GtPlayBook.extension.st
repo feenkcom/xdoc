@@ -34,6 +34,7 @@ GtPlayBook >> playBookNameFrom: eachXdocFile [
 GtPlayBook >> readPlayBookFrom: eachFile [
 	| aPlayBookMember aXdFile aJsonString aPlayBook |
 	aXdFile := self xdocFileFrom: eachFile.
+	aXdFile exists ifFalse: [ ^ GtPlayBook newDefault ].
 	aPlayBookMember := aXdFile streamingStrategy zip members
 		detect:
 			[ :aMember | aMember fileName endsWith: XdConstants playBookExtension ].
@@ -68,6 +69,7 @@ GtPlayBook >> storePlayBookInto: aXdFile [
 GtPlayBook >> xdocFileFrom: eachFile [
 	^ XdReader new
 		streamingStrategy: (XdStreamingStrategy file: eachFile);
+		onError: [ :anError | XdFile empty ];
 		read
 ]
 

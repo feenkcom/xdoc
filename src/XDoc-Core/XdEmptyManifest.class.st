@@ -21,3 +21,28 @@ XdEmptyManifest class >> reset [
 XdEmptyManifest class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
+
+{ #category : #accessing }
+XdEmptyManifest >> attachments [
+	^ #()
+]
+
+{ #category : #accessing }
+XdEmptyManifest >> author [
+	^ ''
+]
+
+{ #category : #accessing }
+XdEmptyManifest >> description [
+	^ ''
+]
+
+{ #category : #accessing }
+XdEmptyManifest >> documents [
+	^ #()
+]
+
+{ #category : #accessing }
+XdEmptyManifest >> title [
+	^ ''
+]
