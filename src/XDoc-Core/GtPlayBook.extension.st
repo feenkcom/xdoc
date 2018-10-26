@@ -5,20 +5,21 @@ GtPlayBook >> gtActionXdocFor: anAction [
 	<gtAction>
 	^ anAction explicit 
 		category: #playground;
-		stencil: [ | button |
-			button := BrDropdown new
+		stencil: [ 
+			BrDropdown new
 				layout: BlLinearLayout horizontal;
 				constraintsDo: [ :c | 
 					c horizontal fitContent.
 					c vertical fitContent ];
-				in: [ :aDropdown | aDropdown toggle: [ 
+				in: [ :aDropdown | 
+					aDropdown toggle: [ 
 						BrButton new
 							look: BrGlamorousButtonWithIconLook;
 							icon: BrGlamorousIcons menu asElement;
 							label: 'XDoc' translated;
 							action: [ aDropdown toggle ] ] ];
 				popup: [ self xdocPlayBookListElement ];
-				look: (BrDropdownExamples new roundLook) ]
+				look: (BrDropdownLook new "outskirtsEmbellisher: [ :e | e look: GtDropdownOutskirtsLook new ]") ]
 ]
 
 { #category : #'*XDoc-Core' }
