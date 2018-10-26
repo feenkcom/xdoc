@@ -111,7 +111,7 @@ GtPlayBook >> xdocSaving [
 	<playBookHandler>
 	| anXdocPlaybookHandler aFileReference |
 	aFileReference := FileLocator localDirectory / 'xdocs' / 
-		(XdUtility fileNameFromDateAndTime: DateAndTime now).
+		(XdUtility playgroundFileNameFromDateAndTime: DateAndTime now).
 	aFileReference parent ensureCreateDirectory. 
 	anXdocPlaybookHandler := XdFile new.
 	anXdocPlaybookHandler streamingStrategy: (XdStreamingStrategy file: aFileReference).
