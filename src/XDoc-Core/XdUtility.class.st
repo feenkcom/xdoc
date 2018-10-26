@@ -8,7 +8,7 @@ Class {
 
 { #category : #utility }
 XdUtility class >> playgroundFileNameFromDateAndTime: aDateAndTime [
-	<script: '(self fileNameFromDateAndTime: DateAndTime now) inspect'>
+	<script: '(self playgroundFileNameFromDateAndTime: DateAndTime now) inspect'>
 	"Screen Shot 2018-10-09 at 22.34.56"
 	^ String streamContents: [ :aStream | 
 			aStream nextPutAll: 'Playground '.
