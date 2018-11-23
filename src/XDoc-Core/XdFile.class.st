@@ -22,17 +22,36 @@ XdFile >> exists [
 { #category : #'gt-extension' }
 XdFile >> gitReferenceFor: aView [
 	<gtView>
-	^ aView list
-		title: 'Files';
-		items: [ self streamingStrategy zip members ]
+
+	^ aView columnedList
+		title: 'Files' translated;
+		priority: 1;
+		items: self streamingStrategy zip members ;
+		column: '' translated do: [:column |
+			column 
+				evaluated: [ :each |
+					each isDirectory 
+						ifTrue: [ BrGlamorousIcons folder ] 
+						ifFalse: [ BrGlamorousIcons file ] ];
+				stencil: [ :eachIcon | eachIcon asElement margin: (BlInsets left: 5 right: 5) ];
+				noResize ];
+		column: 'Name' translated do: [ :column |
+			column evaluated: [ :each | each fileName ] ];
+		column: 'Size' translated do: [ :column |
+			column evaluated: [ :each | each compressedSize ] ];
+		column: 'Last Modified' translated do: [:column |
+			column evaluated: [ :each |
+				String streamContents: [:s | 
+					each lastModTime printYMDOn: s.
+					s nextPut: Character space.
+					each lastModTime printHMSOn: s ] ] ].
 ]
 
 { #category : #'gt-extension' }
 XdFile >> gtManifestFor: aView [
 	<gtView>
 	^ (self manifest gtRawFor: aView)
-		title: 'Manifest';
-		priority: 1
+		title: 'Manifest'
 ]
 
 { #category : #initialization }
