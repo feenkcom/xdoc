@@ -23,28 +23,37 @@ XdFile >> exists [
 XdFile >> gitReferenceFor: aView [
 	<gtView>
 
-	^ aView columnedList
+	| aList |
+	aList := aView columnedList
 		title: 'Files' translated;
 		priority: 1;
-		items: self streamingStrategy zip members ;
-		column: '' translated do: [:column |
+		items: self streamingStrategy zip members.
+	
+	aList	column: 'Icon' translated do: [:column |
 			column 
 				evaluated: [ :each |
 					each isDirectory 
 						ifTrue: [ BrGlamorousIcons folder ] 
 						ifFalse: [ BrGlamorousIcons file ] ];
 				stencil: [ :eachIcon | eachIcon asElement margin: (BlInsets left: 5 right: 5) ];
-				noResize ];
-		column: 'Name' translated do: [ :column |
-			column evaluated: [ :each | each fileName ] ];
-		column: 'Size' translated do: [ :column |
-			column evaluated: [ :each | each compressedSize ] ];
-		column: 'Last Modified' translated do: [:column |
-			column evaluated: [ :each |
+				noResize ].
+	aList	column
+		title: 'Name' translated;
+		matchParent;
+		evaluated: [ :each | each fileName ].
+	aList	column
+		title: 'Size' translated;
+		matchParent;
+		evaluated: [ :each | each compressedSize ].
+	aList	column
+		title: 'Last Modified' translated;
+		matchParent;
+		evaluated: [ :each |
 				String streamContents: [:s | 
 					each lastModTime printYMDOn: s.
 					s nextPut: Character space.
-					each lastModTime printHMSOn: s ] ] ].
+					each lastModTime printHMSOn: s ] ].
+	^ aList.
 ]
 
 { #category : #'gt-extension' }
