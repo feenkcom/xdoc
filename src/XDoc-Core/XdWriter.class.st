@@ -13,6 +13,26 @@ Class {
 }
 
 { #category : #writing }
+XdWriter >> attachment: aRelativeFileName stream: aStream size: aSize [
+	| anAttachment aComponent aDocument |
+	self 
+		assert: [ self manifest documents notEmpty ]
+		description: [ 'A document must be defined before adding attachments' ].
+	anAttachment := XdAttachment new.
+	anAttachment id: idGenerator nextId.
+	anAttachment fileName: aRelativeFileName.
+	anAttachment fileSize: aSize.
+	aComponent := XdComponent new.
+	aComponent link: anAttachment id.
+	aDocument := self manifest documents last.
+	aDocument components: (aDocument components copyWith: aComponent).
+	self manifest attachments: (self manifest attachments copyWith: anAttachment).
+
+	"add file"
+	zip addStream: aStream as: aRelativeFileName
+]
+
+{ #category : #writing }
 XdWriter >> attachment: aFileNameString text: aContentString [
 	| anAttachment aComponent aDocument |
 	self 
