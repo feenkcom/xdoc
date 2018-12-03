@@ -29,7 +29,7 @@ XdWriter >> attachment: aRelativeFileName stream: aStream size: aSize [
 	self manifest attachments: (self manifest attachments copyWith: anAttachment).
 
 	"add file"
-	zip addStream: aStream as: aRelativeFileName
+	zip gtAddStream: aStream as: aRelativeFileName
 ]
 
 { #category : #writing }
