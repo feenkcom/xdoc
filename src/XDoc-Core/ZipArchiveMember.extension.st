@@ -7,5 +7,5 @@ ZipArchiveMember class >> gtNewFromStream: aFileName [
 
 { #category : #'*XDoc-Core' }
 ZipArchiveMember class >> gtNewFromStream: aString named: aFileName [
-	^XdZipStreamMember newFrom: aString named: aFileName
+	^ GtZipStreamMember newFrom: aString named: aFileName
 ]
