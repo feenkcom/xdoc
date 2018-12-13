@@ -10,10 +10,19 @@ XdType class >> text [
 ]
 
 { #category : #enumerating }
+XdType class >> typeFromMimeType: aZnMimeType [ 
+	self allSubclassesDo: [ :eachClass | 
+		(eachClass matchesMimeType: aZnMimeType) ifTrue: [ ^ eachClass ] ].
+	^ XdUndefinedType new
+			mimeType: aZnMimeType;
+			yourself
+]
+
+{ #category : #enumerating }
 XdType class >> typeFromString: aString [ 
 	self allSubclassesDo: [ :eachClass | 
 		eachClass typeString = aString ifTrue: [ ^ eachClass ] ].
-	^ self error: 'Unknown type'
+	^ self error: 'Undefined type'
 ]
 
 { #category : #accessing }
