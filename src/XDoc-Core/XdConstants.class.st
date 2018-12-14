@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #accessing }
+XdConstants class >> htmlIndexFile [
+	^ 'index.html'
+]
+
+{ #category : #accessing }
 XdConstants class >> manifestFileName [
 	^ 'manifest.json'
 ]
