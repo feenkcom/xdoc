@@ -59,7 +59,7 @@ XdFile >> gitReferenceFor: aView [
 { #category : #'gt-extension' }
 XdFile >> gtManifestFor: aView [
 	<gtView>
-	^ (self manifest gtRawFor: aView)
+	^ (self manifest gtContentFor: aView)
 		title: 'Manifest'
 ]
 

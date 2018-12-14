@@ -67,6 +67,20 @@ XdManifest >> documents: anArrayOfDocuments [
 	documents := anArrayOfDocuments
 ]
 
+{ #category : #accessing }
+XdManifest >> gtContentFor: aView [
+	<gtView>
+	^ aView list
+		title: 'Content';
+		items: [ { 
+			'Title: ', self title asString.
+			'Author: ', self author asString.
+			'Description: ', self description asString } ,
+			self documents , 
+			self attachments ]
+			
+]
+
 { #category : #initialization }
 XdManifest >> initialize [
 	super initialize.

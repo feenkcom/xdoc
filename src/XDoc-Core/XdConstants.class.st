@@ -11,20 +11,15 @@ XdConstants class >> manifestFileName [
 
 { #category : #accessing }
 XdConstants class >> pillarExtension [ 
-	^ '.pillar'
+	^ GtFileUtilityConstants pillarExtension
 ]
 
 { #category : #accessing }
 XdConstants class >> playBookExtension [
-	^ '.playbook'
+	^ 'playbook'
 ]
 
 { #category : #accessing }
 XdConstants class >> xdocExtension [
 	^ 'xdoc'
-]
-
-{ #category : #'as yet unclassified' }
-XdConstants >> pillarExtension [
-	^ '.pillar'
 ]

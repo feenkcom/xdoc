@@ -34,17 +34,17 @@ XdWriter >> attachment: aRelativeFileName stream: aStream size: aSize [
 
 { #category : #writing }
 XdWriter >> attachment: aFileNameString text: aContentString [
-	| anAttachment aComponent aDocument nonEmptyFileName |
+	| anAttachment aComponent aDocument |
 	self 
 		assert: [ self manifest documents notEmpty ]
 		description: [ 'A document must be defined before adding attachments' ].
-		
-	nonEmptyFileName := aFileNameString.
-	aFileNameString isEmpty ifTrue: [nonEmptyFileName := '<empty>'].
+	self 
+		assert: [ aFileNameString notNil and: [ aFileNameString size isZero not ] ]
+		description: [ 'Attachment filename must be non-nil and non-empty' ].	
 
 	anAttachment := XdAttachment new.
 	anAttachment id: idGenerator nextId.
-	anAttachment fileName: nonEmptyFileName.
+	anAttachment fileName: aFileNameString.
 	anAttachment fileSize: aContentString size.
 	aComponent := XdComponent new.
 	aComponent link: anAttachment id.
@@ -53,7 +53,7 @@ XdWriter >> attachment: aFileNameString text: aContentString [
 	self manifest attachments: (self manifest attachments copyWith: anAttachment).
 
 	"add file"
-	zip addString: aContentString utf8Encoded as: nonEmptyFileName
+	zip addString: aContentString utf8Encoded as: aFileNameString
 ]
 
 { #category : #writing }
