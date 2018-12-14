@@ -106,6 +106,12 @@ XdWriter >> manifest: aXdManifest [
 ]
 
 { #category : #accessing }
+XdWriter >> streamingStrategy [
+	<return: #XdStreamingStrategy>
+	^ streamingStrategy
+]
+
+{ #category : #accessing }
 XdWriter >> streamingStrategy: aXdStreamingStrategy [ 
 	self 
 		assert: [ aXdStreamingStrategy notNil ] 
