@@ -12,9 +12,18 @@ Class {
 	#category : #'XDoc-Core-Writer'
 }
 
+{ #category : #'private - writing' }
+XdWriter >> addComponentWithAttachment: anAttachment [
+	| aComponent aDocument |
+	aComponent := XdComponent new.
+	aComponent link: anAttachment id.
+	aDocument := self manifest documents last.
+	aDocument components: (aDocument components copyWith: aComponent).
+]
+
 { #category : #writing }
 XdWriter >> attachment: aRelativeFileName stream: aStream size: aSize [
-	| anAttachment aComponent aDocument |
+	| anAttachment |
 	self 
 		assert: [ self manifest documents notEmpty ]
 		description: [ 'A document must be defined before adding attachments' ].
@@ -22,10 +31,7 @@ XdWriter >> attachment: aRelativeFileName stream: aStream size: aSize [
 	anAttachment id: idGenerator nextId.
 	anAttachment fileName: aRelativeFileName.
 	anAttachment fileSize: aSize.
-	aComponent := XdComponent new.
-	aComponent link: anAttachment id.
-	aDocument := self manifest documents last.
-	aDocument components: (aDocument components copyWith: aComponent).
+	self addComponentWithAttachment: anAttachment.
 	self manifest attachments: (self manifest attachments copyWith: anAttachment).
 
 	"add file"
@@ -103,6 +109,18 @@ XdWriter >> manifest: aXdManifest [
 		assert: [ aXdManifest notNil ] 
 		description: [ 'Manifest must be non-nil' ].
 	manifest := aXdManifest
+]
+
+{ #category : #writing }
+XdWriter >> reuseOrAddAttachment: aRelativeFileName stream: aStream size: aSize [
+	self 
+		assert: [ self manifest documents notEmpty ]
+		description: [ 'A document must be defined before adding attachments' ].
+	self manifest attachments 
+		detect: [ :eachAttachment | (eachAttachment fileName = aRelativeFileName) and: [ 
+				eachAttachment fileSize = aSize ] ]
+		ifFound: [ :anAttachment | self addComponentWithAttachment: anAttachment ]
+		ifNone: [ self attachment: aRelativeFileName stream: aStream size: aSize ]
 ]
 
 { #category : #accessing }
