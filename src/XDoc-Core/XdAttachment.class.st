@@ -66,10 +66,12 @@ XdAttachment >> initialize [
 XdAttachment >> printOn: aStream [
 	super printOn: aStream.
 	aStream
-		nextPutAll: '(fileName: ';
+		nextPutAll: '(id: ';
+		print: self id;
+		nextPutAll: ', fileName: ';
 		print: self fileName;
 		nextPutAll: ', fileSize: ';
 		print: self fileSize;
-		nextPut: $)
-		
+		nextPut: $
+	
 ]
