@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #accessing }
+XdConstants class >> cssIndexFile [
+	^ 'index.css'
+]
+
+{ #category : #accessing }
 XdConstants class >> htmlIndexFile [
 	^ 'index.html'
 ]
