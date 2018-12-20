@@ -13,6 +13,14 @@ XdFile class >> empty [
 	^ self new
 ]
 
+{ #category : #public }
+XdFile class >> fromBytes: aByteArray [ 
+	<return: #XdFile>
+	^ XdReader new
+		streamingStrategy: (XdStreamingStrategy bytes: aByteArray);
+		read
+]
+
 { #category : #testing }
 XdFile >> exists [
 	<return: #Boolean>
