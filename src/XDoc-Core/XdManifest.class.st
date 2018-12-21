@@ -53,6 +53,15 @@ XdManifest >> description: aString [
 	description := aString
 ]
 
+{ #category : #enumerating }
+XdManifest >> documentOfType: aXdType [ 
+	<return: #XdDocument>
+	^ self documents 
+		detect: [ :eachDocument | eachDocument type = aXdType ] 
+		ifFound: [ :aDocument | ^ aDocument ] 
+		ifNone: [ self error: 'Document not found' ]
+]
+
 { #category : #accessing }
 XdManifest >> documents [
 	<return: #Array of: #XdDocument>
@@ -67,7 +76,7 @@ XdManifest >> documents: anArrayOfDocuments [
 	documents := anArrayOfDocuments
 ]
 
-{ #category : #accessing }
+{ #category : #'gt-extension' }
 XdManifest >> gtContentFor: aView [
 	<gtView>
 	^ aView list
@@ -79,6 +88,28 @@ XdManifest >> gtContentFor: aView [
 			self documents , 
 			self attachments ]
 			
+]
+
+{ #category : #testing }
+XdManifest >> hasHtmlDocument [
+	<return: #Boolean>
+	^ self documents 
+		anySatisfy: [ :eachDocument | eachDocument type = XdHtmlType ]
+]
+
+{ #category : #enumerating }
+XdManifest >> htmlAttachments [
+	<return: #Array of: #XdAttachment>
+	| aDocument |
+	aDocument := self htmlDocument.
+	^ self attachments select: [ :eachAttachment | 
+		aDocument components anySatisfy: [ :eachComponent | eachComponent link = eachAttachment id ] ]
+]
+
+{ #category : #enumerating }
+XdManifest >> htmlDocument [
+	<return: #XdDocument>
+	^ self documentOfType: XdHtmlType
 ]
 
 { #category : #initialization }

@@ -71,6 +71,16 @@ XdFile >> gtManifestFor: aView [
 		title: 'Manifest'
 ]
 
+{ #category : #enumerating }
+XdFile >> htmlMembers [
+	<return: #Array of: #ArchiveMember>
+	| anXdAttachments |
+	anXdAttachments := self manifest htmlAttachments.
+	^ self streamingStrategy zip members select: [ :eachMember |
+		anXdAttachments anySatisfy: [ :eachAttachment | 
+			eachAttachment fileName = eachMember fileName ] ]
+]
+
 { #category : #initialization }
 XdFile >> initialize [
 	super initialize.
