@@ -9,6 +9,14 @@ Class {
 	#category : #'XDoc-Client-Examples'
 }
 
+{ #category : #client }
+XdClientEamples >> client [
+	<gtExample>
+	| aClient |
+	aClient := XdClient new.
+	^ aClient
+]
+
 { #category : #server }
 XdClientEamples >> delegate [
 	<gtExample>
@@ -21,6 +29,17 @@ XdClientEamples >> delegate [
 	^ delegate
 ]
 
+{ #category : #downloader }
+XdClientEamples >> downloadXDoc [
+	<gtExample>
+	| anXdFile |
+	self startServer.
+	anXdFile := self client download: self xdocPublicUrl.
+	self assert: anXdFile notNil.
+	self assert: anXdFile manifest documents size equals: 2.
+	^ anXdFile
+]
+
 { #category : #initialization }
 XdClientEamples >> initialize [
 	super initialize.
@@ -29,7 +48,7 @@ XdClientEamples >> initialize [
 ]
 
 { #category : #server }
-XdClientEamples >> server [
+XdClientEamples >> startServer [
 	<gtExample>
 	<after: #stopServer>
 	| aServer |
