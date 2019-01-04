@@ -23,6 +23,9 @@ XdClientEamples >> delegate [
 	delegate ifNotNil: [ :aDelegate | ^ aDelegate ].
 	delegate := ZnDispatcherDelegate new.
 	delegate 
+		map: self linkPath
+		to: [ :aRequest :aResponse |
+			aResponse entity: self linkEntity ];
 		map: self xdocPath
 		to: [ :aRequest :aResponse |
 			aResponse entity: documentsExamples documentWithFigureEntity ].
@@ -45,6 +48,24 @@ XdClientEamples >> initialize [
 	super initialize.
 	zincExamples := GtZnServerExamples new.
 	documentsExamples := XdDocumentsExamples new.
+]
+
+{ #category : #downloader }
+XdClientEamples >> linkEntity [
+	<gtExample>
+	^ ZnEntity text: XdClientConstants xdocLinkFileName
+]
+
+{ #category : #downloader }
+XdClientEamples >> linkPath [
+	<gtExample>
+	^ '/', ('/' join: self linkPathSegments)
+]
+
+{ #category : #downloader }
+XdClientEamples >> linkPathSegments [
+	<gtExample>
+	^ { 'cdn'. '1'. XdClientConstants xdocLinkFileName }
 ]
 
 { #category : #server }
@@ -86,7 +107,7 @@ XdClientEamples >> xdocPublicUrl [
 { #category : #downloader }
 XdClientEamples >> xdocUrl [
 	<gtExample>
-	self server.
+	self startServer.
 	^ zincExamples serverUrl withPathSegments: self xdocPathSegments
 	
 ]

@@ -10,7 +10,7 @@ Class {
 
 { #category : #execution }
 XdClientDownloadXDocCommand >> execute [
-	self ensureManifest.
+	self ensureUrl.
 	self ensureXDocBytes.
 	self ensureXdFile.
 	^ self xdFile
