@@ -199,6 +199,16 @@ XdReaderWriterExamples >> fileStreamingStrategy [
 	^ aReference
 ]
 
+{ #category : #'reader / writer' }
+XdReaderWriterExamples >> inMemoryWriter [
+	<gtExample>
+	| aWriter |
+	aWriter := self writer.
+	aWriter streamingStrategy: XdStreamingStrategy bytes.
+	self assert: aWriter streamingStrategy notNil.
+	^ aWriter
+]
+
 { #category : #accessing }
 XdReaderWriterExamples >> json [
 	^ XdManifestJsonMapping

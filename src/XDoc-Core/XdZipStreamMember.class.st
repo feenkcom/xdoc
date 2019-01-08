@@ -19,7 +19,7 @@ XdZipStreamMember class >> newFromStream: aReadStream [
 
 { #category : #'instance creation' }
 XdZipStreamMember >> from: aReadStream [
-	stream := aReadStream.
+	stream := aReadStream contents readStream.
 	compressedSize := uncompressedSize := stream size.
 	desiredCompressionMethod := compressedSize > 0 ifTrue: [ CompressionDeflated ] ifFalse: [ CompressionStored ].
 ]
