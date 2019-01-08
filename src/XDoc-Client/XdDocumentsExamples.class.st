@@ -1,3 +1,15 @@
+"
+!! How-To Create Base64 String
+
+[[[
+| aDocument anXdFile |
+aDocument := Gt2DocumentExamples new documentWithExistingClass.
+anXdFile := aDocument saveToXDoc.
+ZnBase64Encoder new 
+	breakLines;
+	encode: anXdFile streamingStrategy bytes 
+]]]
+"
 Class {
 	#name : #XdDocumentsExamples,
 	#superclass : #Object,
@@ -20,7 +32,23 @@ XdDocumentsExamples >> documentWithExistingClassXDoc [
 XdDocumentsExamples >> documentWithExistingClassXDocBase64 [
 	<gtExample>
 	<noTest>
-	^ 'FIX THIS'
+	^ 'UEsDBBQAAAAAACKiKE6D9LF+HQAAAB0AAAAMAAAAaW5kZXgucGlsbGFyJHtjbGFzczpHdDJEb2N1
+bWVudEV4YW1wbGVzfSRQSwMEFAAAAAAAIqIoTmpo6RFnAQAAZwEAAAoAAABpbmRleC5odG1sPHA+
+CjxkaXYgY2xhc3M9InNvdXJjZUNvZGUiPjxhIGhyZWY9IiMxIj5HdDJEb2N1bWVudEV4YW1wbGVz
+PC9hPjxkaXYgaWQ9IjEiPjxwcmU+PGNvZGUgY2xhc3M9InNtYWxsdGFsayI+Ck9iamVjdCBzdWJj
+bGFzczogI0d0MkRvY3VtZW50RXhhbXBsZXMKCXVzZXM6IFRHdDJEb2N1bWVudENvbnN0YW50cyAr
+IFRCbERlYnVnCglpbnN0YW5jZVZhcmlhYmxlTmFtZXM6ICdtZW1vcnlTeXN0ZW0gdGVtcERpcmVj
+dG9yeScKCWNsYXNzVmFyaWFibGVOYW1lczogJycKCXBvb2xEaWN0aW9uYXJpZXM6ICcnCgljYXRl
+Z29yeTogJ0dUb29sa2l0LU5ld0RvY3VtZW50ZXItRXhhbXBsZXMnCjwvY29kZT48L3ByZT48L2Rp
+dj48L2Rpdj4KCjwvcD5QSwMEFAAAAAAAIqIoTlrCLeYCAQAAAgEAAA0AAABtYW5pZmVzdC5qc29u
+eyJ0aXRsZSI6IiIsImRlc2NyaXB0aW9uIjoiIiwiYXV0aG9yIjoiIiwiYXR0YWNobWVudHMiOlt7
+ImlkIjoiMSIsImZpbGVuYW1lIjoiaW5kZXgucGlsbGFyIiwic2l6ZSI6Mjl9LHsiaWQiOiIyIiwi
+ZmlsZW5hbWUiOiJpbmRleC5odG1sIiwic2l6ZSI6MzU5fV0sImRvY3VtZW50cyI6W3sidHlwZSI6
+ImRvY3VtZW50ZXIiLCJjb21wb25lbnRzIjpbeyJsaW5rIjoiMSJ9XX0seyJ0eXBlIjoiaHRtbCIs
+ImNvbXBvbmVudHMiOlt7ImxpbmsiOiIyIn1dfV19UEsBAhQDFAAAAAAAIqIoToP0sX4dAAAAHQAA
+AAwAAAAAAAAAAAAAALaBAAAAAGluZGV4LnBpbGxhclBLAQIUAxQAAAAAACKiKE5qaOkRZwEAAGcB
+AAAKAAAAAAAAAAAAAAC2gUcAAABpbmRleC5odG1sUEsBAhQDFAAAAAAAIqIoTlrCLeYCAQAAAgEA
+AA0AAAAAAAAAAAAAALaB1gEAAG1hbmlmZXN0Lmpzb25QSwUGAAAAAAMAAwCtAAAAAwMAAAAA'
 ]
 
 { #category : #documenter }
