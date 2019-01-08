@@ -5,6 +5,31 @@ Class {
 }
 
 { #category : #documenter }
+XdDocumentsExamples >> documentWithExistingClassEntity [
+	<gtExample>
+	^ ZnEntity bytes: self documentWithExistingClassXDocBytes
+]
+
+{ #category : #documenter }
+XdDocumentsExamples >> documentWithExistingClassXDoc [
+	<gtExample>
+	^ XdFile fromBytes: self documentWithExistingClassXDocBytes
+]
+
+{ #category : #documenter }
+XdDocumentsExamples >> documentWithExistingClassXDocBase64 [
+	<gtExample>
+	<noTest>
+	^ 'FIX THIS'
+]
+
+{ #category : #documenter }
+XdDocumentsExamples >> documentWithExistingClassXDocBytes [
+	<gtExample>
+	^ self documentWithExistingClassXDocBase64 base64Decoded
+]
+
+{ #category : #documenter }
 XdDocumentsExamples >> documentWithFigureEntity [
 	<gtExample>
 	^ ZnEntity bytes: self documentWithFigureXDocBytes
