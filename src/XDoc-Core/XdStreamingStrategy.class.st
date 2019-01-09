@@ -31,6 +31,12 @@ XdStreamingStrategy class >> null [
 	^ XdNullStreamingStrategy uniqueInstance
 ]
 
+{ #category : #accessing }
+XdStreamingStrategy >> bytes [
+	<return: #ByteArray>
+	^ self readStreamDo: [ :aStream | aStream contents ]
+]
+
 { #category : #testing }
 XdStreamingStrategy >> exists [
 	<return: #Boolean>

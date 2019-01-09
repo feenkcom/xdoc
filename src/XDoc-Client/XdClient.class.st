@@ -1,6 +1,11 @@
 Class {
 	#name : #XdClient,
 	#superclass : #Object,
+	#traits : 'TBlDebug',
+	#classTraits : 'TBlDebug classTrait',
+	#instVars : [
+		'serverUrl'
+	],
 	#category : #'XDoc-Client-Core'
 }
 
@@ -12,4 +17,29 @@ XdClient >> download: aZnUrl [
 		url: aZnUrl;
 		execute;
 		xdFile
+]
+
+{ #category : #actions }
+XdClient >> publish: aXdFile [ 
+	"Publish an XDoc file to a public server"
+	^ XdClientPublishXDocCommand new
+		client: self;
+		xdoc: aXdFile;
+		execute;
+		publicUrlToClipboard;
+		publicUrl
+]
+
+{ #category : #accessing }
+XdClient >> serverUrl [
+	<return: #ZnUrl>
+	^ serverUrl
+]
+
+{ #category : #accessing }
+XdClient >> serverUrl: aZnUrl [
+	self 
+		assert: [ aZnUrl notNil ]
+		description: [ 'Server URL must be non-nil' ].
+	serverUrl := aZnUrl
 ]

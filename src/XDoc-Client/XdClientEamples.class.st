@@ -12,8 +12,11 @@ Class {
 { #category : #client }
 XdClientEamples >> client [
 	<gtExample>
-	| aClient |
+	| aClient anUrl |
 	aClient := XdClient new.
+	anUrl := self serverUrl.
+	aClient serverUrl: anUrl.
+	self assert: aClient serverUrl equals: anUrl.
 	^ aClient
 ]
 
@@ -28,11 +31,14 @@ XdClientEamples >> delegate [
 			aResponse entity: self linkEntity ];
 		map: self xdocPath
 		to: [ :aRequest :aResponse |
-			aResponse entity: documentsExamples documentWithFigureEntity ].
+			aResponse entity: documentsExamples documentWithFigureEntity ];
+		map: self publishPath
+		to: [ :aRequest :aResponse |
+			self publishedResponse ].
 	^ delegate
 ]
 
-{ #category : #downloader }
+{ #category : #downloading }
 XdClientEamples >> downloadXDoc [
 	<gtExample>
 	| anXdFile |
@@ -50,22 +56,55 @@ XdClientEamples >> initialize [
 	documentsExamples := XdDocumentsExamples new.
 ]
 
-{ #category : #downloader }
+{ #category : #downloading }
 XdClientEamples >> linkEntity [
 	<gtExample>
 	^ ZnEntity text: XdClientConstants xdocLinkFileName
 ]
 
-{ #category : #downloader }
+{ #category : #downloading }
 XdClientEamples >> linkPath [
 	<gtExample>
 	^ '/', ('/' join: self linkPathSegments)
 ]
 
-{ #category : #downloader }
+{ #category : #downloading }
 XdClientEamples >> linkPathSegments [
 	<gtExample>
 	^ { 'cdn'. '1'. XdClientConstants xdocLinkFileName }
+]
+
+{ #category : #publishing }
+XdClientEamples >> publishPath [
+	<gtExample>
+	^ '/', ( '/' join: #( 'api' 'xdoc' 'post' ) )
+]
+
+{ #category : #publishing }
+XdClientEamples >> publishXDoc [
+	<gtExample>
+	| aCommand |
+	self startServer.
+	aCommand := XdClientPublishXDocCommand new
+		client: self client;
+		xdoc: documentsExamples documentWithFigureXDoc;
+		execute.
+	self assert: aCommand notNil.
+	self assert: aCommand response isSuccess.
+	self assert: aCommand publicUrl notNil.
+	^ aCommand
+]
+
+{ #category : #publishing }
+XdClientEamples >> publishedResponse [
+	<gtExample>
+	^ ZnResponse created: (zincExamples serverUrl / '1') asString
+]
+
+{ #category : #client }
+XdClientEamples >> serverUrl [
+	<gtExample>
+	^ zincExamples serverUrl
 ]
 
 { #category : #server }
@@ -86,25 +125,25 @@ XdClientEamples >> stopServer [
 	^ zincExamples stopServer
 ]
 
-{ #category : #downloader }
+{ #category : #downloading }
 XdClientEamples >> xdocPath [
 	<gtExample>
 	^ '/', ('/' join: self xdocPathSegments)
 ]
 
-{ #category : #downloader }
+{ #category : #downloading }
 XdClientEamples >> xdocPathSegments [
 	<gtExample>
 	^ #( 'cdn' '1' 'documenter-figure.xdoc' )
 ]
 
-{ #category : #downloader }
+{ #category : #downloading }
 XdClientEamples >> xdocPublicUrl [
 	<gtExample>
 	^ zincExamples serverUrl withPathSegments: (self xdocPathSegments allButLast: 1)
 ]
 
-{ #category : #downloader }
+{ #category : #downloading }
 XdClientEamples >> xdocUrl [
 	<gtExample>
 	self startServer.
