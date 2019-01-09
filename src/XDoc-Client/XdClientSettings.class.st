@@ -30,8 +30,8 @@ XdClientSettings class >> settingsOn: aBuilder [
 	(aBuilder setting: #xdServerUrlString)
 		parent: #xd;
 		target: self;
-		description: 'The URL for the Feenk XD document sharing service';
-		label: 'Feenk XD service URL'
+		description: 'The URL for the Feenk XDoc sharing service';
+		label: 'Feenk XDoc service URL'
 
 ]
 

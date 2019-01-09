@@ -19,6 +19,12 @@ XdClient >> download: aZnUrl [
 		xdFile
 ]
 
+{ #category : #initialization }
+XdClient >> initialize [
+	super initialize.
+	serverUrl := XdClientSettings xdServerUrl.
+]
+
 { #category : #actions }
 XdClient >> publish: aXdFile [ 
 	"Publish an XDoc file to a public server"
