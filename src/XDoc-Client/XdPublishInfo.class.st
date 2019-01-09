@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'author',
 		'title',
-		'description'
+		'description',
+		'publishAction'
 	],
 	#category : #'XDoc-Client-Brick'
 }
@@ -41,6 +42,23 @@ XdPublishInfo >> initialize [
 	author := ''.
 	description := ''.
 	title := ''.
+	publishAction := [ self inform: 'Fake publish action' ].
+]
+
+{ #category : #'api - actions' }
+XdPublishInfo >> publish [
+	"do nothing"
+	self publishAction cull: self
+]
+
+{ #category : #accessing }
+XdPublishInfo >> publishAction [
+	^ publishAction
+]
+
+{ #category : #accessing }
+XdPublishInfo >> publishAction: anObject [
+	publishAction := anObject
 ]
 
 { #category : #accessing }

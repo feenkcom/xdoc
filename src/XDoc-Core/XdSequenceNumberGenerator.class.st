@@ -7,6 +7,17 @@ Class {
 	#category : #'XDoc-Core-Model'
 }
 
+{ #category : #'instance creation' }
+XdSequenceNumberGenerator class >> initialId: anInteger [
+	^ self new initialId: anInteger
+]
+
+{ #category : #initialization }
+XdSequenceNumberGenerator >> initialId: anInteger [
+	"This method should be called only at the instance creation phase."
+	currentId := anInteger
+]
+
 { #category : #initialization }
 XdSequenceNumberGenerator >> initialize [
 	super initialize.
