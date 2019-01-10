@@ -10,6 +10,11 @@ XdConstants class >> cdnPathSegments [
 	^ #( 'cdn' )
 ]
 
+{ #category : #'client / server' }
+XdConstants class >> emptyList [
+	^ '[]'
+]
+
 { #category : #accessing }
 XdConstants class >> htmlIndexFile [
 	^ 'index.html'

@@ -1,6 +1,8 @@
 Class {
 	#name : #XdManifestJsonMapping,
 	#superclass : #Object,
+	#traits : 'XdBasicJsonMappingTrait',
+	#classTraits : 'XdBasicJsonMappingTrait classTrait',
 	#category : #'XDoc-Core-Json'
 }
 
@@ -36,6 +38,15 @@ XdManifestJsonMapping class >> collectionOfDocumentsMappingFor: aNeoJSONMapper [
 		for: #CollectionOfDocuments customDo: [ :mapping |
 			mapping listOfElementSchema: XdDocument ].
 	self documentMappingFor: aNeoJSONMapper.
+]
+
+{ #category : #mapping }
+XdManifestJsonMapping class >> collectionOfFileInfoMappingFor: aNeoJSONMapper [
+	aNeoJSONMapper
+		for: #CollectionOfFileInfo customDo: [ :mapping |
+			mapping listOfElementSchema: XdFileInfo ].
+	self fileInfoMappingFor: aNeoJSONMapper.
+
 ]
 
 { #category : #mapping }
@@ -108,6 +119,14 @@ XdManifestJsonMapping class >> readFileInfo: aJsonFileInfo [
 ]
 
 { #category : #reading }
+XdManifestJsonMapping class >> readFileInfos: aJsonCollectionOfFileInfo [
+	^ self 
+		read: #CollectionOfFileInfo 
+		withMapping: #collectionOfFileInfoMappingFor: 
+		on: aJsonCollectionOfFileInfo readStream
+]
+
+{ #category : #reading }
 XdManifestJsonMapping class >> readManifest: aJsonManifest [
 	^ self read: XdManifest withMapping: #manifestMappingFor: on: aJsonManifest readStream
 ]
@@ -134,6 +153,14 @@ XdManifestJsonMapping class >> write: aXdObject mappedTo: aMappingSymbol prettyP
 { #category : #writing }
 XdManifestJsonMapping class >> writeFileInfo: aXdFileInfo [
 	^ self write: aXdFileInfo mappedTo: #fileInfoMappingFor:
+]
+
+{ #category : #writing }
+XdManifestJsonMapping class >> writeFileInfos: aCollectionOfXdFileInfo [
+	^ self 
+		write: aCollectionOfXdFileInfo 
+		as: #CollectionOfFileInfo 
+		mappedTo: #collectionOfFileInfoMappingFor:
 ]
 
 { #category : #writing }
