@@ -1,7 +1,7 @@
 Class {
 	#name : #XdConstants,
 	#superclass : #Object,
-	#category : #'XDoc-Core-Model'
+	#category : #'XDoc-Core-Utility'
 }
 
 { #category : #'client / server' }
@@ -13,6 +13,12 @@ XdConstants class >> cdnPathSegments [
 { #category : #accessing }
 XdConstants class >> htmlIndexFile [
 	^ 'index.html'
+]
+
+{ #category : #'client / server' }
+XdConstants class >> listFileName [
+	"File name describing all published files"
+	^ 'list.json'
 ]
 
 { #category : #accessing }
