@@ -103,6 +103,11 @@ XdFile >> manifest: aXdManifest [
 	manifest := aXdManifest
 ]
 
+{ #category : #actions }
+XdFile >> open [
+	^ self inspect
+]
+
 { #category : #accessing }
 XdFile >> streamingStrategy [
 	<return: #XdStreamingStrategy>

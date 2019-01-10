@@ -38,11 +38,36 @@ XdClientEamples >> delegate [
 ]
 
 { #category : #downloading }
+XdClientEamples >> downloadFileInfo [
+	<gtExample>
+	| aXdFileInfo |
+	self startServer.
+	aXdFileInfo := self client downloadFileInfo: self xdocPublicUrl.
+	self assert: aXdFileInfo notNil.
+	self assert: aXdFileInfo manifest documents size equals: 2.
+	self assert: aXdFileInfo pathSegment equals: self xdocPathSegment.
+	self assert: aXdFileInfo fileName equals: self xdocFileName.
+	self assert: aXdFileInfo xdocUrl equals: self xdocUrl.
+	^ aXdFileInfo
+]
+
+{ #category : #downloading }
 XdClientEamples >> downloadXDoc [
 	<gtExample>
 	| anXdFile |
 	self startServer.
-	anXdFile := self client download: self xdocPublicUrl.
+	anXdFile := self client downloadXDoc: self xdocPublicUrl.
+	self assert: anXdFile notNil.
+	self assert: anXdFile manifest documents size equals: 2.
+	^ anXdFile
+]
+
+{ #category : #downloading }
+XdClientEamples >> downloadXDocUsingFileInfo [
+	<gtExample>
+	| anXdFile |
+	self startServer.
+	anXdFile := self client downloadXDocUsingFileInfo: self downloadFileInfo.
 	self assert: anXdFile notNil.
 	self assert: anXdFile manifest documents size equals: 2.
 	^ anXdFile

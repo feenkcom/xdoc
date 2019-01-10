@@ -24,7 +24,7 @@ XdClientPublishXDocCommand >> postUrl [
 	^ self client serverUrl withPathSegments: #( 'api' 'xdoc' 'post' )
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 XdClientPublishXDocCommand >> publicUrl [
 	<return: #ZnUrl>
 	^ self response location asZnUrl

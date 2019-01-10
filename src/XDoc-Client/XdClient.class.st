@@ -10,19 +10,51 @@ Class {
 }
 
 { #category : #public }
-XdClient class >> download: aZnUrlString thenDo: aBlock [
+XdClient class >> downloadFileInfo: aZnUrlString thenDo: aBlock [
+	<return: #XdFileInfo>
+	| aFileInfo |
+	aFileInfo := self new downloadFileInfo: aZnUrlString asZnUrl.
+	aFileInfo ifNotNil: [ aBlock value: aFileInfo ].
+	^ aFileInfo
+]
+
+{ #category : #public }
+XdClient class >> downloadXDoc: aZnUrlString thenDo: aBlock [
+	<return: #XdFile>
 	| aXdFile |
-	aXdFile := self new download: aZnUrlString asZnUrl.
+	aXdFile := self new downloadXDoc: aZnUrlString asZnUrl.
 	aXdFile ifNotNil: [ aBlock value: aXdFile ].
 	^ aXdFile
 ]
 
 { #category : #actions }
-XdClient >> download: aZnUrl [ 
+XdClient >> downloadFileInfo: aZnUrl [ 
+	"Download an XDoc file info from a public server"
+	<return: #XdFileInfo>
+	^ XdClientDownloadFileInfoCommand new
+		client: self;
+		url: aZnUrl;
+		execute;
+		fileInfo
+]
+
+{ #category : #actions }
+XdClient >> downloadXDoc: aZnUrl [ 
 	"Download an XDoc file from a public server"
 	^ XdClientDownloadXDocCommand new
 		client: self;
 		url: aZnUrl;
+		execute;
+		xdFile
+]
+
+{ #category : #actions }
+XdClient >> downloadXDocUsingFileInfo: aXdFileInfo [ 
+	"Download an XDoc file from a public server"
+	^ XdClientDownloadXDocCommand new
+		client: self;
+		url: aXdFileInfo xdocUrl;
+		fileInfo: aXdFileInfo;
 		execute;
 		xdFile
 ]

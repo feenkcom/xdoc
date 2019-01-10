@@ -10,28 +10,21 @@ Class {
 }
 
 { #category : #private }
-XdClientDownloadXDocCommand >> ensureXDocUrl [
-	| anIdPathSegment aRootUrl aInfoUrl aResponse |
-	(self url pathSegments beginsWith: XdConstants cdnPathSegments) ifFalse: [ ^ self ].
-	self url pathSegments size > XdConstants cdnPathSegments size ifFalse: [ ^ self ].
-	anIdPathSegment := self url pathSegments at: XdConstants cdnPathSegments size + 1.
-	aRootUrl := (self url copy clearPath addPathSegments: XdConstants cdnPathSegments) / anIdPathSegment.
-	aInfoUrl := aRootUrl / XdConstants xdocInfoFileName.
-	aResponse := ZnClient new
-		url: aInfoUrl;
-		get;
-		response.
-	aResponse isSuccess ifFalse: [ ^ self ].
-	self fileInfo: (XdManifestJsonMapping readFileInfo: aResponse contents)
+XdClientDownloadXDocCommand >> ensureFileInfo [
+	self fileInfo ifNotNil: [ ^ self ].
+	self fileInfo: (XdClientDownloadFileInfoCommand new
+		client: self client;
+		url: self url;
+		execute;
+		fileInfo)
 ]
 
 { #category : #accessing }
 XdClientDownloadXDocCommand >> ensureXdFile [
-	| aXdUrl aResponse |
+	| aResponse |
 	self fileInfo ifNil: [ ^ self ].
-	aXdUrl := self client serverUrl / XdConstants cdnPathSegments / self fileInfo pathSegment / self fileInfo fileName.
 	aResponse := ZnClient new
-		url: aXdUrl;
+		url: self fileInfo xdocUrl;
 		get;
 		response.
 	aResponse isSuccess ifFalse: [ ^ self ].
@@ -40,7 +33,7 @@ XdClientDownloadXDocCommand >> ensureXdFile [
 
 { #category : #execution }
 XdClientDownloadXDocCommand >> execute [
-	self ensureXDocUrl.
+	self ensureFileInfo.
 	self ensureXdFile.
 	^ self xdFile
 ]

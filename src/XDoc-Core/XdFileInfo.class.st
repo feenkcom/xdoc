@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'manifest',
 		'fileName',
-		'pathSegment'
+		'pathSegment',
+		'xdocUrl'
 	],
 	#category : #'XDoc-Core-Model'
 }
@@ -17,6 +18,12 @@ XdFileInfo >> fileName [
 { #category : #accessing }
 XdFileInfo >> fileName: anObject [
 	fileName := anObject
+]
+
+{ #category : #initialization }
+XdFileInfo >> initialize [
+	super initialize.
+	manifest := XdEmptyManifest uniqueInstance.
 ]
 
 { #category : #accessing }
@@ -37,4 +44,23 @@ XdFileInfo >> pathSegment [
 { #category : #accessing }
 XdFileInfo >> pathSegment: anObject [
 	pathSegment := anObject
+]
+
+{ #category : #accessing }
+XdFileInfo >> titleAndAuthor [
+	<return: #String>
+	| aTitle anAuthor |
+	aTitle := self manifest title ifEmpty: [ 'Empty document title' ].
+	anAuthor := self manifest author ifEmpty: [ 'unknown author' ].
+	^ aTitle, ' by ', anAuthor
+]
+
+{ #category : #accessing }
+XdFileInfo >> xdocUrl [
+	^ xdocUrl
+]
+
+{ #category : #accessing }
+XdFileInfo >> xdocUrl: aZnUrl [
+	xdocUrl := aZnUrl
 ]
