@@ -26,6 +26,9 @@ XdClientEamples >> delegate [
 	delegate ifNotNil: [ :aDelegate | ^ aDelegate ].
 	delegate := ZnDispatcherDelegate new.
 	delegate 
+		map: self listFilePath
+		to: [ :aRequest :aResponse |
+			aResponse entity: (ZnEntity json: self listJsonContent) ];
 		map: self infoFilePath
 		to: [ :aRequest :aResponse |
 			aResponse entity: (ZnEntity json: self infoJsonContent) ];
@@ -49,6 +52,21 @@ XdClientEamples >> downloadFileInfo [
 	self assert: aXdFileInfo fileName equals: self xdocFileName.
 	self assert: aXdFileInfo xdocUrl equals: self xdocUrl.
 	^ aXdFileInfo
+]
+
+{ #category : #list }
+XdClientEamples >> downloadList [
+	<gtExample>
+	| aCollectionOfXdFileInfo |
+	self startServer.
+	aCollectionOfXdFileInfo := self client downloadList.
+	self assert: aCollectionOfXdFileInfo notNil.
+	self assert: aCollectionOfXdFileInfo size equals: 1.
+	self assert: aCollectionOfXdFileInfo first manifest documents size equals: 2.
+	self assert: aCollectionOfXdFileInfo first pathSegment equals: self xdocPathSegment.
+	self assert: aCollectionOfXdFileInfo first fileName equals: 'xdoc-file.xdoc'.
+	self assert: aCollectionOfXdFileInfo first xdocUrl isNil.
+	^ aCollectionOfXdFileInfo
 ]
 
 { #category : #downloading }
@@ -102,6 +120,18 @@ XdClientEamples >> initialize [
 	super initialize.
 	zincExamples := GtZnServerExamples new.
 	documentsExamples := XdDocumentsExamples new.
+]
+
+{ #category : #list }
+XdClientEamples >> listFilePath [
+	<gtExample>
+	^ '/', ('/' join: (XdConstants cdnPathSegments copyWith: XdConstants listFileName))
+]
+
+{ #category : #list }
+XdClientEamples >> listJsonContent [
+	<gtExample>
+	^ '[{"pathSegment":"1","fileName":"xdoc-file.xdoc","manifest":{"title":"","description":"","author":"","attachments":[{"id":"1","filename":"index.pillar","size":146},{"id":"2","filename":"gt-logo.png","size":8192},{"id":"3","filename":"index.html","size":245},{"id":"4","filename":"index.css","size":183}],"documents":[{"type":"documenter","components":[{"link":"1"},{"link":"2"}]},{"type":"html","components":[{"link":"3"},{"link":"4"},{"link":"2"}]}]}}]'
 ]
 
 { #category : #publishing }

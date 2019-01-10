@@ -10,6 +10,16 @@ Class {
 	#category : #'XDoc-Core-Model'
 }
 
+{ #category : #'accessing - manifest' }
+XdFileInfo >> author [
+	^ self manifest author
+]
+
+{ #category : #'accessing - manifest' }
+XdFileInfo >> description [
+	^ self manifest description
+]
+
 { #category : #accessing }
 XdFileInfo >> fileName [
 	^ fileName
@@ -44,6 +54,11 @@ XdFileInfo >> pathSegment [
 { #category : #accessing }
 XdFileInfo >> pathSegment: anObject [
 	pathSegment := anObject
+]
+
+{ #category : #'accessing - manifest' }
+XdFileInfo >> title [
+	^ self manifest title
 ]
 
 { #category : #accessing }

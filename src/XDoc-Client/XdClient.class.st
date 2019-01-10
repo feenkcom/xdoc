@@ -27,6 +27,11 @@ XdClient class >> downloadXDoc: aZnUrlString thenDo: aBlock [
 	^ aXdFile
 ]
 
+{ #category : #accessing }
+XdClient class >> gtDocumentsFor: aView [
+	^ self new gtDocumentsFor: aView
+]
+
 { #category : #actions }
 XdClient >> downloadFileInfo: aZnUrl [ 
 	"Download an XDoc file info from a public server"
@@ -36,6 +41,15 @@ XdClient >> downloadFileInfo: aZnUrl [
 		url: aZnUrl;
 		execute;
 		fileInfo
+]
+
+{ #category : #actions }
+XdClient >> downloadList [
+	<return: #Array of: #XdFileInfo>
+	^ XdClientDownloadListCommand new
+		client: self;
+		execute;
+		list
 ]
 
 { #category : #actions }
@@ -59,6 +73,17 @@ XdClient >> downloadXDocUsingFileInfo: aXdFileInfo [
 		fileInfo: aXdFileInfo;
 		execute;
 		xdFile
+]
+
+{ #category : #'gt-extension' }
+XdClient >> gtDocumentsFor: aView [
+	<gtView>
+	^ aView columnedList
+		title: 'Published Documents';
+		items: [ self downloadList ];
+		column: 'Author' item: [ :aFileInfo | aFileInfo author ];
+		column: 'Title' item: [ :aFileInfo | aFileInfo title ]
+		
 ]
 
 { #category : #initialization }
