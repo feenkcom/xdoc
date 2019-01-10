@@ -9,6 +9,14 @@ Class {
 	#category : #'XDoc-Client-Core'
 }
 
+{ #category : #public }
+XdClient class >> download: aZnUrlString thenDo: aBlock [
+	| aXdFile |
+	aXdFile := self new download: aZnUrlString asZnUrl.
+	aXdFile ifNotNil: [ aBlock value: aXdFile ].
+	^ aXdFile
+]
+
 { #category : #actions }
 XdClient >> download: aZnUrl [ 
 	"Download an XDoc file from a public server"

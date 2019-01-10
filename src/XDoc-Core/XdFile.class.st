@@ -117,6 +117,15 @@ XdFile >> streamingStrategy: aXdReference [
 	streamingStrategy := aXdReference
 ]
 
+{ #category : #accessing }
+XdFile >> titleAndAuthor [
+	<return: #String>
+	| aTitle anAuthor |
+	aTitle := self manifest title ifEmpty: [ 'Empty document title' ].
+	anAuthor := self manifest author ifEmpty: [ 'unknown author' ].
+	^ aTitle, ' by ', anAuthor
+]
+
 { #category : #actions }
 XdFile >> writer [
 	^ XdWriter new
