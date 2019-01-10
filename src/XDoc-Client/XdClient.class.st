@@ -29,7 +29,9 @@ XdClient class >> downloadXDoc: aZnUrlString thenDo: aBlock [
 
 { #category : #accessing }
 XdClient class >> gtDocumentsFor: aView [
-	^ self new gtDocumentsFor: aView
+	<gtView>
+	^ (self new gtDocumentsFor: aView)
+			priority: -2
 ]
 
 { #category : #actions }
