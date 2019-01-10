@@ -26,15 +26,14 @@ XdClientEamples >> delegate [
 	delegate ifNotNil: [ :aDelegate | ^ aDelegate ].
 	delegate := ZnDispatcherDelegate new.
 	delegate 
-		map: self linkPath
+		map: self infoFilePath
 		to: [ :aRequest :aResponse |
-			aResponse entity: self linkEntity ];
+			aResponse entity: (ZnEntity json: self infoJsonContent) ];
 		map: self xdocPath
 		to: [ :aRequest :aResponse |
 			aResponse entity: documentsExamples documentWithFigureEntity ];
 		map: self publishPath
-		to: [ :aRequest :aResponse |
-			self publishedResponse ].
+		to: [ :aRequest :aResponse | self publishedResponse ].
 	^ delegate
 ]
 
@@ -49,29 +48,35 @@ XdClientEamples >> downloadXDoc [
 	^ anXdFile
 ]
 
+{ #category : #downloading }
+XdClientEamples >> fileInfo [
+	<gtExample>
+	^ XdFileInfo new
+		manifest: documentsExamples documentWithFigureXDoc manifest;
+		pathSegment: self xdocPathSegment;
+		fileName: self xdocFileName
+]
+
+{ #category : #downloading }
+XdClientEamples >> infoFilePath [
+	<gtExample>
+	^ '/', ('/' join: (XdConstants cdnPathSegments asOrderedCollection
+			add: self xdocPathSegment;
+			add: XdConstants xdocInfoFileName;
+			yourself))
+]
+
+{ #category : #downloading }
+XdClientEamples >> infoJsonContent [
+	<gtExample>
+	^ XdManifestJsonMapping writeFileInfo: self fileInfo
+]
+
 { #category : #initialization }
 XdClientEamples >> initialize [
 	super initialize.
 	zincExamples := GtZnServerExamples new.
 	documentsExamples := XdDocumentsExamples new.
-]
-
-{ #category : #downloading }
-XdClientEamples >> linkEntity [
-	<gtExample>
-	^ ZnEntity text: XdClientConstants xdocLinkFileName
-]
-
-{ #category : #downloading }
-XdClientEamples >> linkPath [
-	<gtExample>
-	^ '/', ('/' join: self linkPathSegments)
-]
-
-{ #category : #downloading }
-XdClientEamples >> linkPathSegments [
-	<gtExample>
-	^ { 'cdn'. '1'. XdClientConstants xdocLinkFileName }
 ]
 
 { #category : #publishing }
@@ -126,15 +131,29 @@ XdClientEamples >> stopServer [
 ]
 
 { #category : #downloading }
+XdClientEamples >> xdocFileName [
+	<gtExample>
+	^ 'documenter-figure.xdoc'
+]
+
+{ #category : #downloading }
 XdClientEamples >> xdocPath [
 	<gtExample>
 	^ '/', ('/' join: self xdocPathSegments)
 ]
 
 { #category : #downloading }
+XdClientEamples >> xdocPathSegment [
+	<gtExample>
+	^ '1'
+]
+
+{ #category : #downloading }
 XdClientEamples >> xdocPathSegments [
 	<gtExample>
-	^ #( 'cdn' '1' 'documenter-figure.xdoc' )
+	^ XdConstants cdnPathSegments, {  
+		self xdocPathSegment . 
+		self xdocFileName }
 ]
 
 { #category : #downloading }

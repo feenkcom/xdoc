@@ -67,6 +67,17 @@ XdManifestJsonMapping class >> documentTypeMappingFor: aNeoJSONMapper [
 ]
 
 { #category : #mapping }
+XdManifestJsonMapping class >> fileInfoMappingFor: aNeoJSONMapper [
+	aNeoJSONMapper
+		for: XdFileInfo do: [ :mapping |
+	      mapping mapAccessor: #pathSegment.
+			mapping mapAccessor: #fileName. 
+			(mapping mapAccessor: #manifest) valueSchema: XdManifest.
+			].
+	self manifestMappingFor: aNeoJSONMapper.
+]
+
+{ #category : #mapping }
 XdManifestJsonMapping class >> manifestMappingFor: aNeoJSONMapper [
 	aNeoJSONMapper
 		for: XdManifest do: [ :mapping |
@@ -92,6 +103,11 @@ XdManifestJsonMapping class >> read: aJsonSchema withMapping: aMessageSymbol on:
 ]
 
 { #category : #reading }
+XdManifestJsonMapping class >> readFileInfo: aJsonFileInfo [
+	^ self read: XdFileInfo withMapping: #fileInfoMappingFor: on: aJsonFileInfo readStream
+]
+
+{ #category : #reading }
 XdManifestJsonMapping class >> readManifest: aJsonManifest [
 	^ self read: XdManifest withMapping: #manifestMappingFor: on: aJsonManifest readStream
 ]
@@ -113,6 +129,11 @@ XdManifestJsonMapping class >> write: aXdObject mappedTo: aMappingSymbol prettyP
 			yourself.
 		self perform: aMappingSymbol with: aJsonWriter.
 		aJsonWriter nextPut: aXdObject ].
+]
+
+{ #category : #writing }
+XdManifestJsonMapping class >> writeFileInfo: aXdFileInfo [
+	^ self write: aXdFileInfo mappedTo: #fileInfoMappingFor:
 ]
 
 { #category : #writing }
