@@ -114,9 +114,26 @@ XdPublishInfoLook >> newTitleElement [
 { #category : #hooks }
 XdPublishInfoLook >> onInfoChanged [
 	self widgetDo: [ 
+		| anInfo | 
+		anInfo := self info.
 		titleElement editor text: self info title asRopedText.
+		titleElement editor 
+			addEventHandlerOn: BrTextEditorDeletedEvent 
+			do: [ :anEvent | anInfo title: titleElement editor text ];
+			addEventHandlerOn: BrTextEditorInsertedEvent 
+			do: [ :anEvent | anInfo title: titleElement editor text ].
 		authorElement editor text: self info author asRopedText.
+		authorElement editor 
+			addEventHandlerOn: BrTextEditorDeletedEvent 
+			do: [ :anEvent | anInfo author: authorElement editor text ];
+			addEventHandlerOn: BrTextEditorInsertedEvent 
+			do: [ :anEvent | anInfo author: authorElement editor text ].
 		descriptionElement editor text: self info description asRopedText.
+		descriptionElement editor 
+			addEventHandlerOn: BrTextEditorDeletedEvent 
+			do: [ :anEvent | anInfo description: descriptionElement editor text ];
+			addEventHandlerOn: BrTextEditorInsertedEvent 
+			do: [ :anEvent | anInfo description: descriptionElement editor text ].
 		publishButton action: (MessageSend receiver: self info selector: #publish)
 	]
 ]

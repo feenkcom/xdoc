@@ -40,6 +40,7 @@ XdClient >> downloadFileInfo: aZnUrl [
 
 { #category : #actions }
 XdClient >> downloadXDoc: aZnUrl [ 
+	<return: #XdFile>
 	"Download an XDoc file from a public server"
 	^ XdClientDownloadXDocCommand new
 		client: self;
@@ -50,6 +51,7 @@ XdClient >> downloadXDoc: aZnUrl [
 
 { #category : #actions }
 XdClient >> downloadXDocUsingFileInfo: aXdFileInfo [ 
+	<return: #XdFile>
 	"Download an XDoc file from a public server"
 	^ XdClientDownloadXDocCommand new
 		client: self;
