@@ -20,9 +20,22 @@ XdClientDownloadXDocCommand >> ensureFileInfo [
 ]
 
 { #category : #accessing }
+XdClientDownloadXDocCommand >> ensureXDocUrl [
+	| aXDocUrl |
+	self fileInfo ifNil: [ ^ self ].
+	self fileInfo xdocUrl ifNotNil: [ ^ self ].
+	aXDocUrl := self client serverUrl 
+		/ XdConstants cdnPathSegments 
+		/ self fileInfo pathSegment 
+		/ self fileInfo fileName.
+	self fileInfo xdocUrl: aXDocUrl
+]
+
+{ #category : #accessing }
 XdClientDownloadXDocCommand >> ensureXdFile [
 	| aResponse |
 	self fileInfo ifNil: [ ^ self ].
+	self ensureXDocUrl.
 	aResponse := ZnClient new
 		url: self fileInfo xdocUrl;
 		get;
