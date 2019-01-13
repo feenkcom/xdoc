@@ -27,12 +27,9 @@ XdClientSettings class >> defaultPublicXdServerUrl [
 XdClientSettings class >> settingsOn: aBuilder [ 
 	<systemsettings>
 	
-	(aBuilder setting: #xdServerUrlString)
-		parent: #xd;
-		target: self;
-		description: 'The URL for the Feenk XDoc sharing service';
-		label: 'Feenk XDoc service URL'
-
+	(aBuilder group: #xdoc)
+		parent: #tools;
+		label: 'XDoc'
 ]
 
 { #category : #accessing }
@@ -43,6 +40,18 @@ XdClientSettings class >> xdServerUrl [
 { #category : #accessing }
 XdClientSettings class >> xdServerUrl: aZnUrlOrString [
 	xdServerUrl := aZnUrlOrString ifNotNil: [ aZnUrlOrString asZnUrl ]
+]
+
+{ #category : #accessing }
+XdClientSettings class >> xdServerUrlSettingOn: aBuilder [ 
+	<systemsettings>
+	
+	(aBuilder setting: #xdServerUrlString)
+		parent: #xdoc;
+		target: self;
+		description: 'The URL for the Feenk XDoc sharing service';
+		label: 'Feenk XDoc service URL'
+
 ]
 
 { #category : #accessing }
