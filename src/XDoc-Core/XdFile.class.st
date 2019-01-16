@@ -103,6 +103,11 @@ XdFile >> manifest: aXdManifest [
 	manifest := aXdManifest
 ]
 
+{ #category : #actions }
+XdFile >> open [
+	^ self inspect
+]
+
 { #category : #accessing }
 XdFile >> streamingStrategy [
 	<return: #XdStreamingStrategy>
@@ -115,6 +120,15 @@ XdFile >> streamingStrategy: aXdReference [
 		assert: [ aXdReference notNil ] 
 		description: [ 'Reference must be non-nil' ].
 	streamingStrategy := aXdReference
+]
+
+{ #category : #accessing }
+XdFile >> titleAndAuthor [
+	<return: #String>
+	| aTitle anAuthor |
+	aTitle := self manifest title ifEmpty: [ 'Empty document title' ].
+	anAuthor := self manifest author ifEmpty: [ 'unknown author' ].
+	^ aTitle, ' by ', anAuthor
 ]
 
 { #category : #actions }

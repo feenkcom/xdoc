@@ -1,12 +1,29 @@
 Class {
 	#name : #XdConstants,
 	#superclass : #Object,
-	#category : #'XDoc-Core-Model'
+	#category : #'XDoc-Core-Utility'
 }
+
+{ #category : #'client / server' }
+XdConstants class >> cdnPathSegments [
+	"Default public URL path segments for published XDoc documents"
+	^ #( 'cdn' )
+]
+
+{ #category : #'client / server' }
+XdConstants class >> emptyList [
+	^ '[]'
+]
 
 { #category : #accessing }
 XdConstants class >> htmlIndexFile [
 	^ 'index.html'
+]
+
+{ #category : #'client / server' }
+XdConstants class >> listFileName [
+	"File name describing all published files"
+	^ 'list.json'
 ]
 
 { #category : #accessing }
@@ -24,7 +41,19 @@ XdConstants class >> playBookExtension [
 	^ 'playbook'
 ]
 
+{ #category : #'client / server' }
+XdConstants class >> publishingPathSegments [
+	"Default REST path to publish XDoc documents"
+	^ #( 'api' 'xdoc' 'post' )
+]
+
 { #category : #accessing }
 XdConstants class >> xdocExtension [
 	^ 'xdoc'
+]
+
+{ #category : #'client / server' }
+XdConstants class >> xdocInfoFileName [
+	"File name describing XDoc file path, name, and manifest"
+	^ 'info.json'
 ]

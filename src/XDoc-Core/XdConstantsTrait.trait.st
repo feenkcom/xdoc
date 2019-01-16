@@ -1,6 +1,6 @@
 Trait {
 	#name : #XdConstantsTrait,
-	#category : #'XDoc-Core-Model'
+	#category : #'XDoc-Core-Utility'
 }
 
 { #category : #accessing }

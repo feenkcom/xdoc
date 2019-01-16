@@ -12,8 +12,11 @@ Class {
 { #category : #client }
 XdClientEamples >> client [
 	<gtExample>
-	| aClient |
+	| aClient anUrl |
 	aClient := XdClient new.
+	anUrl := self serverUrl.
+	aClient serverUrl: anUrl.
+	self assert: aClient serverUrl equals: anUrl.
 	^ aClient
 ]
 
@@ -23,24 +26,93 @@ XdClientEamples >> delegate [
 	delegate ifNotNil: [ :aDelegate | ^ aDelegate ].
 	delegate := ZnDispatcherDelegate new.
 	delegate 
-		map: self linkPath
+		map: self listFilePath
 		to: [ :aRequest :aResponse |
-			aResponse entity: self linkEntity ];
+			aResponse entity: (ZnEntity json: self listJsonContent) ];
+		map: self infoFilePath
+		to: [ :aRequest :aResponse |
+			aResponse entity: (ZnEntity json: self infoJsonContent) ];
 		map: self xdocPath
 		to: [ :aRequest :aResponse |
-			aResponse entity: documentsExamples documentWithFigureEntity ].
+			aResponse entity: documentsExamples documentWithFigureEntity ];
+		map: self publishPath
+		to: [ :aRequest :aResponse | self publishedResponse ].
 	^ delegate
 ]
 
-{ #category : #downloader }
+{ #category : #downloading }
+XdClientEamples >> downloadFileInfo [
+	<gtExample>
+	| aXdFileInfo |
+	self startServer.
+	aXdFileInfo := self client downloadFileInfo: self xdocPublicUrl.
+	self assert: aXdFileInfo notNil.
+	self assert: aXdFileInfo manifest documents size equals: 2.
+	self assert: aXdFileInfo pathSegment equals: self xdocPathSegment.
+	self assert: aXdFileInfo fileName equals: self xdocFileName.
+	self assert: aXdFileInfo xdocUrl equals: self xdocUrl.
+	^ aXdFileInfo
+]
+
+{ #category : #list }
+XdClientEamples >> downloadList [
+	<gtExample>
+	| aCollectionOfXdFileInfo |
+	self startServer.
+	aCollectionOfXdFileInfo := self client downloadList.
+	self assert: aCollectionOfXdFileInfo notNil.
+	self assert: aCollectionOfXdFileInfo size equals: 1.
+	self assert: aCollectionOfXdFileInfo first manifest documents size equals: 2.
+	self assert: aCollectionOfXdFileInfo first pathSegment equals: self xdocPathSegment.
+	self assert: aCollectionOfXdFileInfo first fileName equals: 'xdoc-file.xdoc'.
+	self assert: aCollectionOfXdFileInfo first xdocUrl isNil.
+	^ aCollectionOfXdFileInfo
+]
+
+{ #category : #downloading }
 XdClientEamples >> downloadXDoc [
 	<gtExample>
 	| anXdFile |
 	self startServer.
-	anXdFile := self client download: self xdocPublicUrl.
+	anXdFile := self client downloadXDoc: self xdocPublicUrl.
 	self assert: anXdFile notNil.
 	self assert: anXdFile manifest documents size equals: 2.
 	^ anXdFile
+]
+
+{ #category : #downloading }
+XdClientEamples >> downloadXDocUsingFileInfo [
+	<gtExample>
+	| anXdFile |
+	self startServer.
+	anXdFile := self client downloadXDocUsingFileInfo: self downloadFileInfo.
+	self assert: anXdFile notNil.
+	self assert: anXdFile manifest documents size equals: 2.
+	^ anXdFile
+]
+
+{ #category : #downloading }
+XdClientEamples >> fileInfo [
+	<gtExample>
+	^ XdFileInfo new
+		manifest: documentsExamples documentWithFigureXDoc manifest;
+		pathSegment: self xdocPathSegment;
+		fileName: self xdocFileName
+]
+
+{ #category : #downloading }
+XdClientEamples >> infoFilePath [
+	<gtExample>
+	^ '/', ('/' join: (XdConstants cdnPathSegments asOrderedCollection
+			add: self xdocPathSegment;
+			add: XdConstants xdocInfoFileName;
+			yourself))
+]
+
+{ #category : #downloading }
+XdClientEamples >> infoJsonContent [
+	<gtExample>
+	^ XdManifestJsonMapping writeFileInfo: self fileInfo
 ]
 
 { #category : #initialization }
@@ -50,22 +122,49 @@ XdClientEamples >> initialize [
 	documentsExamples := XdDocumentsExamples new.
 ]
 
-{ #category : #downloader }
-XdClientEamples >> linkEntity [
+{ #category : #list }
+XdClientEamples >> listFilePath [
 	<gtExample>
-	^ ZnEntity text: XdClientConstants xdocLinkFileName
+	^ '/', ('/' join: (XdConstants cdnPathSegments copyWith: XdConstants listFileName))
 ]
 
-{ #category : #downloader }
-XdClientEamples >> linkPath [
+{ #category : #list }
+XdClientEamples >> listJsonContent [
 	<gtExample>
-	^ '/', ('/' join: self linkPathSegments)
+	^ '[{"pathSegment":"1","fileName":"xdoc-file.xdoc","manifest":{"title":"","description":"","author":"","attachments":[{"id":"1","filename":"index.pillar","size":146},{"id":"2","filename":"gt-logo.png","size":8192},{"id":"3","filename":"index.html","size":245},{"id":"4","filename":"index.css","size":183}],"documents":[{"type":"documenter","components":[{"link":"1"},{"link":"2"}]},{"type":"html","components":[{"link":"3"},{"link":"4"},{"link":"2"}]}]}}]'
 ]
 
-{ #category : #downloader }
-XdClientEamples >> linkPathSegments [
+{ #category : #publishing }
+XdClientEamples >> publishPath [
 	<gtExample>
-	^ { 'cdn'. '1'. XdClientConstants xdocLinkFileName }
+	^ '/', ( '/' join: #( 'api' 'xdoc' 'post' ) )
+]
+
+{ #category : #publishing }
+XdClientEamples >> publishXDoc [
+	<gtExample>
+	| aCommand |
+	self startServer.
+	aCommand := XdClientPublishXDocCommand new
+		client: self client;
+		xdoc: documentsExamples documentWithFigureXDoc;
+		execute.
+	self assert: aCommand notNil.
+	self assert: aCommand response isSuccess.
+	self assert: aCommand publicUrl notNil.
+	^ aCommand
+]
+
+{ #category : #publishing }
+XdClientEamples >> publishedResponse [
+	<gtExample>
+	^ ZnResponse created: (zincExamples serverUrl / '1') asString
+]
+
+{ #category : #client }
+XdClientEamples >> serverUrl [
+	<gtExample>
+	^ zincExamples serverUrl
 ]
 
 { #category : #server }
@@ -86,25 +185,39 @@ XdClientEamples >> stopServer [
 	^ zincExamples stopServer
 ]
 
-{ #category : #downloader }
+{ #category : #downloading }
+XdClientEamples >> xdocFileName [
+	<gtExample>
+	^ 'documenter-figure.xdoc'
+]
+
+{ #category : #downloading }
 XdClientEamples >> xdocPath [
 	<gtExample>
 	^ '/', ('/' join: self xdocPathSegments)
 ]
 
-{ #category : #downloader }
-XdClientEamples >> xdocPathSegments [
+{ #category : #downloading }
+XdClientEamples >> xdocPathSegment [
 	<gtExample>
-	^ #( 'cdn' '1' 'documenter-figure.xdoc' )
+	^ '1'
 ]
 
-{ #category : #downloader }
+{ #category : #downloading }
+XdClientEamples >> xdocPathSegments [
+	<gtExample>
+	^ XdConstants cdnPathSegments, {  
+		self xdocPathSegment . 
+		self xdocFileName }
+]
+
+{ #category : #downloading }
 XdClientEamples >> xdocPublicUrl [
 	<gtExample>
 	^ zincExamples serverUrl withPathSegments: (self xdocPathSegments allButLast: 1)
 ]
 
-{ #category : #downloader }
+{ #category : #downloading }
 XdClientEamples >> xdocUrl [
 	<gtExample>
 	self startServer.
