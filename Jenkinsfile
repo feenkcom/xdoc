@@ -14,5 +14,10 @@ pipeline {
                 junit '*.xml'
             }
         }
+        stage('Build xdoc-server') {
+            steps {
+                build '../xdoc-server'
+            }
+        }
     }
 }
