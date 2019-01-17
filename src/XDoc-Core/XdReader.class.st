@@ -43,7 +43,7 @@ XdReader >> read [
 			detect: [ :eachMember | eachMember fileName = self constants manifestFileName ]
 			ifFound: [ :aMember | 
 				| aManifest |
-				aManifest := self json readManifest: aMember contents utf8Decoded.
+				aManifest := self json readManifest: aMember contents "utf8Decoded".
 				XdFile new
 					manifest: aManifest;
 					streamingStrategy: self streamingStrategy ]
