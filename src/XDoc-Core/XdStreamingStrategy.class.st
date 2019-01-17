@@ -1,8 +1,8 @@
 Class {
 	#name : #XdStreamingStrategy,
 	#superclass : #Object,
-	#traits : 'GtAssertingTrait + XdConstantsTrait + XdManifestJsonMappingTrait',
-	#classTraits : 'GtAssertingTrait classTrait + XdConstantsTrait classTrait + XdManifestJsonMappingTrait classTrait',
+	#traits : 'TGtAssert + XdConstantsTrait + XdManifestJsonMappingTrait',
+	#classTraits : 'TGtAssert classTrait + XdConstantsTrait classTrait + XdManifestJsonMappingTrait classTrait',
 	#category : #'XDoc-Core-Model'
 }
 
