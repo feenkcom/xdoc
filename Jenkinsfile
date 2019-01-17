@@ -10,7 +10,6 @@ pipeline {
         }
         stage('Run examples') {
             steps {
-                sh 'chmod +x build/test.sh'
                 sh 'build/test.sh'
                 junit '*.xml'
             }
