@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Build xdoc-server') {
             steps {
-                build '../../xdoc-server/master'
+                build '../xdoc-server/master'
             }
         }
     }
