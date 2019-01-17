@@ -4,7 +4,7 @@ pipeline {
         stage('Load') {
             steps {
                 sh 'git clean -f -d'
-                sh 'chmod +x build/load.sh'
+                sh 'chmod +x build/*.sh'
                 sh 'build/load.sh'
             }
         }
