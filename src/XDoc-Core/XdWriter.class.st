@@ -59,7 +59,7 @@ XdWriter >> attachment: aFileNameString text: aContentString [
 	self manifest attachments: (self manifest attachments copyWith: anAttachment).
 
 	"add file"
-	zip addString: aContentString utf8Encoded as: aFileNameString
+	zip gtAddString: aContentString as: aFileNameString
 ]
 
 { #category : #writing }
@@ -160,7 +160,7 @@ XdWriter >> write [
 { #category : #'private - writing' }
 XdWriter >> writeTo: aWriteStream [
 	zip 
-		addString: (self json writeManifest: self manifest) utf8Encoded
+		gtAddString: (self json writeManifest: self manifest)
 		as: self constants manifestFileName.
 	zip writeTo: aWriteStream.
 ]

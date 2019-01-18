@@ -8,3 +8,11 @@ Archive >> gtAddStream: aReadStream as: aFileName [
 	newMember localFileName: aFileName.
 	^newMember
 ]
+
+{ #category : #'*XDoc-Core' }
+Archive >> gtAddString: aString as: aFileName [
+	| aMember |
+	aMember := self addString: aString utf8Encoded as: aFileName.
+	aMember isTextFile: true.
+	^ aMember
+]

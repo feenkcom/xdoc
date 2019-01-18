@@ -420,7 +420,7 @@ XdReaderWriterExamples >> writeBasicDocument [
 { #category : #writing }
 XdReaderWriterExamples >> writeTextDocument [
 	<gtExample>
-	| aWriter aXdFile |
+	| aWriter aXdFile aMembers |
 	aWriter := self writer.
 	aXdFile := aWriter
 		text;
@@ -448,7 +448,14 @@ XdReaderWriterExamples >> writeTextDocument [
 		equals: self textFileContent size.
 	self assert: aXdFile streamingStrategy notNil.
 	self assert: aXdFile exists.
-	self assert: aXdFile streamingStrategy zip members size equals: 2.
+	aMembers := aXdFile streamingStrategy zip members.
+	self assert: aMembers size equals: 2.
+	self assert: aMembers first fileName equals: self textFileName.
+	self assert: aMembers first isTextFile.
+	self assert: aMembers first gtContents equals: self textFileContent.
+	self assert: aMembers second fileName equals: XdConstants manifestFileName.
+	self assert: aMembers second isTextFile.
+	self assert: aMembers second gtContents isString.
 	^ aXdFile
 ]
 
