@@ -4,6 +4,7 @@ pipeline {
         stage('Load') {
             steps {
                 sh 'git clean -f -d'
+                sh 'rm -rf pharo-local/*'
                 sh 'chmod +x build/*.sh'
                 sh 'build/load.sh'
             }
