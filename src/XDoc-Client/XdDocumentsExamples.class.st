@@ -31,7 +31,6 @@ XdDocumentsExamples >> documentWithExistingClassXDoc [
 { #category : #documenter }
 XdDocumentsExamples >> documentWithExistingClassXDocBase64 [
 	<gtExample>
-	<noTest>
 	^ 'UEsDBBQAAAAAACKiKE6D9LF+HQAAAB0AAAAMAAAAaW5kZXgucGlsbGFyJHtjbGFzczpHdDJEb2N1
 bWVudEV4YW1wbGVzfSRQSwMEFAAAAAAAIqIoTmpo6RFnAQAAZwEAAAoAAABpbmRleC5odG1sPHA+
 CjxkaXYgY2xhc3M9InNvdXJjZUNvZGUiPjxhIGhyZWY9IiMxIj5HdDJEb2N1bWVudEV4YW1wbGVz
