@@ -20,7 +20,7 @@ XdClientSettings class >> defaultLocalXdServerUrl [
 { #category : #accessing }
 XdClientSettings class >> defaultPublicXdServerUrl [
 	<script: 'self xdServerUrl: self defaultPublicXdServerUrl'>
-	^ 'https://docs.feenk.com' asZnUrl
+	^ 'https://blog.feenk.com' asZnUrl
 ]
 
 { #category : #accessing }
