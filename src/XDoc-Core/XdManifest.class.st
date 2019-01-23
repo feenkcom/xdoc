@@ -94,7 +94,7 @@ XdManifest >> gtContentFor: aView [
 XdManifest >> hasHtmlDocument [
 	<return: #Boolean>
 	^ self documents 
-		anySatisfy: [ :eachDocument | eachDocument type = XdHtmlType ]
+		anySatisfy: [ :eachDocument | eachDocument type = XdType html ]
 ]
 
 { #category : #enumerating }
@@ -109,7 +109,7 @@ XdManifest >> htmlAttachments [
 { #category : #enumerating }
 XdManifest >> htmlDocument [
 	<return: #XdDocument>
-	^ self documentOfType: XdHtmlType
+	^ self documentOfType: XdType html
 ]
 
 { #category : #initialization }
