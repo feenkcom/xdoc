@@ -46,7 +46,7 @@ XdReaderWriterExamples >> document [
 	| aDocument |
 
 	aDocument := self emptyDocument.
-	aDocument type: XdTextType.
+	aDocument type: XdType text.
 	aDocument components: { self emptyComponent }.
 	self assert: aDocument type equals: XdTextType .
 	self assert: aDocument components size equals: 1.

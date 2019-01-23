@@ -5,24 +5,25 @@ Class {
 }
 
 { #category : #accessing }
-XdType class >> text [
-	^ XdTextType
+XdType class >> html [
+	^ XdHtmlType
 ]
 
-{ #category : #enumerating }
-XdType class >> typeFromMimeType: aZnMimeType [ 
-	self allSubclassesDo: [ :eachClass | 
-		(eachClass matchesMimeType: aZnMimeType) ifTrue: [ ^ eachClass ] ].
-	^ XdUndefinedType new
-			mimeType: aZnMimeType;
-			yourself
+{ #category : #accessing }
+XdType class >> image [
+	^ XdImageType
+]
+
+{ #category : #accessing }
+XdType class >> text [
+	^ XdTextType
 ]
 
 { #category : #enumerating }
 XdType class >> typeFromString: aString [ 
 	self allSubclassesDo: [ :eachClass | 
 		eachClass typeString = aString ifTrue: [ ^ eachClass ] ].
-	^ self error: 'Undefined type'
+	^ XdUndefinedType new name: aString
 ]
 
 { #category : #accessing }
