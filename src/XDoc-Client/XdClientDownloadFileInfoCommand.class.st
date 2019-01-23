@@ -11,7 +11,7 @@ Class {
 { #category : #private }
 XdClientDownloadFileInfoCommand >> ensureFileInfo [
 	| anIdPathSegment aRootUrl aInfoUrl aResponse |
-	(self url pathSegments beginsWith: XdConstants cdnPathSegments) ifFalse: [ ^ self ].
+	(XdUtility pathSegmentsInCdnPath: self url pathSegments) ifFalse: [ ^ self ].
 	self url pathSegments size > XdConstants cdnPathSegments size ifFalse: [ ^ self ].
 	anIdPathSegment := self url pathSegments at: XdConstants cdnPathSegments size + 1.
 	aRootUrl := (self url copy clearPath addPathSegments: XdConstants cdnPathSegments) / anIdPathSegment.
