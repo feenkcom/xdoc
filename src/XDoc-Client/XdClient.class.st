@@ -97,12 +97,17 @@ XdClient >> initialize [
 { #category : #actions }
 XdClient >> publish: aXdFile [ 
 	"Publish an XDoc file to a public server"
-	^ XdClientPublishXDocCommand new
+	| aCommand |
+	aCommand := XdClientPublishXDocCommand new
 		client: self;
 		xdoc: aXdFile;
-		execute;
-		publicUrlToClipboard;
-		publicUrl
+		execute.
+	^ aCommand isSuccess
+		ifTrue: [ aCommand 
+			publicUrlToClipboard;
+			publicUrl ]
+		ifFalse: [ 
+			aCommand responseToClipboard ]
 ]
 
 { #category : #accessing }
