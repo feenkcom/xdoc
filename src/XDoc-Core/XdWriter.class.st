@@ -162,5 +162,8 @@ XdWriter >> writeTo: aWriteStream [
 	zip 
 		gtAddString: (self json writeManifest: self manifest)
 		as: self constants manifestFileName.
+	zip 
+		gtAddString: self constants formatVersionString
+		as: self constants versionFileName.
 	zip writeTo: aWriteStream.
 ]
