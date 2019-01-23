@@ -42,6 +42,12 @@ XdEmptyManifest >> documents [
 	^ #()
 ]
 
+{ #category : #'gt-extension' }
+XdEmptyManifest >> gtContentFor: aView [ 
+	<gtView>
+	^ aView empty
+]
+
 { #category : #accessing }
 XdEmptyManifest >> title [
 	^ ''
