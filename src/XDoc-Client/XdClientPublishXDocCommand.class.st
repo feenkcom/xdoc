@@ -21,7 +21,7 @@ XdClientPublishXDocCommand >> execute [
 { #category : #accessing }
 XdClientPublishXDocCommand >> postUrl [
 	<return: #ZnUrl>
-	^ self client serverUrl withPathSegments: #( 'api' 'xdoc' 'post' )
+	^ self client serverUrl withPathSegments: XdConstants publishingPathSegments
 ]
 
 { #category : #accessing }

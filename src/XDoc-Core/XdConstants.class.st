@@ -7,7 +7,7 @@ Class {
 { #category : #'client / server' }
 XdConstants class >> cdnPathSegments [
 	"Default public URL path segments for published XDoc documents"
-	^ #( 'cdn' )
+	^ #( )
 ]
 
 { #category : #'client / server' }
