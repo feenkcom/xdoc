@@ -1,6 +1,9 @@
 Class {
 	#name : #XdUndefinedType,
 	#superclass : #XdType,
+	#instVars : [
+		'name'
+	],
 	#category : #'XDoc-Core-Model'
 }
 
@@ -16,4 +19,30 @@ XdUndefinedType class >> typeString [
 	"Return a unique string that represents the type"
 	<return: #String>
 	^ 'undefined'
+]
+
+{ #category : #accessing }
+XdUndefinedType >> name [
+	^ name
+]
+
+{ #category : #accessing }
+XdUndefinedType >> name: anObject [
+	name := anObject
+]
+
+{ #category : #printing }
+XdUndefinedType >> printOn: aStream [
+	super printOn: aStream.
+	aStream 
+		nextPut: $(;
+		print: self name;
+		nextPut: $)
+]
+
+{ #category : #accessing }
+XdUndefinedType >> typeString [
+	"Return a unique string that represents the type"
+	<return: #String>
+	^ self name ifNil: [ self class typeString ]
 ]

@@ -7,6 +7,12 @@ Class {
 }
 
 { #category : #utility }
+XdUtility class >> pathSegmentsInCdnPath: anArray [
+	<return: #Boolean>
+	^ XdConstants cdnPathSegments isEmpty or: [ anArray beginsWith: XdConstants cdnPathSegments ]
+]
+
+{ #category : #utility }
 XdUtility class >> playgroundFileNameFromDateAndTime: aDateAndTime [
 	<script: '(self playgroundFileNameFromDateAndTime: DateAndTime now) inspect'>
 	"Screen Shot 2018-10-09 at 22.34.56"

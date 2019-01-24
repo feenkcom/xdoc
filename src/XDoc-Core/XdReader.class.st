@@ -36,19 +36,32 @@ XdReader >> onError: anOneArgBlock [
 { #category : #reading }
 XdReader >> read [
 	<return: #XdFile>
-	^ [  
-		| aZip |
-		aZip := self streamingStrategy zip.
-		aZip members 
-			detect: [ :eachMember | eachMember fileName = self constants manifestFileName ]
-			ifFound: [ :aMember | 
-				| aManifest |
-				aManifest := self json readManifest: aMember gtContents.
-				XdFile new
-					manifest: aManifest;
-					streamingStrategy: self streamingStrategy ]
-			ifNone: [ self error: 'XDoc manifest file not found' ]
-	] on: Error do: errorHandler
+	^ [ 	| aZip |
+			aZip := self streamingStrategy zip.
+			self readManifestIn: aZip ]
+		on: Error
+		do: errorHandler
+]
+
+{ #category : #private }
+XdReader >> readFormatVersionIn: aZip [
+	<return: #Integer or: nil>
+	| aMemberOrNil |
+	aMemberOrNil := aZip memberNamed: self constants versionFileName.
+	aMemberOrNil ifNil: [ ^ nil ].
+	^ aMemberOrNil gtContents asInteger.
+]
+
+{ #category : #private }
+XdReader >> readManifestIn: aZip [
+	<return: #XdFile>
+	| aMemberOrNil aManifest |
+	aMemberOrNil := aZip memberNamed: self constants manifestFileName.
+	aMemberOrNil ifNil: [ self error: 'XDoc manifest file not found' ].
+	aManifest := self json readManifest: aMemberOrNil gtContents.
+	^ XdFile new
+		manifest: aManifest;
+		streamingStrategy: self streamingStrategy
 ]
 
 { #category : #accessing }

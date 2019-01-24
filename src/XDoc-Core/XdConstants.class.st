@@ -7,12 +7,24 @@ Class {
 { #category : #'client / server' }
 XdConstants class >> cdnPathSegments [
 	"Default public URL path segments for published XDoc documents"
-	^ #( 'cdn' )
+	^ #( )
 ]
 
 { #category : #'client / server' }
 XdConstants class >> emptyList [
 	^ '[]'
+]
+
+{ #category : #version }
+XdConstants class >> formatVersionNumber [
+	<return: #Integer>
+	^ 1
+]
+
+{ #category : #version }
+XdConstants class >> formatVersionString [
+	<return: #String>
+	^ self formatVersionNumber asString
 ]
 
 { #category : #accessing }
@@ -45,6 +57,11 @@ XdConstants class >> playBookExtension [
 XdConstants class >> publishingPathSegments [
 	"Default REST path to publish XDoc documents"
 	^ #( 'api' 'xdoc' 'post' )
+]
+
+{ #category : #accessing }
+XdConstants class >> versionFileName [
+	^ 'format-version.txt'
 ]
 
 { #category : #accessing }

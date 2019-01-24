@@ -18,10 +18,16 @@ XdClientPublishXDocCommand >> execute [
 	
 ]
 
+{ #category : #testing }
+XdClientPublishXDocCommand >> isSuccess [
+	<return: #Boolean>
+	^ self response ifNotNil: #isSuccess ifNil: false
+]
+
 { #category : #accessing }
 XdClientPublishXDocCommand >> postUrl [
 	<return: #ZnUrl>
-	^ self client serverUrl withPathSegments: #( 'api' 'xdoc' 'post' )
+	^ self client serverUrl withPathSegments: XdConstants publishingPathSegments
 ]
 
 { #category : #accessing }
@@ -30,9 +36,11 @@ XdClientPublishXDocCommand >> publicUrl [
 	^ self response location asZnUrl
 ]
 
-{ #category : #accessing }
+{ #category : #actions }
 XdClientPublishXDocCommand >> publicUrlToClipboard [
 	| aPublishedUrl |
+	self response isSuccess ifFalse: [
+		^ self responseToClipboard ].
 	aPublishedUrl := self response location.
 	aPublishedUrl ifNil: [ ^ self inform: 'An HTML file was not published' ].
 	Clipboard clipboardText: aPublishedUrl asString.
@@ -47,6 +55,19 @@ XdClientPublishXDocCommand >> response [
 { #category : #accessing }
 XdClientPublishXDocCommand >> response: anObject [
 	response := anObject
+]
+
+{ #category : #actions }
+XdClientPublishXDocCommand >> responseToClipboard [
+	| aString |
+	self response ifNil: [ ^ self inform: 'A server response is undefined' ].
+	Sensor shiftPressed ifTrue: [ 
+		"Debugging purpose"
+		self response inspect.
+		^ self ].
+	aString := self response printString.
+	Clipboard clipboardText: aString.
+   self inform: aString , ' error occurred'.
 ]
 
 { #category : #accessing }

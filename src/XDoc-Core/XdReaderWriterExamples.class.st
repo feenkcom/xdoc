@@ -46,7 +46,7 @@ XdReaderWriterExamples >> document [
 	| aDocument |
 
 	aDocument := self emptyDocument.
-	aDocument type: XdTextType.
+	aDocument type: XdType text.
 	aDocument components: { self emptyComponent }.
 	self assert: aDocument type equals: XdTextType .
 	self assert: aDocument components size equals: 1.
@@ -279,7 +279,7 @@ XdReaderWriterExamples >> nullStreamingStrategy [
 { #category : #reading }
 XdReaderWriterExamples >> readBasicDocument [
 	<gtExample>
-	| aWrittenXdFile aReader aXdReadFile |
+	| aWrittenXdFile aReader aXdReadFile aFormatVersion |
 	aWrittenXdFile := self writeBasicDocument.
 	aReader := self reader.
 	aXdReadFile := aReader
@@ -296,6 +296,10 @@ XdReaderWriterExamples >> readBasicDocument [
 		equals: self documentAuthorName.
 	self assert: aXdReadFile streamingStrategy notNil.
 	self assert: aXdReadFile exists.
+	"Ensure format version is included"
+	aFormatVersion := aReader readFormatVersionIn: aXdReadFile streamingStrategy zip.
+	self assert: aFormatVersion notNil.
+	self assert: aFormatVersion equals: self constants formatVersionNumber.
 	^ aXdReadFile
 ]
 
@@ -364,9 +368,9 @@ XdReaderWriterExamples >> readTextDocument [
 	self assert: aXdReadFile streamingStrategy notNil.
 	self assert: aXdReadFile exists.
 	aZip := aXdReadFile streamingStrategy zip.
-	self assert: aZip members size equals: 2.
-	aTextFile := aZip members detect: [ :eachMember | 
-		eachMember fileName = self textFileName ].
+	self assert: aZip members size equals: 3.
+	aTextFile := aZip memberNamed: self textFileName.
+	self assert: aTextFile notNil.
 	self assert: aTextFile contents asByteArray utf8Decoded equals: self textFileContent.
 	^ aXdReadFile
 	
@@ -449,13 +453,16 @@ XdReaderWriterExamples >> writeTextDocument [
 	self assert: aXdFile streamingStrategy notNil.
 	self assert: aXdFile exists.
 	aMembers := aXdFile streamingStrategy zip members.
-	self assert: aMembers size equals: 2.
+	self assert: aMembers size equals: 3.
 	self assert: aMembers first fileName equals: self textFileName.
 	self assert: aMembers first isTextFile.
 	self assert: aMembers first gtContents equals: self textFileContent.
-	self assert: aMembers second fileName equals: XdConstants manifestFileName.
+	self assert: aMembers second fileName equals: self constants manifestFileName.
 	self assert: aMembers second isTextFile.
 	self assert: aMembers second gtContents isString.
+	self assert: aMembers third fileName equals: self constants versionFileName.
+	self assert: aMembers third isTextFile.
+	self assert: aMembers third gtContents isString.
 	^ aXdFile
 ]
 
