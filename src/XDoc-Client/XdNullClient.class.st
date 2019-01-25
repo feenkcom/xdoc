@@ -23,3 +23,8 @@ XdNullClient class >> resetUniqueInstance [
 XdNullClient class >> uniqueInstance [
 	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
 ]
+
+{ #category : #accessing }
+XdNullClient >> documents [
+	^ #()
+]

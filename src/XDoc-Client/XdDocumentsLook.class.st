@@ -36,7 +36,17 @@ XdDocumentsLook >> initializeList [
 		title: 'Author';
 		stencil: [ :aFileInfo :anIndex | 
 			(BrListLabelStencil matchParent: aFileInfo author) ].
+	list column 
+		title: 'Title';
+		stencil: [ :aFileInfo :anIndex | 
+			(BrListLabelStencil matchParent: aFileInfo title) ].
 	self widget addChild: list as: #list.
+]
+
+{ #category : #initialization }
+XdDocumentsLook >> initializeListeners [
+	super initializeListeners.
+	self when: XdClientChanged do: [ :anEvent | self client: anEvent client ].
 ]
 
 { #category : #initialization }

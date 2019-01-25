@@ -14,9 +14,6 @@ XdClientExamples >> basicList [
 	<gtExample>
 	| anElement |
 	anElement := XdDocumentsElement new.
-	anElement constraintsDo: [ :c | 
-		c horizontal matchParent.
-		c vertical matchParent ].
 	self assert: anElement client notNil.
 	^ anElement
 ]
@@ -157,9 +154,12 @@ XdClientExamples >> listJsonContent [
 { #category : #'documents - ui' }
 XdClientExamples >> listWithLook [
 	<gtExample>
-	| anElement |
+	| anElement aClient |
 	anElement := self basicListWithLook.
-	anElement client: self client.
+	aClient := self client.
+	anElement client: aClient.
+	self assert: anElement viewModel client equals: aClient.
+	self assert: anElement look client equals: aClient.
 	^ anElement
 ]
 
