@@ -9,6 +9,7 @@ Class {
 
 { #category : #accessing }
 XdDocumentsModel >> client [
+	<return: #XdClient>
 	^ client
 ]
 

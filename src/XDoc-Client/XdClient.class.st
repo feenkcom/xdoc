@@ -91,12 +91,12 @@ XdClient >> downloadXDocUsingFileInfo: aXdFileInfo [
 { #category : #'gt-extension' }
 XdClient >> gtDocumentsFor: aView [
 	<gtView>
-	^ aView columnedList
-		title: 'Published Documents';
-		items: [ self downloadList ];
-		column: 'Author' item: [ :aFileInfo | aFileInfo author ];
-		column: 'Title' item: [ :aFileInfo | aFileInfo title ]
-		
+	^ aView explicit
+		title: 'Documents';
+		stencil: [ 
+			XdDocumentsElement new 
+				look: XdDocumentsLook;
+				client: self ]		
 ]
 
 { #category : #initialization }
