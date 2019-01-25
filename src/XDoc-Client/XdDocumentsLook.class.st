@@ -3,7 +3,8 @@ Class {
 	#superclass : #BrLook,
 	#instVars : [
 		'client',
-		'list'
+		'list',
+		'toolbar'
 	],
 	#category : #'XDoc-Client-Documents - Brick'
 }
@@ -35,11 +36,17 @@ XdDocumentsLook >> initializeList [
 	list column 
 		title: 'Author';
 		stencil: [ :aFileInfo :anIndex | 
-			(BrListLabelStencil matchParent: aFileInfo author) ].
+			BrLabel new
+				look: BrGlamorousListLabelLook;
+				text: aFileInfo author;
+				hMatchParent. ].
 	list column 
 		title: 'Title';
 		stencil: [ :aFileInfo :anIndex | 
-			(BrListLabelStencil matchParent: aFileInfo title) ].
+			BrLabel new
+				look: BrGlamorousListLabelLook;
+				text: aFileInfo title;
+				hMatchParent. ].
 	self widget addChild: list as: #list.
 ]
 
@@ -54,6 +61,7 @@ XdDocumentsLook >> initializeLook [
 	super initializeLook.
 	self widget 
 		layout: BlLinearLayout vertical.
+	self initializeToolbar.
 	self initializeList
 ]
 
@@ -63,7 +71,34 @@ XdDocumentsLook >> initializeRequests [
 	self request: XdClientRequest new.
 ]
 
+{ #category : #initialization }
+XdDocumentsLook >> initializeToolbar [
+	| aButton |
+	toolbar := BrToolbar new.
+	toolbar look: BrGlamorousToolbarLook horizontal.
+	toolbar constraintsDo: [ :c | 
+		c linear horizontal alignRight ].
+	aButton := BrButton new
+		look: BrGlamorousButtonWithIconLook;
+		icon: BrGlamorousIcons refresh asElement;
+		action: [ self refreshList ].
+	toolbar addItem: aButton.
+	self widget addChild: toolbar as: #toolbar.
+]
+
 { #category : #hooks }
 XdDocumentsLook >> onClientChange [
+	self updateList
+]
+
+{ #category : #actions }
+XdDocumentsLook >> refreshList [
+	self widgetDo: [ :aWidget | 
+		self updateList.
+	 ]
+]
+
+{ #category : #private }
+XdDocumentsLook >> updateList [
 	list display: self client documents
 ]
