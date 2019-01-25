@@ -59,8 +59,7 @@ XdDocumentsLook >> initializeListeners [
 { #category : #initialization }
 XdDocumentsLook >> initializeLook [
 	super initializeLook.
-	self widget 
-		layout: BlLinearLayout vertical.
+	self widget layout: BlLinearLayout vertical.
 	self initializeToolbar.
 	self initializeList
 ]

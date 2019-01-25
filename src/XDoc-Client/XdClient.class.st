@@ -95,7 +95,7 @@ XdClient >> gtDocumentsFor: aView [
 		title: 'Documents';
 		stencil: [ 
 			XdDocumentsElement new 
-				look: XdDocumentsLook;
+				look: XdGlamorousDocumentsLook;
 				client: self ]		
 ]
 
