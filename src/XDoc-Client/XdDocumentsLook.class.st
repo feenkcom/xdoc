@@ -23,6 +23,12 @@ XdDocumentsLook >> client: anXdClient [
 	self onClientChange.
 ]
 
+{ #category : #actions }
+XdDocumentsLook >> downloadXdoc: anXdInfo [
+	<return: #XdFile>
+	^ self client downloadXDocUsingFileInfo: anXdInfo
+]
+
 { #category : #initialization }
 XdDocumentsLook >> initialize [
 	super initialize.
