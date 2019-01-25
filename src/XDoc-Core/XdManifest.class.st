@@ -26,6 +26,13 @@ XdManifest >> attachments: anArrayOfAttachments [
 ]
 
 { #category : #accessing }
+XdManifest >> attachmentsForDocument: aXdDocument [
+	<return: #Array of: #XdAttachment>
+	^ self attachments select: [ :eachAttachment | 
+		aXdDocument components anySatisfy: [ :eachComponent | eachComponent link = eachAttachment id ] ]
+]
+
+{ #category : #accessing }
 XdManifest >> author [
 	<return: #String>
 	^ author
@@ -120,6 +127,12 @@ XdManifest >> initialize [
 	title := ''.
 	documents := #().
 	attachments := #().
+]
+
+{ #category : #accessing }
+XdManifest >> mainDocument [
+	<return: #XdDocument>
+	^ self documents first
 ]
 
 { #category : #accessing }

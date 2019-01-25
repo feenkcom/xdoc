@@ -77,6 +77,6 @@ XdClientDownloadXDocCommand >> xdFile [
 ]
 
 { #category : #accessing }
-XdClientDownloadXDocCommand >> xdFile: anObject [
-	xdFile := anObject
+XdClientDownloadXDocCommand >> xdFile: anXdFile [
+	xdFile := anXdFile
 ]

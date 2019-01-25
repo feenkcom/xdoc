@@ -40,6 +40,11 @@ XdDocument >> initialize [
 	type := XdUndefinedType.
 ]
 
+{ #category : #actions }
+XdDocument >> openXdFileInPharo: aXdFile [ 
+	^ self type openDocument: self ofXdFileInPharo: aXdFile
+]
+
 { #category : #printing }
 XdDocument >> printOn: aStream [
 	super printOn: aStream.

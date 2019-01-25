@@ -57,6 +57,12 @@ XdStreamingStrategy >> json [
 	^ XdManifestJsonMapping
 ]
 
+{ #category : #accessing }
+XdStreamingStrategy >> memberNamed: aFileName [ 
+	<return: #ArchiveMember>
+	^ self subclassResponsibility
+]
+
 { #category : #streams }
 XdStreamingStrategy >> readStream [
 	"Return a binary read stream"
