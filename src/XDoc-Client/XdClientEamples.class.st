@@ -9,6 +9,30 @@ Class {
 	#category : #'XDoc-Client-Examples'
 }
 
+{ #category : #'documents - ui' }
+XdClientEamples >> basicList [
+	<gtExample>
+	| anElement |
+	anElement := XdDocumentsElement new.
+	anElement constraintsDo: [ :c | 
+		c horizontal matchParent.
+		c vertical matchParent ].
+	self assert: anElement client notNil.
+	^ anElement
+]
+
+{ #category : #'documents - ui' }
+XdClientEamples >> basicListWithLook [
+	<gtExample>
+	| anElement aLook |
+	anElement := self basicList.
+	aLook := XdDocumentsLook new.
+	anElement look: aLook.
+	self assert: aLook client equals: anElement client.
+	self assert: anElement hasChildren description: 'Element must have children installed by the look'.
+	^ anElement
+]
+
 { #category : #client }
 XdClientEamples >> client [
 	<gtExample>
@@ -44,7 +68,6 @@ XdClientEamples >> delegate [
 XdClientEamples >> downloadFileInfo [
 	<gtExample>
 	| aXdFileInfo |
-	self startServer.
 	aXdFileInfo := self client downloadFileInfo: self xdocPublicUrl.
 	self assert: aXdFileInfo notNil.
 	self assert: aXdFileInfo manifest documents size equals: 2.
@@ -54,11 +77,10 @@ XdClientEamples >> downloadFileInfo [
 	^ aXdFileInfo
 ]
 
-{ #category : #list }
+{ #category : #'documents - list' }
 XdClientEamples >> downloadList [
 	<gtExample>
 	| aCollectionOfXdFileInfo |
-	self startServer.
 	aCollectionOfXdFileInfo := self client downloadList.
 	self assert: aCollectionOfXdFileInfo notNil.
 	self assert: aCollectionOfXdFileInfo size equals: 1.
@@ -73,7 +95,6 @@ XdClientEamples >> downloadList [
 XdClientEamples >> downloadXDoc [
 	<gtExample>
 	| anXdFile |
-	self startServer.
 	anXdFile := self client downloadXDoc: self xdocPublicUrl.
 	self assert: anXdFile notNil.
 	self assert: anXdFile manifest documents size equals: 2.
@@ -84,7 +105,6 @@ XdClientEamples >> downloadXDoc [
 XdClientEamples >> downloadXDocUsingFileInfo [
 	<gtExample>
 	| anXdFile |
-	self startServer.
 	anXdFile := self client downloadXDocUsingFileInfo: self downloadFileInfo.
 	self assert: anXdFile notNil.
 	self assert: anXdFile manifest documents size equals: 2.
@@ -122,16 +142,25 @@ XdClientEamples >> initialize [
 	documentsExamples := XdDocumentsExamples new.
 ]
 
-{ #category : #list }
+{ #category : #'documents - list' }
 XdClientEamples >> listFilePath [
 	<gtExample>
 	^ '/', ('/' join: (XdConstants cdnPathSegments copyWith: XdConstants listFileName))
 ]
 
-{ #category : #list }
+{ #category : #'documents - list' }
 XdClientEamples >> listJsonContent [
 	<gtExample>
 	^ '[{"pathSegment":"1","fileName":"xdoc-file.xdoc","manifest":{"title":"","description":"","author":"","attachments":[{"id":"1","filename":"index.pillar","size":146},{"id":"2","filename":"gt-logo.png","size":8192},{"id":"3","filename":"index.html","size":245},{"id":"4","filename":"index.css","size":183}],"documents":[{"type":"documenter","components":[{"link":"1"},{"link":"2"}]},{"type":"html","components":[{"link":"3"},{"link":"4"},{"link":"2"}]}]}}]'
+]
+
+{ #category : #'documents - ui' }
+XdClientEamples >> listWithLook [
+	<gtExample>
+	| anElement |
+	anElement := self basicListWithLook.
+	anElement client: self client.
+	^ anElement
 ]
 
 { #category : #publishing }
@@ -144,7 +173,6 @@ XdClientEamples >> publishPath [
 XdClientEamples >> publishXDoc [
 	<gtExample>
 	| aCommand |
-	self startServer.
 	aCommand := XdClientPublishXDocCommand new
 		client: self client;
 		xdoc: documentsExamples documentWithFigureXDoc;
@@ -161,9 +189,10 @@ XdClientEamples >> publishedResponse [
 	^ ZnResponse created: (zincExamples serverUrl / '1') asString
 ]
 
-{ #category : #client }
+{ #category : #server }
 XdClientEamples >> serverUrl [
 	<gtExample>
+	self startServer.
 	^ zincExamples serverUrl
 ]
 
@@ -220,7 +249,6 @@ XdClientEamples >> xdocPublicUrl [
 { #category : #downloading }
 XdClientEamples >> xdocUrl [
 	<gtExample>
-	self startServer.
-	^ zincExamples serverUrl withPathSegments: self xdocPathSegments
+	^ self serverUrl withPathSegments: self xdocPathSegments
 	
 ]

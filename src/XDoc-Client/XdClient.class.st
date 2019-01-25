@@ -34,6 +34,17 @@ XdClient class >> gtDocumentsFor: aView [
 			priority: -2
 ]
 
+{ #category : #accessing }
+XdClient class >> null [
+	^ XdNullClient uniqueInstance
+]
+
+{ #category : #'accesing - computed' }
+XdClient >> documents [
+	<return: #Array of: #XdFileInfo>
+	^ self downloadList
+]
+
 { #category : #actions }
 XdClient >> downloadFileInfo: aZnUrl [ 
 	"Download an XDoc file info from a public server"
