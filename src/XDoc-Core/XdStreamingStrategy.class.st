@@ -31,6 +31,11 @@ XdStreamingStrategy class >> null [
 	^ XdNullStreamingStrategy uniqueInstance
 ]
 
+{ #category : #streaming }
+XdStreamingStrategy >> binaryReadStreamDo: anOneArgBlock [ 
+	^ self readStreamDo: anOneArgBlock
+]
+
 { #category : #accessing }
 XdStreamingStrategy >> bytes [
 	<return: #ByteArray>
