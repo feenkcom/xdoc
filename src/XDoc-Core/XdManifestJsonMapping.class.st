@@ -92,7 +92,7 @@ XdManifestJsonMapping class >> fileInfoMappingFor: aNeoJSONMapper [
 		for: XdFileInfo do: [ :mapping |
 	      mapping mapAccessor: #pathSegment.
 			mapping mapAccessor: #fileName. 
-			(mapping mapAccessor: #createdOn) valueSchema: DateAndTime.
+			(mapping mapAccessor: #createdOn to: #creation_time) valueSchema: DateAndTime.
 			(mapping mapAccessor: #manifest) valueSchema: XdManifest.
 			].
 	self dateAndTimeMappingFor: aNeoJSONMapper.
