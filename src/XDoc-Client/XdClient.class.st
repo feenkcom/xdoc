@@ -39,6 +39,17 @@ XdClient class >> null [
 	^ XdNullClient uniqueInstance
 ]
 
+{ #category : #actions }
+XdClient >> deleteXDocId: anId [
+	<return: #XdFile>
+	"Delete an XDoc file from a public server"
+	^ XdClientDeleteXDocIdCommand new
+		client: self;
+		xdocId: anId;
+		execute;
+		response
+]
+
 { #category : #'accesing - computed' }
 XdClient >> documents [
 	<return: #Array of: #XdFileInfo>

@@ -1,6 +1,8 @@
 Class {
 	#name : #XdClientCommand,
 	#superclass : #Object,
+	#traits : 'TBlDebug',
+	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
 		'client'
 	],

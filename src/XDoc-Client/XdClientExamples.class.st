@@ -61,7 +61,16 @@ XdClientExamples >> delegate [
 	^ delegate
 ]
 
-{ #category : #downloading }
+{ #category : #'action - delete' }
+XdClientExamples >> deleteXDocId [
+	<gtExample>
+	| aResponse |
+	aResponse := self client deleteXDocId: self xdocPathSegment.
+	self assert: aResponse notNil.
+	^ aResponse
+]
+
+{ #category : #'action - download xdoc' }
 XdClientExamples >> downloadFileInfo [
 	<gtExample>
 	| aXdFileInfo |
@@ -74,7 +83,7 @@ XdClientExamples >> downloadFileInfo [
 	^ aXdFileInfo
 ]
 
-{ #category : #'documents - list' }
+{ #category : #'action - download list' }
 XdClientExamples >> downloadList [
 	<gtExample>
 	| aCollectionOfXdFileInfo |
@@ -88,7 +97,7 @@ XdClientExamples >> downloadList [
 	^ aCollectionOfXdFileInfo
 ]
 
-{ #category : #downloading }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> downloadXDoc [
 	<gtExample>
 	| anXdFile |
@@ -98,7 +107,7 @@ XdClientExamples >> downloadXDoc [
 	^ anXdFile
 ]
 
-{ #category : #downloading }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> downloadXDocUsingFileInfo [
 	<gtExample>
 	| anXdFile |
@@ -108,7 +117,7 @@ XdClientExamples >> downloadXDocUsingFileInfo [
 	^ anXdFile
 ]
 
-{ #category : #downloading }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> fileInfo [
 	<gtExample>
 	^ XdFileInfo new
@@ -117,7 +126,7 @@ XdClientExamples >> fileInfo [
 		fileName: self xdocFileName
 ]
 
-{ #category : #downloading }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> infoFilePath [
 	<gtExample>
 	^ '/', ('/' join: (XdConstants cdnPathSegments asOrderedCollection
@@ -126,7 +135,7 @@ XdClientExamples >> infoFilePath [
 			yourself))
 ]
 
-{ #category : #downloading }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> infoJsonContent [
 	<gtExample>
 	^ XdManifestJsonMapping writeFileInfo: self fileInfo
@@ -139,13 +148,13 @@ XdClientExamples >> initialize [
 	documentsExamples := XdDocumentsExamples new.
 ]
 
-{ #category : #'documents - list' }
+{ #category : #'action - download list' }
 XdClientExamples >> listFilePath [
 	<gtExample>
 	^ '/', ('/' join: (XdConstants cdnPathSegments copyWith: XdConstants listFileName))
 ]
 
-{ #category : #'documents - list' }
+{ #category : #'action - download list' }
 XdClientExamples >> listJsonContent [
 	<gtExample>
 	^ '[{"pathSegment":"1","fileName":"xdoc-file.xdoc","manifest":{"title":"","description":"","author":"","attachments":[{"id":"1","filename":"index.pillar","size":146},{"id":"2","filename":"gt-logo.png","size":8192},{"id":"3","filename":"index.html","size":245},{"id":"4","filename":"index.css","size":183}],"documents":[{"type":"documenter","components":[{"link":"1"},{"link":"2"}]},{"type":"html","components":[{"link":"3"},{"link":"4"},{"link":"2"}]}]}}]'
@@ -163,13 +172,13 @@ XdClientExamples >> listWithLook [
 	^ anElement
 ]
 
-{ #category : #publishing }
+{ #category : #'action - publish' }
 XdClientExamples >> publishPath [
 	<gtExample>
 	^ '/', ( '/' join: #( 'api' 'xdoc' 'post' ) )
 ]
 
-{ #category : #publishing }
+{ #category : #'action - publish' }
 XdClientExamples >> publishXDoc [
 	<gtExample>
 	| aCommand |
@@ -183,7 +192,7 @@ XdClientExamples >> publishXDoc [
 	^ aCommand
 ]
 
-{ #category : #publishing }
+{ #category : #'action - publish' }
 XdClientExamples >> publishedResponse [
 	<gtExample>
 	^ ZnResponse created: (zincExamples serverUrl / '1') asString
@@ -214,25 +223,25 @@ XdClientExamples >> stopServer [
 	^ zincExamples stopServer
 ]
 
-{ #category : #downloading }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> xdocFileName [
 	<gtExample>
 	^ 'documenter-figure.xdoc'
 ]
 
-{ #category : #downloading }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> xdocPath [
 	<gtExample>
 	^ '/', ('/' join: self xdocPathSegments)
 ]
 
-{ #category : #downloading }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> xdocPathSegment [
 	<gtExample>
 	^ '1'
 ]
 
-{ #category : #downloading }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> xdocPathSegments [
 	<gtExample>
 	^ XdConstants cdnPathSegments, {  
@@ -240,13 +249,13 @@ XdClientExamples >> xdocPathSegments [
 		self xdocFileName }
 ]
 
-{ #category : #downloading }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> xdocPublicUrl [
 	<gtExample>
 	^ zincExamples serverUrl withPathSegments: (self xdocPathSegments allButLast: 1)
 ]
 
-{ #category : #downloading }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> xdocUrl [
 	<gtExample>
 	^ self serverUrl withPathSegments: self xdocPathSegments

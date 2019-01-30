@@ -44,7 +44,7 @@ XdFileInfo >> fileName: anObject [
 { #category : #initialization }
 XdFileInfo >> initialize [
 	super initialize.
-	manifest := XdEmptyManifest uniqueInstance.
+	manifest := XdManifest empty.
 ]
 
 { #category : #accessing }

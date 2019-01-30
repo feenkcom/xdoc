@@ -11,6 +11,11 @@ Class {
 	#category : #'XDoc-Core-Model'
 }
 
+{ #category : #'instance creation' }
+XdManifest class >> empty [
+	^ XdEmptyManifest uniqueInstance
+]
+
 { #category : #accessing }
 XdManifest >> attachments [
 	<return: #Array of: #XdAttachment>
