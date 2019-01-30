@@ -5,7 +5,8 @@ Class {
 		'manifest',
 		'fileName',
 		'pathSegment',
-		'xdocUrl'
+		'xdocUrl',
+		'createdOn'
 	],
 	#category : #'XDoc-Core-Model'
 }
@@ -13,6 +14,16 @@ Class {
 { #category : #'accessing - manifest' }
 XdFileInfo >> author [
 	^ self manifest author
+]
+
+{ #category : #accessing }
+XdFileInfo >> createdOn [
+	^ createdOn
+]
+
+{ #category : #accessing }
+XdFileInfo >> createdOn: creationTime [
+	createdOn := creationTime
 ]
 
 { #category : #'accessing - manifest' }
