@@ -13,7 +13,7 @@ XdManifestJsonMapping class >> attachmentMappingFor: aNeoJSONMapper [
 	      mapping mapAccessor: #id.
 	      mapping mapAccessor: #fileName to: #filename.
 	      mapping mapAccessor: #fileSize to: #size.
-			mapping mapAccessor: #primary to: #isprimary].
+			mapping mapAccessor: #primary to: #'is_primary' ].
 ]
 
 { #category : #'mapping - document' }

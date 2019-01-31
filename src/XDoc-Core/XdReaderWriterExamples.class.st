@@ -252,7 +252,7 @@ XdReaderWriterExamples >> manifestJsonWithOneAttachmentString [
 		equals: '{"title":"', self documentTitle, 
 			'","description":"', self documentDescription,
 			'","author":"', self documentAuthorName,
-			'","attachments":[{"id":12,"filename":"', self textFileName, '","size":42}],',
+			'","attachments":[{"id":12,"filename":"', self textFileName, '","size":42,"is_primary":false}],',
 			'"documents":[{"type":"undefined","components":[]}]}'.
 	^ aJsonString
 ]
