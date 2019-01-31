@@ -41,7 +41,7 @@ XdClient class >> null [
 
 { #category : #actions }
 XdClient >> deleteXDocId: anId [
-	<return: #XdFile>
+	<return: #ZnResponse>
 	"Delete an XDoc file from a public server"
 	^ XdClientDeleteXDocIdCommand new
 		client: self;
