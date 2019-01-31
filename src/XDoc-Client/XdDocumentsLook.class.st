@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'client',
 		'list',
-		'toolbar'
+		'toolbar',
+		'listHandler'
 	],
 	#category : #'XDoc-Client-Documents - Brick'
 }
@@ -26,7 +27,7 @@ XdDocumentsLook >> client: anXdClient [
 { #category : #actions }
 XdDocumentsLook >> downloadXdoc: anXdInfo [
 	<return: #XdFile>
-	^ self client downloadXDocUsingFileInfo: anXdInfo
+	^ self client async downloadXDocUsingFileInfo: anXdInfo
 ]
 
 { #category : #initialization }
@@ -38,7 +39,9 @@ XdDocumentsLook >> initialize [
 
 { #category : #initialization }
 XdDocumentsLook >> initializeList [
+	listHandler := XdDocumentsHandler new.
 	list := BrColumnedList new.
+	list addEventHandler: listHandler.
 	list column 
 		title: 'Author';
 		stencil: [ :aFileInfo :anIndex | 
@@ -93,7 +96,9 @@ XdDocumentsLook >> initializeToolbar [
 
 { #category : #hooks }
 XdDocumentsLook >> onClientChange [
-	self updateList
+	self widgetDo: [ :aWidget | 
+		listHandler client: self client.
+		self updateList ]
 ]
 
 { #category : #actions }
@@ -106,6 +111,9 @@ XdDocumentsLook >> refreshList [
 { #category : #private }
 XdDocumentsLook >> updateList [
 	self client async 
-		callback: [ :aList | list display: aList ];
+		callback: [ :aList | 
+			self widgetDo: [ :aWidget | 
+				list enqueueTask: (BlTaskAction new action: [ 
+					list display: aList ]) ] ];
 		documents
 ]

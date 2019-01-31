@@ -44,7 +44,14 @@ XdAsyncClient >> documents [
 XdAsyncClient >> downloadList [
 	(BlValuableCommand new
 		valuable: [ self client downloadList ]) future
-			onSuccessDo: [ :result | self notifyList: result ]
+			onSuccessDo: [ :result | self resultNotification: result ]
+]
+
+{ #category : #actions }
+XdAsyncClient >> downloadXDocUsingFileInfo: anXdInfo [
+	(BlValuableCommand new
+		valuable: [ self client downloadXDocUsingFileInfo: anXdInfo ]) future
+			onSuccessDo: [ :result | self resultNotification: result ]
 ]
 
 { #category : #initialization }
@@ -55,6 +62,6 @@ XdAsyncClient >> initialize [
 ]
 
 { #category : #notifying }
-XdAsyncClient >> notifyList: aCollection [ 
-	self callbacks do: [ :eachCallback | eachCallback value: aCollection ]
+XdAsyncClient >> resultNotification: anObject [ 
+	self callbacks do: [ :eachCallback | eachCallback value: anObject ]
 ]
