@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    options { 
+        disableConcurrentBuilds() 
+    }
     stages {
         stage('Load') {
             steps {
@@ -17,7 +20,7 @@ pipeline {
         }
         stage('Build xdoc-server') {
             steps {
-                build '../xdoc-server/master'
+                build(job: '../xdoc-server/master', wait: false)
             }
         }
     }
