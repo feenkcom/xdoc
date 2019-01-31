@@ -40,6 +40,12 @@ XdClient class >> null [
 ]
 
 { #category : #actions }
+XdClient >> async [
+	<return: #XdAsyncClient>
+	^ XdAsyncClient new client: self
+]
+
+{ #category : #actions }
 XdClient >> deleteXDocId: anId [
 	<return: #ZnResponse>
 	"Delete an XDoc file from a public server"
@@ -72,6 +78,7 @@ XdClient >> downloadList [
 	<return: #Array of: #XdFileInfo>
 	^ XdClientDownloadListCommand new
 		client: self;
+		signalProgress: self signalProgress;
 		execute;
 		list
 ]
@@ -153,4 +160,10 @@ XdClient >> serverUrl: aZnUrl [
 		assert: [ aZnUrl notNil ]
 		description: [ 'Server URL must be non-nil' ].
 	serverUrl := aZnUrl
+]
+
+{ #category : #accessing }
+XdClient >> signalProgress [
+	<return: #Boolean>
+	^ BlSignalProgress enabled
 ]

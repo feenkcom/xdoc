@@ -105,5 +105,7 @@ XdDocumentsLook >> refreshList [
 
 { #category : #private }
 XdDocumentsLook >> updateList [
-	list display: self client documents
+	self client async 
+		callback: [ :aList | list display: aList ];
+		documents
 ]

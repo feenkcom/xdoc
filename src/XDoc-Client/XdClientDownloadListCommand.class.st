@@ -11,10 +11,12 @@ Class {
 XdClientDownloadListCommand >> execute [
 	| aResponse |
 	aResponse := ZnClient new
-		url: (self client serverUrl withPathSegments: XdConstants cdnPathSegments) / XdConstants listFileName;
+		url: self listUrl;
+		signalProgress: self signalProgress;
 		get;
 		response.
-	aResponse isSuccess ifFalse: [ ^ self list ].
+	aResponse isSuccess
+		ifFalse: [ ^ self list ].
 	self list: (XdManifestJsonMapping readFileInfos: aResponse contents).
 	^ self list
 ]
@@ -33,4 +35,12 @@ XdClientDownloadListCommand >> list [
 { #category : #accessing }
 XdClientDownloadListCommand >> list: anObject [
 	list := anObject
+]
+
+{ #category : #accessing }
+XdClientDownloadListCommand >> listUrl [
+	<return: #ZnUrl>
+	^ self client serverUrl
+		/ XdConstants cdnPathSegments
+		/ XdConstants listFileName
 ]
