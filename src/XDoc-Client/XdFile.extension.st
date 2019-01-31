@@ -1,7 +1,7 @@
 Extension { #name : #XdFile }
 
 { #category : #'*XDoc-Client' }
-XdFile >> gitReferenceFor: aView [
+XdFile >> gtReferenceFor: aView [
 	<gtView>
 	| aList |
 	aList := aView columnedList

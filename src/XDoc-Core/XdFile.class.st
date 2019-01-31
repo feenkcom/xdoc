@@ -60,6 +60,25 @@ XdFile >> initialize [
 ]
 
 { #category : #accessing }
+XdFile >> mainDocument [
+	<return: #XdDocument>
+	^ self manifest mainDocument
+]
+
+{ #category : #accessing }
+XdFile >> mainFileReference [
+	<return: #FileReference>
+	| aXdDocument theAttachments |
+	aXdDocument := self mainDocument.
+	theAttachments := self manifest attachmentsForDocument: aXdDocument.
+	^ self streamingStrategy 
+		detectFileReference: [ :eachFileReference | 
+			eachFileReference basename = theAttachments first fileName ]
+		ifFound: [ :aFileReference | aFileReference ] 
+		ifNone: [ self error: 'File reference must be found' ]
+]
+
+{ #category : #accessing }
 XdFile >> manifest [
 	<return: #XdManifest>
 	^ manifest

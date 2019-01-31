@@ -2,7 +2,8 @@ Class {
 	#name : #XdBytesStreamingStrategy,
 	#superclass : #XdStreamingStrategy,
 	#instVars : [
-		'bytes'
+		'bytes',
+		'fileSystem'
 	],
 	#category : #'XDoc-Core-Model'
 }
@@ -21,10 +22,26 @@ XdBytesStreamingStrategy >> bytes: aByteArray [
 	bytes := aByteArray
 ]
 
+{ #category : #'file system' }
+XdBytesStreamingStrategy >> detectFileReference: aDetectBlock ifFound: aFoundBlock ifNone: aNotFoundBlock [
+	<return: #FileReference>
+	^ self fileSystem root children
+		detect: aDetectBlock
+		ifFound: aFoundBlock
+		ifNone: aNotFoundBlock
+]
+
 { #category : #testing }
 XdBytesStreamingStrategy >> exists [
 	<return: #Boolean>
 	^ self bytes notNil
+]
+
+{ #category : #'file system' }
+XdBytesStreamingStrategy >> fileSystem [
+	<return: #FileSystem>
+	fileSystem ifNil: [ fileSystem := FileSystem zip: self. fileSystem open ].
+	^ fileSystem	
 ]
 
 { #category : #streams }

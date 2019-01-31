@@ -24,12 +24,6 @@ XdDocumentsLook >> client: anXdClient [
 	self onClientChange.
 ]
 
-{ #category : #actions }
-XdDocumentsLook >> downloadXdoc: anXdInfo [
-	<return: #XdFile>
-	^ self client async downloadXDocUsingFileInfo: anXdInfo
-]
-
 { #category : #initialization }
 XdDocumentsLook >> initialize [
 	super initialize.
@@ -87,7 +81,8 @@ XdDocumentsLook >> initializeToolbar [
 	toolbar constraintsDo: [ :c | 
 		c linear horizontal alignRight ].
 	aButton := BrButton new
-		look: BrGlamorousButtonWithIconLook;
+		look: BrGlamorousButtonWithIconAndLabelLook;
+		label: 'Refresh published documents';
 		icon: BrGlamorousIcons refresh asElement;
 		action: [ self refreshList ].
 	toolbar addItem: aButton.
