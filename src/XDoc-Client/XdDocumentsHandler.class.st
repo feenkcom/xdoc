@@ -20,11 +20,12 @@ XdDocumentsHandler >> client: anObject [
 { #category : #private }
 XdDocumentsHandler >> downloadXdoc: anXdInfo element: anElement [
 	self client async 
-		callback: [ :anXdFile | 
-			anElement enqueueTask: (BlTaskAction new action: [ 
-				anElement fireEvent: (GtPhlowObjectToSelect new 
-					object: anXdFile mainFileReference;
-					sourceElement: anElement) ]) ];
+		callback: [ :anXdFileOrNil | 
+			anXdFileOrNil ifNotNil: [ 
+				anElement enqueueTask: (BlTaskAction new action: [ 
+					anElement fireEvent: (GtPhlowObjectToSelect new 
+						object: anXdFileOrNil mainFileReference;
+						sourceElement: anElement) ]) ] ];
 		downloadXDocUsingFileInfo: anXdInfo
 ]
 
