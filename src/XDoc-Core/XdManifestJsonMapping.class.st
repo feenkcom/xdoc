@@ -12,7 +12,8 @@ XdManifestJsonMapping class >> attachmentMappingFor: aNeoJSONMapper [
 		for: XdAttachment do: [ :mapping |
 	      mapping mapAccessor: #id.
 	      mapping mapAccessor: #fileName to: #filename.
-	      mapping mapAccessor: #fileSize to: #size.].
+	      mapping mapAccessor: #fileSize to: #size.
+			mapping mapAccessor: #primary to: #isprimary].
 ]
 
 { #category : #'mapping - document' }

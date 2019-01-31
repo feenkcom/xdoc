@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'id',
 		'fileName',
-		'fileSize'
+		'fileSize',
+		'primary'
 	],
 	#category : #'XDoc-Core-Model'
 }
@@ -60,6 +61,18 @@ XdAttachment >> initialize [
 	fileName := nil.
 	fileSize := 0.
 	id := nil.
+	primary := false.
+]
+
+{ #category : #accessing }
+XdAttachment >> primary [ 
+	<return: #Boolean>
+	^ primary
+]
+
+{ #category : #accessing }
+XdAttachment >> primary: isPrimary [
+	primary := isPrimary
 ]
 
 { #category : #printing }
