@@ -47,13 +47,16 @@ XdClientExamples >> delegate [
 	delegate ifNotNil: [ :aDelegate | ^ aDelegate ].
 	delegate := ZnDispatcherDelegate new.
 	delegate 
+		map: self deletePathString
+		to: [ :aRequest :aResponse |
+			aResponse entity: (ZnEntity textCRLF: 'OK') ];
 		map: self listFilePath
 		to: [ :aRequest :aResponse |
 			aResponse entity: (ZnEntity json: self listJsonContent) ];
 		map: self infoFilePath
 		to: [ :aRequest :aResponse |
 			aResponse entity: (ZnEntity json: self infoJsonContent) ];
-		map: self xdocPath
+		map: self xdocPathString
 		to: [ :aRequest :aResponse |
 			aResponse entity: documentsExamples documentWithFigureEntity ];
 		map: self publishPath
@@ -62,10 +65,22 @@ XdClientExamples >> delegate [
 ]
 
 { #category : #'action - delete' }
+XdClientExamples >> deletePath [
+	<gtExample>
+	^ ZnUrl new / XdConstants xdocPathSegments / self xdocPathSegments allButLast
+]
+
+{ #category : #'action - delete' }
+XdClientExamples >> deletePathString [
+	<gtExample>
+	^ self deletePath asString
+]
+
+{ #category : #'action - delete' }
 XdClientExamples >> deleteXDocId [
 	<gtExample>
 	| aResponse |
-	aResponse := self client deleteXDocId: self xdocPathSegment.
+	aResponse := self client deleteXDocId: self xdocIdSegment.
 	self assert: aResponse notNil.
 	^ aResponse
 ]
@@ -77,7 +92,7 @@ XdClientExamples >> downloadFileInfo [
 	aXdFileInfo := self client downloadFileInfo: self xdocPublicUrl.
 	self assert: aXdFileInfo notNil.
 	self assert: aXdFileInfo manifest documents size equals: 2.
-	self assert: aXdFileInfo pathSegment equals: self xdocPathSegment.
+	self assert: aXdFileInfo pathSegment equals: self xdocIdSegment.
 	self assert: aXdFileInfo fileName equals: self xdocFileName.
 	self assert: aXdFileInfo xdocUrl equals: self xdocUrl.
 	^ aXdFileInfo
@@ -91,7 +106,7 @@ XdClientExamples >> downloadList [
 	self assert: aCollectionOfXdFileInfo notNil.
 	self assert: aCollectionOfXdFileInfo size equals: 1.
 	self assert: aCollectionOfXdFileInfo first manifest documents size equals: 2.
-	self assert: aCollectionOfXdFileInfo first pathSegment equals: self xdocPathSegment.
+	self assert: aCollectionOfXdFileInfo first pathSegment equals: self xdocIdSegment.
 	self assert: aCollectionOfXdFileInfo first fileName equals: 'xdoc-file.xdoc'.
 	self assert: aCollectionOfXdFileInfo first xdocUrl isNil.
 	^ aCollectionOfXdFileInfo
@@ -122,7 +137,7 @@ XdClientExamples >> fileInfo [
 	<gtExample>
 	^ XdFileInfo new
 		manifest: documentsExamples documentWithFigureXDoc manifest;
-		pathSegment: self xdocPathSegment;
+		pathSegment: self xdocIdSegment;
 		fileName: self xdocFileName
 ]
 
@@ -130,7 +145,7 @@ XdClientExamples >> fileInfo [
 XdClientExamples >> infoFilePath [
 	<gtExample>
 	^ '/', ('/' join: (XdConstants cdnPathSegments asOrderedCollection
-			add: self xdocPathSegment;
+			add: self xdocIdSegment;
 			add: XdConstants xdocInfoFileName;
 			yourself))
 ]
@@ -175,7 +190,7 @@ XdClientExamples >> listWithLook [
 { #category : #'action - publish' }
 XdClientExamples >> publishPath [
 	<gtExample>
-	^ '/', ( '/' join: #( 'api' 'xdoc' 'post' ) )
+	^ (ZnUrl new / XdConstants xdocsPathSegments) asString
 ]
 
 { #category : #'action - publish' }
@@ -230,13 +245,7 @@ XdClientExamples >> xdocFileName [
 ]
 
 { #category : #'action - download xdoc' }
-XdClientExamples >> xdocPath [
-	<gtExample>
-	^ '/', ('/' join: self xdocPathSegments)
-]
-
-{ #category : #'action - download xdoc' }
-XdClientExamples >> xdocPathSegment [
+XdClientExamples >> xdocIdSegment [
 	<gtExample>
 	^ '1'
 ]
@@ -245,14 +254,20 @@ XdClientExamples >> xdocPathSegment [
 XdClientExamples >> xdocPathSegments [
 	<gtExample>
 	^ XdConstants cdnPathSegments, {  
-		self xdocPathSegment . 
+		self xdocIdSegment . 
 		self xdocFileName }
+]
+
+{ #category : #'action - download xdoc' }
+XdClientExamples >> xdocPathString [
+	<gtExample>
+	^ (ZnUrl new / self xdocPathSegments) asString
 ]
 
 { #category : #'action - download xdoc' }
 XdClientExamples >> xdocPublicUrl [
 	<gtExample>
-	^ zincExamples serverUrl withPathSegments: (self xdocPathSegments allButLast: 1)
+	^ self serverUrl / (self xdocPathSegments allButLast)
 ]
 
 { #category : #'action - download xdoc' }

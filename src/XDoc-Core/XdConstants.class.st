@@ -72,6 +72,12 @@ XdConstants class >> xdocInfoFileName [
 { #category : #'client / server' }
 XdConstants class >> xdocPathSegments [
 	"Default REST path to access/modify/delete an XDoc document"
+	^ #( 'api' 'xdoc' )
+]
+
+{ #category : #'client / server' }
+XdConstants class >> xdocPathSegmentsPattern [
+	"Default REST path to access/modify/delete an XDoc document"
 	^ #( 'api' 'xdoc' '*' )
 ]
 
