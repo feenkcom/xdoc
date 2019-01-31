@@ -55,8 +55,8 @@ XdFile >> htmlMembers [
 { #category : #initialization }
 XdFile >> initialize [
 	super initialize.
-	manifest := XdEmptyManifest uniqueInstance.
-	streamingStrategy := XdNullStreamingStrategy uniqueInstance.
+	manifest := XdManifest empty.
+	streamingStrategy := XdStreamingStrategy null.
 ]
 
 { #category : #accessing }

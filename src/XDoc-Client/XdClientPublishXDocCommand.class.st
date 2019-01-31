@@ -27,7 +27,7 @@ XdClientPublishXDocCommand >> isSuccess [
 { #category : #accessing }
 XdClientPublishXDocCommand >> postUrl [
 	<return: #ZnUrl>
-	^ self client serverUrl withPathSegments: XdConstants publishingPathSegments
+	^ self client serverUrl withPathSegments: XdConstants xdocsPathSegments
 ]
 
 { #category : #accessing }
