@@ -31,6 +31,11 @@ XdStreamingStrategy class >> null [
 	^ XdNullStreamingStrategy uniqueInstance
 ]
 
+{ #category : #streaming }
+XdStreamingStrategy >> binaryReadStreamDo: anOneArgBlock [ 
+	^ self readStreamDo: anOneArgBlock
+]
+
 { #category : #accessing }
 XdStreamingStrategy >> bytes [
 	<return: #ByteArray>
@@ -55,6 +60,12 @@ XdStreamingStrategy >> gtFilesFor: aView [
 { #category : #accessing }
 XdStreamingStrategy >> json [
 	^ XdManifestJsonMapping
+]
+
+{ #category : #accessing }
+XdStreamingStrategy >> memberNamed: aFileName [ 
+	<return: #ArchiveMember>
+	^ self subclassResponsibility
 ]
 
 { #category : #streams }

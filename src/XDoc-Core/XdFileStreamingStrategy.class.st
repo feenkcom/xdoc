@@ -27,6 +27,12 @@ XdFileStreamingStrategy >> file: aFileReference [
 	file := aFileReference
 ]
 
+{ #category : #accessing }
+XdFileStreamingStrategy >> memberNamed: aFileName [ 
+	<return: #ArchiveMember>
+	^ self zip memberNamed: aFileName
+]
+
 { #category : #streams }
 XdFileStreamingStrategy >> readStream [
 	"Return a binary read stream"

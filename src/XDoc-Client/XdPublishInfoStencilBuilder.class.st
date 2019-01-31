@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'info'
 	],
-	#category : #'XDoc-Client-Brick'
+	#category : #'XDoc-Client-Publish - Brick'
 }
 
 { #category : #'api - instantiation' }

@@ -11,6 +11,11 @@ Class {
 	#category : #'XDoc-Core-Model'
 }
 
+{ #category : #'instance creation' }
+XdManifest class >> empty [
+	^ XdEmptyManifest uniqueInstance
+]
+
 { #category : #accessing }
 XdManifest >> attachments [
 	<return: #Array of: #XdAttachment>
@@ -23,6 +28,13 @@ XdManifest >> attachments: anArrayOfAttachments [
 		assert: [ anArrayOfAttachments notNil ] 
 		description: [ 'Attachments must be non-nil' ].
 	attachments := anArrayOfAttachments
+]
+
+{ #category : #accessing }
+XdManifest >> attachmentsForDocument: aXdDocument [
+	<return: #Array of: #XdAttachment>
+	^ self attachments select: [ :eachAttachment | 
+		aXdDocument components anySatisfy: [ :eachComponent | eachComponent link = eachAttachment id ] ]
 ]
 
 { #category : #accessing }
@@ -120,6 +132,12 @@ XdManifest >> initialize [
 	title := ''.
 	documents := #().
 	attachments := #().
+]
+
+{ #category : #accessing }
+XdManifest >> mainDocument [
+	<return: #XdDocument>
+	^ self documents first
 ]
 
 { #category : #accessing }
