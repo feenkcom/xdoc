@@ -34,6 +34,34 @@ XdClient class >> gtDocumentsFor: aView [
 			priority: -2
 ]
 
+{ #category : #accessing }
+XdClient class >> null [
+	^ XdNullClient uniqueInstance
+]
+
+{ #category : #actions }
+XdClient >> async [
+	<return: #XdAsyncClient>
+	^ XdAsyncClient new client: self
+]
+
+{ #category : #actions }
+XdClient >> deleteXDocId: anId [
+	<return: #ZnResponse>
+	"Delete an XDoc file from a public server"
+	^ XdClientDeleteXDocIdCommand new
+		client: self;
+		xdocId: anId;
+		execute;
+		response
+]
+
+{ #category : #'accesing - computed' }
+XdClient >> documents [
+	<return: #Array of: #XdFileInfo>
+	^ self downloadList
+]
+
 { #category : #actions }
 XdClient >> downloadFileInfo: aZnUrl [ 
 	"Download an XDoc file info from a public server"
@@ -50,6 +78,7 @@ XdClient >> downloadList [
 	<return: #Array of: #XdFileInfo>
 	^ XdClientDownloadListCommand new
 		client: self;
+		signalProgress: self signalProgress;
 		execute;
 		list
 ]
@@ -80,18 +109,27 @@ XdClient >> downloadXDocUsingFileInfo: aXdFileInfo [
 { #category : #'gt-extension' }
 XdClient >> gtDocumentsFor: aView [
 	<gtView>
-	^ aView columnedList
-		title: 'Published Documents';
-		items: [ self downloadList ];
-		column: 'Author' item: [ :aFileInfo | aFileInfo author ];
-		column: 'Title' item: [ :aFileInfo | aFileInfo title ]
-		
+	^ aView explicit
+		title: 'Documents';
+		stencil: [ 
+			XdDocumentsElement new 
+				look: XdGlamorousDocumentsLook;
+				client: self ]		
 ]
 
 { #category : #initialization }
 XdClient >> initialize [
 	super initialize.
 	serverUrl := XdClientSettings xdServerUrl.
+]
+
+{ #category : #actions }
+XdClient >> openFileReference: aFileReference [
+	aFileReference exists ifFalse: [ ^ self ].
+	XdClientOpenXDocCommand new 
+		client: self;
+		fileReference: aFileReference;
+		execute
 ]
 
 { #category : #actions }
@@ -122,4 +160,10 @@ XdClient >> serverUrl: aZnUrl [
 		assert: [ aZnUrl notNil ]
 		description: [ 'Server URL must be non-nil' ].
 	serverUrl := aZnUrl
+]
+
+{ #category : #accessing }
+XdClient >> signalProgress [
+	<return: #Boolean>
+	^ BlSignalProgress enabled
 ]

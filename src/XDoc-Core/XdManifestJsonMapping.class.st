@@ -12,7 +12,8 @@ XdManifestJsonMapping class >> attachmentMappingFor: aNeoJSONMapper [
 		for: XdAttachment do: [ :mapping |
 	      mapping mapAccessor: #id.
 	      mapping mapAccessor: #fileName to: #filename.
-	      mapping mapAccessor: #fileSize to: #size.].
+	      mapping mapAccessor: #fileSize to: #size.
+			mapping mapAccessor: #primary to: #'is_primary' ].
 ]
 
 { #category : #'mapping - document' }
@@ -57,6 +58,15 @@ XdManifestJsonMapping class >> componentMappingFor: aNeoJSONMapper [
 ]
 
 { #category : #'mapping - document' }
+XdManifestJsonMapping class >> dateAndTimeMappingFor: aNeoJSONMapper [
+	aNeoJSONMapper
+		for: DateAndTime customDo: [ :mapping |
+			mapping 
+				decoder: [ :string | DateAndTime fromString: string ];
+				encoder: [ :dateAndTime | dateAndTime printString ] ].
+]
+
+{ #category : #'mapping - document' }
 XdManifestJsonMapping class >> documentMappingFor: aNeoJSONMapper [
 	aNeoJSONMapper
 		for: XdDocument do: [ :mapping |
@@ -83,8 +93,10 @@ XdManifestJsonMapping class >> fileInfoMappingFor: aNeoJSONMapper [
 		for: XdFileInfo do: [ :mapping |
 	      mapping mapAccessor: #pathSegment.
 			mapping mapAccessor: #fileName. 
+			(mapping mapAccessor: #createdOn) valueSchema: DateAndTime.
 			(mapping mapAccessor: #manifest) valueSchema: XdManifest.
 			].
+	self dateAndTimeMappingFor: aNeoJSONMapper.
 	self manifestMappingFor: aNeoJSONMapper.
 ]
 

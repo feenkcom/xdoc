@@ -31,10 +31,21 @@ XdStreamingStrategy class >> null [
 	^ XdNullStreamingStrategy uniqueInstance
 ]
 
+{ #category : #streams }
+XdStreamingStrategy >> binaryReadStreamDo: anOneArgBlock [ 
+	^ self readStreamDo: anOneArgBlock
+]
+
 { #category : #accessing }
 XdStreamingStrategy >> bytes [
 	<return: #ByteArray>
 	^ self readStreamDo: [ :aStream | aStream contents ]
+]
+
+{ #category : #'file system' }
+XdStreamingStrategy >> detectFileReference: aDetectBlock ifFound: aFoundBlock ifNone: aNotFoundBlock [
+	<return: #FileReference>
+	^ self subclassResponsibility
 ]
 
 { #category : #testing }
@@ -55,6 +66,12 @@ XdStreamingStrategy >> gtFilesFor: aView [
 { #category : #accessing }
 XdStreamingStrategy >> json [
 	^ XdManifestJsonMapping
+]
+
+{ #category : #accessing }
+XdStreamingStrategy >> memberNamed: aFileName [ 
+	<return: #ArchiveMember>
+	^ self subclassResponsibility
 ]
 
 { #category : #streams }

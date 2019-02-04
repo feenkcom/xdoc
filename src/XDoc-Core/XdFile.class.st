@@ -21,6 +21,14 @@ XdFile class >> fromBytes: aByteArray [
 		read
 ]
 
+{ #category : #public }
+XdFile class >> fromFileReference: aFileReference [ 
+	<return: #XdFile>
+	^ XdReader new
+		streamingStrategy: (XdStreamingStrategy file: aFileReference);
+		read
+]
+
 { #category : #testing }
 XdFile >> exists [
 	<return: #Boolean>
@@ -47,8 +55,27 @@ XdFile >> htmlMembers [
 { #category : #initialization }
 XdFile >> initialize [
 	super initialize.
-	manifest := XdEmptyManifest uniqueInstance.
-	streamingStrategy := XdNullStreamingStrategy uniqueInstance.
+	manifest := XdManifest empty.
+	streamingStrategy := XdStreamingStrategy null.
+]
+
+{ #category : #accessing }
+XdFile >> mainDocument [
+	<return: #XdDocument>
+	^ self manifest mainDocument
+]
+
+{ #category : #accessing }
+XdFile >> mainFileReference [
+	<return: #FileReference>
+	| aXdDocument theAttachments |
+	aXdDocument := self mainDocument.
+	theAttachments := self manifest attachmentsForDocument: aXdDocument.
+	^ self streamingStrategy 
+		detectFileReference: [ :eachFileReference | 
+			eachFileReference basename = theAttachments first fileName ]
+		ifFound: [ :aFileReference | aFileReference ] 
+		ifNone: [ self error: 'File reference must be found' ]
 ]
 
 { #category : #accessing }
@@ -65,9 +92,22 @@ XdFile >> manifest: aXdManifest [
 	manifest := aXdManifest
 ]
 
+{ #category : #accessing }
+XdFile >> memberNamed: aFileName [ 
+	<return: #ArchiveMember>
+	^ self streamingStrategy memberNamed: aFileName
+]
+
 { #category : #actions }
 XdFile >> open [
 	^ self inspect
+]
+
+{ #category : #actions }
+XdFile >> openInPharo [
+	"Document type should decide how to open (be displayed) in Pharo"
+	self manifest documents ifEmpty: [ ^ self ].
+	^ self manifest mainDocument openXdFileInPharo: self
 ]
 
 { #category : #accessing }

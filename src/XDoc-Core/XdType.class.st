@@ -14,6 +14,11 @@ XdType class >> image [
 	^ XdImageType
 ]
 
+{ #category : #actions }
+XdType class >> openDocument: aXdDocument ofXdFileInPharo: aXdFile [ 
+	self subclassResponsibility
+]
+
 { #category : #accessing }
 XdType class >> text [
 	^ XdTextType

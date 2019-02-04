@@ -23,6 +23,11 @@ XdWriter >> addComponentWithAttachment: anAttachment [
 
 { #category : #writing }
 XdWriter >> attachment: aRelativeFileName stream: aStream size: aSize [
+	self attachment: aRelativeFileName stream: aStream size: aSize primary: false.
+]
+
+{ #category : #writing }
+XdWriter >> attachment: aRelativeFileName stream: aStream size: aSize primary: isPrimary [
 	| anAttachment |
 	self 
 		assert: [ self manifest documents notEmpty ]
@@ -31,6 +36,7 @@ XdWriter >> attachment: aRelativeFileName stream: aStream size: aSize [
 	anAttachment id: idGenerator nextId.
 	anAttachment fileName: aRelativeFileName.
 	anAttachment fileSize: aSize.
+	anAttachment primary: isPrimary.
 	self addComponentWithAttachment: anAttachment.
 	self manifest attachments: (self manifest attachments copyWith: anAttachment).
 
@@ -120,7 +126,9 @@ XdWriter >> reuseOrAddAttachment: aRelativeFileName stream: aStream size: aSize 
 		detect: [ :eachAttachment | (eachAttachment fileName = aRelativeFileName) and: [ 
 				eachAttachment fileSize = aSize ] ]
 		ifFound: [ :anAttachment | self addComponentWithAttachment: anAttachment ]
-		ifNone: [ self attachment: aRelativeFileName stream: aStream size: aSize ]
+		ifNone: [ 
+			self attachment: aRelativeFileName stream: aStream size: aSize.
+		]
 ]
 
 { #category : #accessing }

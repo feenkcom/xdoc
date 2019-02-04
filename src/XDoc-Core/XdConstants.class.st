@@ -53,12 +53,6 @@ XdConstants class >> playBookExtension [
 	^ 'playbook'
 ]
 
-{ #category : #'client / server' }
-XdConstants class >> publishingPathSegments [
-	"Default REST path to publish XDoc documents"
-	^ #( 'api' 'xdoc' 'post' )
-]
-
 { #category : #accessing }
 XdConstants class >> versionFileName [
 	^ 'format-version.txt'
@@ -73,4 +67,22 @@ XdConstants class >> xdocExtension [
 XdConstants class >> xdocInfoFileName [
 	"File name describing XDoc file path, name, and manifest"
 	^ 'info.json'
+]
+
+{ #category : #'client / server' }
+XdConstants class >> xdocPathSegments [
+	"Default REST path to access/modify/delete an XDoc document"
+	^ #( 'api' 'xdoc' )
+]
+
+{ #category : #'client / server' }
+XdConstants class >> xdocPathSegmentsPattern [
+	"Default REST path to access/modify/delete an XDoc document"
+	^ #( 'api' 'xdoc' '*' )
+]
+
+{ #category : #'client / server' }
+XdConstants class >> xdocsPathSegments [
+	"REST path to access/post XDoc documents"
+	^ #( 'api' 'xdocs' )
 ]

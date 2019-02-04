@@ -1,8 +1,11 @@
 Class {
 	#name : #XdClientCommand,
-	#superclass : #Object,
+	#superclass : #BlCommand,
+	#traits : 'TBlDebug',
+	#classTraits : 'TBlDebug classTrait',
 	#instVars : [
-		'client'
+		'client',
+		'signalProgress'
 	],
 	#category : #'XDoc-Client-Commands'
 }
@@ -20,4 +23,22 @@ XdClientCommand >> client: anObject [
 { #category : #execution }
 XdClientCommand >> execute [
 	self subclassResponsibility
+]
+
+{ #category : #initialization }
+XdClientCommand >> initialize [
+	super initialize.
+	client := XdClient null.
+	signalProgress := false.
+]
+
+{ #category : #accessing }
+XdClientCommand >> signalProgress [
+	<return: #Boolean>
+	^ signalProgress
+]
+
+{ #category : #accessing }
+XdClientCommand >> signalProgress: aBoolean [
+	signalProgress := aBoolean
 ]
