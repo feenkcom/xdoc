@@ -21,13 +21,27 @@ XdWriter >> addComponentWithAttachment: anAttachment [
 	aDocument components: (aDocument components copyWith: aComponent).
 ]
 
-{ #category : #writing }
-XdWriter >> attachment: aRelativeFileName stream: aStream size: aSize [
-	self attachment: aRelativeFileName stream: aStream size: aSize primary: false.
+{ #category : #accessing }
+XdWriter >> addPreview: aDataWriter [
+	| previewAttachment |
+
+	aDataWriter allFiles isNotEmpty
+		ifFalse: [ ^ self ].
+	self documentType: XdPreviewType.
+	previewAttachment := aDataWriter allFiles first.
+	previewAttachment
+		binaryReadStreamDo: [ :aStream | 
+			self
+				reuseOrAddAttachment:
+					(GtFileUtility
+						fileNameOf: previewAttachment
+						relativeTo: aDataWriter rootDirectory)
+				stream: aStream
+				size: previewAttachment size ]
 ]
 
 { #category : #writing }
-XdWriter >> attachment: aRelativeFileName stream: aStream size: aSize primary: isPrimary [
+XdWriter >> attachment: aRelativeFileName stream: aStream size: aSize [
 	| anAttachment |
 	self 
 		assert: [ self manifest documents notEmpty ]
@@ -36,7 +50,6 @@ XdWriter >> attachment: aRelativeFileName stream: aStream size: aSize primary: i
 	anAttachment id: idGenerator nextId.
 	anAttachment fileName: aRelativeFileName.
 	anAttachment fileSize: aSize.
-	anAttachment primary: isPrimary.
 	self addComponentWithAttachment: anAttachment.
 	self manifest attachments: (self manifest attachments copyWith: anAttachment).
 
