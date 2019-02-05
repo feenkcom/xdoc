@@ -20,7 +20,7 @@ BaselineOfXdocClient >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
 		spec baseline: 'Xdoc' with: [
-				spec repository: 'github://feenkcom/xdoc:v0.4.11/src' ].
+				spec repository: 'github://feenkcom/xdoc:v0.4.12/src' ].
 		spec package: 'XDoc-Client' with: [
 				spec requires: #('Xdoc' ). ]. ].
 
