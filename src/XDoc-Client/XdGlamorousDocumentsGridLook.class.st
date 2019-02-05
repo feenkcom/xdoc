@@ -35,7 +35,7 @@ XdGlamorousDocumentsGridLook >> initializeList [
 XdGlamorousDocumentsGridLook >> initializeLook [
 	super initializeLook.
 	self widget
-		padding: (BlInsets all: 5);
+		padding: (BlInsets top: 8 left: 5 bottom: 5 right: 5);
 		layout: BlLinearLayout vertical;
 		constraintsDo: [ :c |
 			c horizontal matchParent.
