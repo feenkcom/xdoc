@@ -23,7 +23,7 @@ XdClientExamples >> basicListWithLook [
 	<gtExample>
 	| anElement aLook |
 	anElement := self basicList.
-	aLook := XdGlamorousDocumentsLook new.
+	aLook := XdGlamorousDocumentsListLook new.
 	anElement look: aLook.
 	self assert: aLook client equals: anElement client.
 	self assert: anElement hasChildren description: 'Element must have children installed by the look'.

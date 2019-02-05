@@ -113,8 +113,8 @@ XdClient >> gtDocumentsFor: aView [
 		title: 'Documents';
 		stencil: [ 
 			XdDocumentsElement new 
-				look: XdGlamorousDocumentsLook;
-				client: self ]		
+				look: XdGlamorousDocumentsGridLook;
+				client: self ]
 ]
 
 { #category : #initialization }
