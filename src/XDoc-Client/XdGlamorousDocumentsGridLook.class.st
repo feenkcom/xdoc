@@ -12,21 +12,27 @@ Class {
 XdGlamorousDocumentsGridLook >> initializeList [
 	listHandler := XdDocumentsHandler new.
 	list := BrGridList new
-		stencil: [ :eachResource |
-			BrCard new
+		stencil: [ :eachXdFileInfo |	
+			| aCard |
+			aCard := BrCard new
 				constraintsDo: [ :c |
 					c horizontal matchParent.
-					c vertical exact: 100 ];
-				look: BrShadowLook + BrLabelLook + BrDescriptionLook;
+					c vertical fitContent ];
+				look: BrShadowLook + BrIconLook + BrLabelLook +  BrDescriptionLook;
 				margin: (BlInsets all: 10);
 				padding: (BlInsets all: 10);
 				background: Color white;
-				title: (eachResource title asRopedText bold);
-				description: ((eachResource description asString first: (100 min: eachResource description size)) asRopedText foreground: Color gray);
+				title: (eachXdFileInfo title asRopedText bold);
+				description: (eachXdFileInfo description asRopedText foreground: Color gray);
+				picture: (Form extent: 0@0) asElement;
 				action: [ :aBrCard | aBrCard
 					 fireEvent: (GtPhlowObjectToSpawn new
-						object: eachResource;
-						sourceElement: aBrCard) ] ];
+						object: eachXdFileInfo;
+						sourceElement: aBrCard) ].
+				
+				self updatePreviewOf: eachXdFileInfo in: aCard.
+				
+				aCard ];
 		yourself.
 	self widget addChild: list as: #list.
 ]
@@ -103,4 +109,29 @@ XdGlamorousDocumentsGridLook >> updateList [
 				list enqueueTask: (BlTaskAction new action: [ 
 					list display: aList ]) ] ];
 		documents
+]
+
+{ #category : #private }
+XdGlamorousDocumentsGridLook >> updatePreviewOf: aFileInfo in: aCard [
+
+	self
+		assert: [ aFileInfo isNotNil ]
+		description: [ 'File info must not be nil' ].
+	
+	self client async 
+		callback: [ :anImageForm | 
+			self widgetDo: [ :aWidget | 
+				aCard enqueueTask: (BlTaskAction new action: [
+					| aPreviewElement aScaledForm |
+					
+					aScaledForm := anImageForm scaledToSize: 512 @ anImageForm height.
+					
+					aPreviewElement := aScaledForm asElement asScalableElement.
+					aPreviewElement fitWidth.
+					aPreviewElement constraintsDo: [ :c |
+						c horizontal matchParent.
+						c vertical fitContent ].
+					
+					aCard picture: aPreviewElement ]) ] ];
+		downloadPreviewImageUsingFileInfo: aFileInfo
 ]
