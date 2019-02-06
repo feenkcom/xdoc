@@ -27,10 +27,13 @@ XdGlamorousDocumentsGridLook >> initializeList [
 				title: (eachXdFileInfo title asRopedText bold);
 				description: (eachXdFileInfo description asRopedText foreground: Color gray);
 				picture: (Form extent: 0@0) asElement;
-				action: [ :aBrCard | aBrCard
-					 fireEvent: (GtPhlowObjectToSpawn new
-						object: eachXdFileInfo;
-						sourceElement: aBrCard) ].
+				action: [ :aBrCard | 
+					self client async 
+						callback: [ :anXdFileOrNil | 
+							anXdFileOrNil ifNotNil: [ 
+								aBrCard enqueueTask: (BlTaskAction new action: [ 
+									aBrCard phlow spawnObject: anXdFileOrNil ]) ] ];
+						downloadXDocUsingFileInfo: eachXdFileInfo ].
 				
 				self updatePreviewOf: eachXdFileInfo in: aCard.
 				
