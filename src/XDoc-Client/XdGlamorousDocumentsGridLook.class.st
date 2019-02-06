@@ -23,10 +23,13 @@ XdGlamorousDocumentsGridLook >> initializeList [
 				background: Color white;
 				title: (eachResource title asRopedText bold);
 				description: ((eachResource description asString first: (100 min: eachResource description size)) asRopedText foreground: Color gray);
-				action: [ :aBrCard | aBrCard
-					 fireEvent: (GtPhlowObjectToSpawn new
-						object: eachResource;
-						sourceElement: aBrCard) ] ];
+				action: [ :aBrCard | 
+					self client async 
+						callback: [ :anXdFileOrNil | 
+							anXdFileOrNil ifNotNil: [ 
+								aBrCard enqueueTask: (BlTaskAction new action: [ 
+									aBrCard phlow spawnObject: anXdFileOrNil ]) ] ];
+						downloadXDocUsingFileInfo: eachResource ] ];
 		yourself.
 	self widget addChild: list as: #list.
 ]
