@@ -18,9 +18,11 @@ XdGlamorousDocumentsGridLook >> initializeList [
 				constraintsDo: [ :c |
 					c horizontal matchParent.
 					c vertical fitContent ];
-				look: BrShadowLook + BrIconLook + BrLabelLook +  BrDescriptionLook;
-				margin: (BlInsets all: 10);
-				padding: (BlInsets all: 10);
+				look: BrShadowLook
+					+ BrIconLook
+					+ (BrLabelLook new labelDo: [ :aLabel | aLabel margin: (BlInsets all: 12) ])
+					+ (BrDescriptionLook new descriptionDo: [ :aDescription | aDescription padding: (BlInsets top: 0 left: 12 bottom: 12 right: 12) ]);
+				margin: (BlInsets all: 12);
 				background: Color white;
 				title: (eachXdFileInfo title asRopedText bold);
 				description: (eachXdFileInfo description asRopedText foreground: Color gray);
