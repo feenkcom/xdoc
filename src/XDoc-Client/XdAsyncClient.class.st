@@ -48,6 +48,13 @@ XdAsyncClient >> downloadList [
 ]
 
 { #category : #actions }
+XdAsyncClient >> downloadPreviewImageUsingFileInfo: aXdFileInfo [
+	(BlValuableCommand new
+		valuable: [ self client downloadPreviewImageUsingFileInfo: aXdFileInfo ]) future
+			onSuccessDo: [ :result | self resultNotification: result ]
+]
+
+{ #category : #actions }
 XdAsyncClient >> downloadXDocUsingFileInfo: anXdInfo [
 	(BlValuableCommand new
 		valuable: [ self client downloadXDocUsingFileInfo: anXdInfo ]) future

@@ -84,6 +84,17 @@ XdClient >> downloadList [
 ]
 
 { #category : #actions }
+XdClient >> downloadPreviewImageUsingFileInfo: aXdFileInfo [
+	<return: #Form>
+
+	^ XdClientDownloadPreviewImageCommand new
+		client: self;
+		fileInfo: aXdFileInfo;
+		signalProgress: self signalProgress;
+		execute
+]
+
+{ #category : #actions }
 XdClient >> downloadXDoc: aZnUrl [ 
 	<return: #XdFile>
 	"Download an XDoc file from a public server"

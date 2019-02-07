@@ -12,21 +12,32 @@ Class {
 XdGlamorousDocumentsGridLook >> initializeList [
 	listHandler := XdDocumentsHandler new.
 	list := BrGridList new
-		stencil: [ :eachResource |
-			BrCard new
+		stencil: [ :eachXdFileInfo |	
+			| aCard |
+			aCard := BrCard new
 				constraintsDo: [ :c |
 					c horizontal matchParent.
-					c vertical exact: 100 ];
-				look: BrShadowLook + BrLabelLook + BrDescriptionLook;
-				margin: (BlInsets all: 10);
-				padding: (BlInsets all: 10);
+					c vertical fitContent ];
+				look: BrShadowLook
+					+ BrIconLook
+					+ (BrLabelLook new labelDo: [ :aLabel | aLabel margin: (BlInsets all: 12) ])
+					+ (BrDescriptionLook new descriptionDo: [ :aDescription | aDescription padding: (BlInsets top: 0 left: 12 bottom: 12 right: 12) ]);
+				margin: (BlInsets all: 12);
 				background: Color white;
-				title: (eachResource title asRopedText bold);
-				description: ((eachResource description asString first: (100 min: eachResource description size)) asRopedText foreground: Color gray);
-				action: [ :aBrCard | aBrCard
-					 fireEvent: (GtPhlowObjectToSpawn new
-						object: eachResource;
-						sourceElement: aBrCard) ] ];
+				title: (eachXdFileInfo title asRopedText bold);
+				description: (eachXdFileInfo description asRopedText foreground: Color gray);
+				picture: (Form extent: 0@0) asElement;
+				action: [ :aBrCard | 
+					self client async 
+						callback: [ :anXdFileOrNil | 
+							anXdFileOrNil ifNotNil: [ 
+								aBrCard enqueueTask: (BlTaskAction new action: [ 
+									aBrCard phlow spawnObject: anXdFileOrNil ]) ] ];
+						downloadXDocUsingFileInfo: eachXdFileInfo ].
+				
+				self updatePreviewOf: eachXdFileInfo in: aCard.
+				
+				aCard ];
 		yourself.
 	self widget addChild: list as: #list.
 ]
@@ -103,4 +114,29 @@ XdGlamorousDocumentsGridLook >> updateList [
 				list enqueueTask: (BlTaskAction new action: [ 
 					list display: aList ]) ] ];
 		documents
+]
+
+{ #category : #private }
+XdGlamorousDocumentsGridLook >> updatePreviewOf: aFileInfo in: aCard [
+
+	self
+		assert: [ aFileInfo isNotNil ]
+		description: [ 'File info must not be nil' ].
+	
+	self client async 
+		callback: [ :anImageForm | 
+			self widgetDo: [ :aWidget | 
+				aCard enqueueTask: (BlTaskAction new action: [
+					| aPreviewElement aScaledForm |
+					
+					aScaledForm := anImageForm scaledToSize: 512 @ anImageForm height.
+					
+					aPreviewElement := aScaledForm asElement asScalableElement.
+					aPreviewElement fitWidth.
+					aPreviewElement constraintsDo: [ :c |
+						c horizontal matchParent.
+						c vertical fitContent ].
+					
+					aCard picture: aPreviewElement ]) ] ];
+		downloadPreviewImageUsingFileInfo: aFileInfo
 ]
