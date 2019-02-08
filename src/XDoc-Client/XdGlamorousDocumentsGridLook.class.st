@@ -125,18 +125,18 @@ XdGlamorousDocumentsGridLook >> updatePreviewOf: aFileInfo in: aCard [
 	
 	self client async 
 		callback: [ :anImageForm | 
-			self widgetDo: [ :aWidget | 
-				aCard enqueueTask: (BlTaskAction new action: [
-					| aPreviewElement aScaledForm |
+			anImageForm bits isEmpty ifFalse: [
+				self widgetDo: [ :aWidget | 
+					aCard enqueueTask: (BlTaskAction new action: [
+						| aPreviewElement aScaledForm |
 					
-					aScaledForm := anImageForm scaledToSize: 512 @ anImageForm height.
+						aScaledForm := anImageForm scaledToSize: 512 @ anImageForm height.
 					
-					aPreviewElement := aScaledForm asElement asScalableElement.
-					aPreviewElement fitWidth.
-					aPreviewElement constraintsDo: [ :c |
-						c horizontal matchParent.
-						c vertical fitContent ].
-					
-					aCard picture: aPreviewElement ]) ] ];
+						aPreviewElement := aScaledForm asElement asScalableElement.
+						aPreviewElement fitWidth.
+						aPreviewElement constraintsDo: [ :c |
+							c horizontal matchParent.
+							c vertical fitContent ].
+						aCard picture: aPreviewElement ]) ] ] ];
 		downloadPreviewImageUsingFileInfo: aFileInfo
 ]
