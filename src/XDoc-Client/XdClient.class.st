@@ -117,6 +117,17 @@ XdClient >> downloadXDocUsingFileInfo: aXdFileInfo [
 		xdFile
 ]
 
+{ #category : #accessing }
+XdClient >> gtDocumentListFor: aView [
+	<gtView>
+	^ aView columnedList
+		title: 'List';
+		items: [ self documents ];
+		column: 'Title' do: [:aColumn | aColumn item: [ :doc | doc title] ];
+		column: 'Author' do: [:aColumn | aColumn item: [ :doc | doc author] ];
+		column: 'Created on' do: [:aColumn | aColumn item: [ :doc | doc createdOn asLocalStringYMDHM] ]
+]
+
 { #category : #'gt-extension' }
 XdClient >> gtDocumentsFor: aView [
 	<gtView>
