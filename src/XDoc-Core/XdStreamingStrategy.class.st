@@ -31,7 +31,7 @@ XdStreamingStrategy class >> null [
 	^ XdNullStreamingStrategy uniqueInstance
 ]
 
-{ #category : #streaming }
+{ #category : #streams }
 XdStreamingStrategy >> binaryReadStreamDo: anOneArgBlock [ 
 	^ self readStreamDo: anOneArgBlock
 ]
@@ -40,6 +40,12 @@ XdStreamingStrategy >> binaryReadStreamDo: anOneArgBlock [
 XdStreamingStrategy >> bytes [
 	<return: #ByteArray>
 	^ self readStreamDo: [ :aStream | aStream contents ]
+]
+
+{ #category : #'file system' }
+XdStreamingStrategy >> detectFileReference: aDetectBlock ifFound: aFoundBlock ifNone: aNotFoundBlock [
+	<return: #FileReference>
+	^ self subclassResponsibility
 ]
 
 { #category : #testing }

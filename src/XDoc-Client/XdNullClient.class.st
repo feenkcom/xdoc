@@ -25,6 +25,16 @@ XdNullClient class >> uniqueInstance [
 ]
 
 { #category : #accessing }
+XdNullClient >> async [
+	^ self
+]
+
+{ #category : #accessing }
+XdNullClient >> callback: aBlockClosure [ 
+	"do nothing"
+]
+
+{ #category : #accessing }
 XdNullClient >> documents [
 	^ #()
 ]

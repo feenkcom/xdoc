@@ -40,6 +40,12 @@ XdClient class >> null [
 ]
 
 { #category : #actions }
+XdClient >> async [
+	<return: #XdAsyncClient>
+	^ XdAsyncClient new client: self
+]
+
+{ #category : #actions }
 XdClient >> deleteXDocId: anId [
 	<return: #ZnResponse>
 	"Delete an XDoc file from a public server"
@@ -72,8 +78,20 @@ XdClient >> downloadList [
 	<return: #Array of: #XdFileInfo>
 	^ XdClientDownloadListCommand new
 		client: self;
+		signalProgress: self signalProgress;
 		execute;
 		list
+]
+
+{ #category : #actions }
+XdClient >> downloadPreviewImageUsingFileInfo: aXdFileInfo [
+	<return: #Form>
+
+	^ XdClientDownloadPreviewImageCommand new
+		client: self;
+		fileInfo: aXdFileInfo;
+		signalProgress: self signalProgress;
+		execute
 ]
 
 { #category : #actions }
@@ -99,6 +117,17 @@ XdClient >> downloadXDocUsingFileInfo: aXdFileInfo [
 		xdFile
 ]
 
+{ #category : #accessing }
+XdClient >> gtDocumentListFor: aView [
+	<gtView>
+	^ aView columnedList
+		title: 'List';
+		items: [ self documents ];
+		column: 'Title' do: [:aColumn | aColumn item: [ :doc | doc title] ];
+		column: 'Author' do: [:aColumn | aColumn item: [ :doc | doc author] ];
+		column: 'Created on' do: [:aColumn | aColumn item: [ :doc | doc createdOn asLocalStringYMDHM] ]
+]
+
 { #category : #'gt-extension' }
 XdClient >> gtDocumentsFor: aView [
 	<gtView>
@@ -106,8 +135,8 @@ XdClient >> gtDocumentsFor: aView [
 		title: 'Documents';
 		stencil: [ 
 			XdDocumentsElement new 
-				look: XdGlamorousDocumentsLook;
-				client: self ]		
+				look: XdGlamorousDocumentsGridLook;
+				client: self ]
 ]
 
 { #category : #initialization }
@@ -153,4 +182,10 @@ XdClient >> serverUrl: aZnUrl [
 		assert: [ aZnUrl notNil ]
 		description: [ 'Server URL must be non-nil' ].
 	serverUrl := aZnUrl
+]
+
+{ #category : #accessing }
+XdClient >> signalProgress [
+	<return: #Boolean>
+	^ BlSignalProgress enabled
 ]

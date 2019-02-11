@@ -21,6 +21,25 @@ XdWriter >> addComponentWithAttachment: anAttachment [
 	aDocument components: (aDocument components copyWith: aComponent).
 ]
 
+{ #category : #accessing }
+XdWriter >> addPreview: aDataWriter [
+	| previewAttachment |
+
+	aDataWriter allFiles isNotEmpty
+		ifFalse: [ ^ self ].
+	self documentType: XdPreviewType.
+	previewAttachment := aDataWriter allFiles first.
+	previewAttachment
+		binaryReadStreamDo: [ :aStream | 
+			self
+				reuseOrAddAttachment:
+					(GtFileUtility
+						fileNameOf: previewAttachment
+						relativeTo: aDataWriter rootDirectory)
+				stream: aStream
+				size: previewAttachment size ]
+]
+
 { #category : #writing }
 XdWriter >> attachment: aRelativeFileName stream: aStream size: aSize [
 	| anAttachment |
@@ -120,7 +139,9 @@ XdWriter >> reuseOrAddAttachment: aRelativeFileName stream: aStream size: aSize 
 		detect: [ :eachAttachment | (eachAttachment fileName = aRelativeFileName) and: [ 
 				eachAttachment fileSize = aSize ] ]
 		ifFound: [ :anAttachment | self addComponentWithAttachment: anAttachment ]
-		ifNone: [ self attachment: aRelativeFileName stream: aStream size: aSize ]
+		ifNone: [ 
+			self attachment: aRelativeFileName stream: aStream size: aSize.
+		]
 ]
 
 { #category : #accessing }
