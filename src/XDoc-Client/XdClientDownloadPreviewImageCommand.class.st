@@ -47,7 +47,7 @@ XdClientDownloadPreviewImageCommand >> previewUrlDo: aBlock [
 					aPreviewURL := self client serverUrl 
 						/ XdConstants cdnPathSegments 
 						/ self fileInfo pathSegment
-						/ XdFileSystemStorage new previewDirectoryName
+						/ XdConstants previewDirectoryName
 						/ aPreviewAttachment fileName.
 					
 					aBlock value: aPreviewURL ] ]
