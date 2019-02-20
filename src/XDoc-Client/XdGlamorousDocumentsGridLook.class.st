@@ -15,13 +15,15 @@ XdGlamorousDocumentsGridLook >> initializeList [
 		stencil: [ :eachXdFileInfo |	
 			| aCard |
 			aCard := BrCard new
+				layout: BlLinearLayout vertical;
+				look: BrShadowLook
+					+ BrIconLook
+					+ (BrTextLabelLook new labelDo: [ :aLabel | aLabel margin: (BlInsets all: 12) ])
+					+ (BrDescriptionLook new descriptionDo: [ :aDescription | 
+							aDescription padding: (BlInsets top: 0 left: 12 bottom: 12 right: 12) ]);
 				constraintsDo: [ :c |
 					c horizontal matchParent.
 					c vertical fitContent ];
-				look: BrShadowLook
-					+ BrIconLook
-					+ (BrLabelLook new labelDo: [ :aLabel | aLabel margin: (BlInsets all: 12) ])
-					+ (BrDescriptionLook new descriptionDo: [ :aDescription | aDescription padding: (BlInsets top: 0 left: 12 bottom: 12 right: 12) ]);
 				margin: (BlInsets all: 12);
 				background: Color white;
 				title: (eachXdFileInfo title asRopedText bold);
