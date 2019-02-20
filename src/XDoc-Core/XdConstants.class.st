@@ -53,6 +53,12 @@ XdConstants class >> playBookExtension [
 	^ 'playbook'
 ]
 
+{ #category : #'client / server' }
+XdConstants class >> previewDirectoryName [
+	"ASubdirectory name where HTML previews are stored"
+	^ 'preview'
+]
+
 { #category : #accessing }
 XdConstants class >> versionFileName [
 	^ 'format-version.txt'
