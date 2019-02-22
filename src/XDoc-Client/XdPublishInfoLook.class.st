@@ -68,7 +68,7 @@ XdPublishInfoLook >> initializeRequests [
 { #category : #'instance creation' }
 XdPublishInfoLook >> newAuthorElement [
 	^ BrEditorElement new
-			look: BrGlamorousInputFieldLook + XdPublishInfoInnerWidgetLook;
+			look: BrGlamorousInputFieldSpacingLook + XdPublishInfoInnerWidgetLook;
 			editor: (BrTextEditor new text: self info author);
 			constraintsDo: [ :c | 
 				c horizontal matchParent.
@@ -78,7 +78,7 @@ XdPublishInfoLook >> newAuthorElement [
 { #category : #'instance creation' }
 XdPublishInfoLook >> newDescriptionElement [
 	^ BrEditorElement new
-			look: BrGlamorousTextAreaLook + XdPublishInfoInnerWidgetLook;
+			look: BrGlamorousTextAreaSpacingLook + XdPublishInfoInnerWidgetLook;
 			editor: (BrTextEditor new text: self info description);
 			constraintsDo: [ :c | 
 				c horizontal matchParent.
@@ -104,7 +104,7 @@ XdPublishInfoLook >> newPublishButtonElement [
 { #category : #'instance creation' }
 XdPublishInfoLook >> newTitleElement [
 	^ BrEditorElement new
-			look: BrGlamorousInputFieldLook + XdPublishInfoInnerWidgetLook;
+			look: BrGlamorousInputFieldSpacingLook + XdPublishInfoInnerWidgetLook;
 			editor: (BrTextEditor new text: self info title);
 			constraintsDo: [ :c | 
 				c horizontal matchParent.
