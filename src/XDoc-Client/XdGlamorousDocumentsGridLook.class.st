@@ -26,8 +26,8 @@ XdGlamorousDocumentsGridLook >> initializeList [
 					c vertical fitContent ];
 				margin: (BlInsets all: 12);
 				background: Color white;
-				title: (eachXdFileInfo title asRopedText bold);
-				description: (eachXdFileInfo description asRopedText foreground: Color gray);
+				title: (eachXdFileInfo title asRopedText);
+				description: (eachXdFileInfo description asRopedText foreground: Color gray; glamorousRegularSmallSize);
 				picture: (Form extent: 0@0) asElement;
 				action: [ :aBrCard | 
 					self client async 
