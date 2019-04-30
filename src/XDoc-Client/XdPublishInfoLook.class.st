@@ -34,7 +34,17 @@ XdPublishInfoLook >> initialize [
 	authorElement := self newAuthorElement.
 	descriptionElement := self newDescriptionElement.
 	publishButton := self newPublishButtonElement.
-
+	changes
+		add: (#(content title) asBrLookChildAddAsChangeWithValue: [ titleElement ]);
+		add: (#(content author) asBrLookChildAddAsChangeWithValue: [ authorElement ]);
+		add:
+			(#(content description)
+				asBrLookChildAddAsChangeWithValue: [ descriptionElement ]);
+		add: (#(content button) asBrLookChildAddAsChangeWithValue: [ publishButton ]).
+	changes
+		add:
+			(#(widgetContent layout)
+				asBrLookPropertyChangeWithValue: [ BlLinearLayout vertical ])
 ]
 
 { #category : #initialization }
@@ -44,18 +54,6 @@ XdPublishInfoLook >> initializeListeners [
 	self 
 		addEventHandlerOn: XdPublishInfoChangedEvent 
 		do: [ :anEvent | self info: anEvent info ].
-]
-
-{ #category : #initialization }
-XdPublishInfoLook >> initializeLook [
-	super initializeLook.
-	self widgetContent layout: BlLinearLayout vertical.
-	"Ensure an author element"
-	self widgetContent addChild: titleElement as: #title.
-	self widgetContent addChild: authorElement as: #author.
-	self widgetContent addChild: descriptionElement as: #description.
-	self widgetContent addChild: publishButton as: #button.
-	
 ]
 
 { #category : #initialization }

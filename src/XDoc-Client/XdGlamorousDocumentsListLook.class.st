@@ -9,6 +9,15 @@ Class {
 	#category : #'XDoc-Client-Documents - Brick'
 }
 
+{ #category : #'as yet unclassified' }
+XdGlamorousDocumentsListLook >> initialize [
+	super initialize.
+	changes
+		add:
+			(#(widget layout)
+				asBrLookPropertyChangeWithValue: [ BlLinearLayout vertical ])
+]
+
 { #category : #initialization }
 XdGlamorousDocumentsListLook >> initializeList [
 	listHandler := XdDocumentsHandler new.
@@ -34,7 +43,6 @@ XdGlamorousDocumentsListLook >> initializeList [
 { #category : #initialization }
 XdGlamorousDocumentsListLook >> initializeLook [
 	super initializeLook.
-	self widget layout: BlLinearLayout vertical.
 	self initializeToolbar.
 	self initializeList
 ]
