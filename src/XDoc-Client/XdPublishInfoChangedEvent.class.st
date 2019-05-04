@@ -9,7 +9,7 @@ Class {
 
 { #category : #accessing }
 XdPublishInfoChangedEvent >> info [
-	<return: #OldXdPublishInfo>
+	<return: #XdPublishInfo>
 	^ info
 ]
 

@@ -13,7 +13,7 @@ Class {
 
 { #category : #accessing }
 XdPublishInfoLook >> info [
-	<return: #OldXdPublishInfo>
+	<return: #XdPublishInfo>
 	^ info
 ]
 
