@@ -5,9 +5,14 @@ Class {
 }
 
 { #category : #initialization }
-XdPublishInfoInnerWidgetLook >> initializeLook [
-	super initializeLook.
-	self widget 
-		constraintsDo: [ :c | 
-			c margin: (BlInsets top: 5 left: 0 bottom: 5 right: 0) ]
+XdPublishInfoInnerWidgetLook >> initialize [
+	super initialize.
+	changes
+		add:
+			(#(widget margin)
+				asBrLookPropertyChangeWithValue: [ BlInsets
+						top: 5
+						left: 0
+						bottom: 5
+						right: 0 ])
 ]

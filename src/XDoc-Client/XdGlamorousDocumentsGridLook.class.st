@@ -8,6 +8,23 @@ Class {
 	#category : #'XDoc-Client-Documents - Brick'
 }
 
+{ #category : #'as yet unclassified' }
+XdGlamorousDocumentsGridLook >> initialize [
+	super initialize.
+	changes
+		add:
+			(#(widget padding)
+				asBrLookPropertyChangeWithValue: [ BlInsets
+						top: 8
+						left: 5
+						bottom: 5
+						right: 5 ]).
+	changes
+		add:
+			(#(widget layout)
+				asBrLookPropertyChangeWithValue: [ BlLinearLayout vertical ])
+]
+
 { #category : #initialization }
 XdGlamorousDocumentsGridLook >> initializeList [
 	listHandler := XdDocumentsHandler new.
@@ -48,13 +65,9 @@ XdGlamorousDocumentsGridLook >> initializeList [
 XdGlamorousDocumentsGridLook >> initializeLook [
 	super initializeLook.
 	self widget
-		padding: (BlInsets top: 8 left: 5 bottom: 5 right: 5);
-		layout: BlLinearLayout vertical;
-		constraintsDo: [ :c |
+		constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical matchParent ].
-	
-	
 	self initializeToolbar.
 	self initializeList
 ]

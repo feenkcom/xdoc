@@ -9,7 +9,7 @@ Class {
 
 { #category : #accessing }
 XdPublishInfoModel >> info [
-	<return: #OldXdPublishInfo>
+	<return: #XdPublishInfo>
 	^ info
 ]
 
