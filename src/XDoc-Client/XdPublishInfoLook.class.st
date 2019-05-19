@@ -34,17 +34,15 @@ XdPublishInfoLook >> initialize [
 	authorElement := self newAuthorElement.
 	descriptionElement := self newDescriptionElement.
 	publishButton := self newPublishButtonElement.
-	changes
-		add: (#(content title) asBrLookChildAddAsChangeWithValue: [ titleElement ]);
-		add: (#(content author) asBrLookChildAddAsChangeWithValue: [ authorElement ]);
-		add:
-			(#(content description)
-				asBrLookChildAddAsChangeWithValue: [ descriptionElement ]);
-		add: (#(content button) asBrLookChildAddAsChangeWithValue: [ publishButton ]).
-	changes
-		add:
-			(#(widgetContent layout)
-				asBrLookPropertyChangeWithValue: [ BlLinearLayout vertical ])
+	self addChangeAddChildAs: #(content title) with: [ titleElement ].
+	self addChangeAddChildAs: #(content author) with: [ authorElement ].
+	self
+		addChangeAddChildAs: #(content description)
+		with: [ descriptionElement ].
+	self addChangeAddChildAs: #(content button) with: [ publishButton ].
+	self
+		addChangeProperty: #(widgetContent layout)
+		with: [ BlLinearLayout vertical ]
 ]
 
 { #category : #initialization }

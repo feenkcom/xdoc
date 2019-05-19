@@ -8,31 +8,27 @@ Class {
 	#category : #'XDoc-Client-Documents - Brick'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 XdGlamorousDocumentsGridLook >> initialize [
 	super initialize.
-	changes
-		add:
-			(#(widget padding)
-				asBrLookPropertyChangeWithValue: [ BlInsets
-						top: 8
-						left: 5
-						bottom: 5
-						right: 5 ]).
-	changes
-		add:
-			(#(widget layout)
-				asBrLookPropertyChangeWithValue: [ BlLinearLayout vertical ]).
-	changes
-		add:
-			(#(widget constraints horizontal resizer)
-				asBrLookPropertyChangeWithValue: BlLayoutResizer matchParent).
-	changes
-		add:
-			(#(widget constraints vertical resizer)
-				asBrLookPropertyChangeWithValue: BlLayoutResizer matchParent).
-	changes
-		add:
+	self
+		addChangeProperty: #(widget padding)
+		with: [ BlInsets
+				top: 8
+				left: 5
+				bottom: 5
+				right: 5 ].
+	self
+		addChangeProperty: #(widget layout)
+		with: [ BlLinearLayout vertical ].
+	self
+		addChangeProperty: #(widget constraints horizontal resizer)
+		with: BlLayoutResizer matchParent.
+	self
+		addChangeProperty: #(widget constraints vertical resizer)
+		with: BlLayoutResizer matchParent.
+	self
+		addChange:
 			(BrLookChange new
 				up: [ :e | 
 					self initializeToolbar.
