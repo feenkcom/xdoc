@@ -9,15 +9,14 @@ Class {
 	#category : #'XDoc-Client-Documents - Brick'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 XdGlamorousDocumentsListLook >> initialize [
 	super initialize.
-	changes
-		add:
-			(#(widget layout)
-				asBrLookPropertyChangeWithValue: [ BlLinearLayout vertical ]).
-	changes
-		add:
+	self
+		addChangeProperty: #(widget layout)
+		with: [ BlLinearLayout vertical ].
+	self
+		addChange:
 			(BrLookChange new
 				up: [ :e | 
 					self initializeToolbar.
