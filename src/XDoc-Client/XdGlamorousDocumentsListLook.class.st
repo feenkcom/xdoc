@@ -15,7 +15,15 @@ XdGlamorousDocumentsListLook >> initialize [
 	changes
 		add:
 			(#(widget layout)
-				asBrLookPropertyChangeWithValue: [ BlLinearLayout vertical ])
+				asBrLookPropertyChangeWithValue: [ BlLinearLayout vertical ]).
+	changes
+		add:
+			(BrLookChange new
+				up: [ :e | 
+					self initializeToolbar.
+					self initializeList ];
+				down: [ :e |  ];
+				yourself)
 ]
 
 { #category : #initialization }
@@ -38,13 +46,6 @@ XdGlamorousDocumentsListLook >> initializeList [
 				text: aFileInfo title;
 				hMatchParent. ].
 	self widget addChild: list as: #list.
-]
-
-{ #category : #initialization }
-XdGlamorousDocumentsListLook >> initializeLook [
-	super initializeLook.
-	self initializeToolbar.
-	self initializeList
 ]
 
 { #category : #initialization }

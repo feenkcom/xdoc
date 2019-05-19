@@ -22,7 +22,23 @@ XdGlamorousDocumentsGridLook >> initialize [
 	changes
 		add:
 			(#(widget layout)
-				asBrLookPropertyChangeWithValue: [ BlLinearLayout vertical ])
+				asBrLookPropertyChangeWithValue: [ BlLinearLayout vertical ]).
+	changes
+		add:
+			(#(widget constraints horizontal resizer)
+				asBrLookPropertyChangeWithValue: BlLayoutResizer matchParent).
+	changes
+		add:
+			(#(widget constraints vertical resizer)
+				asBrLookPropertyChangeWithValue: BlLayoutResizer matchParent).
+	changes
+		add:
+			(BrLookChange new
+				up: [ :e | 
+					self initializeToolbar.
+					self initializeList ];
+				down: [ :e |  ];
+				yourself)
 ]
 
 { #category : #initialization }
@@ -59,17 +75,6 @@ XdGlamorousDocumentsGridLook >> initializeList [
 				aCard ];
 		yourself.
 	self widget addChild: list as: #list.
-]
-
-{ #category : #initialization }
-XdGlamorousDocumentsGridLook >> initializeLook [
-	super initializeLook.
-	self widget
-		constraintsDo: [ :c | 
-			c horizontal matchParent.
-			c vertical matchParent ].
-	self initializeToolbar.
-	self initializeList
 ]
 
 { #category : #initialization }
