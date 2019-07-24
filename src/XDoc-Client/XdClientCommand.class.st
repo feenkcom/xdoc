@@ -1,6 +1,6 @@
 Class {
 	#name : #XdClientCommand,
-	#superclass : #BlCommand,
+	#superclass : #BlTktCommand,
 	#traits : 'TBlDebug',
 	#classTraits : 'TBlDebug classTrait',
 	#instVars : [

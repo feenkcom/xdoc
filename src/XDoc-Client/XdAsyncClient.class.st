@@ -42,22 +42,19 @@ XdAsyncClient >> documents [
 
 { #category : #actions }
 XdAsyncClient >> downloadList [
-	(BlValuableCommand new
-		valuable: [ self client downloadList ]) future
+	[ self client downloadList ] asBlTktCommand future
 			onSuccessDo: [ :result | self resultNotification: result ]
 ]
 
 { #category : #actions }
 XdAsyncClient >> downloadPreviewImageUsingFileInfo: aXdFileInfo [
-	(BlValuableCommand new
-		valuable: [ self client downloadPreviewImageUsingFileInfo: aXdFileInfo ]) future
+	[ self client downloadPreviewImageUsingFileInfo: aXdFileInfo ] asBlTktCommand future
 			onSuccessDo: [ :result | self resultNotification: result ]
 ]
 
 { #category : #actions }
 XdAsyncClient >> downloadXDocUsingFileInfo: anXdInfo [
-	(BlValuableCommand new
-		valuable: [ self client downloadXDocUsingFileInfo: anXdInfo ]) future
+	[ self client downloadXDocUsingFileInfo: anXdInfo ] asBlTktCommand future
 			onSuccessDo: [ :result | self resultNotification: result ]
 ]
 
