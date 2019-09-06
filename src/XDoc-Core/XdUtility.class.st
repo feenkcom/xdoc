@@ -27,3 +27,11 @@ XdUtility class >> playgroundFileNameFromDateAndTime: aDateAndTime [
 				nextPut: $.;
 				nextPutAll: self constants xdocExtension. ]
 ]
+
+{ #category : #utility }
+XdUtility class >> xdocFileFromFileReference: aFileReference [
+	^ XdReader new
+		streamingStrategy: (XdStreamingStrategy file: aFileReference);
+		onError: [ :anError | XdFile empty ];
+		read
+]
