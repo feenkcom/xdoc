@@ -24,6 +24,11 @@ XdFileStreamingStrategy >> file: aFileReference [
 	self 
 		assert: [ aFileReference notNil ] 
 		description: [ 'File reference must be non-nil' ].
+	self 
+		assert: [ aFileReference exists 
+			ifTrue: [ aFileReference isFile and: [ aFileReference isWritable ] ]
+			ifFalse: [ true ] ] 
+		description: [ 'File reference must be a writtable file' ].
 	file := aFileReference
 ]
 
@@ -42,5 +47,6 @@ XdFileStreamingStrategy >> readStream [
 { #category : #writing }
 XdFileStreamingStrategy >> writeStreamDo: aBlock [
 	self assert: [ file notNil ] description: ['File must be defined before writing.'].
+	file ensureDelete.
 	^ file binaryWriteStreamDo: aBlock.
 ]

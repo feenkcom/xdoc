@@ -252,7 +252,7 @@ XdReaderWriterExamples >> manifestJsonWithOneAttachmentString [
 		equals: '{"title":"', self documentTitle, 
 			'","description":"', self documentDescription,
 			'","author":"', self documentAuthorName,
-			'","attachments":[{"id":12,"filename":"', self textFileName, '","size":42,"is_primary":false}],',
+			'","attachments":[{"id":12,"filename":"', self textFileName, '","size":42}],',
 			'"documents":[{"type":"undefined","components":[]}]}'.
 	^ aJsonString
 ]
@@ -422,6 +422,44 @@ XdReaderWriterExamples >> writeBasicDocument [
 ]
 
 { #category : #writing }
+XdReaderWriterExamples >> writeBiggerFollowedBySmallerContentSizeIntoTheSameFile [
+	<gtExample>
+	"Let's first write a file with a large content and 
+	then rewrite the same file with a smaller content"
+	| aFileReference aWriter aXdWrittenFile aFileSize |
+	aFileReference := FileReference newTempFilePrefix: self className, '-' suffix: self constants xdocExtension.
+	[ 
+		aWriter := self writerWithLargeContent.
+		aWriter streamingStrategy: (XdStreamingStrategy file: aFileReference).
+		self assert: aFileReference exists not.
+		aXdWrittenFile := aWriter write.
+		self assert: aFileReference exists.
+		aFileSize := aFileReference size.
+		self reader
+			streamingStrategy: (XdStreamingStrategy file: aFileReference);
+			read.
+		
+		"Let's write the smaller file content."
+		aWriter := self writerWithSmallContent.
+		aWriter streamingStrategy: (XdStreamingStrategy file: aFileReference).
+		aXdWrittenFile := aWriter write.
+		self assert: aFileReference exists.
+		"The newly written file should be smaller"
+		self assert: aFileReference size < aFileSize.
+		self reader
+			streamingStrategy: aXdWrittenFile streamingStrategy;
+			read.
+	] ensure: [ 
+		aFileReference exists ifTrue: [ 
+			aFileReference binaryReadStreamDo: [ :aStream | 
+				aXdWrittenFile streamingStrategy: (XdStreamingStrategy bytes: aStream contents) ].
+			aFileReference ensureDelete ].
+	].
+		
+	^ aXdWrittenFile
+]
+
+{ #category : #writing }
 XdReaderWriterExamples >> writeTextDocument [
 	<gtExample>
 	| aWriter aXdFile aMembers |
@@ -473,4 +511,20 @@ XdReaderWriterExamples >> writer [
 	aWriter := XdWriter new.
 	"some assertions here"
 	^ aWriter
+]
+
+{ #category : #writing }
+XdReaderWriterExamples >> writerWithLargeContent [
+	<gtExample>
+	^ self writer
+		text;
+		attachment: 'large-lorem-ipsum.txt' text: (String loremIpsum: 4000)
+]
+
+{ #category : #writing }
+XdReaderWriterExamples >> writerWithSmallContent [
+	<gtExample>
+	^ self writer
+		text;
+		attachment: self textFileName text: self textFileContent
 ]
