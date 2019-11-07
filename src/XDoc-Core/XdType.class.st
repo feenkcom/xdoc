@@ -24,6 +24,13 @@ XdType class >> text [
 	^ XdTextType
 ]
 
+{ #category : #accessing }
+XdType class >> toolForDocument: aXdDocument ofXdFileInPharo: aXdFile [
+	"Return an Bloc elemment or an object that understands #asElement."
+	<return: #BlElement>
+	^ self subclassResponsibility
+]
+
 { #category : #enumerating }
 XdType class >> typeFromString: aString [ 
 	self allSubclassesDo: [ :eachClass | 

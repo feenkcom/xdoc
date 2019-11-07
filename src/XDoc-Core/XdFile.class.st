@@ -36,6 +36,16 @@ XdFile >> exists [
 ]
 
 { #category : #'gt-extension' }
+XdFile >> gtLiveFor: aView [
+	<gtView>
+	^ aView explicit
+		title: 'Live';
+		priority: 0;
+		stencil: [ self toolInPharo ];
+		actionButtonIcon: BrGlamorousIcons open action: [ self openInPharo ]
+]
+
+{ #category : #'gt-extension' }
 XdFile >> gtManifestFor: aView [
 	<gtView>
 	^ (self manifest gtContentFor: aView)
@@ -131,6 +141,13 @@ XdFile >> titleAndAuthor [
 	aTitle := self manifest title ifEmpty: [ 'Empty document title' ].
 	anAuthor := self manifest author ifEmpty: [ 'unknown author' ].
 	^ aTitle, ' by ', anAuthor
+]
+
+{ #category : #actions }
+XdFile >> toolInPharo [
+	"Document type should decide which tool to use  in Pharo"
+	self manifest documents ifEmpty: [ ^ nil ].
+	^ self manifest mainDocument toolForXdFileInPharo: self
 ]
 
 { #category : #actions }

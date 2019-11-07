@@ -63,6 +63,11 @@ XdDocument >> printOn: aStream [
 	aStream nextPut: $)
 ]
 
+{ #category : #actions }
+XdDocument >> toolForXdFileInPharo: aXdFile [ 
+	^ self type toolForDocument: self ofXdFileInPharo: aXdFile
+]
+
 { #category : #accessing }
 XdDocument >> type [
 	<return: #XdType>
