@@ -12,7 +12,7 @@ XdFile >> gtReferenceFor: aView [
 		column: 'Icon' translated
 		do: [ :column | 
 			column
-				evaluated: [ :each | 
+				item: [ :each | 
 					each isDirectory
 						ifTrue: [ BrGlamorousIcons folder ]
 						ifFalse: [ BrGlamorousIcons file ] ];
@@ -21,15 +21,15 @@ XdFile >> gtReferenceFor: aView [
 	aList column
 		title: 'Name' translated;
 		matchParent;
-		evaluated: [ :each | each fileName ].
+		item: [ :each | each fileName ].
 	aList column
 		title: 'Size' translated;
 		matchParent;
-		evaluated: [ :each | each compressedSize ].
+		item: [ :each | each compressedSize ].
 	aList column
 		title: 'Last Modified' translated;
 		matchParent;
-		evaluated: [ :each | 
+		item: [ :each | 
 			String
 				streamContents: [ :s | 
 					each lastModTime printYMDOn: s.
