@@ -29,18 +29,18 @@ XdPublishInfoModel >> initialize [
 
 ]
 
-{ #category : #notifying }
-XdPublishInfoModel >> notifyInfoChanged [
-	self dispatchEvent: (XdPublishInfoChangedEvent new info: self info)
-]
-
 { #category : #hooks }
-XdPublishInfoModel >> onAttachedTo: anElement [
-	super onAttachedTo: anElement.
+XdPublishInfoModel >> initializeListeners [
+	super initializeListeners.
 
 	self 
 		when: XdPublishInfoRequest 
 		reply: [ XdPublishInfoChangedEvent new info: self info ]
+]
+
+{ #category : #notifying }
+XdPublishInfoModel >> notifyInfoChanged [
+	self dispatchEvent: (XdPublishInfoChangedEvent new info: self info)
 ]
 
 { #category : #hooks }
