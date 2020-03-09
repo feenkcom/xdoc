@@ -51,7 +51,7 @@ XdGlamorousDocumentsListLook >> initializeList [
 XdGlamorousDocumentsListLook >> initializeToolbar [
 	| aButton |
 	toolbar := BrToolbar new.
-	toolbar look: BrGlamorousToolbarLook horizontal.
+	toolbar look: BrGlamorousToolbarLook new.
 	toolbar constraintsDo: [ :c | 
 		c linear horizontal alignRight ].
 	aButton := BrButton new

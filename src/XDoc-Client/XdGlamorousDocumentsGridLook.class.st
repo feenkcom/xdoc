@@ -78,10 +78,8 @@ XdGlamorousDocumentsGridLook >> initializeToolbar [
 	| aToolbar aToolbarWrapper aRefreshButton |
 
 	aToolbar := BrToolbar new.
-	aToolbar look: BrGlamorousToolbarLook horizontal.
-	aToolbar constraintsDo: [ :c |
-		c linear horizontal alignRight.
-		c horizontal fitContent ].
+	aToolbar look: BrGlamorousToolbarLook new.
+	aToolbar constraintsDo: [ :c | c linear horizontal alignRight ].
 	aRefreshButton := BrButton new
 		look: BrGlamorousButtonWithIconLook;
 		label: 'Refresh';
