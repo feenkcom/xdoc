@@ -37,7 +37,7 @@ XdBytesStreamingStrategy >> exists [
 	^ self bytes notNil
 ]
 
-{ #category : #'file system' }
+{ #category : #accessing }
 XdBytesStreamingStrategy >> fileSystem [
 	<return: #FileSystem>
 	fileSystem ifNil: [ fileSystem := FileSystem zip: self. fileSystem open ].
