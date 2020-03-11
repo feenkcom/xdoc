@@ -2,10 +2,20 @@ Class {
 	#name : #XdFileStreamingStrategy,
 	#superclass : #XdStreamingStrategy,
 	#instVars : [
-		'file'
+		'file',
+		'fileSystem'
 	],
 	#category : #'XDoc-Core-Model'
 }
+
+{ #category : #'file system' }
+XdFileStreamingStrategy >> detectFileReference: aDetectBlock ifFound: aFoundBlock ifNone: aNotFoundBlock [
+	<return: #FileReference>
+	^ self fileSystem root children
+		detect: aDetectBlock
+		ifFound: aFoundBlock
+		ifNone: aNotFoundBlock
+]
 
 { #category : #testing }
 XdFileStreamingStrategy >> exists [
@@ -30,6 +40,13 @@ XdFileStreamingStrategy >> file: aFileReference [
 			ifFalse: [ true ] ] 
 		description: [ 'File reference must be a writtable file' ].
 	file := aFileReference
+]
+
+{ #category : #accessing }
+XdFileStreamingStrategy >> fileSystem [
+	<return: #FileSystem>
+	fileSystem ifNil: [ fileSystem := FileSystem zip: self. fileSystem open ].
+	^ fileSystem	
 ]
 
 { #category : #accessing }
