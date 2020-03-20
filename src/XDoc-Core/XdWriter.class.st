@@ -40,7 +40,7 @@ XdWriter >> addPreview: aDataWriter [
 				size: previewAttachment size ]
 ]
 
-{ #category : #writing }
+{ #category : #'api - writing' }
 XdWriter >> attachment: aRelativeFileName stream: aStream size: aSize [
 	| anAttachment |
 	self 
@@ -57,7 +57,7 @@ XdWriter >> attachment: aRelativeFileName stream: aStream size: aSize [
 	zip gtAddStream: aStream as: aRelativeFileName
 ]
 
-{ #category : #writing }
+{ #category : #'api - writing' }
 XdWriter >> attachment: aFileNameString text: aContentString [
 	| anAttachment aComponent aDocument |
 	self 
@@ -81,17 +81,17 @@ XdWriter >> attachment: aFileNameString text: aContentString [
 	zip gtAddString: aContentString as: aFileNameString
 ]
 
-{ #category : #writing }
+{ #category : #'api - writing' }
 XdWriter >> authorName: aString [
 	self manifest author: aString.
 ]
 
-{ #category : #writing }
+{ #category : #'api - writing' }
 XdWriter >> description: aString [
 	self manifest description: aString.
 ]
 
-{ #category : #writing }
+{ #category : #'api - writing' }
 XdWriter >> documentType: aXdDocumentType [
 	| aDocument |
 	self 
@@ -130,7 +130,7 @@ XdWriter >> manifest: aXdManifest [
 	manifest := aXdManifest
 ]
 
-{ #category : #writing }
+{ #category : #'api - writing' }
 XdWriter >> reuseOrAddAttachment: aRelativeFileName stream: aStream size: aSize [
 	self 
 		assert: [ self manifest documents notEmpty ]
@@ -158,17 +158,17 @@ XdWriter >> streamingStrategy: aXdStreamingStrategy [
 	streamingStrategy := aXdStreamingStrategy
 ]
 
-{ #category : #writing }
+{ #category : #'api - writing' }
 XdWriter >> text [
 	self documentType: XdType text
 ]
 
-{ #category : #writing }
+{ #category : #'api - writing' }
 XdWriter >> title: aString [
 	self manifest title: aString.
 ]
 
-{ #category : #writing }
+{ #category : #'api - writing' }
 XdWriter >> write [
 	<return: #XdFile>
 

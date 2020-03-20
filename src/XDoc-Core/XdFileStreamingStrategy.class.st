@@ -63,7 +63,7 @@ XdFileStreamingStrategy >> readStream [
 	^ self file binaryReadStream
 ]
 
-{ #category : #writing }
+{ #category : #'api - streams' }
 XdFileStreamingStrategy >> writeStreamDo: aBlock [
 	self assert: [ file notNil ] description: ['File must be defined before writing.'].
 	file ensureDelete.

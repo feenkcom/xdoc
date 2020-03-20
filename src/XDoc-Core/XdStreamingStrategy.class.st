@@ -31,11 +31,6 @@ XdStreamingStrategy class >> null [
 	^ XdNullStreamingStrategy uniqueInstance
 ]
 
-{ #category : #streams }
-XdStreamingStrategy >> binaryReadStreamDo: anOneArgBlock [ 
-	^ self readStreamDo: anOneArgBlock
-]
-
 { #category : #accessing }
 XdStreamingStrategy >> bytes [
 	<return: #ByteArray>
@@ -74,18 +69,16 @@ XdStreamingStrategy >> memberNamed: aFileName [
 	^ self subclassResponsibility
 ]
 
-{ #category : #streams }
-XdStreamingStrategy >> readStream [
-	"Return a binary read stream"
-	^ self subclassResponsibility
+{ #category : #'api - streams' }
+XdStreamingStrategy >> readStreamDo: aBlock [
+	"Iterate over a binary read stream"
+	self subclassResponsibility
 ]
 
-{ #category : #streams }
-XdStreamingStrategy >> readStreamDo: aBlock [
-	| aStream |
-	aStream := self readStream.
-	^ [ aBlock value: aStream ]
-		ensure: [ aStream close ]
+{ #category : #'api - streams' }
+XdStreamingStrategy >> writeStreamDo: aBlock [
+	"Iterate over a binary write stream"
+	self subclassResponsibility
 ]
 
 { #category : #accessing }

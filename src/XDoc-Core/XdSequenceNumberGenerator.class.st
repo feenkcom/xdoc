@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'currentId'
 	],
-	#category : #'XDoc-Core-Model'
+	#category : #'XDoc-Core-ID Generator'
 }
 
 { #category : #'instance creation' }
