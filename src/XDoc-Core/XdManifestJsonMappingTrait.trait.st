@@ -1,9 +1,11 @@
 Trait {
 	#name : #XdManifestJsonMappingTrait,
+	#traits : 'TXdManifestJsonMapping',
+	#classTraits : 'TXdManifestJsonMapping classTrait',
 	#category : #'XDoc-Core-Json'
 }
 
-{ #category : #accessing }
-XdManifestJsonMappingTrait >> json [
-	^ XdManifestJsonMapping
+{ #category : #testing }
+XdManifestJsonMappingTrait classSide >> isDeprecated [
+	^ true
 ]

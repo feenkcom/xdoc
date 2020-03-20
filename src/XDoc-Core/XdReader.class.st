@@ -1,8 +1,8 @@
 Class {
 	#name : #XdReader,
 	#superclass : #Object,
-	#traits : 'XdManifestJsonMappingTrait + XdConstantsTrait',
-	#classTraits : 'XdManifestJsonMappingTrait classTrait + XdConstantsTrait classTrait',
+	#traits : 'TXdManifestJsonMapping + TXdConstants + TGtAssert',
+	#classTraits : 'TXdManifestJsonMapping classTrait + TXdConstants classTrait + TGtAssert classTrait',
 	#instVars : [
 		'streamingStrategy',
 		'errorHandler'

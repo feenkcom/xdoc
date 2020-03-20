@@ -1,11 +1,13 @@
 Class {
 	#name : #XdFileStreamingStrategy,
 	#superclass : #XdStreamingStrategy,
+	#traits : 'TXdReadStream',
+	#classTraits : 'TXdReadStream classTrait',
 	#instVars : [
 		'file',
 		'fileSystem'
 	],
-	#category : #'XDoc-Core-Model'
+	#category : #'XDoc-Core-Streaming'
 }
 
 { #category : #'file system' }

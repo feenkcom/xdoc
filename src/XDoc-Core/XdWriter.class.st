@@ -1,8 +1,8 @@
 Class {
 	#name : #XdWriter,
 	#superclass : #Object,
-	#traits : 'XdManifestJsonMappingTrait + XdConstantsTrait',
-	#classTraits : 'XdManifestJsonMappingTrait classTrait + XdConstantsTrait classTrait',
+	#traits : 'TXdManifestJsonMapping + TXdConstants',
+	#classTraits : 'TXdManifestJsonMapping classTrait + TXdConstants classTrait',
 	#instVars : [
 		'manifest',
 		'zip',
