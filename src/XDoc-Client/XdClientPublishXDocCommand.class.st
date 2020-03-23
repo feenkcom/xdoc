@@ -84,6 +84,7 @@ XdClientPublishXDocCommand >> xdoc: aXdFile [
 { #category : #private }
 XdClientPublishXDocCommand >> xdocBytes [
 	<return: #ByteArray>
+	"^ self xdoc reader bytes"
 	^ self xdoc streamingStrategy bytes
 ]
 

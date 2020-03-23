@@ -1,8 +1,6 @@
 Class {
 	#name : #XdNavigatorComponentAtIndexStep,
-	#superclass : #XdNavigatorStep,
-	#traits : 'TXdNavigatorStepIndex',
-	#classTraits : 'TXdNavigatorStepIndex classTrait',
+	#superclass : #XdNavigatorObjectAtIndexStep,
 	#category : #'XDoc-Core-Tools - Navigator'
 }
 

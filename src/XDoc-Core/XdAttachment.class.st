@@ -9,6 +9,11 @@ Class {
 	#category : #'XDoc-Core-Model'
 }
 
+{ #category : #requirements }
+XdAttachment class >> empty [
+	^ XdEmptyAttachment default
+]
+
 { #category : #accessing }
 XdAttachment >> fileName [
 	<return: #String>

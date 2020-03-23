@@ -6,7 +6,7 @@ Class {
 	#category : #'XDoc-Core-Tools - Navigator'
 }
 
-{ #category : #'api - navigation' }
+{ #category : #'api - navigation - basic' }
 XdNavigator >> addStep: aXdNavigatorStep [
 	self nextStep 
 		addStep: aXdNavigatorStep 
@@ -19,7 +19,12 @@ XdNavigator >> allSteps [
 	^ self nextStep allSteps
 ]
 
-{ #category : #'api - navigation' }
+{ #category : #'api - navigation - basic' }
+XdNavigator >> componentAttachment [
+	self addStep: XdNavigatorComponentAttachmentStep new
+]
+
+{ #category : #'api - search' }
 XdNavigator >> context [
 	<return: #XdNavigatorContext>
 	| aContext |
@@ -28,7 +33,7 @@ XdNavigator >> context [
 	^ aContext
 ]
 
-{ #category : #'api - navigation' }
+{ #category : #'api - search' }
 XdNavigator >> find [
 	<return: #Object>
 	^ self context result
@@ -40,14 +45,31 @@ XdNavigator >> initialize [
 	self nextStep: XdNavigatorStep null.
 ]
 
-{ #category : #'api - navigation' }
+{ #category : #'api - navigation - convenience' }
+XdNavigator >> mainAttachment [
+	self mainComponentAttachment.
+]
+
+{ #category : #'api - navigation - basic' }
 XdNavigator >> mainComponent [
 	self addStep: XdNavigatorComponentAtIndexStep new
 ]
 
-{ #category : #'api - navigation' }
+{ #category : #'api - navigation - convenience' }
+XdNavigator >> mainComponentAttachment [
+	self mainComponent.
+	self componentAttachment.
+]
+
+{ #category : #'api - navigation - basic' }
 XdNavigator >> mainDocument [
 	self addStep: XdNavigatorDocumentAtIndexStep new
+]
+
+{ #category : #'api - navigation - convenience' }
+XdNavigator >> mainDocumentAttachment [
+	self mainDocument.
+	self mainComponentAttachment.
 ]
 
 { #category : #accessing }

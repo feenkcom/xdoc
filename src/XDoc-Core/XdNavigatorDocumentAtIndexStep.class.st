@@ -1,8 +1,6 @@
 Class {
 	#name : #XdNavigatorDocumentAtIndexStep,
-	#superclass : #XdNavigatorStep,
-	#traits : 'TXdNavigatorStepIndex',
-	#classTraits : 'TXdNavigatorStepIndex classTrait',
+	#superclass : #XdNavigatorObjectAtIndexStep,
 	#category : #'XDoc-Core-Tools - Navigator'
 }
 
@@ -19,11 +17,4 @@ XdNavigatorDocumentAtIndexStep >> findHereUsingContext: anXdNavigatorContext [
 		inCollection: anXdNavigatorContext xdFile manifest documents 
 		ifAbsent: [ XdDocument empty ].
 	anXdNavigatorContext result: aResult
-]
-
-{ #category : #accessing }
-XdNavigatorDocumentAtIndexStep >> name [
-	^ self index = self defaultIndexValue
-		ifTrue: [ 'Main Document' ] 
-		ifFalse: [ 'Document at: ', self index asString ]
 ]

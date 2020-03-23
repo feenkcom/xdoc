@@ -299,8 +299,7 @@ XdExamples >> navigateTextDocument_MainAttachment [
 		mainAttachment;
 		find.
 	self assert: aResult isNotNil.
-	self assert: aResult class equals: XdDocument.
-	self assert: aResult type equals: XdTextType.
+	self assert: aResult class equals: XdAttachment.
 	^ aResult
 ]
 
@@ -319,6 +318,21 @@ XdExamples >> navigateTextDocument_MainComponent [
 ]
 
 { #category : #navigating }
+XdExamples >> navigateTextDocument_MainComponent_attachment [
+	<gtExample>
+	| anXdFile aResult |
+	anXdFile := self writeTextDocument.
+	aResult := anXdFile navigator
+		mainDocument;
+		mainComponent;
+		componentAttachment;
+		find.
+	self assert: aResult isNotNil.
+	self assert: aResult class equals: XdAttachment.
+	^ aResult
+]
+
+{ #category : #navigating }
 XdExamples >> navigateTextDocument_MainDocument [
 	<gtExample>
 	| anXdFile aResult |
@@ -329,6 +343,19 @@ XdExamples >> navigateTextDocument_MainDocument [
 	self assert: aResult isNotNil.
 	self assert: aResult class equals: XdDocument.
 	self assert: aResult type equals: XdTextType.
+	^ aResult
+]
+
+{ #category : #navigating }
+XdExamples >> navigateTextDocument_MainDocumentAttachment [
+	<gtExample>
+	| anXdFile aResult |
+	anXdFile := self writeTextDocument.
+	aResult := anXdFile navigator
+		mainDocumentAttachment;
+		find.
+	self assert: aResult isNotNil.
+	self assert: aResult class equals: XdAttachment.
 	^ aResult
 ]
 

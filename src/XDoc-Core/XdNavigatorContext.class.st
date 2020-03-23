@@ -41,6 +41,12 @@ XdNavigatorContext >> initialize [
 	results := OrderedCollection new.
 ]
 
+{ #category : #'accessing - convenience' }
+XdNavigatorContext >> manifest [
+	<return: #XdManifest>
+	^ self xdFile manifest
+]
+
 { #category : #accessing }
 XdNavigatorContext >> navigator [
 	<return: #XdNavigator>
