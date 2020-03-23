@@ -38,6 +38,7 @@ XdFile >> exists [
 { #category : #'gt-extension' }
 XdFile >> gtLiveFor: aView [
 	<gtView>
+	self exists ifFalse: [ ^ aView empty ].
 	^ aView explicit
 		title: 'Live';
 		priority: 0;
@@ -48,8 +49,12 @@ XdFile >> gtLiveFor: aView [
 { #category : #'gt-extension' }
 XdFile >> gtManifestFor: aView [
 	<gtView>
-	^ (self manifest gtContentFor: aView)
-		title: 'Manifest'
+	self manifest ifNil: [ ^ aView empty ].
+	^ aView forward
+		title: 'Manifest';
+		priority: 1;
+		object: [ self manifest ];
+		view: #gtContentFor:
 ]
 
 { #category : #enumerating }
@@ -106,6 +111,11 @@ XdFile >> manifest: aXdManifest [
 XdFile >> memberNamed: aFileName [ 
 	<return: #ArchiveMember>
 	^ self streamingStrategy memberNamed: aFileName
+]
+
+{ #category : #actions }
+XdFile >> navigator [
+	^ XdNavigator new xdFile: self
 ]
 
 { #category : #actions }

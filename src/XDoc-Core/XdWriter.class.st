@@ -1,15 +1,14 @@
 Class {
 	#name : #XdWriter,
-	#superclass : #Object,
-	#traits : 'TXdManifestJsonMapping + TXdConstants',
-	#classTraits : 'TXdManifestJsonMapping classTrait + TXdConstants classTrait',
+	#superclass : #XdStreamHolder,
+	#traits : 'TXdManifestJsonMapping',
+	#classTraits : 'TXdManifestJsonMapping classTrait',
 	#instVars : [
 		'manifest',
 		'zip',
-		'idGenerator',
-		'streamingStrategy'
+		'idGenerator'
 	],
-	#category : #'XDoc-Core-Writer'
+	#category : #'XDoc-Core-Tools - Writer'
 }
 
 { #category : #'private - writing' }
@@ -102,13 +101,34 @@ XdWriter >> documentType: aXdDocumentType [
 	self manifest documents: (self manifest documents copyWith: aDocument).
 ]
 
+{ #category : #'gt-extension' }
+XdWriter >> gtManifestFor: aView [
+	<gtView>
+	self manifest ifNil: [ ^ aView empty ].
+	^ aView forward
+		title: 'Manifest';
+		priority: 1;
+		object: [ self manifest ];
+		view: #gtContentFor:
+]
+
+{ #category : #'gt-extension' }
+XdWriter >> gtMembersFor: aView [
+	<gtView>
+	self manifest ifNil: [ ^ aView empty ].
+	^ aView forward
+		title: 'ZIP Members';
+		priority: 2;
+		object: [ self zip ];
+		view: #gtMembersFor:
+]
+
 { #category : #initialization }
 XdWriter >> initialize [
 	super initialize.
 	manifest := XdManifest new.
 	zip := ZipArchive new.
 	idGenerator := XdSequenceNumberGenerator new.
-	streamingStrategy := XdStreamingStrategy bytes.
 ]
 
 { #category : #accessing }
@@ -144,20 +164,6 @@ XdWriter >> reuseOrAddAttachment: aRelativeFileName stream: aStream size: aSize 
 		]
 ]
 
-{ #category : #accessing }
-XdWriter >> streamingStrategy [
-	<return: #XdStreamingStrategy>
-	^ streamingStrategy
-]
-
-{ #category : #accessing }
-XdWriter >> streamingStrategy: aXdStreamingStrategy [ 
-	self 
-		assert: [ aXdStreamingStrategy notNil ] 
-		description: [ 'Streaming strategy must be non-nil' ].
-	streamingStrategy := aXdStreamingStrategy
-]
-
 { #category : #'api - writing' }
 XdWriter >> text [
 	self documentType: XdType text
@@ -187,4 +193,10 @@ XdWriter >> writeTo: aWriteStream [
 		gtAddString: self constants formatVersionString
 		as: self constants versionFileName.
 	zip writeTo: aWriteStream.
+]
+
+{ #category : #'private - accessing' }
+XdWriter >> zip [
+	<return: #ZipArchive>
+	^ zip
 ]

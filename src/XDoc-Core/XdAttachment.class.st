@@ -1,6 +1,6 @@
 Class {
 	#name : #XdAttachment,
-	#superclass : #Object,
+	#superclass : #XdModel,
 	#instVars : [
 		'id',
 		'fileName',

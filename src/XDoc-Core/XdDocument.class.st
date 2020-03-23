@@ -1,12 +1,17 @@
 Class {
 	#name : #XdDocument,
-	#superclass : #Object,
+	#superclass : #XdModel,
 	#instVars : [
 		'type',
 		'components'
 	],
 	#category : #'XDoc-Core-Model'
 }
+
+{ #category : #requirements }
+XdDocument class >> empty [
+	^ XdEmptyDocument default
+]
 
 { #category : #accessing }
 XdDocument >> components [
@@ -38,6 +43,12 @@ XdDocument >> initialize [
 	super initialize.
 	components := #().
 	type := XdUndefinedType.
+]
+
+{ #category : #convenience }
+XdDocument >> numberOfComponents [
+	<return: #Integer>
+	^ self components size
 ]
 
 { #category : #actions }

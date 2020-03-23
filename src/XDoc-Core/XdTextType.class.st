@@ -12,6 +12,15 @@ XdTextType class >> matchesMimeType: aZnMimeType [
 ]
 
 { #category : #accessing }
+XdTextType class >> toolForDocument: aXdDocument ofXdFileInPharo: aXdFile [
+	"Return an Bloc elemment or an object that understands #asElement."
+	<return: #BlElement>
+	^ BrEditor new 
+		look: BrGlamorousRegularEditorLook;
+		text: 'TODO with navigator aXdFile navigator mainDocument mainAttachment string'
+]
+
+{ #category : #accessing }
 XdTextType class >> typeString [
 	"Return a unique string that represents the type"
 	<return: #String>

@@ -1,6 +1,6 @@
 Class {
 	#name : #XdManifest,
-	#superclass : #Object,
+	#superclass : #XdModel,
 	#instVars : [
 		'title',
 		'description',
@@ -138,6 +138,18 @@ XdManifest >> initialize [
 XdManifest >> mainDocument [
 	<return: #XdDocument>
 	^ self documents first
+]
+
+{ #category : #convenience }
+XdManifest >> numberOfAttachments [
+	<return: #Integer>
+	^ self attachments size
+]
+
+{ #category : #convenience }
+XdManifest >> numberOfDocuments [
+	<return: #Integer>
+	^ self documents size
 ]
 
 { #category : #accessing }
