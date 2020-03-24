@@ -33,6 +33,22 @@ XdBytesStreamingStrategy >> detectFileReference: aDetectBlock ifFound: aFoundBlo
 		ifNone: aNotFoundBlock
 ]
 
+{ #category : #'api - streams' }
+XdBytesStreamingStrategy >> detectReferenceNamed: aFileName ifFound: aFoundBlock ifNone: aNotFoundBlock [
+	<return: #XdStreamReference>
+	| theFileReferences |
+	theFileReferences := self fileSystem root allChildrenMatching: aFileName.
+	theFileReferences size > 1 ifTrue: [ 
+		^ XdTooManyReferencesError new 
+			fileName: aFileName;
+			possibleReferences: theFileReferences;
+			signal: 'Too many ''', aFileName asString, ''' references' ].
+	theFileReferences size isZero ifTrue: [ ^ aNotFoundBlock value ].
+	^ XdReadStreamReference new
+		fileName: aFileName;
+		stream: theFileReferences first.
+]
+
 { #category : #testing }
 XdBytesStreamingStrategy >> exists [
 	<return: #Boolean>

@@ -1,7 +1,5 @@
 Class {
 	#name : #XdProtoModel,
-	#superclass : #Object,
-	#traits : 'TGtAssert',
-	#classTraits : 'TGtAssert classTrait',
+	#superclass : #XdObject,
 	#category : #'XDoc-Core-Model'
 }

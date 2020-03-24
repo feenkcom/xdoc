@@ -1,8 +1,8 @@
 Class {
 	#name : #XdNavigatorContext,
-	#superclass : #Object,
-	#traits : 'TGtAssert + TXdFileAccesssor',
-	#classTraits : 'TGtAssert classTrait + TXdFileAccesssor classTrait',
+	#superclass : #XdObject,
+	#traits : 'TXdFileAccesssor',
+	#classTraits : 'TXdFileAccesssor classTrait',
 	#instVars : [
 		'navigator',
 		'results'
@@ -32,7 +32,8 @@ XdNavigatorContext >> gtStepsFor: aView [
 		title: 'Steps and Results';
 		items: [ self allStepsAndResults ];
 		column: 'Step' item: [ :anAssoc | anAssoc key name ];
-		column: 'Result' item: #value
+		column: 'Result' item: #value;
+		send: #value
 ]
 
 { #category : #initialization }
@@ -71,4 +72,10 @@ XdNavigatorContext >> result: anObject [
 { #category : #accessing }
 XdNavigatorContext >> results [
 	^ results
+]
+
+{ #category : #'accessing - convenience' }
+XdNavigatorContext >> streamingStrategy [
+	<return: #XdStreamingStrategy>
+	^ self xdFile streamingStrategy
 ]

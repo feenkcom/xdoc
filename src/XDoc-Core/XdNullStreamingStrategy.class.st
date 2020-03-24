@@ -28,6 +28,12 @@ XdNullStreamingStrategy >> detectFileReference: aDetectBlock ifFound: aFoundBloc
 	^ aNotFoundBlock value
 ]
 
+{ #category : #'api - streams' }
+XdNullStreamingStrategy >> detectReferenceNamed: aFileName ifFound: aFoundBlock ifNone: aNotFoundBlock [
+	<return: #XdStreamReference>
+	^ aNotFoundBlock value
+]
+
 { #category : #testing }
 XdNullStreamingStrategy >> exists [
 	<return: #Boolean>

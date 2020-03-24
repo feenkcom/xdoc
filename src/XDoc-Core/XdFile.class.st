@@ -1,9 +1,10 @@
 Class {
 	#name : #XdFile,
-	#superclass : #Object,
+	#superclass : #XdObject,
+	#traits : 'TXdStreamingStrategyAccesssor',
+	#classTraits : 'TXdStreamingStrategyAccesssor classTrait',
 	#instVars : [
-		'manifest',
-		'streamingStrategy'
+		'manifest'
 	],
 	#category : #'XDoc-Core-Model'
 }
@@ -71,7 +72,6 @@ XdFile >> htmlMembers [
 XdFile >> initialize [
 	super initialize.
 	manifest := XdManifest empty.
-	streamingStrategy := XdStreamingStrategy null.
 ]
 
 { #category : #accessing }
@@ -128,20 +128,6 @@ XdFile >> openInPharo [
 	"Document type should decide how to open (be displayed) in Pharo"
 	self manifest documents ifEmpty: [ ^ self ].
 	^ self manifest mainDocument openXdFileInPharo: self
-]
-
-{ #category : #accessing }
-XdFile >> streamingStrategy [
-	<return: #XdStreamingStrategy>
-	^ streamingStrategy
-]
-
-{ #category : #accessing }
-XdFile >> streamingStrategy: aXdReference [
-	self 
-		assert: [ aXdReference notNil ] 
-		description: [ 'Reference must be non-nil' ].
-	streamingStrategy := aXdReference
 ]
 
 { #category : #accessing }

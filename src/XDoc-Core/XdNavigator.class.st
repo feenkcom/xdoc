@@ -84,3 +84,8 @@ XdNavigator >> newContext [
 		xdFile: self xdFile;
 		result: xdFile
 ]
+
+{ #category : #'api - navigation - basic' }
+XdNavigator >> stringReadStream [
+	self addStep: XdNavigatorStringReadStreamStep new
+]

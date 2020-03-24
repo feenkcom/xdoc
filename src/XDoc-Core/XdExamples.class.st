@@ -304,6 +304,22 @@ XdExamples >> navigateTextDocument_MainAttachment [
 ]
 
 { #category : #navigating }
+XdExamples >> navigateTextDocument_MainAttachment_Stream [
+	<gtExample>
+	| anXdFile aResult aString |
+	anXdFile := self writeTextDocument.
+	aResult := anXdFile navigator
+		mainDocumentAttachment;
+		stringReadStream;
+		find.
+	self assert: aResult isNotNil.
+	self assert: aResult class equals: XdAttachmentStringReadStream.
+	aString := aResult readStreamDo: [ :aStream | aStream contents ].
+	self assert: aString equals: self textFileContent.
+	^ aResult
+]
+
+{ #category : #navigating }
 XdExamples >> navigateTextDocument_MainComponent [
 	<gtExample>
 	| anXdFile aResult |

@@ -14,6 +14,12 @@ XdAttachment class >> empty [
 	^ XdEmptyAttachment default
 ]
 
+{ #category : #converting }
+XdAttachment >> asXdStringReadStream [
+	^ XdAttachmentStringReadStream new
+		attachment: self
+]
+
 { #category : #accessing }
 XdAttachment >> fileName [
 	<return: #String>

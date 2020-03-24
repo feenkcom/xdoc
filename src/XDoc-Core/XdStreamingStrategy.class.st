@@ -31,6 +31,12 @@ XdStreamingStrategy class >> null [
 	^ XdNullStreamingStrategy uniqueInstance
 ]
 
+{ #category : #'api - streams' }
+XdStreamingStrategy >> binaryReadStreamDo: aBlock [
+	"Iterate over a binary read stream"
+	^ self readStreamDo: aBlock
+]
+
 { #category : #accessing }
 XdStreamingStrategy >> bytes [
 	<return: #ByteArray>
@@ -40,6 +46,12 @@ XdStreamingStrategy >> bytes [
 { #category : #'file system' }
 XdStreamingStrategy >> detectFileReference: aDetectBlock ifFound: aFoundBlock ifNone: aNotFoundBlock [
 	<return: #FileReference>
+	^ self subclassResponsibility
+]
+
+{ #category : #'api - streams' }
+XdStreamingStrategy >> detectReferenceNamed: aFileName ifFound: aFoundBlock ifNone: aNotFoundBlock [
+	<return: #XdStreamReference>
 	^ self subclassResponsibility
 ]
 
@@ -72,7 +84,7 @@ XdStreamingStrategy >> memberNamed: aFileName [
 { #category : #'api - streams' }
 XdStreamingStrategy >> readStreamDo: aBlock [
 	"Iterate over a binary read stream"
-	self subclassResponsibility
+	^ self subclassResponsibility
 ]
 
 { #category : #'api - streams' }
