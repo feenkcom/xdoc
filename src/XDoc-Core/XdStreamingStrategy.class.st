@@ -51,7 +51,7 @@ XdStreamingStrategy >> detectFileReference: aDetectBlock ifFound: aFoundBlock if
 
 { #category : #'api - streams' }
 XdStreamingStrategy >> detectReferenceNamed: aFileName ifFound: aFoundBlock ifNone: aNotFoundBlock [
-	<return: #XdStreamReference>
+	<return: #XdReadStreamReference>
 	^ self subclassResponsibility
 ]
 

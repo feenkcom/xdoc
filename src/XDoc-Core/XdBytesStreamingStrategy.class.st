@@ -35,7 +35,7 @@ XdBytesStreamingStrategy >> detectFileReference: aDetectBlock ifFound: aFoundBlo
 
 { #category : #'api - streams' }
 XdBytesStreamingStrategy >> detectReferenceNamed: aFileName ifFound: aFoundBlock ifNone: aNotFoundBlock [
-	<return: #XdStreamReference>
+	<return: #XdReadStreamReference>
 	| theFileReferences |
 	theFileReferences := self fileSystem root allChildrenMatching: aFileName.
 	theFileReferences size > 1 ifTrue: [ 

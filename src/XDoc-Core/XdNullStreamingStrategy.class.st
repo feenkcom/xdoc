@@ -30,7 +30,7 @@ XdNullStreamingStrategy >> detectFileReference: aDetectBlock ifFound: aFoundBloc
 
 { #category : #'api - streams' }
 XdNullStreamingStrategy >> detectReferenceNamed: aFileName ifFound: aFoundBlock ifNone: aNotFoundBlock [
-	<return: #XdStreamReference>
+	<return: #XdReadStreamReference>
 	^ aNotFoundBlock value
 ]
 
