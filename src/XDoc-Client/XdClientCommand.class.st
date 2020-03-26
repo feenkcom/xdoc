@@ -1,8 +1,8 @@
 Class {
 	#name : #XdClientCommand,
-	#superclass : #BlTktCommand,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
+	#superclass : #Object,
+	#traits : 'TGtAssert',
+	#classTraits : 'TGtAssert classTrait',
 	#instVars : [
 		'client',
 		'signalProgress'
@@ -30,6 +30,11 @@ XdClientCommand >> initialize [
 	super initialize.
 	client := XdClient null.
 	signalProgress := false.
+]
+
+{ #category : #accessing }
+XdClientCommand >> name [
+	^ self printString
 ]
 
 { #category : #accessing }

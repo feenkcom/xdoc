@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'info'
 	],
-	#category : #'XDoc-Client-Publish - Brick'
+	#category : #'XDoc-Gt4XDocClient-Publish'
 }
 
 { #category : #accessing }

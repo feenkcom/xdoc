@@ -19,27 +19,6 @@ XdClientExamples >> basicIdFromUrlCommand [
 	^ anUrlFromUrlCommand
 ]
 
-{ #category : #'documents - ui' }
-XdClientExamples >> basicList [
-	<gtExample>
-	| anElement |
-	anElement := XdDocumentsElement new.
-	self assert: anElement client notNil.
-	^ anElement
-]
-
-{ #category : #'documents - ui' }
-XdClientExamples >> basicListWithLook [
-	<gtExample>
-	| anElement aLook |
-	anElement := self basicList.
-	aLook := XdGlamorousDocumentsListLook new.
-	anElement look: aLook.
-	self assert: aLook client equals: anElement client.
-	self assert: anElement hasChildren description: 'Element must have children installed by the look'.
-	^ anElement
-]
-
 { #category : #client }
 XdClientExamples >> client [
 	<gtExample>
@@ -193,18 +172,6 @@ XdClientExamples >> listFilePath [
 XdClientExamples >> listJsonContent [
 	<gtExample>
 	^ '[{"pathSegment":"1","fileName":"xdoc-file.xdoc","manifest":{"title":"","description":"","author":"","attachments":[{"id":"1","filename":"index.pillar","size":146},{"id":"2","filename":"gt-logo.png","size":8192},{"id":"3","filename":"index.html","size":245},{"id":"4","filename":"index.css","size":183}],"documents":[{"type":"documenter","components":[{"link":"1"},{"link":"2"}]},{"type":"html","components":[{"link":"3"},{"link":"4"},{"link":"2"}]}]}}]'
-]
-
-{ #category : #'documents - ui' }
-XdClientExamples >> listWithLook [
-	<gtExample>
-	| anElement aClient |
-	anElement := self basicListWithLook.
-	aClient := self client.
-	anElement client: aClient.
-	self assert: anElement viewModel client equals: aClient.
-	self assert: anElement look client equals: aClient.
-	^ anElement
 ]
 
 { #category : #'action - publish' }

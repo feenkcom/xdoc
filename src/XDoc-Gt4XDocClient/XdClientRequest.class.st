@@ -1,7 +1,7 @@
 Class {
 	#name : #XdClientRequest,
 	#superclass : #BrRequest,
-	#category : #'XDoc-Client-Documents - Brick'
+	#category : #'XDoc-Gt4XDocClient-Documents'
 }
 
 { #category : #initialization }

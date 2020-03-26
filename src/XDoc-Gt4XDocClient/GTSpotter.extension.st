@@ -1,6 +1,6 @@
 Extension { #name : #GTSpotter }
 
-{ #category : #'*XDoc-Client' }
+{ #category : #'*XDoc-Gt4XDocClient' }
 GTSpotter >> spotterXdocFor: aStep [
 	<spotterOrder: 30>
 	^ aStep listProcessor

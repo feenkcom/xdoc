@@ -1,7 +1,7 @@
 Class {
 	#name : #XdPublishInfoInnerWidgetLook,
 	#superclass : #BrLook,
-	#category : #'XDoc-Client-Publish - Brick'
+	#category : #'XDoc-Gt4XDocClient-Publish'
 }
 
 { #category : #initialization }

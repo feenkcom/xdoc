@@ -40,9 +40,12 @@ BaselineOfXdoc >> baseline: spec [
 		spec 
 			baseline: 'NeoJSON' with: [
 				spec repository: 'github://svenvc/NeoJSON:v17/repository' ];
-			baseline: 'GToolkitUtility' with: [
-				spec repository: 'github://feenkcom/gtoolkit-utility/src' ].
-		spec package: 'XDoc-Core' with: [
-				spec requires: #('NeoJSON' 'GToolkitUtility' ). ]. ].
+			baseline: 'GToolkitFileUtility' with: [
+				spec repository: 'github://feenkcom/gtoolkit-utility/src' ];
+			baseline: 'GToolkitAssertionUtility' with: [
+				spec repository: 'github://feenkcom/gtoolkit-utility/src' ];
+			package: 'XDoc-Core' with: [
+				spec requires: #( 'NeoJSON' 'GToolkitFileUtility' 'GToolkitAssertionUtility' ) ]. 
+	].
 
 ]

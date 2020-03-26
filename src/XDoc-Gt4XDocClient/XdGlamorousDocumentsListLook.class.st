@@ -6,7 +6,7 @@ Class {
 		'toolbar',
 		'listHandler'
 	],
-	#category : #'XDoc-Client-Documents - Brick'
+	#category : #'XDoc-Gt4XDocClient-Documents'
 }
 
 { #category : #accessing }

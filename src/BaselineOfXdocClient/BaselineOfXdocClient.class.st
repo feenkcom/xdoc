@@ -19,18 +19,18 @@ Class {
 BaselineOfXdocClient >> baseline: spec [
 	<baseline>
 	spec for: #common do: [ spec
-		baseline: 'Xdoc' with: [ spec 
+		baseline: 'XdocClientMinimal' with: [ spec 
 			repository: 'github://feenkcom/xdoc/src' ];
 		baseline: 'Brick' with: [ spec 
 			repository: 'github://feenkcom/brick/src' ];
 		baseline: 'GToolkitPhlow' with: [
-				spec repository: 'github://feenkcom/gtoolkit-phlow/src' ];
-		baseline: 'GToolkitExamples' with: [ spec 
-			repository: 'github://feenkcom/gtoolkit-examples/src' ];
-		package: 'XDoc-Client' with: [ spec 
-			requires: #( 'Xdoc' 'Brick' 'GToolkitPhlow' 'GToolkitExamples' ) ];
+			spec repository: 'github://feenkcom/gtoolkit-phlow/src' ];
+		baseline: 'GToolkitSpotter' with: [
+			spec repository: 'github://feenkcom/gtoolkit-spotter/src' ];
 		package: 'XDoc-Extensions' with: [ spec 
-			requires: #( 'Xdoc' 'Brick' 'GToolkitPhlow' ) ]
+			requires: #( 'XdocClientMinimal' 'Brick' 'GToolkitPhlow' ) ];
+		package: 'XDoc-Gt4XDocClient' with: [ spec 
+			requires: #( 'XdocClientMinimal' 'Brick' 'GToolkitPhlow' 'GToolkitSpotter' ) ]
 	].
 
 ]

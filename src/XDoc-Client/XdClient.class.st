@@ -1,10 +1,9 @@
 Class {
 	#name : #XdClient,
-	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
+	#superclass : #XdProtoClient,
 	#instVars : [
-		'serverUrl'
+		'serverUrl',
+		'signalProgress'
 	],
 	#category : #'XDoc-Client-Core'
 }
@@ -144,21 +143,11 @@ XdClient >> gtDocumentListFor: aView [
 				ifNil: [ '' ] ] ]
 ]
 
-{ #category : #'gt-extension' }
-XdClient >> gtDocumentsFor: aView [
-	<gtView>
-	^ aView explicit
-		title: 'Documents';
-		stencil: [ 
-			XdDocumentsElement new 
-				look: XdGlamorousDocumentsGridLook;
-				client: self ]
-]
-
 { #category : #initialization }
 XdClient >> initialize [
 	super initialize.
 	serverUrl := XdClientSettings xdServerUrl.
+	signalProgress := false.
 ]
 
 { #category : #actions }
@@ -203,5 +192,5 @@ XdClient >> serverUrl: aZnUrl [
 { #category : #accessing }
 XdClient >> signalProgress [
 	<return: #Boolean>
-	^ BlSignalProgress enabled
+	^ signalProgress
 ]

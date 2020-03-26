@@ -1,5 +1,5 @@
 Class {
 	#name : #XdPublishInfoRequest,
 	#superclass : #BrRequest,
-	#category : #'XDoc-Client-Publish - Brick'
+	#category : #'XDoc-Gt4XDocClient-Publish'
 }

@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'XDoc-Client-Publish - Brick'
+	#category : #'XDoc-Gt4XDocClient-Publish'
 }
 
 { #category : #cleanup }

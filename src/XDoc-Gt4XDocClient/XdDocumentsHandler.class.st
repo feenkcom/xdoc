@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'client'
 	],
-	#category : #'XDoc-Client-Documents - Brick'
+	#category : #'XDoc-Gt4XDocClient-Documents'
 }
 
 { #category : #accessing }
