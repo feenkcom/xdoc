@@ -10,16 +10,6 @@ XdAttachmentStringReadStream >> content [
 	^ self readStreamDo: [ :aStream | aStream contents ]
 ]
 
-{ #category : #'gt-extension' }
-XdAttachmentStringReadStream >> gtContentFor: aView [
-	<gtView>
-	self streamingStrategy ifNil: [ ^ aView empty ].
-	^ aView textEditor
-		title: 'Content';
-		look: BrGlamorousRegularEditorLook;
-		text: [ self content ]
-]
-
 { #category : #'api - streams' }
 XdAttachmentStringReadStream >> readStreamDo: anOneArgBlock [
 	| aReference |

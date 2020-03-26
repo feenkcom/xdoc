@@ -61,15 +61,6 @@ XdStreamingStrategy >> exists [
 	^ self subclassResponsibility
 ]
 
-{ #category : #'gt-extension' }
-XdStreamingStrategy >> gtFilesFor: aView [
-	<gtView>
-	self exists ifFalse: [ ^ aView empty ].
-	^ aView list
-		title: 'Files';
-		items: [ self zip members ]
-]
-
 { #category : #accessing }
 XdStreamingStrategy >> json [
 	^ XdManifestJsonMapping

@@ -24,12 +24,6 @@ XdEmptyManifest >> documents [
 	^ #()
 ]
 
-{ #category : #'gt-extension' }
-XdEmptyManifest >> gtContentFor: aView [ 
-	<gtView>
-	^ aView empty
-]
-
 { #category : #convenience }
 XdEmptyManifest >> numberOfDocuments [
 	<return: #Integer>

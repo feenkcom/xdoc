@@ -27,7 +27,7 @@ XdClient class >> downloadXDoc: aZnUrlString thenDo: aBlock [
 	^ aXdFile
 ]
 
-{ #category : #accessing }
+{ #category : #'gt-extension' }
 XdClient class >> gtDocumentsFor: aView [
 	<gtView>
 	^ (self new gtDocumentsFor: aView)
@@ -130,7 +130,7 @@ XdClient >> downloadXDocUsingFileInfo: aXdFileInfo [
 		xdFile
 ]
 
-{ #category : #accessing }
+{ #category : #'gt-extension' }
 XdClient >> gtDocumentListFor: aView [
 	<gtView>
 	^ aView columnedList

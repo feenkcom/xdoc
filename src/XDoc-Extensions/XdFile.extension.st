@@ -1,6 +1,28 @@
 Extension { #name : #XdFile }
 
-{ #category : #'*XDoc-Client' }
+{ #category : #'*XDoc-Extensions' }
+XdFile >> gtLiveFor: aView [
+	<gtView>
+	self exists ifFalse: [ ^ aView empty ].
+	^ aView explicit
+		title: 'Live';
+		priority: 0;
+		stencil: [ self toolInPharo ];
+		actionButtonIcon: BrGlamorousIcons open action: [ self openInPharo ]
+]
+
+{ #category : #'*XDoc-Extensions' }
+XdFile >> gtManifestFor: aView [
+	<gtView>
+	self manifest ifNil: [ ^ aView empty ].
+	^ aView forward
+		title: 'Manifest';
+		priority: 1;
+		object: [ self manifest ];
+		view: #gtContentFor:
+]
+
+{ #category : #'*XDoc-Extensions' }
 XdFile >> gtReferenceFor: aView [
 	<gtView>
 	| aList |

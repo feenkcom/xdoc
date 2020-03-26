@@ -27,17 +27,6 @@ XdDocument >> components: aXdComponent [
 	components := aXdComponent
 ]
 
-{ #category : #accessing }
-XdDocument >> gtComponentsFor: aView [
-	<gtView>
-	^ aView list
-		title: 'Components';
-		priority: 1;
-		items: [ self components asOrderedCollection ];
-		itemFormat: [ :eachComponent | 
-			'Link to attachment id: ', eachComponent link asString ]
-]
-
 { #category : #initialization }
 XdDocument >> initialize [
 	super initialize.

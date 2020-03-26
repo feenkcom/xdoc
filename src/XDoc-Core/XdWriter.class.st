@@ -101,28 +101,6 @@ XdWriter >> documentType: aXdDocumentType [
 	self manifest documents: (self manifest documents copyWith: aDocument).
 ]
 
-{ #category : #'gt-extension' }
-XdWriter >> gtManifestFor: aView [
-	<gtView>
-	self manifest ifNil: [ ^ aView empty ].
-	^ aView forward
-		title: 'Manifest';
-		priority: 1;
-		object: [ self manifest ];
-		view: #gtContentFor:
-]
-
-{ #category : #'gt-extension' }
-XdWriter >> gtMembersFor: aView [
-	<gtView>
-	self manifest ifNil: [ ^ aView empty ].
-	^ aView forward
-		title: 'ZIP Members';
-		priority: 2;
-		object: [ self zip ];
-		view: #gtMembersFor:
-]
-
 { #category : #initialization }
 XdWriter >> initialize [
 	super initialize.

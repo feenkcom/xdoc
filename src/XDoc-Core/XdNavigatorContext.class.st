@@ -24,18 +24,6 @@ XdNavigatorContext >> allStepsAndResults [
 			aStream nextPut: eachStep -> aResult ] ]
 ]
 
-{ #category : #'gt-extension' }
-XdNavigatorContext >> gtStepsFor: aView [
-	<gtView>
-	self navigator ifNil: [ ^ aView empty ].
-	^ aView columnedList 
-		title: 'Steps and Results';
-		items: [ self allStepsAndResults ];
-		column: 'Step' item: [ :anAssoc | anAssoc key name ];
-		column: 'Result' item: #value;
-		send: #value
-]
-
 { #category : #initialization }
 XdNavigatorContext >> initialize [
 	super initialize.

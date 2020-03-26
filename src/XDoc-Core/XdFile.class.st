@@ -36,28 +36,6 @@ XdFile >> exists [
 	^ self streamingStrategy exists
 ]
 
-{ #category : #'gt-extension' }
-XdFile >> gtLiveFor: aView [
-	<gtView>
-	self exists ifFalse: [ ^ aView empty ].
-	^ aView explicit
-		title: 'Live';
-		priority: 0;
-		stencil: [ self toolInPharo ];
-		actionButtonIcon: BrGlamorousIcons open action: [ self openInPharo ]
-]
-
-{ #category : #'gt-extension' }
-XdFile >> gtManifestFor: aView [
-	<gtView>
-	self manifest ifNil: [ ^ aView empty ].
-	^ aView forward
-		title: 'Manifest';
-		priority: 1;
-		object: [ self manifest ];
-		view: #gtContentFor:
-]
-
 { #category : #enumerating }
 XdFile >> htmlMembers [
 	<return: #Array of: #ArchiveMember>

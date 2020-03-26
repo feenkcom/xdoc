@@ -653,13 +653,3 @@ XdExamples >> writerWithSmallContent [
 		text;
 		attachment: self textFileName text: self textFileContent
 ]
-
-{ #category : #'phlow extensions' }
-XdExamples >> xdFileLiveExtension [
-	<gtExample>
-	| aFile aPhlow |
-	aFile := self readTextDocument.
-	aPhlow := GtPhlowView empty on: aFile perform: #gtLiveFor:.
-	self assert: aPhlow class ~= GtPhlowViewWithError.
-	^ aPhlow
-]
