@@ -43,6 +43,6 @@ XdDocumentsHandler >> notifySelectionChanged: anEvent [
 	aListElement := anEvent currentTarget.
 	anEvent selectedDo: [ :anInterval |
 		| anXdInfo |
-		anXdInfo := aListElement viewModel items at: aListElement selection from.
+		anXdInfo := aListElement viewModel items at: anInterval first.
 		self downloadXdoc: anXdInfo element: aListElement ]
 ]
