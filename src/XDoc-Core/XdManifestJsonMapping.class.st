@@ -1,8 +1,8 @@
 Class {
 	#name : #XdManifestJsonMapping,
 	#superclass : #Object,
-	#traits : 'XdBasicJsonMappingTrait',
-	#classTraits : 'XdBasicJsonMappingTrait classTrait',
+	#traits : 'TXdBasicJsonMapping',
+	#classTraits : 'TXdBasicJsonMapping classTrait',
 	#category : #'XDoc-Core-Json'
 }
 

@@ -1,9 +1,9 @@
 Class {
 	#name : #XdStreamingStrategy,
 	#superclass : #Object,
-	#traits : 'TGtAssert + XdConstantsTrait + XdManifestJsonMappingTrait',
-	#classTraits : 'TGtAssert classTrait + XdConstantsTrait classTrait + XdManifestJsonMappingTrait classTrait',
-	#category : #'XDoc-Core-Model'
+	#traits : 'TGtAssert + TXdConstants + TXdManifestJsonMapping',
+	#classTraits : 'TGtAssert classTrait + TXdConstants classTrait + TXdManifestJsonMapping classTrait',
+	#category : #'XDoc-Core-Streaming'
 }
 
 { #category : #requirements }
@@ -31,9 +31,10 @@ XdStreamingStrategy class >> null [
 	^ XdNullStreamingStrategy uniqueInstance
 ]
 
-{ #category : #streams }
-XdStreamingStrategy >> binaryReadStreamDo: anOneArgBlock [ 
-	^ self readStreamDo: anOneArgBlock
+{ #category : #'api - streams' }
+XdStreamingStrategy >> binaryReadStreamDo: aBlock [
+	"Iterate over a binary read stream"
+	^ self readStreamDo: aBlock
 ]
 
 { #category : #accessing }
@@ -45,6 +46,12 @@ XdStreamingStrategy >> bytes [
 { #category : #'file system' }
 XdStreamingStrategy >> detectFileReference: aDetectBlock ifFound: aFoundBlock ifNone: aNotFoundBlock [
 	<return: #FileReference>
+	^ self subclassResponsibility
+]
+
+{ #category : #'api - streams' }
+XdStreamingStrategy >> detectReferenceNamed: aFileName ifFound: aFoundBlock ifNone: aNotFoundBlock [
+	<return: #XdStreamReference>
 	^ self subclassResponsibility
 ]
 
@@ -74,18 +81,16 @@ XdStreamingStrategy >> memberNamed: aFileName [
 	^ self subclassResponsibility
 ]
 
-{ #category : #streams }
-XdStreamingStrategy >> readStream [
-	"Return a binary read stream"
+{ #category : #'api - streams' }
+XdStreamingStrategy >> readStreamDo: aBlock [
+	"Iterate over a binary read stream"
 	^ self subclassResponsibility
 ]
 
-{ #category : #streams }
-XdStreamingStrategy >> readStreamDo: aBlock [
-	| aStream |
-	aStream := self readStream.
-	^ [ aBlock value: aStream ]
-		ensure: [ aStream close ]
+{ #category : #'api - streams' }
+XdStreamingStrategy >> writeStreamDo: aBlock [
+	"Iterate over a binary write stream"
+	self subclassResponsibility
 ]
 
 { #category : #accessing }

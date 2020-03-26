@@ -1,9 +1,10 @@
 Class {
 	#name : #XdFile,
-	#superclass : #Object,
+	#superclass : #XdObject,
+	#traits : 'TXdStreamingStrategyAccesssor',
+	#classTraits : 'TXdStreamingStrategyAccesssor classTrait',
 	#instVars : [
-		'manifest',
-		'streamingStrategy'
+		'manifest'
 	],
 	#category : #'XDoc-Core-Model'
 }
@@ -38,6 +39,7 @@ XdFile >> exists [
 { #category : #'gt-extension' }
 XdFile >> gtLiveFor: aView [
 	<gtView>
+	self exists ifFalse: [ ^ aView empty ].
 	^ aView explicit
 		title: 'Live';
 		priority: 0;
@@ -48,8 +50,12 @@ XdFile >> gtLiveFor: aView [
 { #category : #'gt-extension' }
 XdFile >> gtManifestFor: aView [
 	<gtView>
-	^ (self manifest gtContentFor: aView)
-		title: 'Manifest'
+	self manifest ifNil: [ ^ aView empty ].
+	^ aView forward
+		title: 'Manifest';
+		priority: 1;
+		object: [ self manifest ];
+		view: #gtContentFor:
 ]
 
 { #category : #enumerating }
@@ -66,7 +72,6 @@ XdFile >> htmlMembers [
 XdFile >> initialize [
 	super initialize.
 	manifest := XdManifest empty.
-	streamingStrategy := XdStreamingStrategy null.
 ]
 
 { #category : #accessing }
@@ -109,6 +114,11 @@ XdFile >> memberNamed: aFileName [
 ]
 
 { #category : #actions }
+XdFile >> navigator [
+	^ XdNavigator new xdFile: self
+]
+
+{ #category : #actions }
 XdFile >> open [
 	^ self inspect
 ]
@@ -118,20 +128,6 @@ XdFile >> openInPharo [
 	"Document type should decide how to open (be displayed) in Pharo"
 	self manifest documents ifEmpty: [ ^ self ].
 	^ self manifest mainDocument openXdFileInPharo: self
-]
-
-{ #category : #accessing }
-XdFile >> streamingStrategy [
-	<return: #XdStreamingStrategy>
-	^ streamingStrategy
-]
-
-{ #category : #accessing }
-XdFile >> streamingStrategy: aXdReference [
-	self 
-		assert: [ aXdReference notNil ] 
-		description: [ 'Reference must be non-nil' ].
-	streamingStrategy := aXdReference
 ]
 
 { #category : #accessing }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'stream'
 	],
-	#category : #'XDoc-Core-Writer'
+	#category : #'XDoc-Core-Tools - Writer'
 }
 
 { #category : #'instance creation' }

@@ -1,6 +1,6 @@
 Class {
 	#name : #XdFileInfo,
-	#superclass : #Object,
+	#superclass : #XdObject,
 	#instVars : [
 		'manifest',
 		'fileName',

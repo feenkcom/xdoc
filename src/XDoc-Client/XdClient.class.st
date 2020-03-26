@@ -46,6 +46,19 @@ XdClient >> async [
 ]
 
 { #category : #actions }
+XdClient >> deleteXDocFromUrl: anUrl [
+	<return: #ZnResponse>
+	"Delete an XDoc file from a public server"
+	| anId |
+	anId := XdClientXDocIdFromURLCommand new
+		client: self;
+		url: anUrl asZnUrl;
+		execute;
+		id.
+	^ self deleteXDocId: anId
+]
+
+{ #category : #actions }
 XdClient >> deleteXDocId: anId [
 	<return: #ZnResponse>
 	"Delete an XDoc file from a public server"
@@ -125,7 +138,10 @@ XdClient >> gtDocumentListFor: aView [
 		items: [ self documents ];
 		column: 'Title' do: [:aColumn | aColumn item: [ :doc | doc title] ];
 		column: 'Author' do: [:aColumn | aColumn item: [ :doc | doc author] ];
-		column: 'Created on' do: [:aColumn | aColumn item: [ :doc | doc createdOn asLocalStringYMDHM] ]
+		column: 'Created on' do: [:aColumn | aColumn item: [ :doc | 
+			doc createdOn 
+				ifNotNil: #asLocalStringYMDHM
+				ifNil: [ '' ] ] ]
 ]
 
 { #category : #'gt-extension' }

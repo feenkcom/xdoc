@@ -9,6 +9,16 @@ Class {
 	#category : #'XDoc-Client-Examples'
 }
 
+{ #category : #'action - delete from URL' }
+XdClientExamples >> basicIdFromUrlCommand [
+	<gtExample>
+	| anUrlFromUrlCommand |
+	anUrlFromUrlCommand := XdClientXDocIdFromURLCommand new.
+	anUrlFromUrlCommand client: self client.
+	self assert: anUrlFromUrlCommand client isNotNil.
+	^ anUrlFromUrlCommand
+]
+
 { #category : #'documents - ui' }
 XdClientExamples >> basicList [
 	<gtExample>
@@ -83,6 +93,16 @@ XdClientExamples >> deleteXDocId [
 	aResponse := self client deleteXDocId: self xdocIdSegment.
 	self assert: aResponse notNil.
 	^ aResponse
+]
+
+{ #category : #'action - delete from URL' }
+XdClientExamples >> deleteXDocUrl [
+	<gtExample>
+	| aPublishCommand aDeleteResponse |
+	aPublishCommand := self publishedResponse.
+	aDeleteResponse := self client deleteXDocFromUrl: self xdocIdSegment.
+	self assert: aDeleteResponse notNil.
+	^ aDeleteResponse
 ]
 
 { #category : #'action - download xdoc' }
@@ -236,6 +256,22 @@ XdClientExamples >> startServer [
 { #category : #server }
 XdClientExamples >> stopServer [
 	^ zincExamples stopServer
+]
+
+{ #category : #'action - delete from URL' }
+XdClientExamples >> xDocIdFromUrl [
+	<gtExample>
+	| aPublishCommand anUrlFromUrlCommand aPublishedUrl anId |
+	aPublishCommand := self publishXDoc.
+	aPublishedUrl := aPublishCommand publicUrl.
+	anUrlFromUrlCommand := self basicIdFromUrlCommand.
+	anId := anUrlFromUrlCommand
+		url: aPublishedUrl;
+		execute;
+		id.
+	self assert: anId isNotNil.
+	self assert: anId equals: 1 asString.
+	^ anUrlFromUrlCommand
 ]
 
 { #category : #'action - download xdoc' }

@@ -1,13 +1,13 @@
 Class {
-	#name : #XdReaderWriterExamples,
+	#name : #XdExamples,
 	#superclass : #Object,
-	#traits : 'XdManifestJsonMappingTrait + XdConstantsTrait',
-	#classTraits : 'XdManifestJsonMappingTrait classTrait + XdConstantsTrait classTrait',
+	#traits : 'TXdManifestJsonMapping + TXdConstants',
+	#classTraits : 'TXdManifestJsonMapping classTrait + TXdConstants classTrait',
 	#category : #'XDoc-Core-Examples'
 }
 
 { #category : #'basic objects' }
-XdReaderWriterExamples >> attachment [  
+XdExamples >> attachment [  
 	<gtExample>
 	
 	| anAttachment |
@@ -23,14 +23,34 @@ XdReaderWriterExamples >> attachment [
 	
 ]
 
+{ #category : #'writing - in progress' }
+XdExamples >> basicDocumentInProgress [
+	<gtExample>
+	| aWriter |
+	aWriter := self inMemoryWriter.
+	aWriter
+		title: self documentTitle;
+		description: self documentDescription;
+		authorName: self documentAuthorName.
+	self assert: aWriter manifest notNil.
+	self assert: aWriter manifest title equals: self documentTitle.
+	self
+		assert: aWriter manifest description
+		equals: self documentDescription.
+	self
+		assert: aWriter manifest author
+		equals: self documentAuthorName.
+	^ aWriter
+]
+
 { #category : #accessing }
-XdReaderWriterExamples >> bytes [
+XdExamples >> bytes [
 	<gtExample>
 	^ #[ 1 2 3 4 ]
 ]
 
 { #category : #'basic objects' }
-XdReaderWriterExamples >> bytesStreamingStrategy [
+XdExamples >> bytesStreamingStrategy [
 	<gtExample>
 	| aReference |
 	aReference := XdStreamingStrategy bytes.
@@ -40,7 +60,7 @@ XdReaderWriterExamples >> bytesStreamingStrategy [
 ]
 
 { #category : #'basic objects' }
-XdReaderWriterExamples >> document [  
+XdExamples >> document [  
 	<gtExample>
 	
 	| aDocument |
@@ -55,25 +75,25 @@ XdReaderWriterExamples >> document [
 ]
 
 { #category : #accessing }
-XdReaderWriterExamples >> documentAuthorName [
+XdExamples >> documentAuthorName [
 	<gtExample>
 	^ 'Alison Fernandez'
 ]
 
 { #category : #accessing }
-XdReaderWriterExamples >> documentDescription [
+XdExamples >> documentDescription [
 	<gtExample>
 	^ 'Description of a document'
 ]
 
 { #category : #accessing }
-XdReaderWriterExamples >> documentTitle [
+XdExamples >> documentTitle [
 	<gtExample>
 	^ 'Title of a document'
 ]
 
 { #category : #'basic objects' }
-XdReaderWriterExamples >> emptyAttachment [  
+XdExamples >> emptyAttachment [  
 	<gtExample>
 	
 	| anAttachment |
@@ -87,7 +107,7 @@ XdReaderWriterExamples >> emptyAttachment [
 ]
 
 { #category : #'basic objects' }
-XdReaderWriterExamples >> emptyComponent [  
+XdExamples >> emptyComponent [  
 	<gtExample>
 	
 	| aComponent |
@@ -99,7 +119,7 @@ XdReaderWriterExamples >> emptyComponent [
 ]
 
 { #category : #'basic objects' }
-XdReaderWriterExamples >> emptyDocument [ 
+XdExamples >> emptyDocument [ 
 	<gtExample>
 	
 	| aDocument |
@@ -112,7 +132,7 @@ XdReaderWriterExamples >> emptyDocument [
 ]
 
 { #category : #'basic objects' }
-XdReaderWriterExamples >> emptyFile [
+XdExamples >> emptyFile [
 	<gtExample>
 	| aXdFile |
 	aXdFile := XdFile empty.
@@ -131,7 +151,7 @@ XdReaderWriterExamples >> emptyFile [
 ]
 
 { #category : #'basic objects' }
-XdReaderWriterExamples >> emptyManifest [
+XdExamples >> emptyManifest [
 	<gtExample>
 	| aManifest |
 	aManifest := XdManifest new.
@@ -142,7 +162,7 @@ XdReaderWriterExamples >> emptyManifest [
 ]
 
 { #category : #'json mapping' }
-XdReaderWriterExamples >> emptyManifestJsonString [
+XdExamples >> emptyManifestJsonString [
 	<gtExample>
 	| aJsonString |
 	aJsonString := self json writeManifest: self emptyManifest.
@@ -152,7 +172,7 @@ XdReaderWriterExamples >> emptyManifestJsonString [
 ]
 
 { #category : #'basic objects' }
-XdReaderWriterExamples >> existingBytesStreamingStrategy [
+XdExamples >> existingBytesStreamingStrategy [
 	<gtExample>
 	| aReference |
 	aReference := self bytesStreamingStrategy.
@@ -163,7 +183,7 @@ XdReaderWriterExamples >> existingBytesStreamingStrategy [
 ]
 
 { #category : #'basic objects' }
-XdReaderWriterExamples >> existingFileStreamingStrategy [
+XdExamples >> existingFileStreamingStrategy [
 	<gtExample>
 	| aReference |
 	aReference := self fileStreamingStrategy.
@@ -173,24 +193,25 @@ XdReaderWriterExamples >> existingFileStreamingStrategy [
 	^ aReference
 ]
 
-{ #category : #'reader / writer' }
-XdReaderWriterExamples >> file [
+{ #category : #tools }
+XdExamples >> file [
 	<gtExample>
 	| aFile |
 	aFile := XdFile new.
 	self assert: aFile manifest notNil.
 	self assert: aFile streamingStrategy notNil.
+	self assert: aFile exists not.
 	^ aFile
 ]
 
 { #category : #accessing }
-XdReaderWriterExamples >> fileLocator [
+XdExamples >> fileLocator [
 	<gtExample>
 	^ FileLocator image
 ]
 
 { #category : #'basic objects' }
-XdReaderWriterExamples >> fileStreamingStrategy [
+XdExamples >> fileStreamingStrategy [
 	<gtExample>
 	| aReference |
 	aReference := XdStreamingStrategy file.
@@ -199,23 +220,24 @@ XdReaderWriterExamples >> fileStreamingStrategy [
 	^ aReference
 ]
 
-{ #category : #'reader / writer' }
-XdReaderWriterExamples >> inMemoryWriter [
+{ #category : #tools }
+XdExamples >> inMemoryWriter [
 	<gtExample>
 	| aWriter |
 	aWriter := self writer.
 	aWriter streamingStrategy: XdStreamingStrategy bytes.
 	self assert: aWriter streamingStrategy notNil.
+	self assert: aWriter streamingStrategy exists not.
 	^ aWriter
 ]
 
 { #category : #accessing }
-XdReaderWriterExamples >> json [
+XdExamples >> json [
 	^ XdManifestJsonMapping
 ]
 
 { #category : #'basic objects' }
-XdReaderWriterExamples >> manifest [
+XdExamples >> manifest [
 	<gtExample>
 	| aManifest |
 	aManifest := self emptyManifest.
@@ -229,7 +251,7 @@ XdReaderWriterExamples >> manifest [
 ]
 
 { #category : #'json mapping' }
-XdReaderWriterExamples >> manifestJsonString [
+XdExamples >> manifestJsonString [
 	<gtExample>
 	| aJsonString |
 	aJsonString := self json writeManifest: self manifest.
@@ -243,7 +265,7 @@ XdReaderWriterExamples >> manifestJsonString [
 ]
 
 { #category : #'json mapping' }
-XdReaderWriterExamples >> manifestJsonWithOneAttachmentString [
+XdExamples >> manifestJsonWithOneAttachmentString [
 	<gtExample>
 	| aJsonString |
 	aJsonString := self json writeManifest: self manifestWithOneAttachment.
@@ -258,7 +280,7 @@ XdReaderWriterExamples >> manifestJsonWithOneAttachmentString [
 ]
 
 { #category : #'basic objects' }
-XdReaderWriterExamples >> manifestWithOneAttachment [
+XdExamples >> manifestWithOneAttachment [
 	<gtExample>
 	| aManifest |
 	aManifest := self manifest.
@@ -267,8 +289,103 @@ XdReaderWriterExamples >> manifestWithOneAttachment [
 	^ aManifest
 ]
 
+{ #category : #navigating }
+XdExamples >> navigateTextDocument_MainAttachment [
+	<gtExample>
+	| anXdFile aResult |
+	anXdFile := self writeTextDocument.
+	aResult := anXdFile navigator
+		mainDocument;
+		mainAttachment;
+		find.
+	self assert: aResult isNotNil.
+	self assert: aResult class equals: XdAttachment.
+	^ aResult
+]
+
+{ #category : #navigating }
+XdExamples >> navigateTextDocument_MainAttachment_Stream [
+	<gtExample>
+	| anXdFile aResult aString |
+	anXdFile := self writeTextDocument.
+	aResult := anXdFile navigator
+		mainDocumentAttachment;
+		stringReadStream;
+		find.
+	self assert: aResult isNotNil.
+	self assert: aResult class equals: XdAttachmentStringReadStream.
+	aString := aResult readStreamDo: [ :aStream | aStream contents ].
+	self assert: aString equals: self textFileContent.
+	^ aResult
+]
+
+{ #category : #navigating }
+XdExamples >> navigateTextDocument_MainComponent [
+	<gtExample>
+	| anXdFile aResult |
+	anXdFile := self writeTextDocument.
+	aResult := anXdFile navigator
+		mainDocument;
+		mainComponent;
+		find.
+	self assert: aResult isNotNil.
+	self assert: aResult class equals: XdComponent.
+	^ aResult
+]
+
+{ #category : #navigating }
+XdExamples >> navigateTextDocument_MainComponent_attachment [
+	<gtExample>
+	| anXdFile aResult |
+	anXdFile := self writeTextDocument.
+	aResult := anXdFile navigator
+		mainDocument;
+		mainComponent;
+		componentAttachment;
+		find.
+	self assert: aResult isNotNil.
+	self assert: aResult class equals: XdAttachment.
+	^ aResult
+]
+
+{ #category : #navigating }
+XdExamples >> navigateTextDocument_MainDocument [
+	<gtExample>
+	| anXdFile aResult |
+	anXdFile := self writeTextDocument.
+	aResult := anXdFile navigator
+		mainDocument;
+		find.
+	self assert: aResult isNotNil.
+	self assert: aResult class equals: XdDocument.
+	self assert: aResult type equals: XdTextType.
+	^ aResult
+]
+
+{ #category : #navigating }
+XdExamples >> navigateTextDocument_MainDocumentAttachment [
+	<gtExample>
+	| anXdFile aResult |
+	anXdFile := self writeTextDocument.
+	aResult := anXdFile navigator
+		mainDocumentAttachment;
+		find.
+	self assert: aResult isNotNil.
+	self assert: aResult class equals: XdAttachment.
+	^ aResult
+]
+
+{ #category : #tools }
+XdExamples >> navigator [
+	<gtExample>
+	| aNavigator |
+	aNavigator := XdNavigator new.
+	"some assertions here"
+	^ aNavigator
+]
+
 { #category : #'basic objects' }
-XdReaderWriterExamples >> nullStreamingStrategy [
+XdExamples >> nullStreamingStrategy [
 	<gtExample>
 	| aReference |
 	aReference := XdStreamingStrategy null.
@@ -277,7 +394,7 @@ XdReaderWriterExamples >> nullStreamingStrategy [
 ]
 
 { #category : #reading }
-XdReaderWriterExamples >> readBasicDocument [
+XdExamples >> readBasicDocument [
 	<gtExample>
 	| aWrittenXdFile aReader aXdReadFile aFormatVersion |
 	aWrittenXdFile := self writeBasicDocument.
@@ -304,7 +421,7 @@ XdReaderWriterExamples >> readBasicDocument [
 ]
 
 { #category : #reading }
-XdReaderWriterExamples >> readBrokenFile [
+XdExamples >> readBrokenFile [
 	<gtExample>
 	| theErrors aReader aXdFile |
 	theErrors := OrderedCollection new.
@@ -321,7 +438,7 @@ XdReaderWriterExamples >> readBrokenFile [
 ]
 
 { #category : #reading }
-XdReaderWriterExamples >> readBrokenFileAndRaiseErrorByDefault [
+XdExamples >> readBrokenFileAndRaiseErrorByDefault [
 	<gtExample>
 	| theErrors aReader aXdFile |
 	theErrors := OrderedCollection new.
@@ -337,7 +454,7 @@ XdReaderWriterExamples >> readBrokenFileAndRaiseErrorByDefault [
 ]
 
 { #category : #reading }
-XdReaderWriterExamples >> readTextDocument [
+XdExamples >> readTextDocument [
 	<gtExample>
 	| aWrittenXdFile aReader aXdReadFile aZip aTextFile |
 	aWrittenXdFile := self writeTextDocument.
@@ -376,37 +493,35 @@ XdReaderWriterExamples >> readTextDocument [
 	
 ]
 
-{ #category : #'reader / writer' }
-XdReaderWriterExamples >> reader [
+{ #category : #tools }
+XdExamples >> reader [
 	<gtExample>
 	| aReader |
 	aReader := XdReader new.
-	"some assertions here"
+	self assert: aReader streamingStrategy isNotNil.
+	self assert: aReader streamingStrategy exists not.
+	self assert: aReader errorHandler isNotNil.
 	^ aReader
 ]
 
 { #category : #accessing }
-XdReaderWriterExamples >> textFileContent [
+XdExamples >> textFileContent [
 	<gtExample>
 	^ 'UNICODE příliš žluťoučký kůň úpěl ďábelské ódy'
 ]
 
 { #category : #accessing }
-XdReaderWriterExamples >> textFileName [
+XdExamples >> textFileName [
 	<gtExample>
 	^ 'text-document.txt'
 ]
 
 { #category : #writing }
-XdReaderWriterExamples >> writeBasicDocument [
+XdExamples >> writeBasicDocument [
 	<gtExample>
 	| aWriter aXdFile |
-	aWriter := self writer.
-	aXdFile := aWriter
-		title: self documentTitle;
-		description: self documentDescription;
-		authorName: self documentAuthorName;
-		write.
+	aWriter := self basicDocumentInProgress.
+	aXdFile := aWriter write.
 	self assert: aXdFile notNil.
 	self assert: aXdFile manifest notNil.
 	self assert: aXdFile manifest title equals: self documentTitle.
@@ -422,7 +537,7 @@ XdReaderWriterExamples >> writeBasicDocument [
 ]
 
 { #category : #writing }
-XdReaderWriterExamples >> writeBiggerFollowedBySmallerContentSizeIntoTheSameFile [
+XdExamples >> writeBiggerFollowedBySmallerContentSizeIntoTheSameFile [
 	<gtExample>
 	"Let's first write a file with a large content and 
 	then rewrite the same file with a smaller content"
@@ -460,35 +575,12 @@ XdReaderWriterExamples >> writeBiggerFollowedBySmallerContentSizeIntoTheSameFile
 ]
 
 { #category : #writing }
-XdReaderWriterExamples >> writeTextDocument [
+XdExamples >> writeTextDocument [
 	<gtExample>
 	| aWriter aXdFile aMembers |
-	aWriter := self writer.
-	aXdFile := aWriter
-		text;
-		attachment: self textFileName text: self textFileContent;
-		write.
+	aWriter := self writeTextDocumentInProgress.
+	aXdFile := aWriter write.
 	self assert: aXdFile notNil.
-	self assert: aXdFile manifest notNil.
-	self assert: aXdFile manifest documents size equals: 1.
-	self
-		assert: aXdFile manifest documents first type
-		equals: XdType text.
-	self
-		assert: aXdFile manifest documents first components size
-		equals: 1.
-	self
-		assert: aXdFile manifest documents first components first link
-		equals: '1'.
-	self assert: aXdFile manifest attachments size equals: 1.
-	self assert: aXdFile manifest attachments first id equals: '1'.
-	self
-		assert: aXdFile manifest attachments first fileName
-		equals: self textFileName.
-	self
-		assert: aXdFile manifest attachments first fileSize
-		equals: self textFileContent size.
-	self assert: aXdFile streamingStrategy notNil.
 	self assert: aXdFile exists.
 	aMembers := aXdFile streamingStrategy zip members.
 	self assert: aMembers size equals: 3.
@@ -504,27 +596,70 @@ XdReaderWriterExamples >> writeTextDocument [
 	^ aXdFile
 ]
 
-{ #category : #'reader / writer' }
-XdReaderWriterExamples >> writer [
+{ #category : #'writing - in progress' }
+XdExamples >> writeTextDocumentInProgress [
+	<gtExample>
+	| aWriter |
+	aWriter := self basicDocumentInProgress.
+	aWriter
+		text;
+		attachment: self textFileName text: self textFileContent.
+	self assert: aWriter manifest notNil.
+	self assert: aWriter manifest numberOfDocuments equals: 1.
+	self
+		assert: aWriter manifest documents first type
+		equals: XdType text.
+	self
+		assert: aWriter manifest documents first numberOfComponents
+		equals: 1.
+	self
+		assert: aWriter manifest documents first components first link
+		equals: '1'.
+	self assert: aWriter manifest numberOfAttachments equals: 1.
+	self assert: aWriter manifest attachments first id equals: '1'.
+	self
+		assert: aWriter manifest attachments first fileName
+		equals: self textFileName.
+	self
+		assert: aWriter manifest attachments first fileSize
+		equals: self textFileContent size.
+	self assert: aWriter streamingStrategy notNil.
+	self assert: aWriter streamingStrategy exists not.
+	^ aWriter
+]
+
+{ #category : #tools }
+XdExamples >> writer [
 	<gtExample>
 	| aWriter |
 	aWriter := XdWriter new.
-	"some assertions here"
+	self assert: aWriter streamingStrategy isNotNil.
+	self assert: aWriter streamingStrategy exists not.
 	^ aWriter
 ]
 
 { #category : #writing }
-XdReaderWriterExamples >> writerWithLargeContent [
+XdExamples >> writerWithLargeContent [
 	<gtExample>
-	^ self writer
+	^ self inMemoryWriter
 		text;
 		attachment: 'large-lorem-ipsum.txt' text: (String loremIpsum: 4000)
 ]
 
 { #category : #writing }
-XdReaderWriterExamples >> writerWithSmallContent [
+XdExamples >> writerWithSmallContent [
 	<gtExample>
-	^ self writer
+	^ self inMemoryWriter
 		text;
 		attachment: self textFileName text: self textFileContent
+]
+
+{ #category : #'phlow extensions' }
+XdExamples >> xdFileLiveExtension [
+	<gtExample>
+	| aFile aPhlow |
+	aFile := self readTextDocument.
+	aPhlow := GtPhlowView empty on: aFile perform: #gtLive:.
+	self assert: aPhlow class ~= GtPhlowViewWithError.
+	^ aPhlow
 ]

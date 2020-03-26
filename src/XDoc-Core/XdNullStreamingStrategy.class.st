@@ -4,7 +4,7 @@ Class {
 	#classInstVars : [
 		'uniqueInstance'
 	],
-	#category : #'XDoc-Core-Model'
+	#category : #'XDoc-Core-Streaming'
 }
 
 { #category : #cleanup }
@@ -28,6 +28,12 @@ XdNullStreamingStrategy >> detectFileReference: aDetectBlock ifFound: aFoundBloc
 	^ aNotFoundBlock value
 ]
 
+{ #category : #'api - streams' }
+XdNullStreamingStrategy >> detectReferenceNamed: aFileName ifFound: aFoundBlock ifNone: aNotFoundBlock [
+	<return: #XdStreamReference>
+	^ aNotFoundBlock value
+]
+
 { #category : #testing }
 XdNullStreamingStrategy >> exists [
 	<return: #Boolean>
@@ -40,8 +46,12 @@ XdNullStreamingStrategy >> memberNamed: aFileName [
 	^ nil
 ]
 
-{ #category : #streams }
-XdNullStreamingStrategy >> readStream [
-	"Return a binary read stream"
-	^ ByteArray new readStream
+{ #category : #'api - streams' }
+XdNullStreamingStrategy >> readStreamDo: aBlock [
+	"do nothing"
+]
+
+{ #category : #'api - streams' }
+XdNullStreamingStrategy >> writeStreamDo: aBlock [
+	"do nothing"
 ]
