@@ -10,3 +10,13 @@ XdDocument >> gtComponentsFor: aView [
 		itemFormat: [ :eachComponent | 
 			'Link to attachment id: ', eachComponent link asString ]
 ]
+
+{ #category : #'*XDoc-Extensions' }
+XdDocument >> openXdFileInPharo: aXdFile [ 
+	^ self type openDocument: self ofXdFileInPharo: aXdFile
+]
+
+{ #category : #'*XDoc-Extensions' }
+XdDocument >> toolForXdFileInPharo: aXdFile [ 
+	^ self type toolForDocument: self ofXdFileInPharo: aXdFile
+]

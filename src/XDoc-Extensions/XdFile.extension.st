@@ -1,17 +1,6 @@
 Extension { #name : #XdFile }
 
 { #category : #'*XDoc-Extensions' }
-XdFile >> gtLiveFor: aView [
-	<gtView>
-	self exists ifFalse: [ ^ aView empty ].
-	^ aView explicit
-		title: 'Live';
-		priority: 0;
-		stencil: [ self toolInPharo ];
-		actionButtonIcon: BrGlamorousIcons open action: [ self openInPharo ]
-]
-
-{ #category : #'*XDoc-Extensions' }
 XdFile >> gtManifestFor: aView [
 	<gtView>
 	self manifest ifNil: [ ^ aView empty ].
@@ -58,4 +47,18 @@ XdFile >> gtReferenceFor: aView [
 					s nextPut: Character space.
 					each lastModTime printHMSOn: s ] ].
 	^ aList
+]
+
+{ #category : #'*XDoc-Extensions' }
+XdFile >> openInPharo [
+	"Document type should decide how to open (be displayed) in Pharo"
+	self manifest documents ifEmpty: [ ^ self ].
+	^ self manifest mainDocument openXdFileInPharo: self
+]
+
+{ #category : #'*XDoc-Extensions' }
+XdFile >> toolInPharo [
+	"Document type should decide which tool to use  in Pharo"
+	self manifest documents ifEmpty: [ ^ nil ].
+	^ self manifest mainDocument toolForXdFileInPharo: self
 ]

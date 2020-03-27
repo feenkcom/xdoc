@@ -10,3 +10,12 @@ XdClient >> gtDocumentsFor: aView [
 				look: XdGlamorousDocumentsGridLook;
 				client: self ]
 ]
+
+{ #category : #'*XDoc-Gt4XDocClient' }
+XdClient >> openFileReference: aFileReference [
+	aFileReference exists ifFalse: [ ^ self ].
+	XdClientOpenXDocCommand new 
+		client: self;
+		fileReference: aFileReference;
+		execute
+]

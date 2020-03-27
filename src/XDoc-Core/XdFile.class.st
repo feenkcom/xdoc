@@ -101,13 +101,6 @@ XdFile >> open [
 	^ self inspect
 ]
 
-{ #category : #actions }
-XdFile >> openInPharo [
-	"Document type should decide how to open (be displayed) in Pharo"
-	self manifest documents ifEmpty: [ ^ self ].
-	^ self manifest mainDocument openXdFileInPharo: self
-]
-
 { #category : #accessing }
 XdFile >> titleAndAuthor [
 	<return: #String>
@@ -115,13 +108,6 @@ XdFile >> titleAndAuthor [
 	aTitle := self manifest title ifEmpty: [ 'Empty document title' ].
 	anAuthor := self manifest author ifEmpty: [ 'unknown author' ].
 	^ aTitle, ' by ', anAuthor
-]
-
-{ #category : #actions }
-XdFile >> toolInPharo [
-	"Document type should decide which tool to use  in Pharo"
-	self manifest documents ifEmpty: [ ^ nil ].
-	^ self manifest mainDocument toolForXdFileInPharo: self
 ]
 
 { #category : #actions }

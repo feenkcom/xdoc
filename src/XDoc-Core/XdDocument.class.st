@@ -40,11 +40,6 @@ XdDocument >> numberOfComponents [
 	^ self components size
 ]
 
-{ #category : #actions }
-XdDocument >> openXdFileInPharo: aXdFile [ 
-	^ self type openDocument: self ofXdFileInPharo: aXdFile
-]
-
 { #category : #printing }
 XdDocument >> printOn: aStream [
 	super printOn: aStream.
@@ -61,11 +56,6 @@ XdDocument >> printOn: aStream [
 				nextPutAll: ('component' asPluralBasedOn: anArray size) ]
 		ifNil: [ aStream nextPutAll: 'no-components' ].
 	aStream nextPut: $)
-]
-
-{ #category : #actions }
-XdDocument >> toolForXdFileInPharo: aXdFile [ 
-	^ self type toolForDocument: self ofXdFileInPharo: aXdFile
 ]
 
 { #category : #accessing }

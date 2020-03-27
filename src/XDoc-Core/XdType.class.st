@@ -14,21 +14,9 @@ XdType class >> image [
 	^ XdImageType
 ]
 
-{ #category : #actions }
-XdType class >> openDocument: aXdDocument ofXdFileInPharo: aXdFile [ 
-	self subclassResponsibility
-]
-
 { #category : #accessing }
 XdType class >> text [
 	^ XdTextType
-]
-
-{ #category : #accessing }
-XdType class >> toolForDocument: aXdDocument ofXdFileInPharo: aXdFile [
-	"Return an Bloc elemment or an object that understands #asElement."
-	<return: #BlElement>
-	^ self subclassResponsibility
 ]
 
 { #category : #enumerating }

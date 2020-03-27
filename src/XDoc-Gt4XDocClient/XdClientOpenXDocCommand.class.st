@@ -5,7 +5,7 @@ Class {
 		'fileReference',
 		'xdFile'
 	],
-	#category : #'XDoc-Client-Commands'
+	#category : #'XDoc-Gt4XDocClient-Commands'
 }
 
 { #category : #execution }

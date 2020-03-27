@@ -151,15 +151,6 @@ XdClient >> initialize [
 ]
 
 { #category : #actions }
-XdClient >> openFileReference: aFileReference [
-	aFileReference exists ifFalse: [ ^ self ].
-	XdClientOpenXDocCommand new 
-		client: self;
-		fileReference: aFileReference;
-		execute
-]
-
-{ #category : #actions }
 XdClient >> publish: aXdFile [ 
 	"Publish an XDoc file to a public server"
 	| aCommand |
