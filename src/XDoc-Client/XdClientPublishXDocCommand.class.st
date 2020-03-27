@@ -84,6 +84,8 @@ XdClientPublishXDocCommand >> xdoc: aXdFile [
 { #category : #private }
 XdClientPublishXDocCommand >> xdocBytes [
 	<return: #ByteArray>
+	self flag: 'XDoc API proposeal [feenkcom/gtoolkit#888]'.
+	"^ self xdoc reader bytes"
 	^ self xdoc streamingStrategy bytes
 ]
 

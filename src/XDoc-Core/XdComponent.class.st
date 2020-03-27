@@ -1,11 +1,16 @@
 Class {
 	#name : #XdComponent,
-	#superclass : #Object,
+	#superclass : #XdModel,
 	#instVars : [
 		'link'
 	],
 	#category : #'XDoc-Core-Model'
 }
+
+{ #category : #requirements }
+XdComponent class >> empty [
+	^ XdEmptyComponent default
+]
 
 { #category : #accessing }
 XdComponent >> link [

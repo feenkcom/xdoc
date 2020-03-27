@@ -1,11 +1,13 @@
 Class {
 	#name : #XdFileStreamingStrategy,
 	#superclass : #XdStreamingStrategy,
+	#traits : 'TXdReadStream',
+	#classTraits : 'TXdReadStream classTrait',
 	#instVars : [
 		'file',
 		'fileSystem'
 	],
-	#category : #'XDoc-Core-Model'
+	#category : #'XDoc-Core-Streaming'
 }
 
 { #category : #'file system' }
@@ -61,7 +63,7 @@ XdFileStreamingStrategy >> readStream [
 	^ self file binaryReadStream
 ]
 
-{ #category : #writing }
+{ #category : #'api - streams' }
 XdFileStreamingStrategy >> writeStreamDo: aBlock [
 	self assert: [ file notNil ] description: ['File must be defined before writing.'].
 	file ensureDelete.

@@ -1,26 +1,8 @@
 Class {
 	#name : #XdEmptyManifest,
-	#superclass : #Object,
-	#classInstVars : [
-		'uniqueInstance'
-	],
+	#superclass : #XdNullModel,
 	#category : #'XDoc-Core-Model'
 }
-
-{ #category : #cleanup }
-XdEmptyManifest class >> cleanUp [
-	self reset
-]
-
-{ #category : #cleanup }
-XdEmptyManifest class >> reset [
-	uniqueInstance := nil
-]
-
-{ #category : #accessing }
-XdEmptyManifest class >> uniqueInstance [
-	^ uniqueInstance ifNil: [ uniqueInstance := self new ]
-]
 
 { #category : #accessing }
 XdEmptyManifest >> attachments [
@@ -42,10 +24,10 @@ XdEmptyManifest >> documents [
 	^ #()
 ]
 
-{ #category : #'gt-extension' }
-XdEmptyManifest >> gtContentFor: aView [ 
-	<gtView>
-	^ aView empty
+{ #category : #convenience }
+XdEmptyManifest >> numberOfDocuments [
+	<return: #Integer>
+	^ 0
 ]
 
 { #category : #accessing }

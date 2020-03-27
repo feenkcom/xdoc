@@ -1,8 +1,6 @@
 Class {
 	#name : #XdAsyncClient,
-	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
+	#superclass : #XdProtoClient,
 	#instVars : [
 		'client',
 		'callbacks'

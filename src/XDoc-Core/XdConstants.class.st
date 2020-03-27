@@ -10,6 +10,11 @@ XdConstants class >> cdnPathSegments [
 	^ #( )
 ]
 
+{ #category : #accessing }
+XdConstants class >> defaultStringEnconding [
+	^ #utf8
+]
+
 { #category : #'client / server' }
 XdConstants class >> emptyList [
 	^ '[]'

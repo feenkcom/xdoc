@@ -1,19 +1,22 @@
 Class {
 	#name : #XdReader,
-	#superclass : #Object,
-	#traits : 'XdManifestJsonMappingTrait + XdConstantsTrait',
-	#classTraits : 'XdManifestJsonMappingTrait classTrait + XdConstantsTrait classTrait',
+	#superclass : #XdStreamHolder,
 	#instVars : [
-		'streamingStrategy',
 		'errorHandler'
 	],
-	#category : #'XDoc-Core-Reader'
+	#category : #'XDoc-Core-Tools - Reader'
 }
+
+{ #category : #accessing }
+XdReader >> errorHandler [
+	"Return one arg block that receives an exception object"
+	<return: #BlockClosure>
+	^ errorHandler
+]
 
 { #category : #initialization }
 XdReader >> initialize [
 	super initialize.
-	streamingStrategy := XdStreamingStrategy null.
 	errorHandler := [ :anError | anError pass ].
 ]
 
@@ -62,18 +65,4 @@ XdReader >> readManifestIn: aZip [
 	^ XdFile new
 		manifest: aManifest;
 		streamingStrategy: self streamingStrategy
-]
-
-{ #category : #accessing }
-XdReader >> streamingStrategy [
-	<return: #XdStreamingStrategy>
-	^ streamingStrategy
-]
-
-{ #category : #accessing }
-XdReader >> streamingStrategy: aXdStreamingStrategy [
-	self 
-		assert: [ aXdStreamingStrategy notNil ] 
-		description: [ 'Streaming strategy must be non-nil' ].
-	streamingStrategy := aXdStreamingStrategy
 ]

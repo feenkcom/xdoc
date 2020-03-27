@@ -4,12 +4,18 @@ Class {
 	#instVars : [
 		'currentId'
 	],
-	#category : #'XDoc-Core-Model'
+	#category : #'XDoc-Core-ID Generator'
 }
 
 { #category : #'instance creation' }
 XdSequenceNumberGenerator class >> initialId: anInteger [
 	^ self new initialId: anInteger
+]
+
+{ #category : #accessing }
+XdSequenceNumberGenerator >> currentId [
+	<return: #Integer>
+	^ currentId
 ]
 
 { #category : #initialization }

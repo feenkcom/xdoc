@@ -1,12 +1,17 @@
 Class {
 	#name : #XdDocument,
-	#superclass : #Object,
+	#superclass : #XdModel,
 	#instVars : [
 		'type',
 		'components'
 	],
 	#category : #'XDoc-Core-Model'
 }
+
+{ #category : #requirements }
+XdDocument class >> empty [
+	^ XdEmptyDocument default
+]
 
 { #category : #accessing }
 XdDocument >> components [
@@ -22,17 +27,6 @@ XdDocument >> components: aXdComponent [
 	components := aXdComponent
 ]
 
-{ #category : #accessing }
-XdDocument >> gtComponentsFor: aView [
-	<gtView>
-	^ aView list
-		title: 'Components';
-		priority: 1;
-		items: [ self components asOrderedCollection ];
-		itemFormat: [ :eachComponent | 
-			'Link to attachment id: ', eachComponent link asString ]
-]
-
 { #category : #initialization }
 XdDocument >> initialize [
 	super initialize.
@@ -40,9 +34,10 @@ XdDocument >> initialize [
 	type := XdUndefinedType.
 ]
 
-{ #category : #actions }
-XdDocument >> openXdFileInPharo: aXdFile [ 
-	^ self type openDocument: self ofXdFileInPharo: aXdFile
+{ #category : #convenience }
+XdDocument >> numberOfComponents [
+	<return: #Integer>
+	^ self components size
 ]
 
 { #category : #printing }
@@ -61,11 +56,6 @@ XdDocument >> printOn: aStream [
 				nextPutAll: ('component' asPluralBasedOn: anArray size) ]
 		ifNil: [ aStream nextPutAll: 'no-components' ].
 	aStream nextPut: $)
-]
-
-{ #category : #actions }
-XdDocument >> toolForXdFileInPharo: aXdFile [ 
-	^ self type toolForDocument: self ofXdFileInPharo: aXdFile
 ]
 
 { #category : #accessing }

@@ -1,8 +1,6 @@
 Class {
 	#name : #XdNullClient,
-	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
+	#superclass : #XdProtoClient,
 	#classInstVars : [
 		'uniqueInstance'
 	],

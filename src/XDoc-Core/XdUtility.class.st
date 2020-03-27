@@ -1,8 +1,8 @@
 Class {
 	#name : #XdUtility,
 	#superclass : #Object,
-	#traits : 'XdConstantsTrait',
-	#classTraits : 'XdConstantsTrait classTrait',
+	#traits : 'TXdConstants',
+	#classTraits : 'TXdConstants classTrait',
 	#category : #'XDoc-Core-Utility'
 }
 

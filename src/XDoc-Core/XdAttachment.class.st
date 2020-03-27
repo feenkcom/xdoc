@@ -1,6 +1,6 @@
 Class {
 	#name : #XdAttachment,
-	#superclass : #Object,
+	#superclass : #XdModel,
 	#instVars : [
 		'id',
 		'fileName',
@@ -8,6 +8,17 @@ Class {
 	],
 	#category : #'XDoc-Core-Model'
 }
+
+{ #category : #requirements }
+XdAttachment class >> empty [
+	^ XdEmptyAttachment default
+]
+
+{ #category : #converting }
+XdAttachment >> asXdStringReadStream [
+	^ XdAttachmentStringReadStream new
+		attachment: self
+]
 
 { #category : #accessing }
 XdAttachment >> fileName [

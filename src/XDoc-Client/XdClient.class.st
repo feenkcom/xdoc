@@ -1,10 +1,9 @@
 Class {
 	#name : #XdClient,
-	#superclass : #Object,
-	#traits : 'TBlDebug',
-	#classTraits : 'TBlDebug classTrait',
+	#superclass : #XdProtoClient,
 	#instVars : [
-		'serverUrl'
+		'serverUrl',
+		'signalProgress'
 	],
 	#category : #'XDoc-Client-Core'
 }
@@ -27,7 +26,7 @@ XdClient class >> downloadXDoc: aZnUrlString thenDo: aBlock [
 	^ aXdFile
 ]
 
-{ #category : #accessing }
+{ #category : #'gt-extension' }
 XdClient class >> gtDocumentsFor: aView [
 	<gtView>
 	^ (self new gtDocumentsFor: aView)
@@ -43,6 +42,19 @@ XdClient class >> null [
 XdClient >> async [
 	<return: #XdAsyncClient>
 	^ XdAsyncClient new client: self
+]
+
+{ #category : #actions }
+XdClient >> deleteXDocFromUrl: anUrl [
+	<return: #ZnResponse>
+	"Delete an XDoc file from a public server"
+	| anId |
+	anId := XdClientXDocIdFromURLCommand new
+		client: self;
+		url: anUrl asZnUrl;
+		execute;
+		id.
+	^ self deleteXDocId: anId
 ]
 
 { #category : #actions }
@@ -117,7 +129,7 @@ XdClient >> downloadXDocUsingFileInfo: aXdFileInfo [
 		xdFile
 ]
 
-{ #category : #accessing }
+{ #category : #'gt-extension' }
 XdClient >> gtDocumentListFor: aView [
 	<gtView>
 	^ aView columnedList
@@ -125,33 +137,17 @@ XdClient >> gtDocumentListFor: aView [
 		items: [ self documents ];
 		column: 'Title' do: [:aColumn | aColumn item: [ :doc | doc title] ];
 		column: 'Author' do: [:aColumn | aColumn item: [ :doc | doc author] ];
-		column: 'Created on' do: [:aColumn | aColumn item: [ :doc | doc createdOn asLocalStringYMDHM] ]
-]
-
-{ #category : #'gt-extension' }
-XdClient >> gtDocumentsFor: aView [
-	<gtView>
-	^ aView explicit
-		title: 'Documents';
-		stencil: [ 
-			XdDocumentsElement new 
-				look: XdGlamorousDocumentsGridLook;
-				client: self ]
+		column: 'Created on' do: [:aColumn | aColumn item: [ :doc | 
+			doc createdOn 
+				ifNotNil: #asLocalStringYMDHM
+				ifNil: [ '' ] ] ]
 ]
 
 { #category : #initialization }
 XdClient >> initialize [
 	super initialize.
 	serverUrl := XdClientSettings xdServerUrl.
-]
-
-{ #category : #actions }
-XdClient >> openFileReference: aFileReference [
-	aFileReference exists ifFalse: [ ^ self ].
-	XdClientOpenXDocCommand new 
-		client: self;
-		fileReference: aFileReference;
-		execute
+	signalProgress := false.
 ]
 
 { #category : #actions }
@@ -187,5 +183,5 @@ XdClient >> serverUrl: aZnUrl [
 { #category : #accessing }
 XdClient >> signalProgress [
 	<return: #Boolean>
-	^ BlSignalProgress enabled
+	^ signalProgress
 ]

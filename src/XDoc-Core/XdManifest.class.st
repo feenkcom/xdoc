@@ -1,6 +1,6 @@
 Class {
 	#name : #XdManifest,
-	#superclass : #Object,
+	#superclass : #XdModel,
 	#instVars : [
 		'title',
 		'description',
@@ -88,20 +88,6 @@ XdManifest >> documents: anArrayOfDocuments [
 	documents := anArrayOfDocuments
 ]
 
-{ #category : #'gt-extension' }
-XdManifest >> gtContentFor: aView [
-	<gtView>
-	^ aView list
-		title: 'Content';
-		items: [ { 
-			'Title: ', self title asString.
-			'Author: ', self author asString.
-			'Description: ', self description asString } ,
-			self documents , 
-			self attachments ]
-			
-]
-
 { #category : #testing }
 XdManifest >> hasHtmlDocument [
 	<return: #Boolean>
@@ -138,6 +124,18 @@ XdManifest >> initialize [
 XdManifest >> mainDocument [
 	<return: #XdDocument>
 	^ self documents first
+]
+
+{ #category : #convenience }
+XdManifest >> numberOfAttachments [
+	<return: #Integer>
+	^ self attachments size
+]
+
+{ #category : #convenience }
+XdManifest >> numberOfDocuments [
+	<return: #Integer>
+	^ self documents size
 ]
 
 { #category : #accessing }

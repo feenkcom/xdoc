@@ -1,7 +1,7 @@
 Class {
 	#name : #XdIdGenerator,
 	#superclass : #Object,
-	#category : #'XDoc-Core-Model'
+	#category : #'XDoc-Core-ID Generator'
 }
 
 { #category : #accessing }

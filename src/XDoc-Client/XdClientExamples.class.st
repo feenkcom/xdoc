@@ -9,25 +9,14 @@ Class {
 	#category : #'XDoc-Client-Examples'
 }
 
-{ #category : #'documents - ui' }
-XdClientExamples >> basicList [
+{ #category : #'action - delete from URL' }
+XdClientExamples >> basicIdFromUrlCommand [
 	<gtExample>
-	| anElement |
-	anElement := XdDocumentsElement new.
-	self assert: anElement client notNil.
-	^ anElement
-]
-
-{ #category : #'documents - ui' }
-XdClientExamples >> basicListWithLook [
-	<gtExample>
-	| anElement aLook |
-	anElement := self basicList.
-	aLook := XdGlamorousDocumentsListLook new.
-	anElement look: aLook.
-	self assert: aLook client equals: anElement client.
-	self assert: anElement hasChildren description: 'Element must have children installed by the look'.
-	^ anElement
+	| anUrlFromUrlCommand |
+	anUrlFromUrlCommand := XdClientXDocIdFromURLCommand new.
+	anUrlFromUrlCommand client: self client.
+	self assert: anUrlFromUrlCommand client isNotNil.
+	^ anUrlFromUrlCommand
 ]
 
 { #category : #client }
@@ -83,6 +72,16 @@ XdClientExamples >> deleteXDocId [
 	aResponse := self client deleteXDocId: self xdocIdSegment.
 	self assert: aResponse notNil.
 	^ aResponse
+]
+
+{ #category : #'action - delete from URL' }
+XdClientExamples >> deleteXDocUrl [
+	<gtExample>
+	| aPublishCommand aDeleteResponse |
+	aPublishCommand := self publishedResponse.
+	aDeleteResponse := self client deleteXDocFromUrl: self xdocIdSegment.
+	self assert: aDeleteResponse notNil.
+	^ aDeleteResponse
 ]
 
 { #category : #'action - download xdoc' }
@@ -175,18 +174,6 @@ XdClientExamples >> listJsonContent [
 	^ '[{"pathSegment":"1","fileName":"xdoc-file.xdoc","manifest":{"title":"","description":"","author":"","attachments":[{"id":"1","filename":"index.pillar","size":146},{"id":"2","filename":"gt-logo.png","size":8192},{"id":"3","filename":"index.html","size":245},{"id":"4","filename":"index.css","size":183}],"documents":[{"type":"documenter","components":[{"link":"1"},{"link":"2"}]},{"type":"html","components":[{"link":"3"},{"link":"4"},{"link":"2"}]}]}}]'
 ]
 
-{ #category : #'documents - ui' }
-XdClientExamples >> listWithLook [
-	<gtExample>
-	| anElement aClient |
-	anElement := self basicListWithLook.
-	aClient := self client.
-	anElement client: aClient.
-	self assert: anElement viewModel client equals: aClient.
-	self assert: anElement look client equals: aClient.
-	^ anElement
-]
-
 { #category : #'action - publish' }
 XdClientExamples >> publishPath [
 	<gtExample>
@@ -236,6 +223,22 @@ XdClientExamples >> startServer [
 { #category : #server }
 XdClientExamples >> stopServer [
 	^ zincExamples stopServer
+]
+
+{ #category : #'action - delete from URL' }
+XdClientExamples >> xDocIdFromUrl [
+	<gtExample>
+	| aPublishCommand anUrlFromUrlCommand aPublishedUrl anId |
+	aPublishCommand := self publishXDoc.
+	aPublishedUrl := aPublishCommand publicUrl.
+	anUrlFromUrlCommand := self basicIdFromUrlCommand.
+	anId := anUrlFromUrlCommand
+		url: aPublishedUrl;
+		execute;
+		id.
+	self assert: anId isNotNil.
+	self assert: anId equals: 1 asString.
+	^ anUrlFromUrlCommand
 ]
 
 { #category : #'action - download xdoc' }
