@@ -32,6 +32,11 @@ XdEmptyPublishInfo >> description [
 	^ BlText empty
 ]
 
+{ #category : #accessing }
+XdEmptyPublishInfo >> password [
+	^ BlText empty
+]
+
 { #category : #'api - actions' }
 XdEmptyPublishInfo >> publish [
 	"do nothing"
@@ -40,5 +45,10 @@ XdEmptyPublishInfo >> publish [
 
 { #category : #accessing }
 XdEmptyPublishInfo >> title [
+	^ BlText empty
+]
+
+{ #category : #accessing }
+XdEmptyPublishInfo >> username [
 	^ BlText empty
 ]

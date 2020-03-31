@@ -5,7 +5,9 @@ Class {
 		'author',
 		'title',
 		'description',
-		'publishAction'
+		'publishAction',
+		'username',
+		'password'
 	],
 	#category : #'XDoc-Gt4XDocClient-Publish'
 }
@@ -42,7 +44,19 @@ XdPublishInfo >> initialize [
 	author := ''.
 	description := ''.
 	title := ''.
+	username := ''.
+	password := ''.
 	publishAction := [ self inform: 'Fake publish action' ].
+]
+
+{ #category : #accessing }
+XdPublishInfo >> password [
+	^ password
+]
+
+{ #category : #accessing }
+XdPublishInfo >> password: anObject [
+	password := anObject
 ]
 
 { #category : #'api - actions' }
@@ -72,4 +86,14 @@ XdPublishInfo >> title: aStringOrBlRope [
 		assert: [ aStringOrBlRope notNil ] 
 		description: [ 'Document title must be non-nil' ].
 	title := aStringOrBlRope asRopedText
+]
+
+{ #category : #accessing }
+XdPublishInfo >> username [
+	^ username
+]
+
+{ #category : #accessing }
+XdPublishInfo >> username: anObject [
+	username := anObject
 ]

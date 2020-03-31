@@ -1,14 +1,29 @@
 Class {
 	#name : #XdClientCommand,
-	#superclass : #Object,
-	#traits : 'TGtAssert',
-	#classTraits : 'TGtAssert classTrait',
+	#superclass : #XdProtoClientCommand,
 	#instVars : [
 		'client',
-		'signalProgress'
+		'signalProgress',
+		'zincClient'
 	],
 	#category : #'XDoc-Client-Commands'
 }
+
+{ #category : #factory }
+XdClientCommand class >> null [
+	^ XdNullCommand default
+]
+
+{ #category : #'private ' }
+XdClientCommand >> authenticatedZincClient [
+	<return: #ZnClient>
+	| aClient |
+	aClient := self zincClient.
+	self client authentication 
+		zincClient: aClient;
+		execute.
+	^ aClient
+]
 
 { #category : #accessing }
 XdClientCommand >> client [
@@ -20,21 +35,11 @@ XdClientCommand >> client: anObject [
 	client := anObject
 ]
 
-{ #category : #execution }
-XdClientCommand >> execute [
-	self subclassResponsibility
-]
-
 { #category : #initialization }
 XdClientCommand >> initialize [
 	super initialize.
 	client := XdClient null.
 	signalProgress := false.
-]
-
-{ #category : #accessing }
-XdClientCommand >> name [
-	^ self printString
 ]
 
 { #category : #accessing }
@@ -46,4 +51,9 @@ XdClientCommand >> signalProgress [
 { #category : #accessing }
 XdClientCommand >> signalProgress: aBoolean [
 	signalProgress := aBoolean
+]
+
+{ #category : #'private ' }
+XdClientCommand >> zincClient [
+	^ zincClient ifNil: [ zincClient := ZnClient new ]
 ]
