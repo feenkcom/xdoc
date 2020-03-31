@@ -179,7 +179,6 @@ XdClient >> initialize [
 XdClient >> publish: aXdFile [ 
 	"Publish an XDoc file to a public server"
 	| aCommand |
-	self halt.
 	aCommand := XdClientPublishXDocCommand new
 		client: self;
 		xdoc: aXdFile;
