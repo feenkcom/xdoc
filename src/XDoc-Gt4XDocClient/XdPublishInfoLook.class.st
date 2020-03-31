@@ -6,7 +6,9 @@ Class {
 		'titleElement',
 		'authorElement',
 		'descriptionElement',
-		'publishButton'
+		'publishButton',
+		'passwordElement',
+		'usernameElement'
 	],
 	#category : #'XDoc-Gt4XDocClient-Publish'
 }
@@ -33,12 +35,20 @@ XdPublishInfoLook >> initialize [
 	titleElement := self newTitleElement.
 	authorElement := self newAuthorElement.
 	descriptionElement := self newDescriptionElement.
+	usernameElement := self newUsernameElement.
+	passwordElement := self newPasswordElement.
 	publishButton := self newPublishButtonElement.
 	self addChangeAddChildAs: #(content title) with: [ titleElement ].
 	self addChangeAddChildAs: #(content author) with: [ authorElement ].
 	self
 		addChangeAddChildAs: #(content description)
 		with: [ descriptionElement ].
+	self
+		addChangeAddChildAs: #(content username)
+		with: [ usernameElement ].
+	self
+		addChangeAddChildAs: #(content password)
+		with: [ passwordElement ].
 	self addChangeAddChildAs: #(content button) with: [ publishButton ].
 	self
 		addChangeProperty: #(widgetContent layout)
@@ -82,6 +92,16 @@ XdPublishInfoLook >> newDescriptionElement [
 ]
 
 { #category : #'instance creation' }
+XdPublishInfoLook >> newPasswordElement [
+	^ BrEditorElement new
+			look: BrGlamorousInputFieldSpacingLook + XdPublishInfoInnerWidgetLook;
+			editor: (BrTextEditor new text: self info password);
+			constraintsDo: [ :c | 
+				c horizontal matchParent.
+				c vertical fitContent ]
+]
+
+{ #category : #'instance creation' }
 XdPublishInfoLook >> newPublishButtonElement [
 	^ BrButton new
 			look: BrGlamorousButtonWithIconLook
@@ -102,6 +122,16 @@ XdPublishInfoLook >> newTitleElement [
 	^ BrEditorElement new
 			look: BrGlamorousInputFieldSpacingLook + XdPublishInfoInnerWidgetLook;
 			editor: (BrTextEditor new text: self info title);
+			constraintsDo: [ :c | 
+				c horizontal matchParent.
+				c vertical fitContent ]
+]
+
+{ #category : #'instance creation' }
+XdPublishInfoLook >> newUsernameElement [
+	^ BrEditorElement new
+			look: BrGlamorousInputFieldSpacingLook + XdPublishInfoInnerWidgetLook;
+			editor: (BrTextEditor new text: self info username);
 			constraintsDo: [ :c | 
 				c horizontal matchParent.
 				c vertical fitContent ]
@@ -130,6 +160,18 @@ XdPublishInfoLook >> onInfoChanged [
 			do: [ :anEvent | anInfo description: descriptionElement editor text ];
 			addEventHandlerOn: BrTextEditorInsertedEvent 
 			do: [ :anEvent | anInfo description: descriptionElement editor text ].
+		usernameElement editor text: self info username asRopedText.
+		usernameElement editor 
+			addEventHandlerOn: BrTextEditorDeletedEvent 
+			do: [ :anEvent | anInfo username: usernameElement editor text ];
+			addEventHandlerOn: BrTextEditorInsertedEvent 
+			do: [ :anEvent | anInfo username: usernameElement editor text ].
+		passwordElement editor text: self info password asRopedText.
+		passwordElement editor 
+			addEventHandlerOn: BrTextEditorDeletedEvent 
+			do: [ :anEvent | anInfo password: passwordElement editor text ];
+			addEventHandlerOn: BrTextEditorInsertedEvent 
+			do: [ :anEvent | anInfo password: passwordElement editor text ].
 		publishButton action: (MessageSend receiver: self info selector: #publish)
 	]
 ]

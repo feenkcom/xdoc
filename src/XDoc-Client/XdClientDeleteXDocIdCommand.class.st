@@ -10,7 +10,7 @@ Class {
 
 { #category : #execution }
 XdClientDeleteXDocIdCommand >> execute [
-	self response: (ZnClient new
+	self response: (self zincClient
 		url: self xdocUrl;
 		delete;
 		response).

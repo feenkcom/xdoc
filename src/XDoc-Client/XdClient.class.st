@@ -1,6 +1,8 @@
 Class {
 	#name : #XdClient,
 	#superclass : #XdProtoClient,
+	#traits : 'TGtOptions',
+	#classTraits : 'TGtOptions classTrait',
 	#instVars : [
 		'serverUrl',
 		'signalProgress'
@@ -44,6 +46,19 @@ XdClient >> async [
 	^ XdAsyncClient new client: self
 ]
 
+{ #category : #'accessing - options - authentication' }
+XdClient >> authentication [
+	self optionAt: #authentication ifAbsent: [ XdClientCommand null ]
+]
+
+{ #category : #'accessing - options - authentication' }
+XdClient >> authentication: aXdAuthenticationCommand [
+	self 
+		assert: [ aXdAuthenticationCommand isNotNil ] 
+		description: [ 'Authentication must be non-nil' ].
+	self optionAt: #authentication put: aXdAuthenticationCommand
+]
+
 { #category : #actions }
 XdClient >> deleteXDocFromUrl: anUrl [
 	<return: #ZnResponse>
@@ -68,7 +83,7 @@ XdClient >> deleteXDocId: anId [
 		response
 ]
 
-{ #category : #'accesing - computed' }
+{ #category : #'accessing - computed' }
 XdClient >> documents [
 	<return: #Array of: #XdFileInfo>
 	^ self downloadList
@@ -129,6 +144,16 @@ XdClient >> downloadXDocUsingFileInfo: aXdFileInfo [
 		xdFile
 ]
 
+{ #category : #executing }
+XdClient >> executeCommand: aXdClientCommand [
+	<return: #XdCommandResponse>
+	| aWrapperCommand |
+	aWrapperCommand := self wrapperCommand.
+	^ aWrapperCommand 
+		ifNil: [ aXdClientCommand execute ] 
+		ifNotNil: [ (aWrapperCommand copy deepCommand: aXdClientCommand) execute ]
+]
+
 { #category : #'gt-extension' }
 XdClient >> gtDocumentListFor: aView [
 	<gtView>
@@ -154,6 +179,7 @@ XdClient >> initialize [
 XdClient >> publish: aXdFile [ 
 	"Publish an XDoc file to a public server"
 	| aCommand |
+	self halt.
 	aCommand := XdClientPublishXDocCommand new
 		client: self;
 		xdoc: aXdFile;
@@ -184,4 +210,12 @@ XdClient >> serverUrl: aZnUrl [
 XdClient >> signalProgress [
 	<return: #Boolean>
 	^ signalProgress
+]
+
+{ #category : #'accessing - options - authentication' }
+XdClient >> username: aUsername password: aPassword [
+	self authentication: (XdBasicAuthenticationCommand new 
+		client: self;
+		username: aUsername; 
+		password: aPassword)
 ]
