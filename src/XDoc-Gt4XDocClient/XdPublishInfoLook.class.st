@@ -93,12 +93,19 @@ XdPublishInfoLook >> newDescriptionElement [
 
 { #category : #'instance creation' }
 XdPublishInfoLook >> newPasswordElement [
-	^ BrEditorElement new
-			look: BrGlamorousInputFieldSpacingLook + XdPublishInfoInnerWidgetLook;
-			editor: (BrTextEditor new text: self info password);
-			constraintsDo: [ :c | 
-				c horizontal matchParent.
-				c vertical fitContent ]
+	"| inputElement |
+	inputElement := BrEditorElement new.
+	inputElement look:  BrGlamorousInputFieldSpacingLook + XdPublishInfoInnerWidgetLook.
+	inputElement constraintsDo: [ :c | 
+		c horizontal matchParent.
+		c vertical fitContent ].
+	inputElement editor: (BrTextEditor new text: self info password).
+	inputElement editor text replacingText: $*.
+	^ inputElement."
+	
+	^ BrEditor new
+		look: (BrGlamorousRegularEditorLook new replacingText: $*);
+		text: self info password asString. 
 ]
 
 { #category : #'instance creation' }
