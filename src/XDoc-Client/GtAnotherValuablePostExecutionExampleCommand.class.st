@@ -1,5 +1,5 @@
 Class {
 	#name : #GtAnotherValuablePostExecutionExampleCommand,
 	#superclass : #GtValuablePostExecutionExampleCommand,
-	#category : #'XDoc-Client-Decorated Command Builder'
+	#category : #'XDoc-Client-Decorating Command Builder'
 }

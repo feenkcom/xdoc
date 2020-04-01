@@ -5,7 +5,7 @@ Trait {
 	],
 	#traits : 'TGtOptions',
 	#classTraits : 'TGtOptions classTrait',
-	#category : #'XDoc-Client-Decorated Command Builder'
+	#category : #'XDoc-Client-Decorating Command Builder'
 }
 
 { #category : #'as yet unclassified' }

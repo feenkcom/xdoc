@@ -1,6 +1,6 @@
 Trait {
 	#name : #TGtReplacingCommand,
-	#category : #'XDoc-Client-Decorated Command Builder'
+	#category : #'XDoc-Client-Decorating Command Builder'
 }
 
 { #category : #testing }

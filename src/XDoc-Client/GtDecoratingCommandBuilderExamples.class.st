@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'commands'
 	],
-	#category : #'XDoc-Client-Decorated Command Builder'
+	#category : #'XDoc-Client-Decorating Command Builder'
 }
 
 { #category : #'examples - commands' }

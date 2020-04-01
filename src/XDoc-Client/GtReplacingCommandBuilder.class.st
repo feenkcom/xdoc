@@ -1,7 +1,7 @@
 Class {
 	#name : #GtReplacingCommandBuilder,
 	#superclass : #GtDecoratingCommandBuilder,
-	#category : #'XDoc-Client-Decorated Command Builder'
+	#category : #'XDoc-Client-Decorating Command Builder'
 }
 
 { #category : #accessing }

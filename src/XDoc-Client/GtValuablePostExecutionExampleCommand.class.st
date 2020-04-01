@@ -7,7 +7,7 @@ Class {
 		'command',
 		'valuable'
 	],
-	#category : #'XDoc-Client-Decorated Command Builder'
+	#category : #'XDoc-Client-Decorating Command Builder'
 }
 
 { #category : #accessing }
