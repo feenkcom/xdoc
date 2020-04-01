@@ -14,6 +14,11 @@ XdClientCommand class >> null [
 	^ XdNullCommand default
 ]
 
+{ #category : #visiting }
+XdClientCommand >> accept: aVisitor [
+	^ self subclassResponsibility
+]
+
 { #category : #'private ' }
 XdClientCommand >> authenticatedZincClient [
 	<return: #ZnClient>

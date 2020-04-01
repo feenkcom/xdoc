@@ -1,6 +1,8 @@
 Class {
 	#name : #XdZincResponse,
 	#superclass : #XdZincProtoResponse,
+	#traits : 'TGtResponseStatus',
+	#classTraits : 'TGtResponseStatus classTrait',
 	#instVars : [
 		'response'
 	],
@@ -10,6 +12,12 @@ Class {
 { #category : #factory }
 XdZincResponse class >> null [
 	^ XdZincNullResponse default
+]
+
+{ #category : #testing }
+XdZincResponse >> isResponse [
+	<return: #Boolean>
+	^ true
 ]
 
 { #category : #accessing }

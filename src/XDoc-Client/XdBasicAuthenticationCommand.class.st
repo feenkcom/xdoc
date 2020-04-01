@@ -23,6 +23,15 @@ XdBasicAuthenticationCommand >> password: anObject [
 	password := anObject
 ]
 
+{ #category : #printing }
+XdBasicAuthenticationCommand >> printOn: aStream [
+	self username ifNil: [ ^ super printOn: aStream ].
+	aStream 
+		nextPutAll: 'Authenticate with a';
+		print: self username;
+		nextPutAll: ' username password'
+]
+
 { #category : #accessing }
 XdBasicAuthenticationCommand >> username [
 	^ username

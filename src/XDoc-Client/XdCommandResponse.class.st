@@ -1,8 +1,8 @@
 Class {
 	#name : #XdCommandResponse,
 	#superclass : #Object,
-	#traits : 'TGtAssert',
-	#classTraits : 'TGtAssert classTrait',
+	#traits : 'TGtAssert + TGtResponseStatus',
+	#classTraits : 'TGtAssert classTrait + TGtResponseStatus classTrait',
 	#instVars : [
 		'response',
 		'command'
@@ -22,6 +22,12 @@ XdCommandResponse >> command: anXdClientCommand [
 		assert: [ anXdClientCommand isNotNil ] 
 		description: [ 'Command response must be non-nil' ].
 	command := anXdClientCommand
+]
+
+{ #category : #testing }
+XdCommandResponse >> hasResponse [
+	<return: #Boolean>
+	^ self response isResponse
 ]
 
 { #category : #initialization }

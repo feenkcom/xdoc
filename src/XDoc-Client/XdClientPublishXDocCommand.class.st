@@ -8,6 +8,11 @@ Class {
 	#category : #'XDoc-Client-Commands'
 }
 
+{ #category : #visitor }
+XdClientPublishXDocCommand >> accept: aVisitor [
+	^ aVisitor visitXdClientPublishXDocCommand: self
+]
+
 { #category : #execution }
 XdClientPublishXDocCommand >> execute [
 	self response: (self zincClient
