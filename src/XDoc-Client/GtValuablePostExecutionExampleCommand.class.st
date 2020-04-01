@@ -1,6 +1,8 @@
 Class {
 	#name : #GtValuablePostExecutionExampleCommand,
 	#superclass : #Object,
+	#traits : 'TGtReplacingCommand',
+	#classTraits : 'TGtReplacingCommand classTrait',
 	#instVars : [
 		'command',
 		'valuable'

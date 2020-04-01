@@ -1,8 +1,8 @@
 Class {
 	#name : #XdClient,
 	#superclass : #XdProtoClient,
-	#traits : 'TGtOptions',
-	#classTraits : 'TGtOptions classTrait',
+	#traits : 'TGtReplacingCommandHolder',
+	#classTraits : 'TGtReplacingCommandHolder classTrait',
 	#instVars : [
 		'serverUrl',
 		'signalProgress'
@@ -47,16 +47,8 @@ XdClient >> async [
 ]
 
 { #category : #'accessing - options - authentication' }
-XdClient >> authentication [
-	self optionAt: #authentication ifAbsent: [ XdClientCommand null ]
-]
-
-{ #category : #'accessing - options - authentication' }
 XdClient >> authentication: aXdAuthenticationCommand [
-	self 
-		assert: [ aXdAuthenticationCommand isNotNil ] 
-		description: [ 'Authentication must be non-nil' ].
-	self optionAt: #authentication put: aXdAuthenticationCommand
+	self replacingCommand: aXdAuthenticationCommand
 ]
 
 { #category : #actions }
@@ -142,16 +134,6 @@ XdClient >> downloadXDocUsingFileInfo: aXdFileInfo [
 		fileInfo: aXdFileInfo;
 		execute;
 		xdFile
-]
-
-{ #category : #executing }
-XdClient >> executeCommand: aXdClientCommand [
-	<return: #XdCommandResponse>
-	| aWrapperCommand |
-	aWrapperCommand := self wrapperCommand.
-	^ aWrapperCommand 
-		ifNil: [ aXdClientCommand execute ] 
-		ifNotNil: [ (aWrapperCommand copy deepCommand: aXdClientCommand) execute ]
 ]
 
 { #category : #'gt-extension' }

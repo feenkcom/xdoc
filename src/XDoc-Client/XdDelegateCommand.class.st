@@ -1,6 +1,6 @@
 Class {
 	#name : #XdDelegateCommand,
-	#superclass : #XdClientCommand,
+	#superclass : #XdProtoClientCommand,
 	#instVars : [
 		'command'
 	],
@@ -20,4 +20,14 @@ XdDelegateCommand >> command [
 { #category : #accessing }
 XdDelegateCommand >> command: anObject [
 	command := anObject
+]
+
+{ #category : #executing }
+XdDelegateCommand >> executeSubCommand [
+	self command execute
+]
+
+{ #category : #'private ' }
+XdDelegateCommand >> zincClient [
+	<return: #ZnClient>
 ]

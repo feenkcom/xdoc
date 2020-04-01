@@ -8,6 +8,11 @@ Class {
 	#category : #'XDoc-Client-Commands'
 }
 
+{ #category : #authentication }
+XdBasicAuthenticationCommand >> authenticate [
+	self zincClient username: self username password: self password.
+]
+
 { #category : #accessing }
 XdBasicAuthenticationCommand >> password [
 	^ password

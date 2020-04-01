@@ -1,20 +1,16 @@
 Class {
 	#name : #XdAuthenticationCommand,
-	#superclass : #XdClientCommand,
+	#superclass : #XdDelegateCommand,
 	#category : #'XDoc-Client-Commands'
 }
 
-{ #category : #factory }
-XdAuthenticationCommand class >> null [
-	^ XdNullAuthenticationCommand default
+{ #category : #authentication }
+XdAuthenticationCommand >> authenticate [
+	self subclassResponsibility
 ]
 
-{ #category : #accessing }
-XdAuthenticationCommand >> zincClient [
-	^ zincClient
-]
-
-{ #category : #accessing }
-XdAuthenticationCommand >> zincClient: anObject [
-	zincClient := anObject
+{ #category : #execution }
+XdAuthenticationCommand >> execute [
+	self authenticate.
+	self executeSubCommand
 ]

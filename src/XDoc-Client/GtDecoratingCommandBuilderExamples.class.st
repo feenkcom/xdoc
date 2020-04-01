@@ -1,5 +1,5 @@
 Class {
-	#name : #GtDecoratedCommandBuilderExamples,
+	#name : #GtDecoratingCommandBuilderExamples,
 	#superclass : #Object,
 	#instVars : [
 		'commands'
@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #'examples - commands' }
-GtDecoratedCommandBuilderExamples >> anotherPostExecutionExampleCommand [
+GtDecoratingCommandBuilderExamples >> anotherPostExecutionExampleCommand [
 	<gtExample>
 	| aCommand aValuable |
 	aCommand := self basicAnotherPostExecutionExampleCommand.
@@ -20,7 +20,7 @@ GtDecoratedCommandBuilderExamples >> anotherPostExecutionExampleCommand [
 ]
 
 { #category : #'examples - commands' }
-GtDecoratedCommandBuilderExamples >> basicAnotherPostExecutionExampleCommand [
+GtDecoratingCommandBuilderExamples >> basicAnotherPostExecutionExampleCommand [
 	<gtExample>
 	| aCommand |
 	aCommand := GtAnotherValuablePostExecutionExampleCommand new.
@@ -29,16 +29,16 @@ GtDecoratedCommandBuilderExamples >> basicAnotherPostExecutionExampleCommand [
 ]
 
 { #category : #'examples - builder' }
-GtDecoratedCommandBuilderExamples >> basicBuilder [
+GtDecoratingCommandBuilderExamples >> basicBuilder [
 	<gtExample>
 	| aBuilder |
-	aBuilder := GtDecoratedCommandBuilder new.
+	aBuilder := GtReplacingCommandBuilder new.
 	self assert: aBuilder commands size isZero.
 	^ aBuilder
 ]
 
 { #category : #'examples - commands' }
-GtDecoratedCommandBuilderExamples >> basicPostExecutionExampleCommand [
+GtDecoratingCommandBuilderExamples >> basicPostExecutionExampleCommand [
 	<gtExample>
 	| aCommand |
 	aCommand := GtValuablePostExecutionExampleCommand new.
@@ -47,7 +47,7 @@ GtDecoratedCommandBuilderExamples >> basicPostExecutionExampleCommand [
 ]
 
 { #category : #'examples - builder' }
-GtDecoratedCommandBuilderExamples >> builderWithOnePostExecutionCommand [
+GtDecoratingCommandBuilderExamples >> builderWithOnePostExecutionCommand [
 	<gtExample>
 	| aBuilder aCommand |
 	aBuilder := self basicBuilder.
@@ -59,7 +59,7 @@ GtDecoratedCommandBuilderExamples >> builderWithOnePostExecutionCommand [
 ]
 
 { #category : #'examples - builder' }
-GtDecoratedCommandBuilderExamples >> builderWithTwoPostExecutionCommands [
+GtDecoratingCommandBuilderExamples >> builderWithTwoPostExecutionCommands [
 	<gtExample>
 	| aBuilder aCommand |
 	aBuilder := self builderWithOnePostExecutionCommand.
@@ -70,8 +70,32 @@ GtDecoratedCommandBuilderExamples >> builderWithTwoPostExecutionCommands [
 	^ aBuilder
 ]
 
+{ #category : #'examples - builder' }
+GtDecoratingCommandBuilderExamples >> builderWithTwoPostExecutionCommands_FirstReplaced [
+	<gtExample>
+	| aBuilder aCommand |
+	aBuilder := self builderWithTwoPostExecutionCommands.
+	aCommand := self postExecutionExampleCommand.
+	aBuilder replace: aCommand.
+	self assert: aBuilder commands size equals: 2.
+	self assert: aBuilder commands first equals: aCommand.
+	^ aBuilder
+]
+
+{ #category : #'examples - builder' }
+GtDecoratingCommandBuilderExamples >> builderWithTwoPostExecutionCommands_SecondReplaced [
+	<gtExample>
+	| aBuilder aCommand |
+	aBuilder := self builderWithTwoPostExecutionCommands.
+	aCommand := self anotherPostExecutionExampleCommand.
+	aBuilder replace: aCommand.
+	self assert: aBuilder commands size equals: 2.
+	self assert: aBuilder commands second equals: aCommand.
+	^ aBuilder
+]
+
 { #category : #'examples - decorated commands' }
-GtDecoratedCommandBuilderExamples >> decoratedCommandWithOnePostExecutionCommand [
+GtDecoratingCommandBuilderExamples >> decoratedCommandWithOnePostExecutionCommand [
 	<gtExample>
 	| aBuilder aCommand aDecoratedCommand |
 	aBuilder := self builderWithOnePostExecutionCommand.
@@ -87,7 +111,7 @@ GtDecoratedCommandBuilderExamples >> decoratedCommandWithOnePostExecutionCommand
 ]
 
 { #category : #'examples - decorated commands' }
-GtDecoratedCommandBuilderExamples >> decoratedCommandWithTwoPostExecutionCommands [
+GtDecoratingCommandBuilderExamples >> decoratedCommandWithTwoPostExecutionCommands [
 	<gtExample>
 	| aBuilder aCommand aDecoratedCommand |
 	aBuilder := self builderWithTwoPostExecutionCommands.
@@ -107,7 +131,7 @@ GtDecoratedCommandBuilderExamples >> decoratedCommandWithTwoPostExecutionCommand
 ]
 
 { #category : #'examples - commands' }
-GtDecoratedCommandBuilderExamples >> exampleCommand [
+GtDecoratingCommandBuilderExamples >> exampleCommand [
 	<gtExample>
 	| aCommand |
 	aCommand := GtValuableExampleCommand new.
@@ -118,7 +142,7 @@ GtDecoratedCommandBuilderExamples >> exampleCommand [
 ]
 
 { #category : #'examples - commands' }
-GtDecoratedCommandBuilderExamples >> exampleCommandWithValuable [
+GtDecoratingCommandBuilderExamples >> exampleCommandWithValuable [
 	<gtExample>
 	| aCommand aValuable |
 	aCommand := self exampleCommand.
@@ -130,7 +154,7 @@ GtDecoratedCommandBuilderExamples >> exampleCommandWithValuable [
 ]
 
 { #category : #'examples - execution' }
-GtDecoratedCommandBuilderExamples >> executionWithOneDecoratedCommand [
+GtDecoratingCommandBuilderExamples >> executionWithOneDecoratedCommand [
 	<gtExample>
 	| aBuilder aCommand |
 	aBuilder := self builderWithOnePostExecutionCommand.
@@ -141,7 +165,7 @@ GtDecoratedCommandBuilderExamples >> executionWithOneDecoratedCommand [
 ]
 
 { #category : #'examples - execution' }
-GtDecoratedCommandBuilderExamples >> executionWithTwoDecoratedCommands [
+GtDecoratingCommandBuilderExamples >> executionWithTwoDecoratedCommands [
 	<gtExample>
 	| aBuilder aCommand |
 	aBuilder := self builderWithTwoPostExecutionCommands.
@@ -154,7 +178,7 @@ GtDecoratedCommandBuilderExamples >> executionWithTwoDecoratedCommands [
 ]
 
 { #category : #'examples - execution' }
-GtDecoratedCommandBuilderExamples >> executionWithoutDecoratedCommand [
+GtDecoratingCommandBuilderExamples >> executionWithoutDecoratedCommand [
 	<gtExample>
 	| aBuilder aCommand |
 	aBuilder := self basicBuilder.
@@ -165,7 +189,7 @@ GtDecoratedCommandBuilderExamples >> executionWithoutDecoratedCommand [
 ]
 
 { #category : #'examples - commands' }
-GtDecoratedCommandBuilderExamples >> postExecutionExampleCommand [
+GtDecoratingCommandBuilderExamples >> postExecutionExampleCommand [
 	<gtExample>
 	| aCommand aValuable |
 	aCommand := self basicPostExecutionExampleCommand.

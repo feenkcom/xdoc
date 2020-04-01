@@ -1,5 +1,5 @@
 Class {
-	#name : #GtDecoratedCommandBuilder,
+	#name : #GtDecoratingCommandBuilder,
 	#superclass : #Object,
 	#traits : 'TGtAssert',
 	#classTraits : 'TGtAssert classTrait',
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : #accessing }
-GtDecoratedCommandBuilder >> command: aCommand [
+GtDecoratingCommandBuilder >> command: aCommand [
 	self
 		assert: [ aCommand isNotNil ] 
 		description: [ 'Decorating command must be non-nil' ].
@@ -18,17 +18,17 @@ GtDecoratedCommandBuilder >> command: aCommand [
 ]
 
 { #category : #accessing }
-GtDecoratedCommandBuilder >> commands [
+GtDecoratingCommandBuilder >> commands [
 	^ commands
 ]
 
 { #category : #accessing }
-GtDecoratedCommandBuilder >> commands: anObject [
+GtDecoratingCommandBuilder >> commands: anObject [
 	commands := anObject
 ]
 
 { #category : #'private - execution' }
-GtDecoratedCommandBuilder >> decorateCommand: aCommand [
+GtDecoratingCommandBuilder >> decorateCommand: aCommand [
 	self
 		assert: [ aCommand isNotNil ] 
 		description: [ 'Executable command must be non-nil' ].
@@ -39,19 +39,19 @@ GtDecoratedCommandBuilder >> decorateCommand: aCommand [
 ]
 
 { #category : #defaults }
-GtDecoratedCommandBuilder >> defaultCommands [
+GtDecoratingCommandBuilder >> defaultCommands [
 	^ Array empty 
 ]
 
 { #category : #executing }
-GtDecoratedCommandBuilder >> execute: aCommand [
+GtDecoratingCommandBuilder >> execute: aCommand [
 	| aDecoratedCommand |
 	aDecoratedCommand := self decorateCommand: aCommand.
 	aDecoratedCommand execute.
 ]
 
 { #category : #'gt-extension' }
-GtDecoratedCommandBuilder >> gtCommandsFor: aView [
+GtDecoratingCommandBuilder >> gtCommandsFor: aView [
 	<gtView>
 	self commands ifNil: [ ^ aView empty ].
 	^ aView list
@@ -61,7 +61,7 @@ GtDecoratedCommandBuilder >> gtCommandsFor: aView [
 ]
 
 { #category : #initialization }
-GtDecoratedCommandBuilder >> initialize [
+GtDecoratingCommandBuilder >> initialize [
 	super initialize.
 	commands := self defaultCommands.
 ]
