@@ -10,7 +10,7 @@ Class {
 
 { #category : #execution }
 XdClientPublishXDocCommand >> execute [
-	self response: (ZnClient new
+	self response: (self zincClient
 		url: self postUrl;
 		entity: self xdocEntity;
 		post;
