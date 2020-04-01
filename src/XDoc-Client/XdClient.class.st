@@ -167,6 +167,7 @@ XdClient >> initialize [
 { #category : #'actions - modifying' }
 XdClient >> publish: aXdFile [ 
 	"Publish an XDoc file to a public server"
+	<return: #XdCommandResponse>
 	| aCommand |
 	aCommand := XdClientPublishXDocCommand new
 		client: self;
@@ -177,7 +178,15 @@ XdClient >> publish: aXdFile [
 			publicUrlToClipboard ]
 		ifFalse: [ 
 			aCommand responseToClipboard ].
-	^ aCommand
+	^ self responseFromCommand: aCommand
+]
+
+{ #category : #'private - results' }
+XdClient >> responseFromCommand: aCommand [
+	<return: #XdCommandResponse>
+	^ XdCommandResponseBuilder new
+		command: aCommand;
+		build
 ]
 
 { #category : #accessing }

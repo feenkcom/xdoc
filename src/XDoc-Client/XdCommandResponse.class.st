@@ -1,8 +1,8 @@
 Class {
 	#name : #XdCommandResponse,
 	#superclass : #Object,
-	#traits : 'TGtAssert',
-	#classTraits : 'TGtAssert classTrait',
+	#traits : 'TGtAssert + TGtResponseStatus',
+	#classTraits : 'TGtAssert classTrait + TGtResponseStatus classTrait',
 	#instVars : [
 		'response',
 		'command'
@@ -22,6 +22,29 @@ XdCommandResponse >> command: anXdClientCommand [
 		assert: [ anXdClientCommand isNotNil ] 
 		description: [ 'Command response must be non-nil' ].
 	command := anXdClientCommand
+]
+
+{ #category : #'gt-extension' }
+XdCommandResponse >> gtViewsInContext: aContext [
+	| anArray |
+	anArray := Array streamContents: [ :aStream | 
+		aStream nextPutAll: (super gtViewsInContext: aContext).
+		self hasResponse ifTrue: [
+			| aResponseViews | 
+			aResponseViews := GtPhlowViewsCollector new
+				fromObject: self response response;
+				to: ZnMessage;
+				context: aContext;
+				collect.
+			aStream nextPutAll: aResponseViews ] ].
+	GtPhlowViewsCollector sortByPriority: anArray.
+	^ anArray.
+]
+
+{ #category : #testing }
+XdCommandResponse >> hasResponse [
+	<return: #Boolean>
+	^ self response isResponse
 ]
 
 { #category : #initialization }

@@ -239,15 +239,16 @@ XdClientExamples >> publishXDoc [
 { #category : #'action - publish' }
 XdClientExamples >> publishXDoc_AuthenticatedServer_Authenticated [
 	<gtExample>
-	| aCommand aClient |
+	| anXdResponse aClient |
 	self setServerBasicAuthenticator.
 	aClient := self clientWithBasicAuthentication.
-	aCommand := aClient publish: documentsExamples documentWithFigureXDoc.
-	self assert: aCommand notNil.
-	self assert: aCommand response isSuccess.
-	self assert: aCommand response isError not.
-	self assert: aCommand response isAuthenticationRequired not.
-	^ aCommand
+	anXdResponse := aClient publish: documentsExamples documentWithFigureXDoc.
+	self assert: anXdResponse isNotNil.
+	self assert: anXdResponse isSuccess.
+	self assert: anXdResponse isError not.
+	self assert: anXdResponse isAuthenticationRequired not.
+	self assert: anXdResponse class equals: XdSuccessfullyPublishedResponse.
+	^ anXdResponse
 ]
 
 { #category : #'action - publish' }
