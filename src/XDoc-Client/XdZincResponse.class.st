@@ -14,19 +14,6 @@ XdZincResponse class >> null [
 	^ XdZincNullResponse default
 ]
 
-{ #category : #'gt-extension' }
-XdZincResponse >> gtViewsInContext: aContext [
-	^ Array streamContents: [ :aStream | 
-		| aZnResponseViews |
-		aZnResponseViews := GtPhlowViewsCollector new
-			fromObject: self response;
-			to: ZnMessage;
-			context: aContext;
-			collect.
-		aStream nextPutAll: aZnResponseViews.
-		aStream nextPutAll: (super gtViewsInContext: aContext). ]
-]
-
 { #category : #testing }
 XdZincResponse >> isResponse [
 	<return: #Boolean>
