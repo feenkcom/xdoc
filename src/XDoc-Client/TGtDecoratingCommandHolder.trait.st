@@ -4,7 +4,6 @@ Trait {
 		'decoratingCommand'
 	],
 	#traits : 'TGtOptions',
-	#classTraits : 'TGtOptions classTrait',
 	#category : #'XDoc-Client-Decorating Command Builder'
 }
 

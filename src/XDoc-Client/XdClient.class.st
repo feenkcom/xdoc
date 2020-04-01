@@ -40,7 +40,7 @@ XdClient class >> null [
 	^ XdNullClient uniqueInstance
 ]
 
-{ #category : #actions }
+{ #category : #'actions - reading' }
 XdClient >> async [
 	<return: #XdAsyncClient>
 	^ XdAsyncClient new client: self
@@ -51,7 +51,14 @@ XdClient >> authentication: aXdAuthenticationCommand [
 	self replacingCommand: aXdAuthenticationCommand
 ]
 
-{ #category : #actions }
+{ #category : #'accessing - options - decorating commands' }
+XdClient >> decoratingCommandBuilder [
+	^ self 
+		optionAt: self class decoratingCommandBuilderOptionName 
+		ifAbsentPut: [ self newDecoratingCommandBuilder ]
+]
+
+{ #category : #'actions - modifying' }
 XdClient >> deleteXDocFromUrl: anUrl [
 	<return: #ZnResponse>
 	"Delete an XDoc file from a public server"
@@ -64,7 +71,7 @@ XdClient >> deleteXDocFromUrl: anUrl [
 	^ self deleteXDocId: anId
 ]
 
-{ #category : #actions }
+{ #category : #'actions - modifying' }
 XdClient >> deleteXDocId: anId [
 	<return: #ZnResponse>
 	"Delete an XDoc file from a public server"
@@ -81,7 +88,7 @@ XdClient >> documents [
 	^ self downloadList
 ]
 
-{ #category : #actions }
+{ #category : #'actions - reading' }
 XdClient >> downloadFileInfo: aZnUrl [ 
 	"Download an XDoc file info from a public server"
 	<return: #XdFileInfo>
@@ -92,7 +99,7 @@ XdClient >> downloadFileInfo: aZnUrl [
 		fileInfo
 ]
 
-{ #category : #actions }
+{ #category : #'actions - reading' }
 XdClient >> downloadList [
 	<return: #Array of: #XdFileInfo>
 	^ XdClientDownloadListCommand new
@@ -102,7 +109,7 @@ XdClient >> downloadList [
 		list
 ]
 
-{ #category : #actions }
+{ #category : #'actions - reading' }
 XdClient >> downloadPreviewImageUsingFileInfo: aXdFileInfo [
 	<return: #Form>
 
@@ -113,7 +120,7 @@ XdClient >> downloadPreviewImageUsingFileInfo: aXdFileInfo [
 		execute
 ]
 
-{ #category : #actions }
+{ #category : #'actions - reading' }
 XdClient >> downloadXDoc: aZnUrl [ 
 	<return: #XdFile>
 	"Download an XDoc file from a public server"
@@ -124,7 +131,7 @@ XdClient >> downloadXDoc: aZnUrl [
 		xdFile
 ]
 
-{ #category : #actions }
+{ #category : #'actions - reading' }
 XdClient >> downloadXDocUsingFileInfo: aXdFileInfo [ 
 	<return: #XdFile>
 	"Download an XDoc file from a public server"
@@ -157,20 +164,20 @@ XdClient >> initialize [
 	signalProgress := false.
 ]
 
-{ #category : #actions }
+{ #category : #'actions - modifying' }
 XdClient >> publish: aXdFile [ 
 	"Publish an XDoc file to a public server"
 	| aCommand |
 	aCommand := XdClientPublishXDocCommand new
 		client: self;
-		xdoc: aXdFile;
-		execute.
-	^ aCommand isSuccess
+		xdoc: aXdFile.
+	self executeCommand: aCommand.
+	aCommand isSuccess
 		ifTrue: [ aCommand 
-			publicUrlToClipboard;
-			publicUrl ]
+			publicUrlToClipboard ]
 		ifFalse: [ 
-			aCommand responseToClipboard ]
+			aCommand responseToClipboard ].
+	^ aCommand
 ]
 
 { #category : #accessing }
@@ -195,8 +202,7 @@ XdClient >> signalProgress [
 
 { #category : #'accessing - options - authentication' }
 XdClient >> username: aUsername password: aPassword [
-	self authentication: (XdBasicAuthenticationCommand new 
-		client: self;
+	self authentication: (XdBasicAuthenticationCommand new
 		username: aUsername; 
 		password: aPassword)
 ]

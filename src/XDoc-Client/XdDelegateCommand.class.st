@@ -30,4 +30,5 @@ XdDelegateCommand >> executeSubCommand [
 { #category : #'private ' }
 XdDelegateCommand >> zincClient [
 	<return: #ZnClient>
+	^ self command zincClient
 ]

@@ -1,7 +1,6 @@
 Trait {
 	#name : #TGtReplacingCommandHolder,
 	#traits : 'TGtDecoratingCommandHolder - {#newDecoratingCommandBuilder}',
-	#classTraits : 'TGtDecoratingCommandHolder classTrait',
 	#category : #'XDoc-Client-Decorating Command Builder'
 }
 

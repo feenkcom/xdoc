@@ -9,6 +9,14 @@ Class {
 	#category : #'XDoc-Client-Examples'
 }
 
+{ #category : #server }
+XdClientExamples >> basicAuthenticator [
+	<gtExample>
+	^ ZnBasicAuthenticator
+		username: self joeDoeUsername
+		password: self joeDoePassword
+]
+
 { #category : #'action - delete from URL' }
 XdClientExamples >> basicIdFromUrlCommand [
 	<gtExample>
@@ -19,6 +27,17 @@ XdClientExamples >> basicIdFromUrlCommand [
 	^ anUrlFromUrlCommand
 ]
 
+{ #category : #server }
+XdClientExamples >> cleanServerBasicAuthenticator [
+	<gtExample>
+	| aServer anAuthenticator |
+	aServer := self startServer.
+	anAuthenticator := self basicAuthenticator.
+	aServer authenticator: nil.
+	self assert: aServer authenticator isNil.
+	^ aServer
+]
+
 { #category : #client }
 XdClientExamples >> client [
 	<gtExample>
@@ -27,6 +46,19 @@ XdClientExamples >> client [
 	anUrl := self serverUrl.
 	aClient serverUrl: anUrl.
 	self assert: aClient serverUrl equals: anUrl.
+	^ aClient
+]
+
+{ #category : #client }
+XdClientExamples >> clientWithBasicAuthentication [
+	<gtExample>
+	| aClient anUrl |
+	aClient := XdClient new.
+	anUrl := self serverUrl.
+	aClient serverUrl: anUrl.
+	aClient username: self joeDoeUsername password: self joeDoePassword.
+	self assert: aClient serverUrl equals: anUrl.
+	self assert: aClient decoratingCommandBuilder commands size equals: 1.
 	^ aClient
 ]
 
@@ -162,6 +194,16 @@ XdClientExamples >> initialize [
 	documentsExamples := XdDocumentsExamples new.
 ]
 
+{ #category : #server }
+XdClientExamples >> joeDoePassword [
+	^ 'Joe Doe''s secret password'
+]
+
+{ #category : #server }
+XdClientExamples >> joeDoeUsername [
+	^ 'JoeDoe'
+]
+
 { #category : #'action - download list' }
 XdClientExamples >> listFilePath [
 	<gtExample>
@@ -195,6 +237,36 @@ XdClientExamples >> publishXDoc [
 ]
 
 { #category : #'action - publish' }
+XdClientExamples >> publishXDoc_AuthenticatedServer_Authenticated [
+	<gtExample>
+	| aCommand aClient |
+	self setServerBasicAuthenticator.
+	aClient := self clientWithBasicAuthentication.
+	aCommand := aClient publish: documentsExamples documentWithFigureXDoc.
+	self assert: aCommand notNil.
+	self assert: aCommand response isSuccess.
+	self assert: aCommand response isError not.
+	self assert: aCommand response isAuthenticationRequired not.
+	^ aCommand
+]
+
+{ #category : #'action - publish' }
+XdClientExamples >> publishXDoc_AuthenticatedServer_Denied [
+	<gtExample>
+	| aCommand |
+	self setServerBasicAuthenticator.
+	aCommand := XdClientPublishXDocCommand new
+		client: self client;
+		xdoc: documentsExamples documentWithFigureXDoc;
+		execute.
+	self assert: aCommand notNil.
+	self assert: aCommand response isSuccess not.
+	self assert: aCommand response isError.
+	self assert: aCommand response isAuthenticationRequired.
+	^ aCommand
+]
+
+{ #category : #'action - publish' }
 XdClientExamples >> publishedResponse [
 	<gtExample>
 	^ ZnResponse created: (zincExamples serverUrl / '1') asString
@@ -205,6 +277,17 @@ XdClientExamples >> serverUrl [
 	<gtExample>
 	self startServer.
 	^ zincExamples serverUrl
+]
+
+{ #category : #server }
+XdClientExamples >> setServerBasicAuthenticator [
+	<gtExample>
+	| aServer anAuthenticator |
+	aServer := self startServer.
+	anAuthenticator := self basicAuthenticator.
+	aServer authenticator: anAuthenticator.
+	self assert: aServer authenticator equals: anAuthenticator.
+	^ aServer
 ]
 
 { #category : #server }
