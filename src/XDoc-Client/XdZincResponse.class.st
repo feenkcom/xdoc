@@ -1,23 +1,29 @@
 Class {
 	#name : #XdZincResponse,
-	#superclass : #XdZincProtoResponse,
+	#superclass : #XdProtoResponse,
 	#traits : 'TGtResponseStatus',
 	#classTraits : 'TGtResponseStatus classTrait',
 	#instVars : [
 		'response'
 	],
-	#category : #'XDoc-Client-Responses'
+	#category : #'XDoc-Client-Answers'
 }
 
 { #category : #factory }
 XdZincResponse class >> null [
-	^ XdZincNullResponse default
+	^ XdNullResponse default
 ]
 
 { #category : #testing }
 XdZincResponse >> isResponse [
 	<return: #Boolean>
 	^ true
+]
+
+{ #category : #accessing }
+XdZincResponse >> rawResponse [
+	<return: #ZnResponse>
+	^ self response
 ]
 
 { #category : #accessing }

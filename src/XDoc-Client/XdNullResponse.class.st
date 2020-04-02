@@ -1,63 +1,68 @@
 Class {
-	#name : #XdZincNullResponse,
-	#superclass : #XdZincProtoResponse,
+	#name : #XdNullResponse,
+	#superclass : #XdProtoResponse,
 	#traits : 'TGtUniqueInstance',
 	#classTraits : 'TGtUniqueInstance classTrait',
-	#category : #'XDoc-Client-Responses'
+	#category : #'XDoc-Client-Answers'
 }
 
 { #category : #'testing - response status' }
-XdZincNullResponse >> isAuthenticationRequired [
+XdNullResponse >> isAuthenticationRequired [
 	^ false
 ]
 
 { #category : #'testing - response status' }
-XdZincNullResponse >> isBadRequest [
+XdNullResponse >> isBadRequest [
 	^ false
 ]
 
 { #category : #'testing - response status' }
-XdZincNullResponse >> isCreated [
+XdNullResponse >> isCreated [
 	^ false
 ]
 
 { #category : #'testing - response status' }
-XdZincNullResponse >> isError [
+XdNullResponse >> isError [
 	^ false
 ]
 
 { #category : #'testing - response status' }
-XdZincNullResponse >> isInformational [
+XdNullResponse >> isInformational [
 	^ false
 ]
 
 { #category : #'testing - response status' }
-XdZincNullResponse >> isNoContent [
+XdNullResponse >> isNoContent [
 	^ false
 ]
 
 { #category : #'testing - response status' }
-XdZincNullResponse >> isNotFound [
+XdNullResponse >> isNotFound [
 	^ false
 ]
 
 { #category : #'testing - response status' }
-XdZincNullResponse >> isNotModified [
+XdNullResponse >> isNotModified [
 	^ false
 ]
 
 { #category : #'testing - response status' }
-XdZincNullResponse >> isRedirect [
+XdNullResponse >> isRedirect [
 	^ false
 ]
 
 { #category : #testing }
-XdZincNullResponse >> isResponse [
+XdNullResponse >> isResponse [
 	<return: #Boolean>
 	^ false
 ]
 
 { #category : #'testing - response status' }
-XdZincNullResponse >> isSuccess [
+XdNullResponse >> isSuccess [
 	^ false
+]
+
+{ #category : #accessing }
+XdNullResponse >> rawResponse [
+	^ nil
 ]

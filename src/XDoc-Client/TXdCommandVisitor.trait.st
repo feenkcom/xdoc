@@ -1,9 +1,19 @@
 Trait {
 	#name : #TXdCommandVisitor,
-	#category : #'XDoc-Client-Responses'
+	#category : #'XDoc-Client-Answers - Builder'
 }
 
 { #category : #visiting }
+TXdCommandVisitor >> visitXdAuthenticationCommand: aCommand [
+	^ aCommand command accept: self
+]
+
+{ #category : #visiting }
 TXdCommandVisitor >> visitXdClientPublishXDocCommand: aCommand [
+	^ self explicitRequirement
+]
+
+{ #category : #visiting }
+TXdCommandVisitor >> visitXdTaskItCommand: aCommand [
 	^ self explicitRequirement
 ]

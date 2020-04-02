@@ -1,11 +1,11 @@
 Class {
-	#name : #XdSuccessfullyPublishedResponse,
-	#superclass : #XdSuccessfulResponse,
-	#category : #'XDoc-Client-Responses'
+	#name : #XdSuccessfullyPublishedAnswer,
+	#superclass : #XdSuccessfulAnswer,
+	#category : #'XDoc-Client-Answers'
 }
 
-{ #category : #'as yet unclassified' }
-XdSuccessfullyPublishedResponse >> gtPublicUrlFor: aView [
+{ #category : #'gt-extension' }
+XdSuccessfullyPublishedAnswer >> gtPublicUrlFor: aView [
 	<gtView>
 	self command ifNil: [ ^ aView empty ].
 	^ aView textEditor

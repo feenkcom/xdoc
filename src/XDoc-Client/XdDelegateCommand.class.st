@@ -54,6 +54,12 @@ XdDelegateCommand >> putCommandsInto: aStream [
 ]
 
 { #category : #'private ' }
+XdDelegateCommand >> response [
+	<return: #ZnResponse>
+	^ self command response 
+]
+
+{ #category : #'private ' }
 XdDelegateCommand >> zincClient [
 	<return: #ZnClient>
 	^ self command zincClient

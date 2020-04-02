@@ -40,6 +40,14 @@ XdClient class >> null [
 	^ XdNullClient uniqueInstance
 ]
 
+{ #category : #'private - results' }
+XdClient >> answerFromCommand: aCommand [
+	<return: #XdCommandAnswer>
+	^ XdCommandAnswerBuilder new
+		commandChain: aCommand;
+		build
+]
+
 { #category : #'actions - reading' }
 XdClient >> async [
 	<return: #XdAsyncClient>
@@ -143,6 +151,11 @@ XdClient >> downloadXDocUsingFileInfo: aXdFileInfo [
 		xdFile
 ]
 
+{ #category : #'execution - decorating commands' }
+XdClient >> executeCommand: aCommand [
+	^ self decoratingCommandBuilder execute: aCommand
+]
+
 { #category : #'gt-extension' }
 XdClient >> gtDocumentListFor: aView [
 	<gtView>
@@ -167,26 +180,18 @@ XdClient >> initialize [
 { #category : #'actions - modifying' }
 XdClient >> publish: aXdFile [ 
 	"Publish an XDoc file to a public server"
-	<return: #XdCommandResponse>
-	| aCommand |
+	<return: #XdCommandAnswer>
+	| aCommand anExecutedCommand |
 	aCommand := XdClientPublishXDocCommand new
 		client: self;
 		xdoc: aXdFile.
-	self executeCommand: aCommand.
+	anExecutedCommand := self executeCommand: aCommand.
 	aCommand isSuccess
 		ifTrue: [ aCommand 
 			publicUrlToClipboard ]
 		ifFalse: [ 
 			aCommand responseToClipboard ].
-	^ self responseFromCommand: aCommand
-]
-
-{ #category : #'private - results' }
-XdClient >> responseFromCommand: aCommand [
-	<return: #XdCommandResponse>
-	^ XdCommandResponseBuilder new
-		command: aCommand;
-		build
+	^ self answerFromCommand: anExecutedCommand
 ]
 
 { #category : #accessing }

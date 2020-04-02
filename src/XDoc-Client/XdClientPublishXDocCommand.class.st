@@ -35,6 +35,20 @@ XdClientPublishXDocCommand >> postUrl [
 	^ self client serverUrl withPathSegments: XdConstants xdocsPathSegments
 ]
 
+{ #category : #printing }
+XdClientPublishXDocCommand >> printOn: aStream [
+	(self response isNotNil and: [ self response isSuccess ]) 
+		 ifTrue: [ aStream 
+			nextPutAll: 'Successfully published at ';
+			print: self publicUrl.
+			^ self ].
+	aStream nextPutAll: 'Publish XDoc document'.
+	self client ifNotNil: [
+		aStream nextPutAll: ' at '; print: self client serverUrl ].
+	self response ifNotNil: [ 
+		aStream nextPutAll: ' (failure)' ]
+]
+
 { #category : #accessing }
 XdClientPublishXDocCommand >> publicUrl [
 	<return: #ZnUrl>
