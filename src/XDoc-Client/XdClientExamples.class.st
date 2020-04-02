@@ -247,24 +247,44 @@ XdClientExamples >> publishXDoc_AuthenticatedServer_Authenticated [
 	self assert: anXdResponse isSuccess.
 	self assert: anXdResponse isError not.
 	self assert: anXdResponse isAuthenticationRequired not.
-	self assert: anXdResponse class equals: XdSuccessfullyPublishedResponse.
+	self assert: anXdResponse class equals: XdSuccessfullyPublishedAnswer.
+	self assert: anXdResponse command class equals: XdClientPublishXDocCommand.
+	self assert: anXdResponse response class equals: XdZincResponse.
+	^ anXdResponse
+]
+
+{ #category : #'action - publish' }
+XdClientExamples >> publishXDoc_AuthenticatedServer_Authenticated_TaskIt [
+	<gtExample>
+	| anXdResponse aClient |
+	self setServerBasicAuthenticator.
+	aClient := self clientWithBasicAuthentication.
+	anXdResponse := aClient taskIt; publish: documentsExamples documentWithFigureXDoc.
+	self assert: anXdResponse isNotNil.
+	self assert: anXdResponse isSuccess not.
+	self assert: anXdResponse isError not.
+	self assert: anXdResponse isAuthenticationRequired not.
+	self assert: anXdResponse class equals: XdTaskItCommandAnswer.
+	self assert: anXdResponse command class equals: XdTaskItCommand.
+	self assert: anXdResponse response class equals: XdNullResponse.
 	^ anXdResponse
 ]
 
 { #category : #'action - publish' }
 XdClientExamples >> publishXDoc_AuthenticatedServer_Denied [
 	<gtExample>
-	| aCommand |
+	| aClient anXdResponse |
 	self setServerBasicAuthenticator.
-	aCommand := XdClientPublishXDocCommand new
-		client: self client;
-		xdoc: documentsExamples documentWithFigureXDoc;
-		execute.
-	self assert: aCommand notNil.
-	self assert: aCommand response isSuccess not.
-	self assert: aCommand response isError.
-	self assert: aCommand response isAuthenticationRequired.
-	^ aCommand
+	aClient := self client.
+	anXdResponse := aClient publish: documentsExamples documentWithFigureXDoc.
+	self assert: anXdResponse notNil.
+	self assert: anXdResponse isSuccess not.
+	self assert: anXdResponse isError.
+	self assert: anXdResponse isAuthenticationRequired.
+	self assert: anXdResponse class equals: XdAuthenticationRequiredAnswer.
+	self assert: anXdResponse command class equals: XdClientPublishXDocCommand.
+	self assert: anXdResponse response class equals: XdZincResponse.
+	^ anXdResponse
 ]
 
 { #category : #'action - publish' }

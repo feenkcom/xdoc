@@ -2,11 +2,11 @@ Extension { #name : #XdZincResponse }
 
 { #category : #'*XDoc-Gt4XDocClient' }
 XdZincResponse >> gtViewsInContext: aContext [
-	^ Array streamContents: [ :aStream | 
+	^ OrderedCollection streamContents: [ :aStream | 
 		| aZnResponseViews |
 		aZnResponseViews := GtPhlowViewsCollector new
 			fromObject: self response;
-			to: ZnMessage;
+			justBelowTheObject;
 			context: aContext;
 			collect.
 		aStream nextPutAll: aZnResponseViews.

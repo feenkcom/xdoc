@@ -4,6 +4,11 @@ Class {
 	#category : #'XDoc-Client-Commands'
 }
 
+{ #category : #visitor }
+XdAuthenticationCommand >> accept: aVisitor [
+	^ aVisitor visitXdAuthenticationCommand: self
+]
+
 { #category : #authentication }
 XdAuthenticationCommand >> authenticate [
 	self subclassResponsibility

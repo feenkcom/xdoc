@@ -48,6 +48,7 @@ GtDecoratingCommandBuilder >> execute: aCommand [
 	| aDecoratedCommand |
 	aDecoratedCommand := self decorateCommand: aCommand.
 	aDecoratedCommand execute.
+	^ aDecoratedCommand
 ]
 
 { #category : #'gt-extension' }
@@ -57,7 +58,7 @@ GtDecoratingCommandBuilder >> gtCommandsFor: aView [
 	^ aView list
 		title: 'Commands';
 		priority: 1;
-		items: [ self commands ]
+		items: [ self commands reversed ]
 ]
 
 { #category : #initialization }
