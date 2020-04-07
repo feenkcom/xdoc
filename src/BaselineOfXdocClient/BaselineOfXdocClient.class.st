@@ -30,7 +30,8 @@ BaselineOfXdocClient >> baseline: spec [
 		package: 'XDoc-Extensions' with: [ spec 
 			requires: #( 'XdocClientMinimal' 'Brick' 'GToolkitPhlow' ) ];
 		package: 'XDoc-Gt4XDocClient' with: [ spec 
-			requires: #( 'XdocClientMinimal' 'Brick' 'GToolkitPhlow' 'GToolkitSpotter' ) ]
+			requires: #( 'XdocClientMinimal' 'Brick' 'GToolkitPhlow' 'GToolkitSpotter' ) ];
+		package: 'XDoc-Store'
 	].
 
 ]
