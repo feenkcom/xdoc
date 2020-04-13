@@ -90,6 +90,11 @@ XdCommandAnswerBuilder >> visitXdClientPublishXDocCommand: aCommand [
 ]
 
 { #category : #visiting }
+XdCommandAnswerBuilder >> visitXdClientUpdateXDocCommand: aCommand [
+	^ self buildResponse: aCommand
+]
+
+{ #category : #visiting }
 XdCommandAnswerBuilder >> visitXdTaskItCommand: aCommand [
 	^ XdTaskItCommandAnswer new
 		command: aCommand;

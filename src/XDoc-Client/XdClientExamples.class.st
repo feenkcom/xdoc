@@ -101,7 +101,7 @@ XdClientExamples >> deletePathString [
 XdClientExamples >> deleteXDocId [
 	<gtExample>
 	| aResponse |
-	aResponse := self client deleteXDocId: self xdocIdSegment.
+	aResponse := self client deleteId: self xdocIdSegment.
 	self assert: aResponse notNil.
 	^ aResponse
 ]
@@ -111,7 +111,7 @@ XdClientExamples >> deleteXDocUrl [
 	<gtExample>
 	| aPublishCommand aDeleteResponse |
 	aPublishCommand := self publishedResponse.
-	aDeleteResponse := self client deleteXDocFromUrl: self xdocIdSegment.
+	aDeleteResponse := self client deleteUrl: self xdocIdSegment.
 	self assert: aDeleteResponse notNil.
 	^ aDeleteResponse
 ]
@@ -327,6 +327,23 @@ XdClientExamples >> startServer [
 { #category : #server }
 XdClientExamples >> stopServer [
 	^ zincExamples stopServer
+]
+
+{ #category : #'action - update' }
+XdClientExamples >> updateXDoc_AuthenticatedServer_Authenticated [
+	<gtExample>
+	| anXdResponse aClient |
+	self setServerBasicAuthenticator.
+	aClient := self clientWithBasicAuthentication.
+	anXdResponse := aClient update: documentsExamples documentWithFigureXDoc url: (self serverUrl / '1').
+	self assert: anXdResponse isNotNil.
+	self assert: anXdResponse isSuccess.
+	self assert: anXdResponse isError not.
+	self assert: anXdResponse isAuthenticationRequired not.
+	self assert: anXdResponse class equals: XdSuccessfullyUpdatedAnswer.
+	self assert: anXdResponse command class equals: XdClientUpdateXDocCommand.
+	self assert: anXdResponse response class equals: XdZincResponse.
+	^ anXdResponse
 ]
 
 { #category : #'action - delete from URL' }

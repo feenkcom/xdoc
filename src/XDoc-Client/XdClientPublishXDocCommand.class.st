@@ -1,10 +1,6 @@
 Class {
 	#name : #XdClientPublishXDocCommand,
-	#superclass : #XdClientCommand,
-	#instVars : [
-		'xdoc',
-		'response'
-	],
+	#superclass : #XdClientCreateXDocCommand,
 	#category : #'XDoc-Client-Commands'
 }
 
@@ -49,12 +45,6 @@ XdClientPublishXDocCommand >> printOn: aStream [
 		aStream nextPutAll: ' (failure)' ]
 ]
 
-{ #category : #accessing }
-XdClientPublishXDocCommand >> publicUrl [
-	<return: #ZnUrl>
-	^ self response location asZnUrl
-]
-
 { #category : #actions }
 XdClientPublishXDocCommand >> publicUrlToClipboard [
 	| aPublishedUrl |
@@ -64,16 +54,6 @@ XdClientPublishXDocCommand >> publicUrlToClipboard [
 	aPublishedUrl ifNil: [ ^ self inform: 'An HTML file was not published' ].
 	Clipboard clipboardText: aPublishedUrl asString.
    self inform: aPublishedUrl asString, ' was published and the URL was copied to a clipboard'.
-]
-
-{ #category : #accessing }
-XdClientPublishXDocCommand >> response [
-	^ response
-]
-
-{ #category : #accessing }
-XdClientPublishXDocCommand >> response: anObject [
-	response := anObject
 ]
 
 { #category : #actions }
@@ -87,29 +67,4 @@ XdClientPublishXDocCommand >> responseToClipboard [
 	aString := self response printString.
 	Clipboard clipboardText: aString.
    self inform: aString , ' error occurred'.
-]
-
-{ #category : #accessing }
-XdClientPublishXDocCommand >> xdoc [
-	<return: #XdFile>
-	^ xdoc
-]
-
-{ #category : #accessing }
-XdClientPublishXDocCommand >> xdoc: aXdFile [ 
-	xdoc := aXdFile
-]
-
-{ #category : #private }
-XdClientPublishXDocCommand >> xdocBytes [
-	<return: #ByteArray>
-	self flag: 'XDoc API proposeal [feenkcom/gtoolkit#888]'.
-	"^ self xdoc reader bytes"
-	^ self xdoc streamingStrategy bytes
-]
-
-{ #category : #accessing }
-XdClientPublishXDocCommand >> xdocEntity [
-	<return: #ZnEntity>
-	^ ZnEntity bytes: self xdocBytes
 ]

@@ -14,6 +14,11 @@ TXdCommandVisitor >> visitXdClientPublishXDocCommand: aCommand [
 ]
 
 { #category : #visiting }
+TXdCommandVisitor >> visitXdClientUpdateXDocCommand: aCommand [
+	^ self explicitRequirement
+]
+
+{ #category : #visiting }
 TXdCommandVisitor >> visitXdTaskItCommand: aCommand [
 	^ self explicitRequirement
 ]
