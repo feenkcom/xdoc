@@ -4,10 +4,18 @@ Class {
 	#traits : 'TXdShareInformationHolderAccess',
 	#classTraits : 'TXdShareInformationHolderAccess classTrait',
 	#instVars : [
-		'pager'
+		'pager',
+		'document'
 	],
 	#category : #'XDoc-Gt4XDocClient-Dialog - Look'
 }
+
+{ #category : #execution }
+XdShareDialogLook >> executePublishAction [
+	self pager addPage: (self 
+		newProgressPageLabel: 'Publishing...').
+	self pager smoothScrollToLast.
+]
 
 { #category : #initialization }
 XdShareDialogLook >> initialize [ 
@@ -61,11 +69,28 @@ XdShareDialogLook >> newDeletePage [
 { #category : #'instance creation' }
 XdShareDialogLook >> newInitialPage [
 	<return: #BlElement>
-	^ XdInitialDialogPageStencil new 
+	^ XdInitialDialogStencil new 
 		informationHolder: self informationHolder;
 		publishAction: [ self proceedPublishStep ];
 		updateAction: [ self proceedUpdateStep ];
 		deleteAction: [ self proceedDeleteStep ];
+		asElement
+]
+
+{ #category : #'instance creation' }
+XdShareDialogLook >> newProgressPage [
+	<return: #BlElement>
+	^ XdProgressDialogStencil new
+		informationHolder: self informationHolder
+		asElement
+]
+
+{ #category : #'instance creation' }
+XdShareDialogLook >> newProgressPageLabel: aString [
+	<return: #BlElement>
+	^ XdProgressDialogStencil new
+		informationHolder: self informationHolder;
+		title: aString;
 		asElement
 ]
 
