@@ -1,8 +1,25 @@
 Class {
 	#name : #XdShareDialogExamples,
 	#superclass : #Object,
+	#instVars : [
+		'results'
+	],
 	#category : #'XDoc-Gt4XDocClient-Dialog - Examples'
 }
+
+{ #category : #'examples - actions' }
+XdShareDialogExamples >> actions [
+	<gtExample>
+	| anActions |
+	anActions := self basicActions.
+	anActions publishAction: [ results add: #publishAction ].
+	anActions deleteAction: [ results add: #deleteAction ].
+	anActions updateAction: [ results add: #updateAction ].
+	self assert: anActions publishAction isNotNil.
+	self assert: anActions deleteAction isNotNil.
+	self assert: anActions updateAction isNotNil.
+	^ anActions
+]
 
 { #category : #asserting }
 XdShareDialogExamples >> assertDialog: aDialog withInformation: anInformation [
@@ -18,6 +35,14 @@ XdShareDialogExamples >> assertPartValue: aRealValue with: anExpectedValue [
 	self 
 		assert: aRealValue asString 
 		equals: anExpectedValue asString.
+]
+
+{ #category : #'examples - actions' }
+XdShareDialogExamples >> basicActions [
+	<gtExample>
+	| anActions |
+	anActions := XdShareActions new.
+	^ anActions
 ]
 
 { #category : #'examples - dialog' }
@@ -57,6 +82,9 @@ XdShareDialogExamples >> dialog [
 	self 
 		assert: aDialog viewModel information
 		equals: aDialog viewModel information.
+	self 
+		assert: aDialog viewModel actions
+		equals: aDialog viewModel actions.
 	^ aDialog
 ]
 
@@ -86,11 +114,14 @@ XdShareDialogExamples >> emptyDialog [
 { #category : #'examples - dialog' }
 XdShareDialogExamples >> filledDialog [
 	<gtExample>
-	| aDialog anInformation |
+	| aDialog anInformation anActions |
 	aDialog := self dialog.
 	anInformation := self filledInformation.
+	anActions := self actions.
 	aDialog information: anInformation.
+	aDialog actions: anActions.	
 	self assertDialog: aDialog withInformation: anInformation.
+	self assert: aDialog actions equals: anActions.
 	^ aDialog
 ]
 
@@ -123,6 +154,12 @@ XdShareDialogExamples >> informationTitle [
 	anEditor := self editorAt: 1 in: aDialog look pager pages second.
 	self assertPartValue: anEditor text with: self titleString.
 	^ aDialog
+]
+
+{ #category : #initialization }
+XdShareDialogExamples >> initialize [
+	super initialize.
+	results := OrderedCollection new.
 ]
 
 { #category : #'examples - basic values' }

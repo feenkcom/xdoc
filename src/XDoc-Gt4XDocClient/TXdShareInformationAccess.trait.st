@@ -13,10 +13,15 @@ TXdShareInformationAccess >> defaultInformation [
 
 { #category : #accessing }
 TXdShareInformationAccess >> information [
-	^ information ifNil: [ information := self defaultInformation ]
+	^ information
 ]
 
 { #category : #accessing }
 TXdShareInformationAccess >> information: anObject [
 	information := anObject
+]
+
+{ #category : #initialization }
+TXdShareInformationAccess >> initializeInformation [
+	information := self defaultInformation
 ]

@@ -1,8 +1,8 @@
 Class {
 	#name : #XdShareDialogLook,
 	#superclass : #BrLook,
-	#traits : 'TXdShareInformationHolderAccess',
-	#classTraits : 'TXdShareInformationHolderAccess classTrait',
+	#traits : 'TXdShareInformationHolderAccess + TXdShareActionsAccess',
+	#classTraits : 'TXdShareInformationHolderAccess classTrait + TXdShareActionsAccess classTrait',
 	#instVars : [
 		'pager',
 		'document'
@@ -11,9 +11,35 @@ Class {
 }
 
 { #category : #execution }
+XdShareDialogLook >> executeDeleteAction [
+	self pager addPage: (self 
+		newProgressPageLabel: 'Delete...').
+	self pager smoothScrollToLast.
+	self actions delete.
+	self pager addPage: (self 
+		newProgressPageLabel: 'Finished...').
+	self pager smoothScrollToLast.
+]
+
+{ #category : #execution }
 XdShareDialogLook >> executePublishAction [
 	self pager addPage: (self 
 		newProgressPageLabel: 'Publishing...').
+	self pager smoothScrollToLast.
+	self actions publish.
+	self pager addPage: (self 
+		newProgressPageLabel: 'Finished...').
+	self pager smoothScrollToLast.
+]
+
+{ #category : #execution }
+XdShareDialogLook >> executeUpdateAction [
+	self pager addPage: (self 
+		newProgressPageLabel: 'Delete...').
+	self pager smoothScrollToLast.
+	self actions update.
+	self pager addPage: (self 
+		newProgressPageLabel: 'Finished...').
 	self pager smoothScrollToLast.
 ]
 
@@ -21,6 +47,7 @@ XdShareDialogLook >> executePublishAction [
 XdShareDialogLook >> initialize [ 
 	super initialize.
 	self initializeInformationHolder.
+	self initializeActions.
 	pager := BrPager new.
 	self addChangeAddChildAs: #(content pager) with: [ pager ].
 	self initializeFirstPage.
@@ -38,13 +65,17 @@ XdShareDialogLook >> initializeListeners [
 	self 
 		addEventHandlerOn: XdShareInformationChanged 
 		do: [ :anEvent | self onInformationChange: anEvent information ].
+	self 
+		addEventHandlerOn: XdShareActionsChanged 
+		do: [ :anEvent | self onActionsChange: anEvent actions ].
 ]
 
 { #category : #initialization }
 XdShareDialogLook >> initializeRequests [
 	super initializeRequests.
 	
-	self request: XdShareInformationRequest new
+	self request: XdShareInformationRequest new.
+	self request: XdShareActionsRequest new.
 ]
 
 { #category : #'instance creation' }
@@ -110,6 +141,11 @@ XdShareDialogLook >> newUpdatePage [
 		informationHolder: self informationHolder;
 		nextAction: [ self proceedUpdateNextStep ];
 		asElement
+]
+
+{ #category : #hooks }
+XdShareDialogLook >> onActionsChange: anInformation [
+	self actions: anInformation.
 ]
 
 { #category : #hooks }
