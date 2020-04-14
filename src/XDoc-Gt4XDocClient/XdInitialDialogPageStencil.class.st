@@ -6,7 +6,7 @@ Class {
 		'updateAction',
 		'deleteAction'
 	],
-	#category : #'XDoc-Gt4XDocClient-Dialog'
+	#category : #'XDoc-Gt4XDocClient-Dialog - UI'
 }
 
 { #category : #'api - instantiation' }

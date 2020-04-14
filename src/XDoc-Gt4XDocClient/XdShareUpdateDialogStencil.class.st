@@ -1,7 +1,7 @@
 Class {
 	#name : #XdShareUpdateDialogStencil,
 	#superclass : #XdSharePublishDialogStencil,
-	#category : #'XDoc-Gt4XDocClient-Dialog'
+	#category : #'XDoc-Gt4XDocClient-Dialog - UI'
 }
 
 { #category : #streams }

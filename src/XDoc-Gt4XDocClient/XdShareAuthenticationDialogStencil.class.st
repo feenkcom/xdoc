@@ -1,7 +1,7 @@
 Class {
 	#name : #XdShareAuthenticationDialogStencil,
 	#superclass : #XdShareInputFieldsDialogStencil,
-	#category : #'XDoc-Gt4XDocClient-Dialog'
+	#category : #'XDoc-Gt4XDocClient-Dialog - UI'
 }
 
 { #category : #'api - instantiation' }
@@ -33,7 +33,7 @@ XdShareAuthenticationDialogStencil >> newPasswordLabel [
 
 { #category : #'instance creation' }
 XdShareAuthenticationDialogStencil >> newUserInputField [
-	^ self newInputField
+	^ self newInputFieldWith: #username
 ]
 
 { #category : #'instance creation' }

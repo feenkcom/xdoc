@@ -1,7 +1,10 @@
 Class {
 	#name : #XdShareDialogStencil,
 	#superclass : #BrStencil,
-	#category : #'XDoc-Gt4XDocClient-Dialog'
+	#instVars : [
+		'informationHolder'
+	],
+	#category : #'XDoc-Gt4XDocClient-Dialog - UI'
 }
 
 { #category : #testing }
@@ -12,6 +15,16 @@ XdShareDialogStencil class >> isAbstract [
 { #category : #defaults }
 XdShareDialogStencil >> defaultButtonAction [
 	^ [ :aButton | "do nothing" ]
+]
+
+{ #category : #accessing }
+XdShareDialogStencil >> informationHolder [
+	^ informationHolder
+]
+
+{ #category : #accessing }
+XdShareDialogStencil >> informationHolder: anObject [
+	informationHolder := anObject
 ]
 
 { #category : #'instance creation' }
@@ -58,6 +71,14 @@ XdShareDialogStencil >> newInputField [
 ]
 
 { #category : #'instance creation' }
+XdShareDialogStencil >> newInputFieldWith: aSymbol [
+	| anEditor |
+	anEditor := self newInputField.
+	self onEditor: anEditor register: aSymbol.
+	^ anEditor
+]
+
+{ #category : #'instance creation' }
 XdShareDialogStencil >> newLabel [
 	^ BrLabel new
 		look: (BrGlamorousLabelLook new glamorousRegularFontAndSize foreground: Color gray; fontSize: 12);
@@ -100,4 +121,28 @@ XdShareDialogStencil >> newSecretInputField [
 XdShareDialogStencil >> newVerticalContainer [
 	^ BrVerticalPane new 
 		matchParent
+]
+
+{ #category : #registration }
+XdShareDialogStencil >> notifyAboutChangesInEditor: anEditor withType: aSymbol [
+	self informationHolder setPart: aSymbol value: anEditor text.
+]
+
+{ #category : #registration }
+XdShareDialogStencil >> onEditor: anEditor register: aSymbol [
+	anEditor
+		addEventHandlerOn: XdShareInformationPartChanged
+			do: [ :anEvent | 
+			(anEvent type = aSymbol
+				and: [ anEvent value ~= anEditor text asString ])
+				ifTrue: [ anEditor text: anEvent value ] ];
+		addEventHandlerOn: BrTextEditorDeletedEvent
+			do:
+				[ :anEvent | self notifyAboutChangesInEditor: anEditor withType: aSymbol ];
+		addEventHandlerOn: BrTextEditorModifiedEvent
+			do:
+				[ :anEvent | self notifyAboutChangesInEditor: anEditor withType: aSymbol ];
+		addEventHandlerOn: BrTextEditorInsertedEvent
+			do: [ :anEvent | 
+			self notifyAboutChangesInEditor: anEditor withType: aSymbol ]
 ]
