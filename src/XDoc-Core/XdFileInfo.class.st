@@ -6,7 +6,8 @@ Class {
 		'fileName',
 		'pathSegment',
 		'xdocUrl',
-		'createdOn'
+		'createdOn',
+		'previewUrl'
 	],
 	#category : #'XDoc-Core-Model'
 }
@@ -70,6 +71,16 @@ XdFileInfo >> pathSegment [
 { #category : #accessing }
 XdFileInfo >> pathSegment: anObject [
 	pathSegment := anObject
+]
+
+{ #category : #accessing }
+XdFileInfo >> previewUrl [
+	^ previewUrl
+]
+
+{ #category : #accessing }
+XdFileInfo >> previewUrl: anObject [
+	previewUrl := anObject
 ]
 
 { #category : #'accessing - manifest' }

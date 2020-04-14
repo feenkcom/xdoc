@@ -1,12 +1,15 @@
 Class {
 	#name : #XdClientDeleteXDocIdCommand,
-	#superclass : #XdClientCommand,
-	#instVars : [
-		'xdocId',
-		'response'
-	],
+	#superclass : #XdClientWithResponseCommand,
+	#traits : 'TXdClientXDocIdInstance - {#client}',
+	#classTraits : 'TXdClientXDocIdInstance classTrait',
 	#category : #'XDoc-Client-Commands'
 }
+
+{ #category : #visitor }
+XdClientDeleteXDocIdCommand >> accept: aVisitor [
+	^ aVisitor visitXdClientDeleteXDocIdCommand: self
+]
 
 { #category : #execution }
 XdClientDeleteXDocIdCommand >> execute [
@@ -15,30 +18,6 @@ XdClientDeleteXDocIdCommand >> execute [
 		delete;
 		response).
 	
-]
-
-{ #category : #accessing }
-XdClientDeleteXDocIdCommand >> response [
-	^ response
-]
-
-{ #category : #accessing }
-XdClientDeleteXDocIdCommand >> response: anObject [
-	response := anObject
-]
-
-{ #category : #accessing }
-XdClientDeleteXDocIdCommand >> xdocId [
-	<return: #String>
-	^ xdocId
-]
-
-{ #category : #accessing }
-XdClientDeleteXDocIdCommand >> xdocId: anIdString [
-	self 
-		assert: [ anIdString notNil ] 
-		description: [ 'XDoc ID must be non-nil' ].
-	xdocId := anIdString
 ]
 
 { #category : #'accessing - computed' }

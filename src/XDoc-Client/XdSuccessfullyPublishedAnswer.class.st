@@ -1,6 +1,6 @@
 Class {
 	#name : #XdSuccessfullyPublishedAnswer,
-	#superclass : #XdSuccessfulAnswer,
+	#superclass : #XdSuccessfullyCreatedAnswer,
 	#category : #'XDoc-Client-Answers'
 }
 

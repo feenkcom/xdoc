@@ -32,3 +32,20 @@ XdClientExamples >> listWithLook [
 	self assert: anElement look client equals: aClient.
 	^ anElement
 ]
+
+{ #category : #'*XDoc-Gt4XDocClient' }
+XdClientExamples >> publishXDoc_AuthenticatedServer_Authenticated_TaskIt [
+	<gtExample>
+	| anXdResponse aClient |
+	self setServerBasicAuthenticator.
+	aClient := self clientWithBasicAuthentication.
+	anXdResponse := aClient taskIt; publish: documentsExamples documentWithFigureXDoc.
+	self assert: anXdResponse isNotNil.
+	self assert: anXdResponse isSuccess not.
+	self assert: anXdResponse isError not.
+	self assert: anXdResponse isAuthenticationRequired not.
+	self assert: anXdResponse class equals: XdTaskItCommandAnswer.
+	self assert: anXdResponse command class equals: XdTaskItCommand.
+	self assert: anXdResponse response class equals: XdNullResponse.
+	^ anXdResponse
+]

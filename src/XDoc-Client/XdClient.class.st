@@ -67,7 +67,18 @@ XdClient >> decoratingCommandBuilder [
 ]
 
 { #category : #'actions - modifying' }
-XdClient >> deleteXDocFromUrl: anUrl [
+XdClient >> deleteId: anId [
+	<return: #ZnResponse>
+	"Delete an XDoc file from a public server"
+	^ XdClientDeleteXDocIdCommand new
+		client: self;
+		xdocId: anId;
+		execute;
+		response
+]
+
+{ #category : #'actions - modifying' }
+XdClient >> deleteUrl: anUrl [
 	<return: #ZnResponse>
 	"Delete an XDoc file from a public server"
 	| anId |
@@ -76,18 +87,7 @@ XdClient >> deleteXDocFromUrl: anUrl [
 		url: anUrl asZnUrl;
 		execute;
 		id.
-	^ self deleteXDocId: anId
-]
-
-{ #category : #'actions - modifying' }
-XdClient >> deleteXDocId: anId [
-	<return: #ZnResponse>
-	"Delete an XDoc file from a public server"
-	^ XdClientDeleteXDocIdCommand new
-		client: self;
-		xdocId: anId;
-		execute;
-		response
+	^ self deleteId: anId
 ]
 
 { #category : #'accessing - computed' }
@@ -212,6 +212,32 @@ XdClient >> serverUrl: aZnUrl [
 XdClient >> signalProgress [
 	<return: #Boolean>
 	^ signalProgress
+]
+
+{ #category : #'actions - modifying' }
+XdClient >> update: aXdFile id: anId [
+	"Update an XDoc file at a public server"
+	<return: #XdCommandAnswer>
+	| aCommand anExecutedCommand |
+	aCommand := XdClientUpdateXDocCommand new
+		client: self;
+		xdoc: aXdFile;
+		xdocId: anId.
+	anExecutedCommand := self executeCommand: aCommand.
+	^ self answerFromCommand: anExecutedCommand
+]
+
+{ #category : #'actions - modifying' }
+XdClient >> update: aXdFile url: aZnUrl [
+	"Update an XDoc file at a public server"
+	<return: #XdCommandAnswer>
+	| anId |
+	anId := XdClientXDocIdFromURLCommand new
+		client: self;
+		url: aZnUrl asZnUrl;
+		execute;
+		id.
+	^ self update: aXdFile id: anId
 ]
 
 { #category : #'accessing - options - authentication' }

@@ -94,9 +94,12 @@ XdManifestJsonMapping class >> fileInfoMappingFor: aNeoJSONMapper [
 			mapping mapAccessor: #fileName. 
 			(mapping mapAccessor: #createdOn) valueSchema: DateAndTime.
 			(mapping mapAccessor: #manifest) valueSchema: XdManifest.
+			(mapping mapAccessor: #previewUrl to: #preview_url) valueSchema: ZnUrl.
+			(mapping mapAccessor: #xdocUrl to: #xdoc_url) valueSchema: ZnUrl.
 			].
 	self dateAndTimeMappingFor: aNeoJSONMapper.
 	self manifestMappingFor: aNeoJSONMapper.
+	self urlMappingFor: aNeoJSONMapper.
 ]
 
 { #category : #mapping }
@@ -140,6 +143,15 @@ XdManifestJsonMapping class >> readFileInfos: aJsonCollectionOfFileInfo [
 { #category : #reading }
 XdManifestJsonMapping class >> readManifest: aJsonManifest [
 	^ self read: XdManifest withMapping: #manifestMappingFor: on: aJsonManifest readStream
+]
+
+{ #category : #'mapping - document' }
+XdManifestJsonMapping class >> urlMappingFor: aNeoJSONMapper [
+	aNeoJSONMapper
+		for: ZnUrl customDo: [ :mapping |
+			mapping 
+				decoder: [ :string | ZnUrl fromString: string ];
+				encoder: [ :aZnUrl | aZnUrl printString ] ].
 ]
 
 { #category : #writing }

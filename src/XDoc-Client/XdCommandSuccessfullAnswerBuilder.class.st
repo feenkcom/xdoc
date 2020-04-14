@@ -33,3 +33,10 @@ XdCommandSuccessfullAnswerBuilder >> visitXdClientPublishXDocCommand: aCommand [
 		buildAnswer: XdSuccessfullyPublishedAnswer new 
 		withCommand: aCommand
 ]
+
+{ #category : #visiting }
+XdCommandSuccessfullAnswerBuilder >> visitXdClientUpdateXDocCommand: aCommand [
+	^ self 
+		buildAnswer: XdSuccessfullyUpdatedAnswer new 
+		withCommand: aCommand
+]
