@@ -4,7 +4,7 @@ Trait {
 		'nextAction',
 		'nextActionLabel'
 	],
-	#category : #'XDoc-Gt4XDocClient-Dialog - UI'
+	#category : #'XDoc-Gt4XDocClient-Dialog - Traits'
 }
 
 { #category : #defaults }

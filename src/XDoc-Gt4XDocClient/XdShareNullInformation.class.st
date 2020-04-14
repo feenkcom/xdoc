@@ -11,12 +11,17 @@ XdShareNullInformation >> hasParts [
 	^ false
 ]
 
-{ #category : #enumerating }
-XdShareNullInformation >> partsDo: aBlock [ 
-	"do nothing"
+{ #category : #initialization }
+XdShareNullInformation >> partAt: aType [
+	^ ''
 ]
 
 { #category : #initialization }
-XdShareNullInformation >> setPart: aType value: aValue [
+XdShareNullInformation >> partAt: aType put: aValue [
+	"do nothing"
+]
+
+{ #category : #enumerating }
+XdShareNullInformation >> partsDo: aBlock [ 
 	"do nothing"
 ]

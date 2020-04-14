@@ -118,12 +118,17 @@ XdShareDialogExamples >> filledInformation [
 { #category : #'examples - dialog infromation modifications' }
 XdShareDialogExamples >> informationTitle [
 	<gtExample>
-	<noTest>
 	| aDialog anEditor |
 	aDialog := self filledDialogInPublishStep.
 	anEditor := self editorAt: 1 in: aDialog look pager pages second.
 	self assertPartValue: anEditor text with: self titleString.
 	^ aDialog
+]
+
+{ #category : #'examples - basic values' }
+XdShareDialogExamples >> modificationString [
+	<gtExample>
+	^ ' (user modification)'
 ]
 
 { #category : #'examples - basic values' }
@@ -135,11 +140,15 @@ XdShareDialogExamples >> titleString [
 { #category : #'examples - dialog user modifications' }
 XdShareDialogExamples >> userModificationOfTitle [
 	<gtExample>
-	<noTest>
 	| aDialog anEditor |
 	aDialog := self filledDialogInPublishStep.
 	anEditor := self editorAt: 1 in: aDialog look pager pages second.
-	anEditor text: 'user modification'.
-	self assertPartValue: aDialog information title with: 'user modification'.
+	anEditor inserter 
+		atEnd;
+		string: self modificationString;
+		insert.
+	self 
+		assertPartValue: aDialog information title 
+		with: self titleString, self modificationString.
 	^ aDialog
 ]

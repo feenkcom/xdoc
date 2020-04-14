@@ -3,7 +3,7 @@ Trait {
 	#instVars : [
 		'information'
 	],
-	#category : #'XDoc-Gt4XDocClient-Dialog - Model'
+	#category : #'XDoc-Gt4XDocClient-Dialog - Traits'
 }
 
 { #category : #defaults }

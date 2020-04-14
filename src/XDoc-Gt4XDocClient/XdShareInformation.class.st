@@ -93,6 +93,16 @@ XdShareInformation >> hasParts [
 	^ self hasOptions
 ]
 
+{ #category : #accessing }
+XdShareInformation >> partAt: aType [
+	^ self  optionAt: aType ifAbsent: [ '' ]
+]
+
+{ #category : #accessing }
+XdShareInformation >> partAt: aType put: aValue [
+	self optionAt: aType put: aValue
+]
+
 { #category : #enumerating }
 XdShareInformation >> partsDo: aBlock [ 
 	"aBlock receives aKey and aValue"
@@ -128,11 +138,6 @@ XdShareInformation >> publicUrl: aString [
 	^ self 
 		optionAt: self class publicUrlOptionName 
 		put: aString
-]
-
-{ #category : #accessing }
-XdShareInformation >> setPart: aType value: aValue [
-	self optionAt: aType put: aValue
 ]
 
 { #category : #accessing }

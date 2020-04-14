@@ -3,7 +3,7 @@ Class {
 	#superclass : #XdShareDialogStencil,
 	#traits : 'TXdShareNextActionAccessors',
 	#classTraits : 'TXdShareNextActionAccessors classTrait',
-	#category : #'XDoc-Gt4XDocClient-Dialog - UI'
+	#category : #'XDoc-Gt4XDocClient-Dialog - Stencils'
 }
 
 { #category : #testing }

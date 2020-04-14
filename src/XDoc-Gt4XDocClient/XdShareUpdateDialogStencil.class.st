@@ -1,7 +1,7 @@
 Class {
 	#name : #XdShareUpdateDialogStencil,
 	#superclass : #XdSharePublishDialogStencil,
-	#category : #'XDoc-Gt4XDocClient-Dialog - UI'
+	#category : #'XDoc-Gt4XDocClient-Dialog - Stencils'
 }
 
 { #category : #streams }
@@ -14,7 +14,7 @@ XdShareUpdateDialogStencil >> labelsAndInputFieldsOn: aStream [
 
 { #category : #'instance creation' }
 XdShareUpdateDialogStencil >> newUrlInputField [
-	^ self newCodeInputField
+	^ self newCodeInputFieldWith: self constants publicUrlOptionName
 ]
 
 { #category : #'instance creation' }

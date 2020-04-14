@@ -1,23 +1,18 @@
 Class {
 	#name : #XdShareDialogLook,
 	#superclass : #BrLook,
-	#traits : 'TXdShareInformationAccess',
-	#classTraits : 'TXdShareInformationAccess classTrait',
+	#traits : 'TXdShareInformationHolderAccess',
+	#classTraits : 'TXdShareInformationHolderAccess classTrait',
 	#instVars : [
 		'pager'
 	],
 	#category : #'XDoc-Gt4XDocClient-Dialog - Look'
 }
 
-{ #category : #accessing }
-XdShareDialogLook >> information: anObject [
-	information := anObject.
-	self notifyInformationChanged.
-]
-
 { #category : #initialization }
 XdShareDialogLook >> initialize [ 
 	super initialize.
+	self initializeInformationHolder.
 	pager := BrPager new.
 	self addChangeAddChildAs: #(content pager) with: [ pager ].
 	self initializeFirstPage.
@@ -35,9 +30,6 @@ XdShareDialogLook >> initializeListeners [
 	self 
 		addEventHandlerOn: XdShareInformationChanged 
 		do: [ :anEvent | self onInformationChange: anEvent information ].
-	self 
-		addEventHandlerOn: XdShareInformationPartChangedByUser 
-		do: [ :anEvent | self onInformationPartChange: anEvent type value: anEvent value ].
 ]
 
 { #category : #initialization }
@@ -51,6 +43,7 @@ XdShareDialogLook >> initializeRequests [
 XdShareDialogLook >> newAuthenticationPageLabel: aString action: aBlock [
 	<return: #BlElement>
 	^ XdShareAuthenticationDialogStencil new
+		informationHolder: self informationHolder;
 		nextAction: aBlock;
 		nextActionLabel: aString;
 		asElement
@@ -60,6 +53,7 @@ XdShareDialogLook >> newAuthenticationPageLabel: aString action: aBlock [
 XdShareDialogLook >> newDeletePage [
 	<return: #BlElement>
 	^ XdShareDeleteDialogStencil new
+		informationHolder: self informationHolder;
 		nextAction: [ self proceedDeleteNextStep ];
 		asElement
 ]
@@ -68,6 +62,7 @@ XdShareDialogLook >> newDeletePage [
 XdShareDialogLook >> newInitialPage [
 	<return: #BlElement>
 	^ XdInitialDialogPageStencil new 
+		informationHolder: self informationHolder;
 		publishAction: [ self proceedPublishStep ];
 		updateAction: [ self proceedUpdateStep ];
 		deleteAction: [ self proceedDeleteStep ];
@@ -78,6 +73,7 @@ XdShareDialogLook >> newInitialPage [
 XdShareDialogLook >> newPublishPage [
 	<return: #BlElement>
 	^ XdSharePublishDialogStencil new
+		informationHolder: self informationHolder;
 		nextAction: [ self proceedPublishNextStep ];
 		asElement 
 ]
@@ -86,27 +82,14 @@ XdShareDialogLook >> newPublishPage [
 XdShareDialogLook >> newUpdatePage [
 	<return: #BlElement>
 	^ XdShareUpdateDialogStencil new
+		informationHolder: self informationHolder;
 		nextAction: [ self proceedUpdateNextStep ];
 		asElement
-]
-
-{ #category : #notifying }
-XdShareDialogLook >> notifyInformationChanged [
-	self information partsDo: [ :aKey :aValue | 
-		self dispatchEvent: (XdShareInformationPartChanged new 
-			type: aKey;
-			value: aValue) ]
 ]
 
 { #category : #hooks }
 XdShareDialogLook >> onInformationChange: anInformation [
 	self information: anInformation.
-]
-
-{ #category : #hooks }
-XdShareDialogLook >> onInformationPartChange: aType value: aValue [
-	self trace: aType; trace: ': '; trace: aValue; traceCr: ' (by user)'.
-	self information setPart: aType value: aValue
 ]
 
 { #category : #accessing }

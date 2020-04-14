@@ -1,15 +1,19 @@
 Class {
 	#name : #XdShareDialogStencil,
 	#superclass : #BrStencil,
-	#instVars : [
-		'informationHolder'
-	],
-	#category : #'XDoc-Gt4XDocClient-Dialog - UI'
+	#traits : 'TXdShareInformationHolderAccess',
+	#classTraits : 'TXdShareInformationHolderAccess classTrait',
+	#category : #'XDoc-Gt4XDocClient-Dialog - Stencils'
 }
 
 { #category : #testing }
 XdShareDialogStencil class >> isAbstract [
 	^ self name = #XdShareDialogStencil 
+]
+
+{ #category : #accessing }
+XdShareDialogStencil >> constants [
+	^ XdShareInformation
 ]
 
 { #category : #defaults }
@@ -25,6 +29,12 @@ XdShareDialogStencil >> informationHolder [
 { #category : #accessing }
 XdShareDialogStencil >> informationHolder: anObject [
 	informationHolder := anObject
+]
+
+{ #category : #initialization }
+XdShareDialogStencil >> initialize [
+	super initialize.
+	self initializeInformationHolder.
 ]
 
 { #category : #'instance creation' }
@@ -47,6 +57,14 @@ XdShareDialogStencil >> newCodeInputField [
 ]
 
 { #category : #'instance creation' }
+XdShareDialogStencil >> newCodeInputFieldWith: aSymbol [
+	| anEditor |
+	anEditor := self newCodeInputField.
+	self onEditor: anEditor register: aSymbol.
+	^ anEditor
+]
+
+{ #category : #'instance creation' }
 XdShareDialogStencil >> newInputEditor [
 	^ BrEditor new
 		look: BrGlamorousInputFieldSpacingLook + (BrGlamorousRegularEditorLook - BrLayoutResizerLook);
@@ -56,6 +74,14 @@ XdShareDialogStencil >> newInputEditor [
 			c vertical matchParent.
 			c grid horizontal alignLeft.
 			c grid vertical alignTop. ]
+]
+
+{ #category : #'instance creation' }
+XdShareDialogStencil >> newInputEditorWith: aSymbol [
+	| anEditor |
+	anEditor := self newInputEditor.
+	self onEditor: anEditor register: aSymbol.
+	^ anEditor
 ]
 
 { #category : #'instance creation' }
@@ -118,6 +144,14 @@ XdShareDialogStencil >> newSecretInputField [
 ]
 
 { #category : #'instance creation' }
+XdShareDialogStencil >> newSecretInputFieldWith: aSymbol [
+	| anEditor |
+	anEditor := self newSecretInputField.
+	self onEditor: anEditor register: aSymbol.
+	^ anEditor
+]
+
+{ #category : #'instance creation' }
 XdShareDialogStencil >> newVerticalContainer [
 	^ BrVerticalPane new 
 		matchParent
@@ -125,17 +159,15 @@ XdShareDialogStencil >> newVerticalContainer [
 
 { #category : #registration }
 XdShareDialogStencil >> notifyAboutChangesInEditor: anEditor withType: aSymbol [
-	self informationHolder setPart: aSymbol value: anEditor text.
+	self informationHolder partAt: aSymbol put: anEditor text
 ]
 
 { #category : #registration }
 XdShareDialogStencil >> onEditor: anEditor register: aSymbol [
-	anEditor
-		addEventHandlerOn: XdShareInformationPartChanged
-			do: [ :anEvent | 
-			(anEvent type = aSymbol
-				and: [ anEvent value ~= anEditor text asString ])
-				ifTrue: [ anEditor text: anEvent value ] ];
+	anEditor text: (self informationHolder partAt: aSymbol).
+	self informationHolder whenAllChangedDo: [ :newInformation | 
+		anEditor text: (newInformation partAt: aSymbol) ].
+	anEditor editor
 		addEventHandlerOn: BrTextEditorDeletedEvent
 			do:
 				[ :anEvent | self notifyAboutChangesInEditor: anEditor withType: aSymbol ];
