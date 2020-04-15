@@ -9,6 +9,17 @@ Class {
 }
 
 { #category : #accessing }
+XdShareDialogElement >> actions [
+	<return: #XdShareActions>
+	^ self viewModel actions
+]
+
+{ #category : #accessing }
+XdShareDialogElement >> actions: anActions [
+	self viewModel actions: anActions
+]
+
+{ #category : #accessing }
 XdShareDialogElement >> information [
 	<return: #XdShareInformation>
 	^ self viewModel information

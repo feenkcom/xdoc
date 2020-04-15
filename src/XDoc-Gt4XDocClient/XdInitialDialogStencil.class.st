@@ -1,16 +1,16 @@
 Class {
-	#name : #XdInitialDialogPageStencil,
+	#name : #XdInitialDialogStencil,
 	#superclass : #XdShareDialogStencil,
 	#instVars : [
 		'publishAction',
 		'updateAction',
 		'deleteAction'
 	],
-	#category : #'XDoc-Gt4XDocClient-Dialog - UI'
+	#category : #'XDoc-Gt4XDocClient-Dialog - Stencils'
 }
 
 { #category : #'api - instantiation' }
-XdInitialDialogPageStencil >> create [
+XdInitialDialogStencil >> create [
 	<return: #BlElement>
 	^ self newPage
 		addChild: self newPublishButton;
@@ -19,17 +19,17 @@ XdInitialDialogPageStencil >> create [
 ]
 
 { #category : #accessing }
-XdInitialDialogPageStencil >> deleteAction [
+XdInitialDialogStencil >> deleteAction [
 	^ deleteAction
 ]
 
 { #category : #accessing }
-XdInitialDialogPageStencil >> deleteAction: anObject [
+XdInitialDialogStencil >> deleteAction: anObject [
 	deleteAction := anObject
 ]
 
 { #category : #initialization }
-XdInitialDialogPageStencil >> initialize [
+XdInitialDialogStencil >> initialize [
 	super initialize.
 	deleteAction := self defaultButtonAction.
 	publishAction := self defaultButtonAction.
@@ -37,7 +37,7 @@ XdInitialDialogPageStencil >> initialize [
 ]
 
 { #category : #'api - instantiation' }
-XdInitialDialogPageStencil >> newButton [
+XdInitialDialogStencil >> newButton [
 	^ super newButton
 		margin: (BlInsets all: 5);
 		constraintsDo: [ :c | 
@@ -45,7 +45,7 @@ XdInitialDialogPageStencil >> newButton [
 ]
 
 { #category : #'instance creation' }
-XdInitialDialogPageStencil >> newDeleteButton [
+XdInitialDialogStencil >> newDeleteButton [
 	| aButton |
 	aButton := self newButton
 		label: 'Delete existing document'.
@@ -54,7 +54,7 @@ XdInitialDialogPageStencil >> newDeleteButton [
 ]
 
 { #category : #'instance creation' }
-XdInitialDialogPageStencil >> newPublishButton [
+XdInitialDialogStencil >> newPublishButton [
 	| aButton |
 	aButton := self newButton
 		label: 'Publish new document'.
@@ -63,7 +63,7 @@ XdInitialDialogPageStencil >> newPublishButton [
 ]
 
 { #category : #'instance creation' }
-XdInitialDialogPageStencil >> newUpdateButton [
+XdInitialDialogStencil >> newUpdateButton [
 	| aButton |
 	aButton := self newButton
 		label: 'Update existing document'.
@@ -72,21 +72,21 @@ XdInitialDialogPageStencil >> newUpdateButton [
 ]
 
 { #category : #accessing }
-XdInitialDialogPageStencil >> publishAction [
+XdInitialDialogStencil >> publishAction [
 	^ publishAction
 ]
 
 { #category : #accessing }
-XdInitialDialogPageStencil >> publishAction: anObject [
+XdInitialDialogStencil >> publishAction: anObject [
 	publishAction := anObject
 ]
 
 { #category : #accessing }
-XdInitialDialogPageStencil >> updateAction [
+XdInitialDialogStencil >> updateAction [
 	^ updateAction
 ]
 
 { #category : #accessing }
-XdInitialDialogPageStencil >> updateAction: anObject [
+XdInitialDialogStencil >> updateAction: anObject [
 	updateAction := anObject
 ]

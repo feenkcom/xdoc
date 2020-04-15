@@ -1,7 +1,7 @@
 Class {
 	#name : #XdSharePublishDialogStencil,
 	#superclass : #XdShareInputFieldsDialogStencil,
-	#category : #'XDoc-Gt4XDocClient-Dialog - UI'
+	#category : #'XDoc-Gt4XDocClient-Dialog - Stencils'
 }
 
 { #category : #'api - instantiation' }
@@ -24,7 +24,7 @@ XdSharePublishDialogStencil >> labelsAndInputFieldsOn: aStream [
 
 { #category : #'instance creation' }
 XdSharePublishDialogStencil >> newAuthorInputField [
-	^ self newInputField
+	^ self newInputFieldWith: self constants authorOptionName
 ]
 
 { #category : #'instance creation' }
@@ -35,7 +35,7 @@ XdSharePublishDialogStencil >> newAuthorLabel [
 
 { #category : #'instance creation' }
 XdSharePublishDialogStencil >> newDescriptionInputField [
-	^ self newInputEditor
+	^ self newInputEditorWith: self constants descriptionOptionName
 ]
 
 { #category : #'instance creation' }
@@ -46,7 +46,7 @@ XdSharePublishDialogStencil >> newDescriptionLabel [
 
 { #category : #'instance creation' }
 XdSharePublishDialogStencil >> newTitleInputField [
-	^ self newInputFieldWith: #title
+	^ self newInputFieldWith: self constants titleOptionName
 ]
 
 { #category : #'instance creation' }

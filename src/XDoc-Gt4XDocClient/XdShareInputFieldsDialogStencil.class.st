@@ -1,7 +1,7 @@
 Class {
 	#name : #XdShareInputFieldsDialogStencil,
 	#superclass : #XdShareDialogWithNextActionStencil,
-	#category : #'XDoc-Gt4XDocClient-Dialog - UI'
+	#category : #'XDoc-Gt4XDocClient-Dialog - Stencils'
 }
 
 { #category : #testing }

@@ -1,5 +1,5 @@
 Class {
-	#name : #XdShareInformationRequest,
+	#name : #XdShareActionsRequest,
 	#superclass : #XdShareRequests,
 	#category : #'XDoc-Gt4XDocClient-Dialog - Events'
 }

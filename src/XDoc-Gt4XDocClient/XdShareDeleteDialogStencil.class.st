@@ -1,7 +1,7 @@
 Class {
 	#name : #XdShareDeleteDialogStencil,
 	#superclass : #XdShareInputFieldsDialogStencil,
-	#category : #'XDoc-Gt4XDocClient-Dialog - UI'
+	#category : #'XDoc-Gt4XDocClient-Dialog - Stencils'
 }
 
 { #category : #'api - instantiation' }
@@ -20,7 +20,7 @@ XdShareDeleteDialogStencil >> labelsAndInputFieldsOn: aStream [
 
 { #category : #'instance creation' }
 XdShareDeleteDialogStencil >> newUrlInputField [
-	^ self newCodeInputField
+	^ self newCodeInputFieldWith: self constants publicUrlOptionName
 ]
 
 { #category : #'instance creation' }

@@ -12,13 +12,18 @@ XdShareProtoInformation >> hasParts [
 	^ self subclassResponsibility
 ]
 
-{ #category : #enumerating }
-XdShareProtoInformation >> partsDo: aBlock [ 
-	"aBlock receives aKey and aValue"
+{ #category : #initialization }
+XdShareProtoInformation >> partAt: aType [
 	self subclassResponsibility
 ]
 
 { #category : #initialization }
-XdShareProtoInformation >> setPart: aType value: aValue [
+XdShareProtoInformation >> partAt: aType put: aValue [
+	self subclassResponsibility
+]
+
+{ #category : #enumerating }
+XdShareProtoInformation >> partsDo: aBlock [ 
+	"aBlock receives aKey and aValue"
 	self subclassResponsibility
 ]
