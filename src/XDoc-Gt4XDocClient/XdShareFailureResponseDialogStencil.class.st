@@ -1,17 +1,17 @@
 Class {
-	#name : #XdShareErrorResponseDialogStencil,
+	#name : #XdShareFailureResponseDialogStencil,
 	#superclass : #XdShareResponseDialogStencil,
 	#category : #'XDoc-Gt4XDocClient-Dialog - Stencils'
 }
 
 { #category : #'api - instantiation' }
-XdShareErrorResponseDialogStencil >> create [
+XdShareFailureResponseDialogStencil >> create [
 	<return: #BlElement>
 	^ self newPage addChild: self newFields
 ]
 
 { #category : #streams }
-XdShareErrorResponseDialogStencil >> labelsAndInputFieldsOn: aStream [
+XdShareFailureResponseDialogStencil >> labelsAndInputFieldsOn: aStream [
 	aStream 
 		nextPut: self newStatusLabel;
 		nextPut: self newStatusInputField

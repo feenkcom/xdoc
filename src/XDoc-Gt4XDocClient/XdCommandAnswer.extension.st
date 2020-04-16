@@ -1,6 +1,12 @@
 Extension { #name : #XdCommandAnswer }
 
 { #category : #'*XDoc-Gt4XDocClient' }
+XdCommandAnswer >> asElement [
+	<return: #BlElement>
+	^ self subclassResponsibility
+]
+
+{ #category : #'*XDoc-Gt4XDocClient' }
 XdCommandAnswer >> gtViewsInContext: aContext [
 	| aCollection |
 	aCollection := OrderedCollection streamContents: [ :aStream | 

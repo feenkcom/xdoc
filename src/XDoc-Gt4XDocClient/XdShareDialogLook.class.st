@@ -11,15 +11,21 @@ Class {
 }
 
 { #category : #execution }
+XdShareDialogLook >> executeAsTaskIt: aBlock [ 
+	BlTktWorkerProvider highUIExternalResourceBoundPool 
+		schedule: aBlock
+]
+
+{ #category : #execution }
 XdShareDialogLook >> executeDeleteAction [
-	| aResponse |
 	self pager addPage: (self 
-		newProgressPageLabel: 'Delete...').
+		newProgressPageLabel: 'Deleting...').
 	self pager smoothScrollToLast.
-	aResponse := self actions delete.
-	self pager addPage: (self 
-		newResponsePage: aResponse).
-	self pager smoothScrollToLast.
+	self executeAsTaskIt: [ 
+		| anAnswer |
+		anAnswer := self actions delete.
+		self pager addPage: anAnswer asElement.
+		self pager smoothScrollToLast ].
 ]
 
 { #category : #execution }
@@ -27,21 +33,23 @@ XdShareDialogLook >> executePublishAction [
 	self pager addPage: (self 
 		newProgressPageLabel: 'Publishing...').
 	self pager smoothScrollToLast.
-	self actions publish.
-	self pager addPage: (self 
-		newProgressPageLabel: 'Finished...').
-	self pager smoothScrollToLast.
+	self executeAsTaskIt: [ 
+		| anAnswer |
+		anAnswer := self actions publish.
+		self pager addPage: anAnswer asElement.
+		self pager smoothScrollToLast ].
 ]
 
 { #category : #execution }
 XdShareDialogLook >> executeUpdateAction [
 	self pager addPage: (self 
-		newProgressPageLabel: 'Delete...').
+		newProgressPageLabel: 'Updating...').
 	self pager smoothScrollToLast.
-	self actions update.
-	self pager addPage: (self 
-		newProgressPageLabel: 'Finished...').
-	self pager smoothScrollToLast.
+	self executeAsTaskIt: [ 
+		| anAnswer |
+		anAnswer := self actions update.
+		self pager addPage: anAnswer asElement.
+		self pager smoothScrollToLast ]
 ]
 
 { #category : #initialization }
@@ -125,13 +133,6 @@ XdShareDialogLook >> newPublishPage: aString action: aBlock [
 		nextAction: aBlock;
 		nextActionLabel: aString;
 		asElement 
-]
-
-{ #category : #'instance creation' }
-XdShareDialogLook >> newResponsePage: aResponse [
-	<return: #BlElement>
-	^ (XdShareResponseDialogStencil response: aResponse)
-		asElement
 ]
 
 { #category : #'instance creation' }

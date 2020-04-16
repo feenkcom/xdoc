@@ -38,3 +38,8 @@ XdZincResponse >> response: aZnResponse [
 		description: [ 'Zinc response must be non-nil' ].
 	response := aZnResponse
 ]
+
+{ #category : #'accessing - response' }
+XdZincResponse >> statusLineMessage [
+	^ (String streamContents: [ :out | self response statusLine writeOn: out ])
+]

@@ -23,8 +23,18 @@ XdExceptionResponse >> isResponse [
 	^ true
 ]
 
+{ #category : #testing }
+XdExceptionResponse >> isSuccess [
+	^ false
+]
+
 { #category : #accessing }
 XdExceptionResponse >> rawResponse [
 	<return: #Exception>
 	^ self exception
+]
+
+{ #category : #'accessing - response' }
+XdExceptionResponse >> statusLineMessage [
+	^ self exception printString
 ]

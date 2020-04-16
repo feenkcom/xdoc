@@ -20,7 +20,7 @@ XdShareDeleteDialogStencil >> labelsAndInputFieldsOn: aStream [
 
 { #category : #'instance creation' }
 XdShareDeleteDialogStencil >> newUrlInputField [
-	^ self newCodeInputFieldWith: self constants publicUrlOptionName
+	^ self newInputFieldWith: self constants publicUrlOptionName
 ]
 
 { #category : #'instance creation' }

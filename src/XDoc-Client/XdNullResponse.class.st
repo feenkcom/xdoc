@@ -66,3 +66,9 @@ XdNullResponse >> isSuccess [
 XdNullResponse >> rawResponse [
 	^ nil
 ]
+
+{ #category : #'accessing - response' }
+XdNullResponse >> statusLineMessage [
+	<return: #String>
+	^ ''
+]

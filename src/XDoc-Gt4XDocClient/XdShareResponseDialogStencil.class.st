@@ -18,8 +18,19 @@ XdShareResponseDialogStencil class >> response: aZnResponse [
 		assert: [ aZnResponse isNotNil ] 
 		description: [ 'Zinc response must be non-nil' ].
 	aZnResponse isSuccess ifTrue: [ ^ XdShareSuccessResponseDialogStencil new response: aZnResponse ].
-	aZnResponse isError ifTrue: [ ^ XdShareErrorResponseDialogStencil new response: aZnResponse ].
+	aZnResponse isError ifTrue: [ ^ XdShareFailureResponseDialogStencil new response: aZnResponse ].
 	self error: 'unknown response'
+]
+
+{ #category : #defaults }
+XdShareResponseDialogStencil >> defaultResponse [
+	^ XdZincResponse null
+]
+
+{ #category : #initialization }
+XdShareResponseDialogStencil >> initialize [
+	super initialize.
+	response := self defaultResponse.
 ]
 
 { #category : #'instance creation' }
@@ -50,5 +61,5 @@ XdShareResponseDialogStencil >> response: aZnResponse [
 
 { #category : #accessing }
 XdShareResponseDialogStencil >> responseStatusLineMessage [
-	^ (String streamContents: [ :out | self response statusLine writeOn: out ])
+	^ self response statusLineMessage
 ]
