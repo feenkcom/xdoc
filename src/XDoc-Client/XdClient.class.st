@@ -59,6 +59,11 @@ XdClient >> authentication: aXdAuthenticationCommand [
 	self replacingCommand: aXdAuthenticationCommand
 ]
 
+{ #category : #'execution - decorating commands' }
+XdClient >> basicExecuteCommand: aCommand [
+	^ self decoratingCommandBuilder execute: aCommand
+]
+
 { #category : #'accessing - options - decorating commands' }
 XdClient >> decoratingCommandBuilder [
 	^ self 
@@ -68,14 +73,13 @@ XdClient >> decoratingCommandBuilder [
 
 { #category : #'actions - modifying' }
 XdClient >> deleteId: anId [
-	<return: #ZnResponse>
+	<return: #XdCommandAnwer>
 	"Delete an XDoc file from a public server"
-	| aCommand anExecutedCommand |
+	| aCommand |
 	aCommand := XdClientDeleteXDocIdCommand new
 		client: self;
 		xdocId: anId.
-	anExecutedCommand := self executeCommand: aCommand.
-	^ self answerFromCommand: anExecutedCommand.
+	^ self executeCommand: aCommand.
 ]
 
 { #category : #'actions - modifying' }
@@ -154,7 +158,15 @@ XdClient >> downloadXDocUsingFileInfo: aXdFileInfo [
 
 { #category : #'execution - decorating commands' }
 XdClient >> executeCommand: aCommand [
-	^ self decoratingCommandBuilder execute: aCommand
+	<return: #XdCommandAnwer>
+	^ [ 
+		| anExecutedCommand |
+		anExecutedCommand := self basicExecuteCommand: aCommand.
+		self answerFromCommand: anExecutedCommand
+		]
+	on: Error 
+	do: [ :anException | 
+		XdExceptionAnswer new exception: anException ]
 ]
 
 { #category : #'gt-extension' }
@@ -182,17 +194,11 @@ XdClient >> initialize [
 XdClient >> publish: aXdFile [ 
 	"Publish an XDoc file to a public server"
 	<return: #XdCommandAnswer>
-	| aCommand anExecutedCommand |
+	| aCommand |
 	aCommand := XdClientPublishXDocCommand new
 		client: self;
 		xdoc: aXdFile.
-	anExecutedCommand := self executeCommand: aCommand.
-	aCommand isSuccess
-		ifTrue: [ aCommand 
-			publicUrlToClipboard ]
-		ifFalse: [ 
-			aCommand responseToClipboard ].
-	^ self answerFromCommand: anExecutedCommand
+	^ self executeCommand: aCommand.
 ]
 
 { #category : #accessing }
@@ -219,13 +225,12 @@ XdClient >> signalProgress [
 XdClient >> update: aXdFile id: anId [
 	"Update an XDoc file at a public server"
 	<return: #XdCommandAnswer>
-	| aCommand anExecutedCommand |
+	| aCommand |
 	aCommand := XdClientUpdateXDocCommand new
 		client: self;
 		xdoc: aXdFile;
 		xdocId: anId.
-	anExecutedCommand := self executeCommand: aCommand.
-	^ self answerFromCommand: anExecutedCommand
+	^ self executeCommand: aCommand.
 ]
 
 { #category : #'actions - modifying' }

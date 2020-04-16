@@ -11,6 +11,11 @@ XdSuccessfullyDeletedAnswerStencil >> create [
 		addChild: self newPublishedTitle
 ]
 
+{ #category : #streams }
+XdSuccessfullyDeletedAnswerStencil >> labelsAndInputFieldsOn: aStream [
+	self shouldNotImplement
+]
+
 { #category : #'instance creation' }
 XdSuccessfullyDeletedAnswerStencil >> newPublishedTitle [
 	^ self newTitleLabel

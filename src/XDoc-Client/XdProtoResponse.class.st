@@ -17,6 +17,12 @@ XdProtoResponse >> isSuccess [
 ]
 
 { #category : #accessing }
+XdProtoResponse >> message [
+	<return: #String>
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
 XdProtoResponse >> rawResponse [
 	<return: #Object>
 	^ self subclassResponsibility
