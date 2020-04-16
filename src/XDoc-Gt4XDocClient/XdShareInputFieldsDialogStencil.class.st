@@ -12,10 +12,22 @@ XdShareInputFieldsDialogStencil class >> isAbstract [
 { #category : #streams }
 XdShareInputFieldsDialogStencil >> authenticationLabelsAndInputFieldsOn: aStream [
 	aStream
+		nextPut: self createHorizontalSeparatorElement;
 		nextPut: self newUserLabel;
 		nextPut: self newUserInputField;
 		nextPut: self newPasswordLabel;
 		nextPut: self newPasswordInputField.
+]
+
+{ #category : #'as yet unclassified' }
+XdShareInputFieldsDialogStencil >> createHorizontalSeparatorElement [
+	^ BlElement new
+		background: Color gray;
+		margin: (BlInsets top: 10 bottom: 10);
+		constraintsDo: [ :c |
+			c horizontal matchParent.
+			c vertical exact: 0.5.
+			c grid horizontal span: 2 ].
 ]
 
 { #category : #streams }
