@@ -65,6 +65,17 @@ XdShareDialogStencil >> newCodeInputFieldWith: aSymbol [
 ]
 
 { #category : #'instance creation' }
+XdShareDialogStencil >> newHorizontalSeparatorElement [
+	^ BlElement new
+		background: Color gray;
+		margin: (BlInsets top: 10 bottom: 10);
+		constraintsDo: [ :c |
+			c horizontal matchParent.
+			c vertical exact: 0.5.
+			c grid horizontal span: 2 ].
+]
+
+{ #category : #'instance creation' }
 XdShareDialogStencil >> newInputEditor [
 	^ BrEditor new
 		look: BrGlamorousInputFieldSpacingLook + (BrGlamorousRegularEditorLook - BrLayoutResizerLook);
@@ -126,6 +137,12 @@ XdShareDialogStencil >> newPage [
 		viewModel: BrPagerPageModel new;
 		layout: BlLinearLayout vertical;
 		look: BrVerticalPaneLook new.
+]
+
+{ #category : #'instance creation' }
+XdShareDialogStencil >> newReadOnlyInputField [
+	^ self newInputField
+		beReadOnlyWithSelection
 ]
 
 { #category : #'instance creation' }

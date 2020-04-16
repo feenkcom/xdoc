@@ -12,12 +12,13 @@ Class {
 
 { #category : #execution }
 XdShareDialogLook >> executeDeleteAction [
+	| aResponse |
 	self pager addPage: (self 
 		newProgressPageLabel: 'Delete...').
 	self pager smoothScrollToLast.
-	self actions delete.
+	aResponse := self actions delete.
 	self pager addPage: (self 
-		newProgressPageLabel: 'Finished...').
+		newResponsePage: aResponse).
 	self pager smoothScrollToLast.
 ]
 
@@ -81,7 +82,7 @@ XdShareDialogLook >> initializeRequests [
 { #category : #'instance creation' }
 XdShareDialogLook >> newDeletePage: aString action: aBlock [
 	<return: #BlElement>
-	^ XdShareDeleteDialogStencil new
+	^ XdShareDeleteDialogWithAuthenticationStencil new
 		informationHolder: self informationHolder;
 		nextAction: aBlock;
 		nextActionLabel: aString;
@@ -119,7 +120,7 @@ XdShareDialogLook >> newProgressPageLabel: aString [
 { #category : #'instance creation' }
 XdShareDialogLook >> newPublishPage: aString action: aBlock [ 
 	<return: #BlElement>
-	^ XdSharePublishDialogStencil new
+	^ XdSharePublishDialogWithAuthenticationStencil new
 		informationHolder: self informationHolder;
 		nextAction: aBlock;
 		nextActionLabel: aString;
@@ -127,9 +128,16 @@ XdShareDialogLook >> newPublishPage: aString action: aBlock [
 ]
 
 { #category : #'instance creation' }
+XdShareDialogLook >> newResponsePage: aResponse [
+	<return: #BlElement>
+	^ (XdShareResponseDialogStencil response: aResponse)
+		asElement
+]
+
+{ #category : #'instance creation' }
 XdShareDialogLook >> newUpdatePage: aString action: aBlock [ 
 	<return: #BlElement>
-	^ XdShareUpdateDialogStencil new
+	^ XdShareUpdateDialogWithAuthenticationStencil new
 		informationHolder: self informationHolder;
 		nextAction: aBlock;
 		nextActionLabel: aString;
