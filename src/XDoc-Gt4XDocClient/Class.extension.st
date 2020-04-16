@@ -11,6 +11,10 @@ Class >> gtXDocPublishActionFor: anAction [
 			| anInformation anActions |
 			anInformation := XdShareInformation new.
 			anActions := XdShareActions new.
+			anActions 
+				publishAction: [ (GtDocument forClass: self) publishXDocWithInformation: anInformation ];
+				updateAction: [ (GtDocument forClass: self) updateXDocWithInformation: anInformation ];
+				deleteAction: [ (GtDocument forClass: self) deleteXDocWithInformation: anInformation ].
 			XdShareDialogElement new  
 				look: XdShareDialogLook;
 				layout: BlLinearLayout vertical;

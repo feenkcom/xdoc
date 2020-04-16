@@ -127,12 +127,13 @@ XdShareDialogLook >> newPublishPage: aString action: aBlock [
 ]
 
 { #category : #'instance creation' }
-XdShareDialogLook >> newUpdatePage [
+XdShareDialogLook >> newUpdatePage: aString action: aBlock [ 
 	<return: #BlElement>
 	^ XdShareUpdateDialogStencil new
 		informationHolder: self informationHolder;
-		nextAction: [ self proceedUpdateNextStep ];
-		asElement
+		nextAction: aBlock;
+		nextActionLabel: aString;
+		asElement 
 ]
 
 { #category : #hooks }
@@ -173,6 +174,6 @@ XdShareDialogLook >> proceedPublishStep [
 { #category : #steps }
 XdShareDialogLook >> proceedUpdateStep [
 	self pager viewModel removePagesAfter: self pager viewModel pages first.
-	self pager addPage: (self newPublishPage: 'Update' action: [self executeUpdateAction]).
+	self pager addPage: (self newUpdatePage: 'Update' action: [self executeUpdateAction]).
 	self pager smoothScrollToLast.
 ]
