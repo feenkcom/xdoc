@@ -17,3 +17,9 @@ XdSuccessfullyPublishedAnswer >> gtPublicUrlFor: aView [
 			action: [ :aButton | 
 				self command publicUrlToClipboard ]
 ]
+
+{ #category : #accessing }
+XdSuccessfullyPublishedAnswer >> publicUrl [
+	<return: #ZnUrl>
+	^ self command publicUrl
+]

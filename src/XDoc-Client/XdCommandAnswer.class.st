@@ -72,3 +72,8 @@ XdCommandAnswer >> response: aXdZincResponse [
 		description: [ 'Zinc response must be non-nil' ].
 	response := aXdZincResponse
 ]
+
+{ #category : #'accessing - response' }
+XdCommandAnswer >> statusLineMessage [
+	^ self response statusLineMessage
+]

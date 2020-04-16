@@ -10,8 +10,20 @@ XdProtoResponse >> isResponse [
 	^ self subclassResponsibility
 ]
 
+{ #category : #testing }
+XdProtoResponse >> isSuccess [
+	<return: #Boolean>
+	^ self subclassResponsibility
+]
+
 { #category : #accessing }
 XdProtoResponse >> rawResponse [
 	<return: #Object>
+	^ self subclassResponsibility
+]
+
+{ #category : #'accessing - response' }
+XdProtoResponse >> statusLineMessage [
+	<return: #String>
 	^ self subclassResponsibility
 ]

@@ -169,6 +169,16 @@ XdShareDialogStencil >> newSecretInputFieldWith: aSymbol [
 ]
 
 { #category : #'instance creation' }
+XdShareDialogStencil >> newTitleLabel [
+	^ BrLabel new
+		look: (BrGlamorousLabelLook new glamorousRegularFont; fontSize: 24);
+		focusability: BlFocusability none;
+		margin: (BlInsets all: 5);
+		constraintsDo: [ :c | 
+			c linear horizontal alignCenter ]
+]
+
+{ #category : #'instance creation' }
 XdShareDialogStencil >> newVerticalContainer [
 	^ BrVerticalPane new 
 		matchParent

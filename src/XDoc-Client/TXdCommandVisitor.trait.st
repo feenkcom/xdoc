@@ -9,6 +9,11 @@ TXdCommandVisitor >> visitXdAuthenticationCommand: aCommand [
 ]
 
 { #category : #visiting }
+TXdCommandVisitor >> visitXdClientDeleteXDocIdCommand: aCommand [
+	^ self explicitRequirement
+]
+
+{ #category : #visiting }
 TXdCommandVisitor >> visitXdClientPublishXDocCommand: aCommand [
 	^ self explicitRequirement
 ]

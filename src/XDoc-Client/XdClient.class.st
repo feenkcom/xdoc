@@ -70,11 +70,12 @@ XdClient >> decoratingCommandBuilder [
 XdClient >> deleteId: anId [
 	<return: #ZnResponse>
 	"Delete an XDoc file from a public server"
-	^ XdClientDeleteXDocIdCommand new
+	| aCommand anExecutedCommand |
+	aCommand := XdClientDeleteXDocIdCommand new
 		client: self;
-		xdocId: anId;
-		execute;
-		response
+		xdocId: anId.
+	anExecutedCommand := self executeCommand: aCommand.
+	^ self answerFromCommand: anExecutedCommand.
 ]
 
 { #category : #'actions - modifying' }

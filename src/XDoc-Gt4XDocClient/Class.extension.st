@@ -9,7 +9,7 @@ Class >> gtXDocPublishActionFor: anAction [
 		priority: 55;
 		content: [ 
 			| anInformation anActions |
-			anInformation := XdShareInformation new.
+			anInformation := XdDocumenterShareInformation default last.
 			anActions := XdShareActions new.
 			anActions 
 				publishAction: [ (GtDocument forClass: self) publishXDocWithInformation: anInformation ];

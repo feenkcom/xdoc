@@ -11,8 +11,8 @@ Class {
 XdProgressDialogStencil >> create [
 	<return: #BlElement>
 	^ self newPage
-		addChild: self newTitleLabel;
-		addChild: self newSubtitleLabel.
+		addChild: self newTitleLabel";
+		addChild: self newSubtitleLabel".
 ]
 
 { #category : #initialization }

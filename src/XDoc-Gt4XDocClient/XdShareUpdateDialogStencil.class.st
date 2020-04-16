@@ -14,7 +14,7 @@ XdShareUpdateDialogStencil >> labelsAndInputFieldsOn: aStream [
 
 { #category : #'instance creation' }
 XdShareUpdateDialogStencil >> newUrlInputField [
-	^ self newCodeInputFieldWith: self constants publicUrlOptionName
+	^ self newInputFieldWith: self constants publicUrlOptionName
 ]
 
 { #category : #'instance creation' }

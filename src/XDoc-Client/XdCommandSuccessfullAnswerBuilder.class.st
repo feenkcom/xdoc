@@ -28,6 +28,13 @@ XdCommandSuccessfullAnswerBuilder >> context: anObject [
 ]
 
 { #category : #visiting }
+XdCommandSuccessfullAnswerBuilder >> visitXdClientDeleteXDocIdCommand: aCommand [
+	^ self 
+		buildAnswer: XdSuccessfullyDeletedAnswer new 
+		withCommand: aCommand
+]
+
+{ #category : #visiting }
 XdCommandSuccessfullAnswerBuilder >> visitXdClientPublishXDocCommand: aCommand [
 	^ self 
 		buildAnswer: XdSuccessfullyPublishedAnswer new 
