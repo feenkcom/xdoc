@@ -73,7 +73,7 @@ XdClient >> decoratingCommandBuilder [
 
 { #category : #'actions - modifying' }
 XdClient >> deleteId: anId [
-	<return: #XdCommandAnwer>
+	<return: #XdCommandAnswer>
 	"Delete an XDoc file from a public server"
 	| aCommand |
 	aCommand := XdClientDeleteXDocIdCommand new
@@ -158,7 +158,7 @@ XdClient >> downloadXDocUsingFileInfo: aXdFileInfo [
 
 { #category : #'execution - decorating commands' }
 XdClient >> executeCommand: aCommand [
-	<return: #XdCommandAnwer>
+	<return: #XdCommandAnswer>
 	^ [ 
 		| anExecutedCommand |
 		anExecutedCommand := self basicExecuteCommand: aCommand.
