@@ -19,18 +19,7 @@ XdSharePublishDialogStencil >> labelsAndInputFieldsOn: aStream [
 		nextPut: self newAuthorLabel;
 		nextPut: self newAuthorInputField;
 		nextPut: self newDescriptionLabel;
-		nextPut: self newDescriptionInputField
-]
-
-{ #category : #'instance creation' }
-XdSharePublishDialogStencil >> newAuthorInputField [
-	^ self newInputFieldWith: self constants authorOptionName
-]
-
-{ #category : #'instance creation' }
-XdSharePublishDialogStencil >> newAuthorLabel [
-	^ self newLabel
-		text: 'Author:'
+		nextPut: self newDescriptionInputField.
 ]
 
 { #category : #'instance creation' }

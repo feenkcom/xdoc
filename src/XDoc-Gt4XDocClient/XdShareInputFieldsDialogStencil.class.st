@@ -10,8 +10,28 @@ XdShareInputFieldsDialogStencil class >> isAbstract [
 ]
 
 { #category : #streams }
+XdShareInputFieldsDialogStencil >> authenticationLabelsAndInputFieldsOn: aStream [
+	aStream
+		nextPut: self newUserLabel;
+		nextPut: self newUserInputField;
+		nextPut: self newPasswordLabel;
+		nextPut: self newPasswordInputField.
+]
+
+{ #category : #streams }
 XdShareInputFieldsDialogStencil >> labelsAndInputFieldsOn: aStream [
 	self subclassResponsibility
+]
+
+{ #category : #'instance creation' }
+XdShareInputFieldsDialogStencil >> newAuthorInputField [
+	^ self newInputFieldWith: self constants authorOptionName
+]
+
+{ #category : #'instance creation' }
+XdShareInputFieldsDialogStencil >> newAuthorLabel [
+	^ self newLabel
+		text: 'Author:'
 ]
 
 { #category : #'instance creation' }
@@ -28,5 +48,30 @@ XdShareInputFieldsDialogStencil >> newFields [
 XdShareInputFieldsDialogStencil >> newLabelsAndInputFields [
 	^ Array
 		streamContents:
-			[ :aStream | self labelsAndInputFieldsOn: aStream ]
+			[ :aStream | 
+				self labelsAndInputFieldsOn: aStream. 
+				self authenticationLabelsAndInputFieldsOn: aStream.
+			]
+]
+
+{ #category : #'instance creation' }
+XdShareInputFieldsDialogStencil >> newPasswordInputField [
+	^ self newSecretInputFieldWith: self constants passwordOptionName.
+]
+
+{ #category : #'instance creation' }
+XdShareInputFieldsDialogStencil >> newPasswordLabel [
+	^ self newLabel
+		text: 'Password:'
+]
+
+{ #category : #'instance creation' }
+XdShareInputFieldsDialogStencil >> newUserInputField [
+	^ self newInputFieldWith: self constants usernameOptionName
+]
+
+{ #category : #'instance creation' }
+XdShareInputFieldsDialogStencil >> newUserLabel [
+	^ self newLabel
+		text: 'Username:'
 ]

@@ -79,22 +79,13 @@ XdShareDialogLook >> initializeRequests [
 ]
 
 { #category : #'instance creation' }
-XdShareDialogLook >> newAuthenticationPageLabel: aString action: aBlock [
-	<return: #BlElement>
-	^ XdShareAuthenticationDialogStencil new
-		informationHolder: self informationHolder;
-		nextAction: aBlock;
-		nextActionLabel: aString;
-		asElement
-]
-
-{ #category : #'instance creation' }
-XdShareDialogLook >> newDeletePage [
+XdShareDialogLook >> newDeletePage: aString action: aBlock [
 	<return: #BlElement>
 	^ XdShareDeleteDialogStencil new
 		informationHolder: self informationHolder;
-		nextAction: [ self proceedDeleteNextStep ];
-		asElement
+		nextAction: aBlock;
+		nextActionLabel: aString;
+		asElement 
 ]
 
 { #category : #'instance creation' }
@@ -126,11 +117,12 @@ XdShareDialogLook >> newProgressPageLabel: aString [
 ]
 
 { #category : #'instance creation' }
-XdShareDialogLook >> newPublishPage [
+XdShareDialogLook >> newPublishPage: aString action: aBlock [ 
 	<return: #BlElement>
 	^ XdSharePublishDialogStencil new
 		informationHolder: self informationHolder;
-		nextAction: [ self proceedPublishNextStep ];
+		nextAction: aBlock;
+		nextActionLabel: aString;
 		asElement 
 ]
 
@@ -165,54 +157,22 @@ XdShareDialogLook >> pages [
 ]
 
 { #category : #steps }
-XdShareDialogLook >> proceedAuthenticationNextStep [
-	
-]
-
-{ #category : #steps }
-XdShareDialogLook >> proceedDeleteNextStep [
-	self pager viewModel removePagesAfter: self pager viewModel pages second.
-	self pager addPage: (self 
-		newAuthenticationPageLabel: 'Delete'
-		action: [ self executeDeleteAction ]).
-	self pager smoothScrollToLast.
-]
-
-{ #category : #steps }
 XdShareDialogLook >> proceedDeleteStep [
 	self pager viewModel removePagesAfter: self pager viewModel pages first.
-	self pager addPage: self newDeletePage.
-	self pager smoothScrollToLast.
-]
-
-{ #category : #steps }
-XdShareDialogLook >> proceedPublishNextStep [
-	self pager viewModel removePagesAfter: self pager viewModel pages second.
-	self pager addPage: (self 
-		newAuthenticationPageLabel: 'Publish'
-		action: [ self executePublishAction ]).
+	self pager addPage: (self newDeletePage: 'Delete' action: [self executeDeleteAction]).
 	self pager smoothScrollToLast.
 ]
 
 { #category : #steps }
 XdShareDialogLook >> proceedPublishStep [
 	self pager viewModel removePagesAfter: self pager viewModel pages first.
-	self pager addPage: self newPublishPage.
-	self pager smoothScrollToLast.
-]
-
-{ #category : #steps }
-XdShareDialogLook >> proceedUpdateNextStep [
-	self pager viewModel removePagesAfter: self pager viewModel pages second.
-	self pager addPage: (self 
-		newAuthenticationPageLabel: 'Update'
-		action: [ self executeUpdateAction ]).
+	self pager addPage: (self newPublishPage: 'Publish' action: [self executePublishAction]).
 	self pager smoothScrollToLast.
 ]
 
 { #category : #steps }
 XdShareDialogLook >> proceedUpdateStep [
 	self pager viewModel removePagesAfter: self pager viewModel pages first.
-	self pager addPage: self newUpdatePage.
+	self pager addPage: (self newPublishPage: 'Update' action: [self executeUpdateAction]).
 	self pager smoothScrollToLast.
 ]
