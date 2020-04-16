@@ -10,15 +10,6 @@ XdShareInputFieldsDialogStencil class >> isAbstract [
 ]
 
 { #category : #streams }
-XdShareInputFieldsDialogStencil >> authenticationLabelsAndInputFieldsOn: aStream [
-	aStream
-		nextPut: self newUserLabel;
-		nextPut: self newUserInputField;
-		nextPut: self newPasswordLabel;
-		nextPut: self newPasswordInputField.
-]
-
-{ #category : #streams }
 XdShareInputFieldsDialogStencil >> labelsAndInputFieldsOn: aStream [
 	self subclassResponsibility
 ]
@@ -49,8 +40,7 @@ XdShareInputFieldsDialogStencil >> newLabelsAndInputFields [
 	^ Array
 		streamContents:
 			[ :aStream | 
-				self labelsAndInputFieldsOn: aStream. 
-				self authenticationLabelsAndInputFieldsOn: aStream.
+				self labelsAndInputFieldsOn: aStream.
 			]
 ]
 

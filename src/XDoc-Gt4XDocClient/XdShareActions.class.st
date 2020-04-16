@@ -16,7 +16,7 @@ XdShareActions class >> null [
 
 { #category : #actions }
 XdShareActions >> delete [
-	self deleteAction value
+	^ self deleteAction value
 ]
 
 { #category : #accessing }
@@ -31,7 +31,7 @@ XdShareActions >> deleteAction: anObject [
 
 { #category : #actions }
 XdShareActions >> publish [
-	self publishAction value
+	^ self publishAction value
 ]
 
 { #category : #accessing }
@@ -46,7 +46,7 @@ XdShareActions >> publishAction: anObject [
 
 { #category : #actions }
 XdShareActions >> update [
-	self updateAction value
+	^ self updateAction value
 ]
 
 { #category : #accessing }
