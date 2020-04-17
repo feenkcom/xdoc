@@ -29,6 +29,12 @@ XdExceptionResponse >> isSuccess [
 ]
 
 { #category : #accessing }
+XdExceptionResponse >> message [
+	<return: #String>
+	^ self exception messageText asString
+]
+
+{ #category : #accessing }
 XdExceptionResponse >> rawResponse [
 	<return: #Exception>
 	^ self exception

@@ -24,7 +24,7 @@ XdCommandAnswerBuilder >> buildAuthenticationRequiredResponse [
 { #category : #'private - building' }
 XdCommandAnswerBuilder >> buildErrorResponse [
 	<return: #XdCommandAnswer>
-	^ self initializeResponse: XdErrorAnswer new.
+	^ self initializeResponse: XdFailureAnswer new.
 ]
 
 { #category : #'private - building' }

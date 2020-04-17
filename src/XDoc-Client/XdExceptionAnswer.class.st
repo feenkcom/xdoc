@@ -17,3 +17,8 @@ XdExceptionAnswer >> exception: anException [
 		description: [ 'Exception must be non-nil' ].
 	self response: (XdExceptionResponse new exception: anException)
 ]
+
+{ #category : #accessing }
+XdExceptionAnswer >> message [
+	^ self exception messageText
+]

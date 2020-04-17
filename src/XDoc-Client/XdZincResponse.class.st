@@ -21,6 +21,14 @@ XdZincResponse >> isResponse [
 ]
 
 { #category : #accessing }
+XdZincResponse >> message [
+	<return: #String>
+	self response hasEntity ifFalse: [ ^ String empty ].
+	self response contentType isBinary ifTrue: [ ^ String empty ].
+	^ self response contents asString
+]
+
+{ #category : #accessing }
 XdZincResponse >> rawResponse [
 	<return: #ZnResponse>
 	^ self response

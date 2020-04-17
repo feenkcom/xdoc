@@ -21,3 +21,20 @@ XdCommandAnswerStencil >> answer [
 XdCommandAnswerStencil >> answer: anObject [
 	answer := anObject
 ]
+
+{ #category : #'instance creation' }
+XdCommandAnswerStencil >> newStatusInputField [
+	^ self newReadOnlyInputField 
+		text: self responseStatusLineMessage
+]
+
+{ #category : #'instance creation' }
+XdCommandAnswerStencil >> newStatusLabel [
+	^ self newLabel
+		text: 'Status:'
+]
+
+{ #category : #accessing }
+XdCommandAnswerStencil >> responseStatusLineMessage [
+	^ self answer statusLineMessage
+]

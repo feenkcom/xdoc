@@ -140,6 +140,12 @@ XdShareDialogStencil >> newPage [
 ]
 
 { #category : #'instance creation' }
+XdShareDialogStencil >> newReadOnlyInputEditor [
+	^ self newInputEditor
+		beReadOnlyWithSelection
+]
+
+{ #category : #'instance creation' }
 XdShareDialogStencil >> newReadOnlyInputField [
 	^ self newInputField
 		beReadOnlyWithSelection
