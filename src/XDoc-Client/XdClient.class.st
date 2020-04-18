@@ -48,12 +48,6 @@ XdClient >> answerFromCommand: aCommand [
 		build
 ]
 
-{ #category : #'actions - reading' }
-XdClient >> async [
-	<return: #XdAsyncClient>
-	^ XdAsyncClient new client: self
-]
-
 { #category : #'accessing - options - authentication' }
 XdClient >> authentication: aXdAuthenticationCommand [
 	self replacingCommand: aXdAuthenticationCommand
