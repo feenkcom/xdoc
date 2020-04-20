@@ -10,3 +10,8 @@ Class {
 XdNullClient >> documents [
 	^ #()
 ]
+
+{ #category : #accessing }
+XdNullClient >> downloadXDocUsingFileInfo: aXdFileInfo [ 
+	^ XdFile empty  
+]

@@ -8,6 +8,12 @@ Class {
 
 { #category : #accessing }
 XdProtoClient >> documents [
-	"Return a list of published documents"
+	"Download a list of published documents"
+	^ self subclassResponsibility
+]
+
+{ #category : #accessing }
+XdProtoClient >> downloadXDocUsingFileInfo: aXdFileInfo [ 
+	"Download a XdFile"
 	^ self subclassResponsibility
 ]

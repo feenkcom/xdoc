@@ -1,6 +1,8 @@
 Class {
 	#name : #XdFileInfo,
 	#superclass : #XdObject,
+	#traits : 'TGtOptions',
+	#classTraits : 'TGtOptions classTrait',
 	#instVars : [
 		'manifest',
 		'fileName',
@@ -11,6 +13,16 @@ Class {
 	],
 	#category : #'XDoc-Core-Model'
 }
+
+{ #category : #'as yet unclassified' }
+XdFileInfo class >> clientOptionName [
+	^ #client
+]
+
+{ #category : #'as yet unclassified' }
+XdFileInfo class >> xdocOptionName [
+	^ #xdoc
+]
 
 { #category : #'accessing - manifest' }
 XdFileInfo >> author [

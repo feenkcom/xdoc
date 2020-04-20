@@ -41,29 +41,29 @@ XdAsyncClient >> defaultPool [
 	^ BlTktWorkerProvider highUIExternalResourceBoundPool
 ]
 
-{ #category : #accessing }
-XdAsyncClient >> documents [
-	^ self downloadList
-]
-
 { #category : #actions }
-XdAsyncClient >> downloadList [
-	| aFuture |
-	aFuture := self pool future: [ self client downloadList ] asBlTktCommand.
-	aFuture onSuccessDo: [ :result | self resultNotification: result ].
-	^ aFuture
+XdAsyncClient >> documents [
+	^ self executeCommand: [ self client documents ] asBlTktCommand.
 ]
 
 { #category : #actions }
 XdAsyncClient >> downloadPreviewImageUsingFileInfo: aXdFileInfo [
-	[ self client downloadPreviewImageUsingFileInfo: aXdFileInfo ] asBlTktCommand future
-			onSuccessDo: [ :result | self resultNotification: result ]
+	^ self executeCommand: [ self client downloadPreviewImageUsingFileInfo: aXdFileInfo ] asBlTktCommand.
 ]
 
 { #category : #actions }
 XdAsyncClient >> downloadXDocUsingFileInfo: anXdInfo [
-	[ self client downloadXDocUsingFileInfo: anXdInfo ] asBlTktCommand future
-			onSuccessDo: [ :result | self resultNotification: result ]
+	^ self executeCommand: [ self client downloadXDocUsingFileInfo: anXdInfo ] asBlTktCommand
+]
+
+{ #category : #'private - execution' }
+XdAsyncClient >> executeCommand: aCommand [
+	<return: #TKTFuture>
+	| aFuture |
+	aFuture := self pool future: aCommand asBlTktCommand.
+	aFuture onSuccessDo: [ :result | self notifyResult: result ].
+	aFuture onFailureDo: [ :anException | self notifyFailure: anException ].
+	^ aFuture
 ]
 
 { #category : #initialization }
@@ -73,6 +73,16 @@ XdAsyncClient >> initialize [
 	pool := self defaultPool.
 	successCallbacks := self defaultCallbacks.
 	failureCallbacks := self defaultCallbacks.
+]
+
+{ #category : #notifying }
+XdAsyncClient >> notifyFailure: anException [ 
+	self onFailure do: [ :eachCallback | eachCallback value: anException ]
+]
+
+{ #category : #notifying }
+XdAsyncClient >> notifyResult: anObject [ 
+	self onSuccess do: [ :eachCallback | eachCallback value: anObject ]
 ]
 
 { #category : #accessing }
@@ -111,9 +121,4 @@ XdAsyncClient >> pool [
 { #category : #accessing }
 XdAsyncClient >> pool: anObject [
 	pool := anObject
-]
-
-{ #category : #notifying }
-XdAsyncClient >> resultNotification: anObject [ 
-	self onSuccess do: [ :eachCallback | eachCallback value: anObject ]
 ]
