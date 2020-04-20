@@ -44,16 +44,23 @@ XdFileInfoStencil >> newEmptyLabel [
 	<return: #BlElement>
 	^ BrLabel new 
 		look: BrGlamorousLabelLook;
-		label: 'No content';
+		text: self newEmptyLabelText;
 		constraintsDo: [ :c | 
 			c frame horizontal alignCenter.
 			c frame vertical alignCenter ]
 ]
 
 { #category : #'instance creation' }
+XdFileInfoStencil >> newEmptyLabelText [
+	<return: #BlRopedText>
+	^ 'No content' asRopedText foreground: BrGlamorousColors disabledButtonTextColor
+]
+
+{ #category : #'instance creation' }
 XdFileInfoStencil >> newToolOrEmptyElement [
 	<return: #BlElement>
 	| anXDoc |
+	self fileInfo xdocUrl ifNil: [ ^ self newEmptyElement ].
 	anXDoc := self fileInfo xdoc.
 	^ anXDoc toolInPharo 
 		ifNotNil: #asElement
