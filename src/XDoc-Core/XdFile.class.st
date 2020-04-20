@@ -1,6 +1,6 @@
 Class {
 	#name : #XdFile,
-	#superclass : #XdObject,
+	#superclass : #XdProtoFile,
 	#traits : 'TXdStreamingStrategyAccesssor',
 	#classTraits : 'TXdStreamingStrategyAccesssor classTrait',
 	#instVars : [
@@ -28,6 +28,11 @@ XdFile class >> fromFileReference: aFileReference [
 	^ XdReader new
 		streamingStrategy: (XdStreamingStrategy file: aFileReference);
 		read
+]
+
+{ #category : #factory }
+XdFile class >> null [
+	^ XdNullFile default
 ]
 
 { #category : #testing }
