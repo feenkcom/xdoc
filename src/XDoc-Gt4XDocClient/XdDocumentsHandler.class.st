@@ -23,9 +23,8 @@ XdDocumentsHandler >> downloadXdoc: anXdInfo element: anElement [
 		callback: [ :anXdFileOrNil | 
 			anXdFileOrNil ifNotNil: [ 
 				anElement enqueueTask: (BlTaskAction new action: [ 
-					anElement fireEvent: (GtPhlowObjectToSelect new 
-						object: anXdFileOrNil mainFileReference;
-						sourceElement: anElement) ]) ] ];
+					anElement phlow 
+						selectObject: anXdFileOrNil mainFileReference ]) ] ];
 		downloadXDocUsingFileInfo: anXdInfo
 ]
 
