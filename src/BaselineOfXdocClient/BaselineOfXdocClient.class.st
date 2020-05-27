@@ -21,7 +21,7 @@ BaselineOfXdocClient >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'XdocClientMinimal' with: [
-				spec repository: 'github://feenkcom/xdoc:v0.7.98/src' ];
+				spec repository: 'github://feenkcom/xdoc:v0.7.99/src' ];
 			baseline: 'Brick' with: [
 				spec repository: 'github://feenkcom/Brick:v0.7.486/src' ];
 			baseline: 'GToolkitPhlow' with: [
