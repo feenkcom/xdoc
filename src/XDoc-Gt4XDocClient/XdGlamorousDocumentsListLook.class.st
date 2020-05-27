@@ -80,7 +80,7 @@ XdGlamorousDocumentsListLook >> refreshList [
 { #category : #private }
 XdGlamorousDocumentsListLook >> updateList [
 	self client async 
-		callback: [ :aList | 
+		onSuccessDo: [ :aList | 
 			self widgetDo: [ :aWidget | 
 				list enqueueTask: (BlTaskAction new action: [ 
 					list display: aList ]) ] ];

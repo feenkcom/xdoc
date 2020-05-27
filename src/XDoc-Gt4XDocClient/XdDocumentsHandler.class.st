@@ -20,7 +20,7 @@ XdDocumentsHandler >> client: anObject [
 { #category : #private }
 XdDocumentsHandler >> downloadXdoc: anXdInfo element: anElement [
 	self client async 
-		callback: [ :anXdFileOrNil | 
+		onSuccessDo: [ :anXdFileOrNil | 
 			anXdFileOrNil ifNotNil: [ 
 				anElement enqueueTask: (BlTaskAction new action: [ 
 					anElement phlow 

@@ -61,6 +61,7 @@ XdFileInfoStencil >> newToolOrEmptyElement [
 	<return: #BlElement>
 	| anXDoc |
 	anXDoc := self fileInfo xdoc.
+	anXDoc ifNil: [ ^ self newEmptyElement ].
 	^ anXDoc toolInPharo 
 		ifNotNil: #asElement
 		ifNil: [ self newEmptyElement ]
