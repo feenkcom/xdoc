@@ -60,7 +60,7 @@ XdGlamorousDocumentsGridLook >> initializeList [
 				picture: (Form extent: 0@0) asElement;
 				action: [ :aBrCard | 
 					self client async 
-						callback: [ :anXdFileOrNil | 
+						onSuccessDo: [ :anXdFileOrNil | 
 							anXdFileOrNil ifNotNil: [ 
 								aBrCard enqueueTask: (BlTaskAction new action: [ 
 									aBrCard phlow spawnObject: anXdFileOrNil ]) ] ];
@@ -123,7 +123,7 @@ XdGlamorousDocumentsGridLook >> refreshList [
 { #category : #private }
 XdGlamorousDocumentsGridLook >> updateList [
 	self client async 
-		callback: [ :aList | 
+		onSuccessDo: [ :aList | 
 			self widgetDo: [ :aWidget | 
 				list enqueueTask: (BlTaskAction new action: [ 
 					list display: aList ]) ] ];
@@ -138,7 +138,7 @@ XdGlamorousDocumentsGridLook >> updatePreviewOf: aFileInfo in: aCard [
 		description: [ 'File info must not be nil' ].
 	
 	self client async 
-		callback: [ :anImageForm | 
+		onSuccessDo: [ :anImageForm | 
 			anImageForm bits isEmpty ifFalse: [
 				self widgetDo: [ :aWidget | 
 					aCard enqueueTask: (BlTaskAction new action: [
