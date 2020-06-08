@@ -83,6 +83,6 @@ XdGlamorousDocumentsListLook >> updateList [
 		onSuccessDo: [ :aList | 
 			self widgetDo: [ :aWidget | 
 				list enqueueTask: (BlTaskAction new action: [ 
-					list display: aList ]) ] ];
+					list items: aList ]) ] ];
 		documents
 ]
