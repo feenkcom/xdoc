@@ -74,6 +74,16 @@ XdConstants class >> xdocExtension [
 	^ 'xdoc'
 ]
 
+{ #category : #accessing }
+XdConstants class >> xdocFileName [
+	^ 'xdoc-file'
+]
+
+{ #category : #accessing }
+XdConstants class >> xdocFileNameMaxLenght [
+	^ 42
+]
+
 { #category : #'client / server' }
 XdConstants class >> xdocInfoFileName [
 	"File name describing XDoc file path, name, and manifest"
