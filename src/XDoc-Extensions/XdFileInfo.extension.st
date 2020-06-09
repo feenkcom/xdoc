@@ -11,7 +11,8 @@ XdFileInfo >> gtDetailsFor: aView [
 			'Description' -> self description.
 			'File name' -> self fileName.
 			'Created on' -> self createdOn.
-			'XDoc url' -> self xdocUrl} ];
+			'XDoc URL' -> self xdocUrl.
+			'Preview URL' -> self previewUrl} ];
 		column: 'Property' format: [:assoc | assoc key];
 		column: 'Value' format: [:assoc | assoc value asString ];
 		send: #value
