@@ -15,6 +15,11 @@ XdType class >> image [
 ]
 
 { #category : #accessing }
+XdType class >> preview [ 
+	^ XdPreviewType
+]
+
+{ #category : #accessing }
 XdType class >> text [
 	^ XdTextType
 ]
