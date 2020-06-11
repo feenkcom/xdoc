@@ -20,23 +20,13 @@ XdWriter >> addComponentWithAttachment: anAttachment [
 	aDocument components: (aDocument components copyWith: aComponent).
 ]
 
-{ #category : #accessing }
-XdWriter >> addPreview: aDataWriter [
-	| previewAttachment |
-
-	aDataWriter allFiles isNotEmpty
-		ifFalse: [ ^ self ].
+{ #category : #'private - writing' }
+XdWriter >> addPreviewWithAttachment: anAttachment [
+	self
+		assert: [ anAttachment isNotNil ]
+		description: [ 'Preview attachment must be non-nil' ].
 	self documentType: XdPreviewType.
-	previewAttachment := aDataWriter allFiles first.
-	previewAttachment
-		binaryReadStreamDo: [ :aStream | 
-			self
-				reuseOrAddAttachment:
-					(GtFileUtility
-						fileNameOf: previewAttachment
-						relativeTo: aDataWriter rootDirectory)
-				stream: aStream
-				size: previewAttachment size ]
+	self addComponentWithAttachment: anAttachment
 ]
 
 { #category : #'api - writing' }
@@ -126,6 +116,25 @@ XdWriter >> manifest: aXdManifest [
 		assert: [ aXdManifest notNil ] 
 		description: [ 'Manifest must be non-nil' ].
 	manifest := aXdManifest
+]
+
+{ #category : #'api - writing' }
+XdWriter >> preview [
+	self 
+		previewThat: [ :eachAttachment | 
+			| aMimeType | 
+			aMimeType := GtFileUtility mimeTypeOfFileName: eachAttachment fileName.
+			XdPreviewType matchesMimeType: aMimeType ]
+		ifNone: [ "ignore" ]
+]
+
+{ #category : #'api - writing' }
+XdWriter >> previewThat: aOneArgBlock ifNone: aNoneBlock [
+	self manifest attachments
+		detect: aOneArgBlock 
+		ifFound: [ :anAttachment | 
+			self addPreviewWithAttachment: anAttachment ] 
+		ifNone: aNoneBlock
 ]
 
 { #category : #'api - writing' }
