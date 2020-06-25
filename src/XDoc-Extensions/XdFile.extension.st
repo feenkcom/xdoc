@@ -18,7 +18,7 @@ XdFile >> gtReferenceFor: aView [
 	aList := aView columnedList
 		title: 'Files' translated;
 		priority: 1;
-		items: self streamingStrategy zip members.
+		items: [ self streamingStrategy zip members ].
 	aList
 		column: 'Icon' translated
 		do: [ :column | 
