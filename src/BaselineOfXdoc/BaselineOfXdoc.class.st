@@ -5,7 +5,7 @@ XDoc stands for eXecutable Document.
 
 It is a container that contains content files and meta-data. Let's consider this document containing some text and a picture.
 
-${example:GtDocumentExamples>>#documentWithFigure|noCode|previewShow=#gtTextFor:|previewHeight=400}$
+${example:GtDocumentExamples>>#documentWithFigure|noCode|previewShow=#gtLiveFor:|previewHeight=400}$
 
 The corresponsing XDoc file is a zip archive that looks like this internally:
 
