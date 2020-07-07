@@ -110,6 +110,18 @@ XdManifest >> htmlDocument [
 	^ self documentOfType: XdType html
 ]
 
+{ #category : #accessing }
+XdManifest >> htmlPreviewImage [
+	|any|
+	any := ((self documents select: [:d | d type typeString = 'preview']) 
+		collect: [:d | (self attachments 
+			detect:[:a | a id asSymbol = (d components first link) asSymbol])]).
+			
+	(any size > 0) ifTrue: [ ^ any first].
+	^ nil
+
+]
+
 { #category : #initialization }
 XdManifest >> initialize [
 	super initialize.
