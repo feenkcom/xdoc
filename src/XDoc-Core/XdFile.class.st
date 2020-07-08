@@ -4,7 +4,9 @@ Class {
 	#traits : 'TXdStreamingStrategyAccesssor',
 	#classTraits : 'TXdStreamingStrategyAccesssor classTrait',
 	#instVars : [
-		'manifest'
+		'manifest',
+		'publicUrl',
+		'publicationDate'
 	],
 	#category : #'XDoc-Core-Model'
 }
@@ -35,10 +37,51 @@ XdFile class >> null [
 	^ XdNullFile default
 ]
 
+{ #category : #'api - manifest' }
+XdFile >> author [
+	<return: #String>
+	^ self manifest author
+]
+
+{ #category : #'api - manifest' }
+XdFile >> description [
+	<return: #String>
+	^ self manifest description
+]
+
 { #category : #testing }
 XdFile >> exists [
 	<return: #Boolean>
 	^ self streamingStrategy exists
+]
+
+{ #category : #'api - testing' }
+XdFile >> hasAuthor [
+	<return: #Boolean>
+	^ self author isNotNil and: [ self author isNotEmpty ]
+]
+
+{ #category : #'api - testing' }
+XdFile >> hasDescription [
+	<return: #Boolean>
+	^ self description isNotNil and: [ self description isNotEmpty ]
+]
+
+{ #category : #'api - testing' }
+XdFile >> hasPublicUrl [
+	<return: #Boolean>
+	^ self publicUrl isNotNil
+]
+
+{ #category : #'api - testing' }
+XdFile >> hasPublicationDate [
+	^ self publicationDate isNotNil
+]
+
+{ #category : #'api - testing' }
+XdFile >> hasTitle [
+	<return: #Boolean>
+	^ self title isNotNil and: [ self title isNotEmpty ]
 ]
 
 { #category : #enumerating }
@@ -104,6 +147,32 @@ XdFile >> navigator [
 { #category : #actions }
 XdFile >> open [
 	^ self inspect
+]
+
+{ #category : #'api - accessing' }
+XdFile >> publicUrl [
+	^ publicUrl
+]
+
+{ #category : #'api - accessing' }
+XdFile >> publicUrl: aZnUrl [
+	publicUrl := aZnUrl asZnUrl
+]
+
+{ #category : #'api - accessing' }
+XdFile >> publicationDate [
+	^ publicationDate
+]
+
+{ #category : #'api - accessing' }
+XdFile >> publicationDate: aCreationTime [
+	publicationDate := aCreationTime asDateAndTime
+]
+
+{ #category : #'api - manifest' }
+XdFile >> title [
+	<return: #String>
+	^ self manifest title
 ]
 
 { #category : #accessing }

@@ -10,3 +10,13 @@ XdFile >> gtLiveFor: aView [
 		stencil: [ self toolInPharo ];
 		actionButtonIcon: BrGlamorousIcons open action: [ self openInPharo ]
 ]
+
+{ #category : #'*XDoc-Gt4XDocClient' }
+XdFile >> gtSpotterActDefaultFrom: aSpotterElement [
+	| aDocumenter aTitle |
+	aDocumenter := XdDocumenter forXdFile: self.
+	aTitle := self hasTitle 
+		ifTrue: [ self title ] 
+		ifFalse: [ 'XDoc Document' ].
+	GtPager openWrappedOn: aDocumenter title: aTitle from: aSpotterElement
+]
