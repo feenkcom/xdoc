@@ -24,12 +24,14 @@ XdDocumenterHeader >> contentText [
 		aLink attribute: (BrTextAdornmentDynamicAttribute new
 			beReplace;
 			stencil: [ BrButton new
-				look: BrGlamorousLinkSquaredButtonWithLabelLook new;
+				look: (BrGlamorousLinkSquaredButtonWithLabelLook new
+					foreground: BrGlamorousColors disabledButtonTextColor);
 				padding: (BlInsets top: 3 left: 3 bottom: 3 right: 3);
 				geometry: (BlRectangle cornerRadius: 4);
 				action: [ WebBrowser openOn: self xdFile publicUrl asString ];
 				label: self xdFile publicUrl asString asRopedText ]).
 		aText := aText, aLink ].
+	aText foreground: BrGlamorousColors disabledButtonTextColor.
 	^ aText
 ]
 
@@ -48,6 +50,7 @@ XdDocumenterHeader >> headerText [
 	self xdFile hasPublicationDate 
 		ifTrue: [ aText, (' on ', self xdFile publicationDate asDate asString) 
 			asRopedText glamorousRegularFontAndSize ].
+	aText foreground: BrGlamorousColors disabledButtonTextColor.
 	^ aText
 ]
 

@@ -1,6 +1,11 @@
 Extension { #name : #XdFile }
 
 { #category : #'*XDoc-Gt4XDocClient' }
+XdFile >> asDocumenter [
+	^ XdDocumenter forXdFile: self
+]
+
+{ #category : #'*XDoc-Gt4XDocClient' }
 XdFile >> gtLiveFor: aView [
 	<gtView>
 	self exists ifFalse: [ ^ aView empty ].

@@ -71,6 +71,7 @@ XdDocumenter >> initializeHeader [
 	aHeader labeled: 'Header'.
 	aHeader look: GtCoderExpanderWithoutShadowLook.
 	aHeader margin: (BlInsets bottom: 10).
+	aHeader padding: (BlInsets all: 7).
 	aHeader hMatchParent; vFitContent.
 	self addChild: aHeader as: self defaultHeaderChildName.
 	
@@ -98,6 +99,7 @@ XdDocumenter >> onXdFileChanged [
 	anElement ifNil: [ ^ self ].
 	
 	resizer inherit: anElement.
+	anElement labeled: 'Content'.
 	
 	self removeChildNamed: self defaultDocumentContentChildName.
 	self addChild: anElement as: self defaultDocumentContentChildName.
