@@ -41,7 +41,11 @@ XdClientDownloadXDocCommand >> ensureXdFile [
 		get;
 		response.
 	aResponse isSuccess ifFalse: [ ^ self ].
-	self xdFile: (XdFile fromBytes: aResponse contents)
+	self xdFile: (XdFile fromBytes: aResponse contents).
+	self fileInfo previewUrl ifNotNil: [
+		self xdFile publicUrl: self fileInfo previewUrl ].
+	self fileInfo createdOn ifNotNil: [
+		self xdFile publicationDate: self fileInfo createdOn ].
 ]
 
 { #category : #execution }
