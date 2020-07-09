@@ -107,7 +107,7 @@ XdDocumenter >> onXdFileChanged [
 
 { #category : #'private - accessing' }
 XdDocumenter >> titleElement [
-	<return: #BrText>
+	<return: #BlText>
 	^ self childNamed: self defaultTitleChildName
 ]
 
