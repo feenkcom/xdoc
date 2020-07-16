@@ -27,6 +27,8 @@ The store assumes that files are not written rapidly, i.e. less than one per sec
 Class {
 	#name : #XdKeyDocumentStore,
 	#superclass : #Object,
+	#traits : 'TGtAssert',
+	#classTraits : 'TGtAssert classTrait',
 	#instVars : [
 		'location'
 	],
@@ -67,8 +69,20 @@ XdKeyDocumentStore class >> forKey: aString rootDirectory: aFileReference [
 { #category : #private }
 XdKeyDocumentStore >> dateAndTimeFrom: aFileReference [
 	"Answer the timestamp encoded in the supplied filename"
-
-	^ DateAndTime readFrom: aFileReference asFileReference basenameWithoutExtension readStream 
+	
+	| aBasename theNumbers |
+	aBasename := aFileReference asFileReference basenameWithoutExtension asString.
+	theNumbers := '-' split: aBasename.
+	theNumbers := theNumbers collect: #asInteger.
+	
+	^ DateAndTime
+		year: theNumbers first 
+		month: theNumbers second 
+		day: theNumbers third 
+		hour: theNumbers fourth 
+		minute: theNumbers fifth 
+		second: theNumbers sixth 
+		offset: 0 asDuration.
 ]
 
 { #category : #private }
@@ -79,11 +93,11 @@ XdKeyDocumentStore >> filenameFor: aDateAndTime [
 	utc := aDateAndTime asUTC.
 	^ String streamContents: [ :stream |
 		BasicDatePrinter default printYMD: utc asDate withLeadingSpace: false on: stream.
-		stream << ' '.
+		stream << '-'.
 		utc hour printOn: stream base: 10 length: 2 padded: true.
-		stream << ':'.
+		stream << '-'.
 		utc minute printOn: stream base: 10 length: 2 padded: true.
-		stream << ':'.
+		stream << '-'.
 		utc seconds printOn: stream base: 10 length: 2 padded: true.
 		stream << '.xdoc' ].
 ]
