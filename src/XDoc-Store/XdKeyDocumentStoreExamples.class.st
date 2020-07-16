@@ -35,6 +35,50 @@ XdKeyDocumentStoreExamples >> dateAndTimeFrom [
 	^ aDateAndTime
 ]
 
+{ #category : #examples }
+XdKeyDocumentStoreExamples >> dateAndTimeFrom_Incomplete_NoFields [
+	<gtExample>
+	| aFileName aStore aDateAndTime |
+	aFileName := '-----.xdoc'.
+	aStore := XdKeyDocumentStore new.
+	aDateAndTime := aStore dateAndTimeFrom: aFileName.
+	self assert: aDateAndTime equals: DateAndTime epoch.
+	^ aDateAndTime
+]
+
+{ #category : #examples }
+XdKeyDocumentStoreExamples >> dateAndTimeFrom_Incomplete_NoNumbers [
+	<gtExample>
+	| aFileName aStore aDateAndTime |
+	aFileName := 'HELLO-INVALID-NAME-WITH-SIX-PARTS.xdoc'.
+	aStore := XdKeyDocumentStore new.
+	aDateAndTime := aStore dateAndTimeFrom: aFileName.
+	self assert: aDateAndTime equals: DateAndTime epoch.
+	^ aDateAndTime
+]
+
+{ #category : #examples }
+XdKeyDocumentStoreExamples >> dateAndTimeFrom_Incomplete_OnlyDate [
+	<gtExample>
+	| aFileName aStore aDateAndTime |
+	aFileName := '2020-04-06.xdoc'.
+	aStore := XdKeyDocumentStore new.
+	aDateAndTime := aStore dateAndTimeFrom: aFileName.
+	self assert: aDateAndTime equals: DateAndTime epoch.
+	^ aDateAndTime
+]
+
+{ #category : #examples }
+XdKeyDocumentStoreExamples >> dateAndTimeFrom_Incomplete_RandomFile [
+	<gtExample>
+	| aFileName aStore aDateAndTime |
+	aFileName := 'hello.xdoc'.
+	aStore := XdKeyDocumentStore new.
+	aDateAndTime := aStore dateAndTimeFrom: aFileName.
+	self assert: aDateAndTime equals: DateAndTime epoch.
+	^ aDateAndTime
+]
+
 { #category : #'examples - date and time' }
 XdKeyDocumentStoreExamples >> dateAndTimeRoundedToSeconds [
 	<gtExample>

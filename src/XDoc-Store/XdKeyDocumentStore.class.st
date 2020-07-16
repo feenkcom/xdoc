@@ -73,8 +73,10 @@ XdKeyDocumentStore >> dateAndTimeFrom: aFileReference [
 	| aBasename theNumbers |
 	aBasename := aFileReference asFileReference basenameWithoutExtension asString.
 	theNumbers := '-' split: aBasename.
-	theNumbers := theNumbers collect: #asInteger.
+	theNumbers := theNumbers collect: #asInteger thenReject: #isNil.
 	
+	theNumbers size = 6 ifFalse: [ ^ DateAndTime epoch ].
+	 	
 	^ DateAndTime
 		year: theNumbers first 
 		month: theNumbers second 
