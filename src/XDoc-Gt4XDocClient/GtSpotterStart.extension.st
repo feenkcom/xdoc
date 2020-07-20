@@ -8,7 +8,7 @@ GtSpotterStart >> gtSpotterXdocFor: aStep [
 		title: 'XDoc';
 		itemName: [ :aFileInfo | aFileInfo titleAndAuthor ];
 		wantsToDisplayOnEmptyQuery: false;
-		filter: GTNullFilter
+		filter: GtNullFilter
 			item: [ :filter :context | 
 			(context textTrimmed beginsWith: XdClientSettings xdServerUrlString)
 				ifTrue:
