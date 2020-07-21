@@ -47,6 +47,11 @@ XdNullStreamingStrategy >> memberNamed: aFileName [
 ]
 
 { #category : #'api - streams' }
+XdNullStreamingStrategy >> open [
+	"Do nothing"
+]
+
+{ #category : #'api - streams' }
 XdNullStreamingStrategy >> readStreamDo: aBlock [
 	"do nothing"
 ]

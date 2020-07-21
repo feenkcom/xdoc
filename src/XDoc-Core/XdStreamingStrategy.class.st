@@ -73,6 +73,12 @@ XdStreamingStrategy >> memberNamed: aFileName [
 ]
 
 { #category : #'api - streams' }
+XdStreamingStrategy >> open [
+	"Prepare the document for reading and editing"
+	self subclassResponsibility
+]
+
+{ #category : #'api - streams' }
 XdStreamingStrategy >> readStreamDo: aBlock [
 	"Iterate over a binary read stream"
 	^ self subclassResponsibility

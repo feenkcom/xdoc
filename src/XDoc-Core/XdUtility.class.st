@@ -7,6 +7,19 @@ Class {
 }
 
 { #category : #utility }
+XdUtility class >> extractInTempDirectory: aStream basename: aBasename [
+	"Return a directory in which XDoc is extracted"
+	<return: #FileReference>
+	| anArchive aTmpDir |
+	anArchive := ZipArchive new.
+	anArchive readFrom: aStream.
+	aTmpDir := FileReference newTempFilePrefix: aBasename suffix: '-extracted-dir'.
+	aTmpDir ensureCreateDirectory.
+	anArchive extractAllTo: aTmpDir.
+	^ aTmpDir
+]
+
+{ #category : #utility }
 XdUtility class >> pathSegmentsInCdnPath: anArray [
 	<return: #Boolean>
 	^ XdConstants cdnPathSegments isEmpty or: [ anArray beginsWith: XdConstants cdnPathSegments ]

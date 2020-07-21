@@ -5,7 +5,8 @@ Class {
 	#classTraits : 'TXdReadStream classTrait',
 	#instVars : [
 		'file',
-		'fileSystem'
+		'fileSystem',
+		'extracted'
 	],
 	#category : #'XDoc-Core-Streaming'
 }
@@ -23,6 +24,28 @@ XdFileStreamingStrategy >> detectFileReference: aDetectBlock ifFound: aFoundBloc
 XdFileStreamingStrategy >> exists [
 	<return: #Boolean>
 	^ self file notNil and: [ self file exists ]
+]
+
+{ #category : #'private - accessing' }
+XdFileStreamingStrategy >> extracted [
+	"Return a directory in which XDoc ZIP content is extracted"
+	<return: #FileReference>
+	^ extracted
+]
+
+{ #category : #'private - accessing' }
+XdFileStreamingStrategy >> extracted: aDirectory [
+	"Set a directory in which XDoc ZIP content is extracted"
+	self 
+		assert: [ aDirectory isNotNil ] 
+		description: [ 'Directory must be non-nil' ].
+	self 
+		assert: [ aDirectory exists ] 
+		description: [ 'Directory must exist' ].
+	self 
+		assert: [ aDirectory isDirectory ] 
+		description: [ 'Directory must be a dirrectory' ].
+	extracted := aDirectory
 ]
 
 { #category : #accessing }
@@ -55,6 +78,18 @@ XdFileStreamingStrategy >> fileSystem [
 XdFileStreamingStrategy >> memberNamed: aFileName [ 
 	<return: #ArchiveMember>
 	^ self zip memberNamed: aFileName
+]
+
+{ #category : #'api - streams' }
+XdFileStreamingStrategy >> open [
+	"Prepare the document for reading and editing"
+	| aDirectory |
+	self extracted ifNotNil: [ ^ self ].
+	aDirectory := self binaryReadStreamDo: [ :aStream |
+		XdUtility 
+			extractInTempDirectory: aStream
+			basename: self file basenameWithoutExtension ].
+	self extracted: aDirectory.
 ]
 
 { #category : #streams }

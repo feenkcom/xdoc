@@ -55,6 +55,12 @@ XdFile >> exists [
 	^ self streamingStrategy exists
 ]
 
+{ #category : #'api - streaming' }
+XdFile >> extract [
+	"Prepare the document for reading and editing"
+	self streamingStrategy open
+]
+
 { #category : #'api - testing' }
 XdFile >> hasAuthor [
 	<return: #Boolean>
