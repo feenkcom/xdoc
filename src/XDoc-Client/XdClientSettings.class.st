@@ -2,7 +2,8 @@ Class {
 	#name : #XdClientSettings,
 	#superclass : #Object,
 	#classInstVars : [
-		'xdServerUrl'
+		'xdServerUrl',
+		'downloadDirectory'
 	],
 	#category : #'XDoc-Client-Settings'
 }
@@ -21,6 +22,12 @@ XdClientSettings class >> defaultLocalXdServerUrl [
 XdClientSettings class >> defaultPublicXdServerUrl [
 	<script: 'self xdServerUrl: self defaultPublicXdServerUrl'>
 	^ 'https://blog.feenk.com' asZnUrl
+]
+
+{ #category : #accessing }
+XdClientSettings class >> downloadDirectory [
+	<return: #FileReference>
+	^ downloadDirectory ifNil: [ downloadDirectory := FileLocator localDirectory / 'xdocs' ].
 ]
 
 { #category : #accessing }
