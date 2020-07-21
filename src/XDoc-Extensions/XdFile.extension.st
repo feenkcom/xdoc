@@ -55,7 +55,7 @@ XdFile >> openInPharo [
 
 { #category : #'*XDoc-Extensions' }
 XdFile >> toolInPharo [
-	"Document type should decide which tool to use  in Pharo"
+	"Document type should decide which tool to use in Pharo"
 	self manifest documents ifEmpty: [ ^ nil ].
 	^ self manifest mainDocument toolForXdFileInPharo: self
 ]
