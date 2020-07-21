@@ -10,6 +10,16 @@ Class {
 }
 
 { #category : #private }
+XdClientDownloadXDocCommand >> downloadFile [
+	<return: #FileReference>
+	| aBasename |
+	aBasename := self fileInfo xdocUrl asZnUrl lastPathSegment.
+	^ XdClientUtility 
+		notExistingFileIn: XdClientSettings downloadDirectory
+		basename: aBasename
+]
+
+{ #category : #private }
 XdClientDownloadXDocCommand >> ensureFileInfo [
 	self fileInfo ifNotNil: [ ^ self ].
 	self fileInfo: (XdClientDownloadFileInfoCommand new
@@ -19,7 +29,7 @@ XdClientDownloadXDocCommand >> ensureFileInfo [
 		fileInfo)
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 XdClientDownloadXDocCommand >> ensureXDocUrl [
 	| aXDocUrl |
 	self fileInfo ifNil: [ ^ self ].
@@ -31,17 +41,18 @@ XdClientDownloadXDocCommand >> ensureXDocUrl [
 	self fileInfo xdocUrl: aXDocUrl
 ]
 
-{ #category : #accessing }
+{ #category : #private }
 XdClientDownloadXDocCommand >> ensureXdFile [
-	| aResponse |
+	| aResponse aFile |
 	self fileInfo ifNil: [ ^ self ].
 	self ensureXDocUrl.
+	aFile := self downloadFile.
 	aResponse := ZnClient new
 		url: self fileInfo xdocUrl;
-		get;
+		downloadTo: aFile;
 		response.
 	aResponse isSuccess ifFalse: [ ^ self ].
-	self xdFile: (XdFile fromBytes: aResponse contents).
+	self xdFile: (XdFile fromFileReference: aFile).
 	self fileInfo previewUrl ifNotNil: [
 		self xdFile publicUrl: self fileInfo previewUrl ].
 	self fileInfo createdOn ifNotNil: [
