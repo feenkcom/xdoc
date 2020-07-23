@@ -12,7 +12,7 @@ XdFile >> gtLiveFor: aView [
 	^ aView explicit
 		title: 'Live';
 		priority: 0;
-		stencil: [ self toolInPharo ];
+		stencil: [ XdDocumenter forXdFile: self ];
 		actionButtonIcon: BrGlamorousIcons open action: [ self openInPharo ]
 ]
 
