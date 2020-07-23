@@ -12,7 +12,7 @@ XdUtility class >> extractInTempDirectory: aStream basename: aBasename [
 	<return: #FileReference>
 	| anArchive aTmpDir |
 	anArchive := ZipArchive new.
-	anArchive readFrom: aStream.
+	anArchive readFrom: aStream contents readStream.
 	aTmpDir := FileReference newTempFilePrefix: aBasename suffix: '-extracted-dir'.
 	aTmpDir ensureCreateDirectory.
 	anArchive extractAllTo: aTmpDir.
