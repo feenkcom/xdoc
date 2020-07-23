@@ -4,6 +4,9 @@ Extension { #name : #AbstractFileReference }
 AbstractFileReference >> gtXDFileFor: aView [
 	<gtView>
 	(self isFile and: [ XdConstants xdocExtension = self extension ]) ifFalse: [ ^ aView empty ].
-	^ ((XdFile fromFileReference: self) gtLiveFor: aView)
-		title: 'XDoc'
+	^ aView forward
+		title: 'XDoc';
+		priority: 0;
+		object: [ XdFile fromFileReference: self ];
+		view: #gtLiveFor:
 ]
