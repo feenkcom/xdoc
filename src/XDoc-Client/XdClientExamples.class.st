@@ -27,6 +27,15 @@ XdClientExamples >> basicIdFromUrlCommand [
 	^ anUrlFromUrlCommand
 ]
 
+{ #category : #accessing }
+XdClientExamples >> basicRealmAuthenticator [
+	<gtExample>
+	^ ZnBasicAuthenticator
+		username: self joeDoeUsername
+		password: self joeDoePassword
+		realm:'myrealm'
+]
+
 { #category : #server }
 XdClientExamples >> cleanServerBasicAuthenticator [
 	<gtExample>
@@ -57,6 +66,19 @@ XdClientExamples >> clientWithBasicAuthentication [
 	anUrl := self serverUrl.
 	aClient serverUrl: anUrl.
 	aClient username: self joeDoeUsername password: self joeDoePassword.
+	self assert: aClient serverUrl equals: anUrl.
+	self assert: aClient decoratingCommandBuilder commands size equals: 1.
+	^ aClient
+]
+
+{ #category : #accessing }
+XdClientExamples >> clientWithBasicRealmAuthentication [
+	<gtExample>
+	| aClient anUrl |
+	aClient := XdClient new.
+	anUrl := self serverUrl.
+	aClient serverUrl: anUrl.
+	aClient username: self joeDoeUsername password: self joeDoePassword realm: self joeDoeRealm.
 	self assert: aClient serverUrl equals: anUrl.
 	self assert: aClient decoratingCommandBuilder commands size equals: 1.
 	^ aClient
@@ -199,6 +221,11 @@ XdClientExamples >> joeDoePassword [
 	^ 'Joe Doe''s secret password'
 ]
 
+{ #category : #accessing }
+XdClientExamples >> joeDoeRealm [
+	^ 'myrealm'
+]
+
 { #category : #server }
 XdClientExamples >> joeDoeUsername [
 	^ 'JoeDoe'
@@ -270,6 +297,23 @@ XdClientExamples >> publishXDoc_AuthenticatedServer_Denied [
 	^ anXdResponse
 ]
 
+{ #category : #accessing }
+XdClientExamples >> publishXDoc_RealmAuthenticatedServer_Authenticated [
+	<gtExample>
+	| anXdResponse aClient |
+	self setServerBasicRealmAuthenticator.
+	aClient := self clientWithBasicRealmAuthentication.
+	anXdResponse := aClient publish: documentsExamples documentWithFigureXDoc.
+	self assert: anXdResponse isNotNil.
+	self assert: anXdResponse isSuccess.
+	self assert: anXdResponse isError not.
+	self assert: anXdResponse isAuthenticationRequired not.
+	self assert: anXdResponse class equals: XdSuccessfullyPublishedAnswer.
+	self assert: anXdResponse command class equals: XdClientPublishXDocCommand.
+	self assert: anXdResponse response class equals: XdZincResponse.
+	^ anXdResponse
+]
+
 { #category : #'action - publish' }
 XdClientExamples >> publishedResponse [
 	<gtExample>
@@ -283,12 +327,23 @@ XdClientExamples >> serverUrl [
 	^ zincExamples serverUrl
 ]
 
-{ #category : #server }
+{ #category : #accessing }
 XdClientExamples >> setServerBasicAuthenticator [
 	<gtExample>
 	| aServer anAuthenticator |
 	aServer := self startServer.
 	anAuthenticator := self basicAuthenticator.
+	aServer authenticator: anAuthenticator.
+	self assert: aServer authenticator equals: anAuthenticator.
+	^ aServer
+]
+
+{ #category : #accessing }
+XdClientExamples >> setServerBasicRealmAuthenticator [
+	<gtExample>
+	| aServer anAuthenticator |
+	aServer := self startServer.
+	anAuthenticator := self basicRealmAuthenticator.
 	aServer authenticator: anAuthenticator.
 	self assert: aServer authenticator equals: anAuthenticator.
 	^ aServer
