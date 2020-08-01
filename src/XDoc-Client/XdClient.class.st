@@ -246,3 +246,11 @@ XdClient >> username: aUsername password: aPassword [
 		username: aUsername; 
 		password: aPassword)
 ]
+
+{ #category : #accessing }
+XdClient >> username: aUsername password: aPassword realm: aRealm [
+	self authentication: (XdBasicRealmAuthenticationCommand new
+		username: aUsername; 
+		password: aPassword;
+		realm: aRealm)
+]
