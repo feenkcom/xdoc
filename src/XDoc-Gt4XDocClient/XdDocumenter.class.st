@@ -92,12 +92,13 @@ XdDocumenter >> initializeTitle [
 
 { #category : #hooks }
 XdDocumenter >> onXdFileChanged [
-	| anElement |
+	| aTool anElement |
 	self titleElement text: self titleText.
 	self headerElement xdFile: self xdFile.
-	anElement := self xdFile toolInPharo.
-	anElement ifNil: [ ^ self ].
+	aTool := self xdFile toolInPharo.
+	aTool ifNil: [ ^ self ].
 	
+	anElement := aTool asElement.
 	resizer inherit: anElement.
 	anElement labeled: 'Content'.
 	
