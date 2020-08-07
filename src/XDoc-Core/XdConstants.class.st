@@ -105,5 +105,5 @@ XdConstants class >> xdocPathSegmentsPattern [
 { #category : #'client / server' }
 XdConstants class >> xdocsPathSegments [
 	"REST path to access/post XDoc documents"
-	^ #( 'api' 'xdocs' )
+	^ #( 'api' 'xdocs' '*')
 ]
