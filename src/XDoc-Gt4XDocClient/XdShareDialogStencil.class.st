@@ -155,8 +155,7 @@ XdShareDialogStencil >> newReadOnlyInputField [
 XdShareDialogStencil >> newSecretInputField [
 	^ BrEditor new
 		look: BrGlamorousInputFieldSpacingLook + 
-			(BrGlamorousRegularEditorLook new 
-				- BrLayoutResizerLook;
+			(BrGlamorousRegularEditorLook new - BrLayoutResizerLook;
 				replacingText: $*);
 		margin: self newLineMarginInsets;
 		constraintsDo: [ :c | 
