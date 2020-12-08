@@ -51,17 +51,14 @@ XdDocumenter >> headerElement [
 XdDocumenter >> initialize [
 	super initialize.
 	xdFile := self defaultXdFile.
-	self viewModel: (BrInteractiveModel withAll: {
-				BrLayoutHorizontalResizerModel matchParent.
-				BrLayoutVerticalResizerModel matchParent }).
+		
 	self initializeTitle.
 	self initializeHeader.
 	
+	self matchParent.
 	self layout: BlLinearLayout vertical.
 	self padding: (BlInsets all: 10).
-	self look: (resizer := BrLayoutResizerLook inherit
-		hInherit: self headerElement).
-	self matchParent.
+	self look: (resizer := BrLayoutResizerLook inherit hInherit: self headerElement)
 ]
 
 { #category : #initialization }
