@@ -58,6 +58,12 @@ XdClient >> basicExecuteCommand: aCommand [
 	^ self decoratingCommandBuilder execute: aCommand
 ]
 
+{ #category : #'accessing - options - authentication' }
+XdClient >> bearerToken: anAccessToken [
+	self authentication: (XdBearerAuthenticationCommand new
+		accessToken: anAccessToken)
+]
+
 { #category : #'accessing - options - decorating commands' }
 XdClient >> decoratingCommandBuilder [
 	^ self 
@@ -247,7 +253,7 @@ XdClient >> username: aUsername password: aPassword [
 		password: aPassword)
 ]
 
-{ #category : #accessing }
+{ #category : #'accessing - options - authentication' }
 XdClient >> username: aUsername password: aPassword realm: aRealm [
 	self authentication: (XdBasicRealmAuthenticationCommand new
 		username: aUsername; 
