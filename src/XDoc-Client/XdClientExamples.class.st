@@ -27,13 +27,20 @@ XdClientExamples >> basicIdFromUrlCommand [
 	^ anUrlFromUrlCommand
 ]
 
-{ #category : #accessing }
+{ #category : #server }
 XdClientExamples >> basicRealmAuthenticator [
 	<gtExample>
 	^ ZnBasicAuthenticator
 		username: self joeDoeUsername
 		password: self joeDoePassword
 		realm:'myrealm'
+]
+
+{ #category : #server }
+XdClientExamples >> bearerAuthenticator [
+	<gtExample>
+	^ XdBearerExampleAuthenticator
+		token: self joeDoeBearerToken
 ]
 
 { #category : #server }
@@ -71,7 +78,7 @@ XdClientExamples >> clientWithBasicAuthentication [
 	^ aClient
 ]
 
-{ #category : #accessing }
+{ #category : #client }
 XdClientExamples >> clientWithBasicRealmAuthentication [
 	<gtExample>
 	| aClient anUrl |
@@ -79,6 +86,19 @@ XdClientExamples >> clientWithBasicRealmAuthentication [
 	anUrl := self serverUrl.
 	aClient serverUrl: anUrl.
 	aClient username: self joeDoeUsername password: self joeDoePassword realm: self joeDoeRealm.
+	self assert: aClient serverUrl equals: anUrl.
+	self assert: aClient decoratingCommandBuilder commands size equals: 1.
+	^ aClient
+]
+
+{ #category : #client }
+XdClientExamples >> clientWithBearerAuthentication [
+	<gtExample>
+	| aClient anUrl |
+	aClient := XdClient new.
+	anUrl := self serverUrl.
+	aClient serverUrl: anUrl.
+	aClient bearerToken: self joeDoeBearerToken.
 	self assert: aClient serverUrl equals: anUrl.
 	self assert: aClient decoratingCommandBuilder commands size equals: 1.
 	^ aClient
@@ -131,8 +151,7 @@ XdClientExamples >> deleteXDocId [
 { #category : #'action - delete from URL' }
 XdClientExamples >> deleteXDocUrl [
 	<gtExample>
-	| aPublishCommand aDeleteResponse |
-	aPublishCommand := self publishedResponse.
+	| aDeleteResponse |
 	aDeleteResponse := self client deleteUrl: self xdocIdSegment.
 	self assert: aDeleteResponse notNil.
 	^ aDeleteResponse
@@ -217,6 +236,11 @@ XdClientExamples >> initialize [
 ]
 
 { #category : #server }
+XdClientExamples >> joeDoeBearerToken [
+	^ 'hsdhjsd235agsggd6326shsln9ygvak'
+]
+
+{ #category : #server }
 XdClientExamples >> joeDoePassword [
 	^ 'Joe Doe''s secret password'
 ]
@@ -297,7 +321,7 @@ XdClientExamples >> publishXDoc_AuthenticatedServer_Denied [
 	^ anXdResponse
 ]
 
-{ #category : #accessing }
+{ #category : #'action - publish' }
 XdClientExamples >> publishXDoc_RealmAuthenticatedServer_Authenticated [
 	<gtExample>
 	| anXdResponse aClient |
@@ -327,7 +351,7 @@ XdClientExamples >> serverUrl [
 	^ zincExamples serverUrl
 ]
 
-{ #category : #accessing }
+{ #category : #server }
 XdClientExamples >> setServerBasicAuthenticator [
 	<gtExample>
 	| aServer anAuthenticator |
@@ -338,12 +362,23 @@ XdClientExamples >> setServerBasicAuthenticator [
 	^ aServer
 ]
 
-{ #category : #accessing }
+{ #category : #server }
 XdClientExamples >> setServerBasicRealmAuthenticator [
 	<gtExample>
 	| aServer anAuthenticator |
 	aServer := self startServer.
 	anAuthenticator := self basicRealmAuthenticator.
+	aServer authenticator: anAuthenticator.
+	self assert: aServer authenticator equals: anAuthenticator.
+	^ aServer
+]
+
+{ #category : #server }
+XdClientExamples >> setServerBearerAuthenticator [
+	<gtExample>
+	| aServer anAuthenticator |
+	aServer := self startServer.
+	anAuthenticator := self bearerAuthenticator.
 	aServer authenticator: anAuthenticator.
 	self assert: aServer authenticator equals: anAuthenticator.
 	^ aServer
@@ -368,11 +403,28 @@ XdClientExamples >> stopServer [
 ]
 
 { #category : #'action - update' }
-XdClientExamples >> updateXDoc_AuthenticatedServer_Authenticated [
+XdClientExamples >> updateXDoc_AuthenticatedServer_BasicAuthenticated [
 	<gtExample>
 	| anXdResponse aClient |
 	self setServerBasicAuthenticator.
 	aClient := self clientWithBasicAuthentication.
+	anXdResponse := aClient update: documentsExamples documentWithFigureXDoc url: (self serverUrl / '1').
+	self assert: anXdResponse isNotNil.
+	self assert: anXdResponse isSuccess.
+	self assert: anXdResponse isError not.
+	self assert: anXdResponse isAuthenticationRequired not.
+	self assert: anXdResponse class equals: XdSuccessfullyUpdatedAnswer.
+	self assert: anXdResponse command class equals: XdClientUpdateXDocCommand.
+	self assert: anXdResponse response class equals: XdZincResponse.
+	^ anXdResponse
+]
+
+{ #category : #'action - update' }
+XdClientExamples >> updateXDoc_AuthenticatedServer_BearerAuthenticated [
+	<gtExample>
+	| anXdResponse aClient |
+	self setServerBearerAuthenticator.
+	aClient := self clientWithBearerAuthentication.
 	anXdResponse := aClient update: documentsExamples documentWithFigureXDoc url: (self serverUrl / '1').
 	self assert: anXdResponse isNotNil.
 	self assert: anXdResponse isSuccess.
