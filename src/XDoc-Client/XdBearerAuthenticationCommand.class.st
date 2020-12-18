@@ -58,13 +58,3 @@ XdBearerAuthenticationCommand >> username [
 XdBearerAuthenticationCommand >> username: anObject [
 	username := anObject
 ]
-
-{ #category : #accessing }
-XdBearerAuthenticationCommand >> zincAuthClient [
-	| loginConfig response |
-	loginConfig := LeAuthAPIConfig forDefaultServer.
-	response := LeAuthAPIClient new 
-		configuration: loginConfig; 
-		login: username with:password.
-	accessToken := response contents at: 'accessToken'.
-]
