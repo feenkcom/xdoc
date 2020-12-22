@@ -2,7 +2,9 @@ Class {
 	#name : #XdBearerAuthenticationCommand,
 	#superclass : #XdAuthenticationCommand,
 	#instVars : [
-		'accessToken'
+		'accessToken',
+		'username',
+		'password'
 	],
 	#category : #'XDoc-Client-Commands'
 }

@@ -58,6 +58,7 @@ XdShareDialogLook >> initialize [
 	self initializeInformationHolder.
 	self initializeActions.
 	pager := BrPager new.
+	pager matchParent.
 	self addChangeAddChildAs: #(content pager) with: [ pager ].
 	self initializeFirstPage.
 ]

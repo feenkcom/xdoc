@@ -19,3 +19,9 @@ XdAuthenticationCommand >> execute [
 	self authenticate.
 	self executeSubCommand
 ]
+
+{ #category : #accessing }
+XdAuthenticationCommand >> shouldReplace: aCommand [
+	<return: #Boolean>
+	^ self class = aCommand class
+]
