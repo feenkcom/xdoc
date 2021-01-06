@@ -7,8 +7,8 @@ XdDocument >> gtComponentsFor: aView [
 		title: 'Components';
 		priority: 1;
 		items: [ self components asOrderedCollection ];
-		itemFormat: [ :eachComponent | 
-			'Link to attachment id: ', eachComponent link asString ]
+		itemText:
+				[ :eachComponent | 'Link to attachment id: ' , eachComponent link asString ]
 ]
 
 { #category : #'*XDoc-Extensions' }
