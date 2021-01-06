@@ -3,9 +3,6 @@ Class {
 	#superclass : #XdShareProtoInformation,
 	#traits : 'TGtOptions',
 	#classTraits : 'TGtOptions classTrait',
-	#classInstVars : [
-		'defaultPublishUrl'
-	],
 	#category : #'XDoc-Gt4XDocClient-Dialog - Model'
 }
 
@@ -15,39 +12,8 @@ XdShareInformation class >> authorOptionName [
 ]
 
 { #category : #accessing }
-XdShareInformation class >> defaultLocalPublishUrl [
-	^ 'https://localhost:2019'
-]
-
-{ #category : #accessing }
-XdShareInformation class >> defaultPublicPublishUrl [
-	^ 'https://publish.feenk.com'
-]
-
-{ #category : #accessing }
-XdShareInformation class >> defaultPublishUrl [
-	defaultPublishUrl ifNil: [ defaultPublishUrl := self defaultPublicPublishUrl ].
-	^ defaultPublishUrl
-]
-
-{ #category : #accessing }
-XdShareInformation class >> defaultPublishUrl: aUrlString [
-	defaultPublishUrl  := aUrlString
-]
-
-{ #category : #accessing }
 XdShareInformation class >> descriptionOptionName [
 	^ #description
-]
-
-{ #category : #accessing }
-XdShareInformation class >> makeLocalServerCurrent [
-	self defaultPublishUrl: self defaultLocalPublishUrl
-]
-
-{ #category : #accessing }
-XdShareInformation class >> makePublicServerCurrent [
-	self defaultPublishUrl: self defaultPublicPublishUrl
 ]
 
 { #category : #factory }
