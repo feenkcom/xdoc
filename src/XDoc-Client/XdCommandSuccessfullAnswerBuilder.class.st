@@ -35,6 +35,13 @@ XdCommandSuccessfullAnswerBuilder >> visitXdClientDeleteXDocIdCommand: aCommand 
 ]
 
 { #category : #visiting }
+XdCommandSuccessfullAnswerBuilder >> visitXdClientPingCommand: aCommand [
+	^ self 
+		buildAnswer: XdSuccessfullyPingAnswer new 
+		withCommand: aCommand
+]
+
+{ #category : #visiting }
 XdCommandSuccessfullAnswerBuilder >> visitXdClientPublishXDocCommand: aCommand [
 	^ self 
 		buildAnswer: XdSuccessfullyPublishedAnswer new 

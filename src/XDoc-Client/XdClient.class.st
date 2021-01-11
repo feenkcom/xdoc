@@ -191,6 +191,15 @@ XdClient >> initialize [
 ]
 
 { #category : #'actions - modifying' }
+XdClient >> ping [
+	<return: #XdCommandAnswer>
+	| aCommand |
+	aCommand := XdClientPingCommand new
+		client: self.
+	^ self executeCommand: aCommand.
+]
+
+{ #category : #'actions - modifying' }
 XdClient >> publish: aXdFile [ 
 	"Publish an XDoc file to a public server"
 	<return: #XdCommandAnswer>
