@@ -33,7 +33,7 @@ XdClientDownloadFileInfoCommand >> ensureFileInfo [
 { #category : #execution }
 XdClientDownloadFileInfoCommand >> execute [
 	self ensureFileInfo.
-	"self updateXDocUrl."
+	self updateXDocUrl.
 	^ self fileInfo
 ]
 
