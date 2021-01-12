@@ -10,12 +10,18 @@ Class {
 
 { #category : #private }
 XdClientDownloadFileInfoCommand >> ensureFileInfo [
-	| anIdPathSegment aRootUrl aInfoUrl aResponse |
+	| anIdPathSegment aRootUrl aInfoUrl aResponse segments hasRealm|
 	(XdUtility pathSegmentsInCdnPath: self url pathSegments) ifFalse: [ ^ self ].
 	self url pathSegments size > XdConstants cdnPathSegments size ifFalse: [ ^ self ].
-	anIdPathSegment := self url pathSegments at: XdConstants cdnPathSegments size + 1.
-	aRootUrl := (self url copy clearPath addPathSegments: XdConstants cdnPathSegments) / anIdPathSegment.
-	aInfoUrl := aRootUrl / XdConstants xdocInfoFileName.
+	segments := self url pathSegments.
+	hasRealm := segments size = 3.
+	
+	anIdPathSegment := self url pathSegments at: XdConstants cdnPathSegments size + (hasRealm ifTrue: [2] ifFalse:[1]).
+	aRootUrl := (self url copy clearPath addPathSegments: XdConstants cdnPathSegments) "/ anIdPathSegment".
+	aInfoUrl := aRootUrl.
+	hasRealm ifTrue: [aInfoUrl := aInfoUrl/segments first].
+	
+	aInfoUrl := aInfoUrl / anIdPathSegment / XdConstants xdocInfoFileName.
 	aResponse := ZnClient new
 		url: aInfoUrl;
 		get;
@@ -27,7 +33,7 @@ XdClientDownloadFileInfoCommand >> ensureFileInfo [
 { #category : #execution }
 XdClientDownloadFileInfoCommand >> execute [
 	self ensureFileInfo.
-	self updateXDocUrl.
+	"self updateXDocUrl."
 	^ self fileInfo
 ]
 
