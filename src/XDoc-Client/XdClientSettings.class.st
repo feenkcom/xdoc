@@ -21,7 +21,7 @@ XdClientSettings class >> defaultLocalXdServerUrl [
 { #category : #accessing }
 XdClientSettings class >> defaultNewPublicXdServerUrl [
 	<script: 'self xdServerUrl: self defaultNewPublicXdServerUrl'>
-	^ 'https://publish.lepiter.com' asZnUrl
+	^ 'https://my.lepiter.com' asZnUrl
 ]
 
 { #category : #accessing }
