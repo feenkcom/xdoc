@@ -49,12 +49,17 @@ XdClientDownloadFileInfoCommand >> fileInfo: aXdFileInfo [
 
 { #category : #private }
 XdClientDownloadFileInfoCommand >> updateXDocUrl [
-	| aXDocUrl |
+	| aXDocUrl spaceName |
 	self fileInfo ifNil: [ ^ self ].
 	aXDocUrl := self client serverUrl 
-		/ XdConstants cdnPathSegments 
+		/ XdConstants cdnPathSegments .
+	self fileInfo hasRealm ifTrue:[
+		aXDocUrl := aXDocUrl / self fileInfo realm].
+	aXDocUrl := aXDocUrl 
 		/ self fileInfo pathSegment 
 		/ self fileInfo fileName.
+		
+	
 	self fileInfo xdocUrl: aXDocUrl
 ]
 
