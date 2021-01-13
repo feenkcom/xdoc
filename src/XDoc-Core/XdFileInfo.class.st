@@ -59,6 +59,13 @@ XdFileInfo >> gtDisplayOn: stream [
 	stream nextPutAll: self title
 ]
 
+{ #category : #accessing }
+XdFileInfo >> hasRealm [
+	self xdocUrl ifNotNil: [
+		^ self xdocUrl asZnUrl segments size = 3].
+	^ false
+]
+
 { #category : #initialization }
 XdFileInfo >> initialize [
 	super initialize.
@@ -93,6 +100,18 @@ XdFileInfo >> previewUrl [
 { #category : #accessing }
 XdFileInfo >> previewUrl: anObject [
 	previewUrl := anObject
+]
+
+{ #category : #accessing }
+XdFileInfo >> realm [
+	| computedRealm segments |
+	computedRealm := ''.
+	self xdocUrl ifNotNil: [
+		segments := self xdocUrl asZnUrl segments.
+		segments size = 3 ifTrue:[ 
+			computedRealm := segments first]. 
+		].
+	^ computedRealm.
 ]
 
 { #category : #'accessing - manifest' }
