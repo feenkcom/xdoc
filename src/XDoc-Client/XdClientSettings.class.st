@@ -19,12 +19,6 @@ XdClientSettings class >> defaultLocalXdServerUrl [
 ]
 
 { #category : #accessing }
-XdClientSettings class >> defaultNewPublicXdServerUrl [
-	<script: 'self xdServerUrl: self defaultNewPublicXdServerUrl'>
-	^ 'https://my.lepiter.com' asZnUrl
-]
-
-{ #category : #accessing }
 XdClientSettings class >> defaultPublicXdServerUrl [
 	<script: 'self xdServerUrl: self defaultPublicXdServerUrl'>
 	^ 'https://blog.feenk.com' asZnUrl
@@ -34,16 +28,6 @@ XdClientSettings class >> defaultPublicXdServerUrl [
 XdClientSettings class >> downloadDirectory [
 	<return: #FileReference>
 	^ downloadDirectory ifNil: [ downloadDirectory := FileLocator localDirectory / 'xdocs' ].
-]
-
-{ #category : #accessing }
-XdClientSettings class >> makeLocalServerCurrent [
-	self xdServerUrl: self defaultLocalXdServerUrl
-]
-
-{ #category : #accessing }
-XdClientSettings class >> makePublicServerCurrent [
-	self xdServerUrl: self defaultNewPublicXdServerUrl
 ]
 
 { #category : #accessing }
