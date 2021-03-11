@@ -23,5 +23,5 @@ XdFile >> gtSpotterActDefaultFrom: aSpotterElement [
 	aTitle := self hasTitle 
 		ifTrue: [ self title ] 
 		ifFalse: [ 'XDoc Document' ].
-	GtPager openWrappedOn: aDocumenter title: aTitle from: aSpotterElement
+	(GtPager openWrappedOn: aDocumenter title: aTitle from: aSpotterElement) maximized
 ]
