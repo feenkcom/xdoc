@@ -1,6 +1,6 @@
 Class {
 	#name : #XdShareDialogLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#traits : 'TXdShareInformationHolderAccess + TXdShareActionsAccess',
 	#classTraits : 'TXdShareInformationHolderAccess classTrait + TXdShareActionsAccess classTrait',
 	#instVars : [

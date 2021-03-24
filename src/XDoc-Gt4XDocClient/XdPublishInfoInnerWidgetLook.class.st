@@ -1,6 +1,6 @@
 Class {
 	#name : #XdPublishInfoInnerWidgetLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#category : #'XDoc-Gt4XDocClient-Publish'
 }
 

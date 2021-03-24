@@ -1,6 +1,6 @@
 Class {
 	#name : #XdPublishInfoLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'info',
 		'titleElement',

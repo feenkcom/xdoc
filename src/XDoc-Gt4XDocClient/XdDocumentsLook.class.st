@@ -1,6 +1,6 @@
 Class {
 	#name : #XdDocumentsLook,
-	#superclass : #BrLook,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'client'
 	],
