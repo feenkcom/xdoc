@@ -40,14 +40,14 @@ XdShareDialogStencil >> initialize [
 { #category : #'instance creation' }
 XdShareDialogStencil >> newButton [
 	^ BrButton new 
-		look: BrGlamorousButtonWithLabelLook
+		aptitude: BrGlamorousButtonWithLabelAptitude
 ]
 
 { #category : #'instance creation' }
 XdShareDialogStencil >> newCodeInputField [
 	^ BrEditor new
-		look: BrGlamorousInputFieldSpacingLook + 
-			(BrGlamorousCodeEditorLook - BrLayoutResizerLook);
+		aptitude: BrGlamorousInputFieldSpacingAptitude + 
+			(BrGlamorousCodeEditorAptitude - BrLayoutResizerAptitude);
 		margin: self newLineMarginInsets;
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
@@ -78,7 +78,7 @@ XdShareDialogStencil >> newHorizontalSeparatorElement [
 { #category : #'instance creation' }
 XdShareDialogStencil >> newInputEditor [
 	^ BrEditor new
-		look: BrGlamorousInputFieldSpacingLook + (BrGlamorousRegularEditorLook - BrLayoutResizerLook);
+		aptitude: BrGlamorousInputFieldSpacingAptitude + (BrGlamorousRegularEditorAptitude - BrLayoutResizerAptitude);
 		margin: self newLineMarginInsets;
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
@@ -98,7 +98,7 @@ XdShareDialogStencil >> newInputEditorWith: aSymbol [
 { #category : #'instance creation' }
 XdShareDialogStencil >> newInputField [
 	^ BrEditor new
-		look: BrGlamorousInputFieldSpacingLook + (BrGlamorousRegularEditorLook - BrLayoutResizerLook);
+		aptitude: BrGlamorousInputFieldSpacingAptitude + (BrGlamorousRegularEditorAptitude - BrLayoutResizerAptitude);
 		margin: self newLineMarginInsets;
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
@@ -118,7 +118,7 @@ XdShareDialogStencil >> newInputFieldWith: aSymbol [
 { #category : #'instance creation' }
 XdShareDialogStencil >> newLabel [
 	^ BrLabel new
-		look: (BrGlamorousLabelLook new glamorousRegularFontAndSize foreground: Color gray; fontSize: 12);
+		aptitude: (BrGlamorousLabelAptitude new glamorousRegularFontAndSize foreground: Color gray; fontSize: 12);
 		focusability: BlFocusability none;
 		margin: (BlInsets top: 5 right: 2);
 		constraintsDo: [ :c | 
@@ -136,7 +136,7 @@ XdShareDialogStencil >> newPage [
 	^ BlElement new
 		viewModel: BrPagerPageModel new;
 		layout: BlLinearLayout vertical;
-		look: BrVerticalPaneLook new.
+		aptitude: BrVerticalPaneAptitude new.
 ]
 
 { #category : #'instance creation' }
@@ -154,8 +154,8 @@ XdShareDialogStencil >> newReadOnlyInputField [
 { #category : #'instance creation' }
 XdShareDialogStencil >> newSecretInputField [
 	^ BrEditor new
-		look: BrGlamorousInputFieldSpacingLook + 
-			(BrGlamorousRegularEditorLook new - BrLayoutResizerLook;
+		aptitude: BrGlamorousInputFieldSpacingAptitude + 
+			(BrGlamorousRegularEditorAptitude new - BrLayoutResizerAptitude;
 				replacingText: $*);
 		margin: self newLineMarginInsets;
 		constraintsDo: [ :c | 
@@ -176,7 +176,7 @@ XdShareDialogStencil >> newSecretInputFieldWith: aSymbol [
 { #category : #'instance creation' }
 XdShareDialogStencil >> newTitleLabel [
 	^ BrLabel new
-		look: (BrGlamorousLabelLook new glamorousRegularFont; fontSize: 24);
+		aptitude: (BrGlamorousLabelAptitude new glamorousRegularFont; fontSize: 24);
 		focusability: BlFocusability none;
 		margin: (BlInsets all: 5);
 		constraintsDo: [ :c | 

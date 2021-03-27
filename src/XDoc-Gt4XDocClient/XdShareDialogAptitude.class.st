@@ -1,5 +1,5 @@
 Class {
-	#name : #XdShareDialogLook,
+	#name : #XdShareDialogAptitude,
 	#superclass : #BrAptitude,
 	#traits : 'TXdShareInformationHolderAccess + TXdShareActionsAccess',
 	#classTraits : 'TXdShareInformationHolderAccess classTrait + TXdShareActionsAccess classTrait',
@@ -11,13 +11,13 @@ Class {
 }
 
 { #category : #execution }
-XdShareDialogLook >> executeAsTaskIt: aBlock [ 
+XdShareDialogAptitude >> executeAsTaskIt: aBlock [ 
 	BlTktWorkerProvider highUIExternalResourceBoundPool 
 		schedule: aBlock
 ]
 
 { #category : #execution }
-XdShareDialogLook >> executeDeleteAction [
+XdShareDialogAptitude >> executeDeleteAction [
 	self pager addPage: (self 
 		newProgressPageLabel: 'Deleting...').
 	self pager smoothScrollToLast.
@@ -29,7 +29,7 @@ XdShareDialogLook >> executeDeleteAction [
 ]
 
 { #category : #execution }
-XdShareDialogLook >> executePublishAction [
+XdShareDialogAptitude >> executePublishAction [
 	self pager addPage: (self 
 		newProgressPageLabel: 'Publishing...').
 	self pager smoothScrollToLast.
@@ -41,7 +41,7 @@ XdShareDialogLook >> executePublishAction [
 ]
 
 { #category : #execution }
-XdShareDialogLook >> executeUpdateAction [
+XdShareDialogAptitude >> executeUpdateAction [
 	self pager addPage: (self 
 		newProgressPageLabel: 'Updating...').
 	self pager smoothScrollToLast.
@@ -53,7 +53,7 @@ XdShareDialogLook >> executeUpdateAction [
 ]
 
 { #category : #initialization }
-XdShareDialogLook >> initialize [ 
+XdShareDialogAptitude >> initialize [ 
 	super initialize.
 	self initializeInformationHolder.
 	self initializeActions.
@@ -64,12 +64,12 @@ XdShareDialogLook >> initialize [
 ]
 
 { #category : #initialization }
-XdShareDialogLook >> initializeFirstPage [
+XdShareDialogAptitude >> initializeFirstPage [
 	self pager addPage: self newInitialPage
 ]
 
 { #category : #initialization }
-XdShareDialogLook >> initializeListeners [
+XdShareDialogAptitude >> initializeListeners [
 	super initializeListeners.
 	
 	self 
@@ -81,7 +81,7 @@ XdShareDialogLook >> initializeListeners [
 ]
 
 { #category : #initialization }
-XdShareDialogLook >> initializeRequests [
+XdShareDialogAptitude >> initializeRequests [
 	super initializeRequests.
 	
 	self request: XdShareInformationRequest new.
@@ -89,7 +89,7 @@ XdShareDialogLook >> initializeRequests [
 ]
 
 { #category : #'instance creation' }
-XdShareDialogLook >> newDeletePage: aString action: aBlock [
+XdShareDialogAptitude >> newDeletePage: aString action: aBlock [
 	<return: #BlElement>
 	^ XdShareDeleteDialogWithAuthenticationStencil new
 		informationHolder: self informationHolder;
@@ -99,7 +99,7 @@ XdShareDialogLook >> newDeletePage: aString action: aBlock [
 ]
 
 { #category : #'instance creation' }
-XdShareDialogLook >> newInitialPage [
+XdShareDialogAptitude >> newInitialPage [
 	<return: #BlElement>
 	^ XdInitialDialogStencil new 
 		informationHolder: self informationHolder;
@@ -110,7 +110,7 @@ XdShareDialogLook >> newInitialPage [
 ]
 
 { #category : #'instance creation' }
-XdShareDialogLook >> newProgressPage [
+XdShareDialogAptitude >> newProgressPage [
 	<return: #BlElement>
 	^ XdProgressDialogStencil new
 		informationHolder: self informationHolder
@@ -118,7 +118,7 @@ XdShareDialogLook >> newProgressPage [
 ]
 
 { #category : #'instance creation' }
-XdShareDialogLook >> newProgressPageLabel: aString [
+XdShareDialogAptitude >> newProgressPageLabel: aString [
 	<return: #BlElement>
 	^ XdProgressDialogStencil new
 		informationHolder: self informationHolder;
@@ -127,7 +127,7 @@ XdShareDialogLook >> newProgressPageLabel: aString [
 ]
 
 { #category : #'instance creation' }
-XdShareDialogLook >> newPublishPage: aString action: aBlock [ 
+XdShareDialogAptitude >> newPublishPage: aString action: aBlock [ 
 	<return: #BlElement>
 	^ XdSharePublishDialogWithAuthenticationStencil new
 		informationHolder: self informationHolder;
@@ -137,7 +137,7 @@ XdShareDialogLook >> newPublishPage: aString action: aBlock [
 ]
 
 { #category : #'instance creation' }
-XdShareDialogLook >> newUpdatePage: aString action: aBlock [ 
+XdShareDialogAptitude >> newUpdatePage: aString action: aBlock [ 
 	<return: #BlElement>
 	^ XdShareUpdateDialogWithAuthenticationStencil new
 		informationHolder: self informationHolder;
@@ -147,42 +147,42 @@ XdShareDialogLook >> newUpdatePage: aString action: aBlock [
 ]
 
 { #category : #hooks }
-XdShareDialogLook >> onActionsChange: anInformation [
+XdShareDialogAptitude >> onActionsChange: anInformation [
 	self actions: anInformation.
 ]
 
 { #category : #hooks }
-XdShareDialogLook >> onInformationChange: anInformation [
+XdShareDialogAptitude >> onInformationChange: anInformation [
 	self information: anInformation.
 ]
 
 { #category : #accessing }
-XdShareDialogLook >> pager [
+XdShareDialogAptitude >> pager [
 	<return: #BrPager>
 	^ pager
 ]
 
 { #category : #accessing }
-XdShareDialogLook >> pages [
+XdShareDialogAptitude >> pages [
 	^ self pager pages
 ]
 
 { #category : #steps }
-XdShareDialogLook >> proceedDeleteStep [
+XdShareDialogAptitude >> proceedDeleteStep [
 	self pager viewModel removePagesAfter: self pager viewModel pages first.
 	self pager addPage: (self newDeletePage: 'Delete' action: [self executeDeleteAction]).
 	self pager smoothScrollToLast.
 ]
 
 { #category : #steps }
-XdShareDialogLook >> proceedPublishStep [
+XdShareDialogAptitude >> proceedPublishStep [
 	self pager viewModel removePagesAfter: self pager viewModel pages first.
 	self pager addPage: (self newPublishPage: 'Publish' action: [self executePublishAction]).
 	self pager smoothScrollToLast.
 ]
 
 { #category : #steps }
-XdShareDialogLook >> proceedUpdateStep [
+XdShareDialogAptitude >> proceedUpdateStep [
 	self pager viewModel removePagesAfter: self pager viewModel pages first.
 	self pager addPage: (self newUpdatePage: 'Update' action: [self executeUpdateAction]).
 	self pager smoothScrollToLast.

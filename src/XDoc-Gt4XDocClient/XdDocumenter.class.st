@@ -58,7 +58,7 @@ XdDocumenter >> initialize [
 	self matchParent.
 	self layout: BlLinearLayout vertical.
 	self padding: (BlInsets all: 10).
-	self look: (resizer := BrLayoutResizerLook inherit hInherit: self headerElement)
+	self aptitude: (resizer := BrLayoutResizerAptitude inherit hInherit: self headerElement)
 ]
 
 { #category : #initialization }
@@ -66,7 +66,7 @@ XdDocumenter >> initializeHeader [
 	| aHeader |
 	aHeader := XdDocumenterHeader new.
 	aHeader labeled: 'Header'.
-	aHeader look: GtCoderExpanderWithoutShadowLook.
+	aHeader aptitude: GtCoderExpanderWithoutShadowAptitude.
 	aHeader margin: (BlInsets bottom: 10).
 	aHeader padding: (BlInsets all: 7).
 	aHeader hMatchParent; vFitContent.
@@ -78,7 +78,7 @@ XdDocumenter >> initializeHeader [
 XdDocumenter >> initializeTitle [
 	| aHeader |
 	aHeader := BrEditor new 
-		look: BrGlamorousEditorLook;
+		aptitude: BrGlamorousEditorAptitude;
 		beReadOnlyWithSelection;
 		text: self titleText;
 		hMatchParent;

@@ -1,6 +1,6 @@
 Class {
-	#name : #XdGlamorousDocumentsGridLook,
-	#superclass : #XdDocumentsLook,
+	#name : #XdGlamorousDocumentsGridAptitude,
+	#superclass : #XdDocumentsAptitude,
 	#instVars : [
 		'list',
 		'listHandler'
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #accessing }
-XdGlamorousDocumentsGridLook >> initialize [
+XdGlamorousDocumentsGridAptitude >> initialize [
 	super initialize.
 	self
 		addChangeProperty: #(widget padding)
@@ -38,17 +38,17 @@ XdGlamorousDocumentsGridLook >> initialize [
 ]
 
 { #category : #initialization }
-XdGlamorousDocumentsGridLook >> initializeList [
+XdGlamorousDocumentsGridAptitude >> initializeList [
 	listHandler := XdDocumentsHandler new.
 	list := BrGridList new
 		stencil: [ :eachXdFileInfo |	
 			| aCard |
 			aCard := BrCard new
 				layout: BlLinearLayout vertical;
-				look: BrShadowLook
-					+ BrIconLook
-					+ (BrTextLabelLook new labelDo: [ :aLabel | aLabel margin: (BlInsets all: 12) ])
-					+ (BrDescriptionLook new descriptionDo: [ :aDescription | 
+				aptitude: BrShadowAptitude
+					+ BrIconAptitude
+					+ (BrTextLabelAptitude new labelDo: [ :aLabel | aLabel margin: (BlInsets all: 12) ])
+					+ (BrDescriptionAptitude new descriptionDo: [ :aDescription | 
 							aDescription padding: (BlInsets top: 0 left: 12 bottom: 12 right: 12) ]);
 				constraintsDo: [ :c |
 					c horizontal matchParent.
@@ -74,14 +74,14 @@ XdGlamorousDocumentsGridLook >> initializeList [
 ]
 
 { #category : #initialization }
-XdGlamorousDocumentsGridLook >> initializeToolbar [
+XdGlamorousDocumentsGridAptitude >> initializeToolbar [
 	| aToolbar aToolbarWrapper aRefreshButton |
 
 	aToolbar := BrToolbar new.
-	aToolbar look: BrGlamorousToolbarLook new.
+	aToolbar aptitude: BrGlamorousToolbarAptitude new.
 	aToolbar constraintsDo: [ :c | c linear horizontal alignRight ].
 	aRefreshButton := BrButton new
-		look: BrGlamorousButtonWithIconLook;
+		aptitude: BrGlamorousButtonWithIconAptitude;
 		label: 'Refresh';
 		icon: BrGlamorousIcons refresh asElement;
 		action: [ self refreshList ].
@@ -96,7 +96,7 @@ XdGlamorousDocumentsGridLook >> initializeToolbar [
 	aToolbarWrapper addChildren: {
 		BrLabel new
 			text: 'blog.feenk.com';
-			look: (BrGlamorousLabelLook new fontSize: 15);
+			aptitude: (BrGlamorousLabelAptitude new fontSize: 15);
 			hMatchParent;
 			constraintsDo: [ :c | c linear vertical alignCenter ].
 		
@@ -107,21 +107,21 @@ XdGlamorousDocumentsGridLook >> initializeToolbar [
 ]
 
 { #category : #hooks }
-XdGlamorousDocumentsGridLook >> onClientChange [
+XdGlamorousDocumentsGridAptitude >> onClientChange [
 	self widgetDo: [ :aWidget | 
 		listHandler client: self client.
 		self updateList ]
 ]
 
 { #category : #actions }
-XdGlamorousDocumentsGridLook >> refreshList [
+XdGlamorousDocumentsGridAptitude >> refreshList [
 	self widgetDo: [ :aWidget | 
 		self updateList.
 	 ]
 ]
 
 { #category : #private }
-XdGlamorousDocumentsGridLook >> updateList [
+XdGlamorousDocumentsGridAptitude >> updateList [
 	self client async 
 		onSuccessDo: [ :aList | 
 			self widgetDo: [ :aWidget | 
@@ -131,7 +131,7 @@ XdGlamorousDocumentsGridLook >> updateList [
 ]
 
 { #category : #private }
-XdGlamorousDocumentsGridLook >> updatePreviewOf: aFileInfo in: aCard [
+XdGlamorousDocumentsGridAptitude >> updatePreviewOf: aFileInfo in: aCard [
 
 	self
 		assert: [ aFileInfo isNotNil ]

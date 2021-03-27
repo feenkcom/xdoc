@@ -1,6 +1,6 @@
 Class {
-	#name : #XdGlamorousDocumentsListLook,
-	#superclass : #XdDocumentsLook,
+	#name : #XdGlamorousDocumentsListAptitude,
+	#superclass : #XdDocumentsAptitude,
 	#instVars : [
 		'list',
 		'toolbar',
@@ -10,7 +10,7 @@ Class {
 }
 
 { #category : #accessing }
-XdGlamorousDocumentsListLook >> initialize [
+XdGlamorousDocumentsListAptitude >> initialize [
 	super initialize.
 	self
 		addChangeProperty: #(widget layout)
@@ -26,7 +26,7 @@ XdGlamorousDocumentsListLook >> initialize [
 ]
 
 { #category : #initialization }
-XdGlamorousDocumentsListLook >> initializeList [
+XdGlamorousDocumentsListAptitude >> initializeList [
 	listHandler := XdDocumentsHandler new.
 	list := BrColumnedList new.
 	list addEventHandler: listHandler.
@@ -34,28 +34,28 @@ XdGlamorousDocumentsListLook >> initializeList [
 		title: 'Author';
 		stencil: [ :aFileInfo :anIndex | 
 			BrLabel new
-				look: BrGlamorousListLabelLook;
+				aptitude: BrGlamorousListLabelAptitude;
 				text: aFileInfo author;
 				hMatchParent. ].
 	list column 
 		title: 'Title';
 		stencil: [ :aFileInfo :anIndex | 
 			BrLabel new
-				look: BrGlamorousListLabelLook;
+				aptitude: BrGlamorousListLabelAptitude;
 				text: aFileInfo title;
 				hMatchParent. ].
 	self widget addChild: list as: #list.
 ]
 
 { #category : #initialization }
-XdGlamorousDocumentsListLook >> initializeToolbar [
+XdGlamorousDocumentsListAptitude >> initializeToolbar [
 	| aButton |
 	toolbar := BrToolbar new.
-	toolbar look: BrGlamorousToolbarLook new.
+	toolbar aptitude: BrGlamorousToolbarAptitude new.
 	toolbar constraintsDo: [ :c | 
 		c linear horizontal alignRight ].
 	aButton := BrButton new
-		look: BrGlamorousButtonWithIconAndLabelLook;
+		aptitude: BrGlamorousButtonWithIconAndLabelAptitude;
 		label: 'Refresh published documents';
 		icon: BrGlamorousIcons refresh asElement;
 		action: [ self refreshList ].
@@ -64,21 +64,21 @@ XdGlamorousDocumentsListLook >> initializeToolbar [
 ]
 
 { #category : #hooks }
-XdGlamorousDocumentsListLook >> onClientChange [
+XdGlamorousDocumentsListAptitude >> onClientChange [
 	self widgetDo: [ :aWidget | 
 		listHandler client: self client.
 		self updateList ]
 ]
 
 { #category : #actions }
-XdGlamorousDocumentsListLook >> refreshList [
+XdGlamorousDocumentsListAptitude >> refreshList [
 	self widgetDo: [ :aWidget | 
 		self updateList.
 	 ]
 ]
 
 { #category : #private }
-XdGlamorousDocumentsListLook >> updateList [
+XdGlamorousDocumentsListAptitude >> updateList [
 	self client async 
 		onSuccessDo: [ :aList | 
 			self widgetDo: [ :aWidget | 

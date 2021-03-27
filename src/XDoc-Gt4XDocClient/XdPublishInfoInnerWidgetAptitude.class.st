@@ -1,11 +1,11 @@
 Class {
-	#name : #XdPublishInfoInnerWidgetLook,
+	#name : #XdPublishInfoInnerWidgetAptitude,
 	#superclass : #BrAptitude,
 	#category : #'XDoc-Gt4XDocClient-Publish'
 }
 
 { #category : #initialization }
-XdPublishInfoInnerWidgetLook >> initialize [
+XdPublishInfoInnerWidgetAptitude >> initialize [
 	super initialize.
 	self
 		addChangeProperty: #(widget margin)

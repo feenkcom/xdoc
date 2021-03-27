@@ -24,7 +24,7 @@ XdDocumenterHeader >> contentText [
 		aLink attribute: (BrTextAdornmentDynamicAttribute new
 			beReplace;
 			stencil: [ BrButton new
-				look: (BrGlamorousLinkSquaredButtonWithLabelLook new
+				aptitude: (BrGlamorousLinkSquaredButtonWithLabelAptitude new
 					foreground: BrGlamorousColors disabledButtonTextColor);
 				padding: (BlInsets top: 3 left: 3 bottom: 3 right: 3);
 				geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
@@ -64,13 +64,13 @@ XdDocumenterHeader >> initialize [
 { #category : #initialization }
 XdDocumenterHeader >> initializeStencils [
 	headerEditor := BrEditor new 
-		look: BrGlamorousEditorLook;
+		aptitude: BrGlamorousEditorAptitude;
 		beReadOnlyWithSelection;
 		text: self headerText;
 		hMatchParent;
 		vFitContent.
 	contentEditor :=  BrEditor new 
-		look: BrGlamorousEditorLook;
+		aptitude: BrGlamorousEditorAptitude;
 		beReadOnlyWithSelection;
 		text: self contentText;
 		hMatchParent;

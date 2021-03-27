@@ -43,7 +43,7 @@ XdFileInfoStencil >> newEmptyElement [
 XdFileInfoStencil >> newEmptyLabel [
 	<return: #BlElement>
 	^ BrLabel new 
-		look: BrGlamorousLabelLook;
+		aptitude: BrGlamorousLabelAptitude;
 		text: self newEmptyLabelText;
 		constraintsDo: [ :c | 
 			c frame horizontal alignCenter.
