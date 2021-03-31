@@ -1,6 +1,6 @@
 Class {
-	#name : #XdPublishInfoLook,
-	#superclass : #BrLook,
+	#name : #XdPublishInfoAptitude,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'info',
 		'titleElement',
@@ -14,13 +14,13 @@ Class {
 }
 
 { #category : #accessing }
-XdPublishInfoLook >> info [
+XdPublishInfoAptitude >> info [
 	<return: #XdPublishInfo>
 	^ info
 ]
 
 { #category : #accessing }
-XdPublishInfoLook >> info: aXdPublishInfo [
+XdPublishInfoAptitude >> info: aXdPublishInfo [
 	self 
 		assert: [ aXdPublishInfo notNil ] 
 		description: [ 'Publish information must be non-nil' ].
@@ -29,7 +29,7 @@ XdPublishInfoLook >> info: aXdPublishInfo [
 ]
 
 { #category : #initialization }
-XdPublishInfoLook >> initialize [
+XdPublishInfoAptitude >> initialize [
 	super initialize.
 	info := XdEmptyPublishInfo uniqueInstance.
 	titleElement := self newTitleElement.
@@ -56,7 +56,7 @@ XdPublishInfoLook >> initialize [
 ]
 
 { #category : #initialization }
-XdPublishInfoLook >> initializeListeners [
+XdPublishInfoAptitude >> initializeListeners [
 	super initializeListeners.
 	
 	self 
@@ -65,16 +65,16 @@ XdPublishInfoLook >> initializeListeners [
 ]
 
 { #category : #initialization }
-XdPublishInfoLook >> initializeRequests [
+XdPublishInfoAptitude >> initializeRequests [
 	super initializeRequests.
 	
 	self request: XdPublishInfoRequest new
 ]
 
 { #category : #'instance creation' }
-XdPublishInfoLook >> newAuthorElement [
+XdPublishInfoAptitude >> newAuthorElement [
 	^ BrEditorElement new
-			look: BrGlamorousInputFieldSpacingLook + XdPublishInfoInnerWidgetLook;
+			aptitude: BrGlamorousInputFieldSpacingAptitude + XdPublishInfoInnerWidgetAptitude;
 			editor: (BrTextEditor new text: self info author);
 			constraintsDo: [ :c | 
 				c horizontal matchParent.
@@ -82,9 +82,9 @@ XdPublishInfoLook >> newAuthorElement [
 ]
 
 { #category : #'instance creation' }
-XdPublishInfoLook >> newDescriptionElement [
+XdPublishInfoAptitude >> newDescriptionElement [
 	^ BrEditorElement new
-			look: BrGlamorousTextAreaSpacingLook + XdPublishInfoInnerWidgetLook;
+			aptitude: BrGlamorousTextAreaSpacingAptitude + XdPublishInfoInnerWidgetAptitude;
 			editor: (BrTextEditor new text: self info description);
 			constraintsDo: [ :c | 
 				c horizontal matchParent.
@@ -92,7 +92,7 @@ XdPublishInfoLook >> newDescriptionElement [
 ]
 
 { #category : #'instance creation' }
-XdPublishInfoLook >> newPasswordElement [
+XdPublishInfoAptitude >> newPasswordElement [
 	"| inputElement |
 	inputElement := BrEditorElement new.
 	inputElement look:  BrGlamorousInputFieldSpacingLook + XdPublishInfoInnerWidgetLook.
@@ -104,16 +104,16 @@ XdPublishInfoLook >> newPasswordElement [
 	^ inputElement."
 	
 	^ BrEditor new
-		look: (BrGlamorousRegularEditorLook new replacingText: $*);
+		aptitude: (BrGlamorousRegularEditorAptitude new replacingText: $*);
 		text: self info password asString. 
 ]
 
 { #category : #'instance creation' }
-XdPublishInfoLook >> newPublishButtonElement [
+XdPublishInfoAptitude >> newPublishButtonElement [
 	^ BrButton new
-			look: BrGlamorousButtonWithIconLook
-				+ BrGlamorousButtonWithLabelLook
-				+ XdPublishInfoInnerWidgetLook;
+			aptitude: BrGlamorousButtonWithIconAptitude
+				+ BrGlamorousButtonWithLabelAptitude
+				+ XdPublishInfoInnerWidgetAptitude;
 			label: 'Publish';
 			icon: BrGlamorousIcons tocloud asElement;
 			action: (MessageSend receiver: self info selector: #publish);
@@ -125,9 +125,9 @@ XdPublishInfoLook >> newPublishButtonElement [
 ]
 
 { #category : #'instance creation' }
-XdPublishInfoLook >> newTitleElement [
+XdPublishInfoAptitude >> newTitleElement [
 	^ BrEditorElement new
-			look: BrGlamorousInputFieldSpacingLook + XdPublishInfoInnerWidgetLook;
+			aptitude: BrGlamorousInputFieldSpacingAptitude + XdPublishInfoInnerWidgetAptitude;
 			editor: (BrTextEditor new text: self info title);
 			constraintsDo: [ :c | 
 				c horizontal matchParent.
@@ -135,9 +135,9 @@ XdPublishInfoLook >> newTitleElement [
 ]
 
 { #category : #'instance creation' }
-XdPublishInfoLook >> newUsernameElement [
+XdPublishInfoAptitude >> newUsernameElement [
 	^ BrEditorElement new
-			look: BrGlamorousInputFieldSpacingLook + XdPublishInfoInnerWidgetLook;
+			aptitude: BrGlamorousInputFieldSpacingAptitude + XdPublishInfoInnerWidgetAptitude;
 			editor: (BrTextEditor new text: self info username);
 			constraintsDo: [ :c | 
 				c horizontal matchParent.
@@ -145,7 +145,7 @@ XdPublishInfoLook >> newUsernameElement [
 ]
 
 { #category : #hooks }
-XdPublishInfoLook >> onInfoChanged [
+XdPublishInfoAptitude >> onInfoChanged [
 	self widgetDo: [ 
 		| anInfo | 
 		anInfo := self info.

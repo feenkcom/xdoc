@@ -13,7 +13,7 @@ XdPublishInfoStencilBuilder >> buildDefault [
 
 	^ BlElement new
 			viewModel: (XdPublishInfoModel new info: self info);
-			look: XdPublishInfoLook;
+			aptitude: XdPublishInfoAptitude;
 			constraintsDo: [ :c | 
 				c horizontal matchParent.
 				c vertical matchParent. ]

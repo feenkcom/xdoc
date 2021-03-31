@@ -51,7 +51,7 @@ XdShareDialogExamples >> basicDialog [
 	| aDialog |
 	aDialog := XdShareDialogElement new.
 	self assert: aDialog viewModel isNotNil.
-	self assert: aDialog look isNil.
+	self assert: aDialog aptitude isNil.
 	^ aDialog
 ]
 
@@ -72,13 +72,13 @@ XdShareDialogExamples >> dialog [
 	| aDialog |
 	aDialog := self basicDialog.
 	aDialog 
-		look: XdShareDialogLook;
+		aptitude: XdShareDialogAptitude;
 		layout: BlLinearLayout vertical;
 		constraintsDo: [ :c | 
 			c horizontal matchParent. 
 			c vertical matchParent ].
 	self assert: aDialog viewModel isNotNil.
-	self assert: aDialog look isNotNil.
+	self assert: aDialog aptitude isNotNil.
 	self 
 		assert: aDialog viewModel information
 		equals: aDialog viewModel information.
@@ -130,8 +130,8 @@ XdShareDialogExamples >> filledDialogInPublishStep [
 	<gtExample>
 	| aDialog |
 	aDialog := self filledDialog.
-	aDialog look proceedPublishStep.
-	self assert: aDialog look pager pages size equals: 2.
+	aDialog aptitude proceedPublishStep.
+	self assert: aDialog aptitude pager pages size equals: 2.
 	^ aDialog
 ]
 
@@ -151,7 +151,7 @@ XdShareDialogExamples >> informationTitle [
 	<gtExample>
 	| aDialog anEditor |
 	aDialog := self filledDialogInPublishStep.
-	anEditor := self editorAt: 1 in: aDialog look pager pages second.
+	anEditor := self editorAt: 1 in: aDialog aptitude pager pages second.
 	self assertPartValue: anEditor text with: self titleString.
 	^ aDialog
 ]
@@ -179,7 +179,7 @@ XdShareDialogExamples >> userModificationOfTitle [
 	<gtExample>
 	| aDialog anEditor |
 	aDialog := self filledDialogInPublishStep.
-	anEditor := self editorAt: 1 in: aDialog look pager pages second.
+	anEditor := self editorAt: 1 in: aDialog aptitude pager pages second.
 	anEditor inserter 
 		atEnd;
 		string: self modificationString;

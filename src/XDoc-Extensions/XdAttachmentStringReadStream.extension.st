@@ -6,6 +6,6 @@ XdAttachmentStringReadStream >> gtContentFor: aView [
 	self streamingStrategy ifNil: [ ^ aView empty ].
 	^ aView textEditor
 		title: 'Content';
-		look: BrGlamorousRegularEditorLook;
+		aptitude: BrGlamorousRegularEditorAptitude;
 		text: [ self content ]
 ]

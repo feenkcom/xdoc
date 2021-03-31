@@ -7,7 +7,7 @@ XdClient >> gtDocumentsFor: aView [
 		title: 'Documents';
 		stencil: [ 
 			XdDocumentsElement new 
-				look: XdGlamorousDocumentsGridLook;
+				aptitude: XdGlamorousDocumentsGridAptitude;
 				client: self ]
 ]
 

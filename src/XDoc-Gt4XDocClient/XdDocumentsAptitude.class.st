@@ -1,6 +1,6 @@
 Class {
-	#name : #XdDocumentsLook,
-	#superclass : #BrLook,
+	#name : #XdDocumentsAptitude,
+	#superclass : #BrAptitude,
 	#instVars : [
 		'client'
 	],
@@ -8,12 +8,12 @@ Class {
 }
 
 { #category : #accessing }
-XdDocumentsLook >> client [
+XdDocumentsAptitude >> client [
 	^ client
 ]
 
 { #category : #accessing }
-XdDocumentsLook >> client: anXdClient [
+XdDocumentsAptitude >> client: anXdClient [
 	self
 		assert: [ anXdClient notNil ] 
 		description: [ 'XDoc client must be non-nil' ].
@@ -22,24 +22,24 @@ XdDocumentsLook >> client: anXdClient [
 ]
 
 { #category : #initialization }
-XdDocumentsLook >> initialize [
+XdDocumentsAptitude >> initialize [
 	super initialize.
 	client := XdClient null.
 	
 ]
 
 { #category : #initialization }
-XdDocumentsLook >> initializeListeners [
+XdDocumentsAptitude >> initializeListeners [
 	super initializeListeners.
 	self when: XdClientChanged do: [ :anEvent | self client: anEvent client ].
 ]
 
 { #category : #initialization }
-XdDocumentsLook >> initializeRequests [
+XdDocumentsAptitude >> initializeRequests [
 	super initializeRequests.
 	self request: XdClientRequest new.
 ]
 
 { #category : #hooks }
-XdDocumentsLook >> onClientChange [
+XdDocumentsAptitude >> onClientChange [
 ]

@@ -29,7 +29,7 @@ XdProgressDialogStencil >> initialize [
 { #category : #'instance creation' }
 XdProgressDialogStencil >> newSubtitleLabel [
 	^ BrLabel new
-		look: (BrGlamorousLabelLook new glamorousRegularFontAndSize; foreground: Color gray);
+		aptitude: (BrGlamorousLabelAptitude new glamorousRegularFontAndSize; foreground: Color gray);
 		text: 'waiting...';
 		focusability: BlFocusability none;
 		margin: (BlInsets all: 5);
@@ -40,7 +40,7 @@ XdProgressDialogStencil >> newSubtitleLabel [
 { #category : #'instance creation' }
 XdProgressDialogStencil >> newTitleLabel [
 	^ BrLabel new
-		look: (BrGlamorousLabelLook new glamorousRegularFont; fontSize: 24);
+		aptitude: (BrGlamorousLabelAptitude new glamorousRegularFont; fontSize: 24);
 		text: self title;
 		focusability: BlFocusability none;
 		margin: (BlInsets all: 5);
