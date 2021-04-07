@@ -136,7 +136,10 @@ XdShareDialogStencil >> newPage [
 	^ BlElement new
 		viewModel: BrPagerPageModel new;
 		layout: BlLinearLayout vertical;
-		aptitude: BrVerticalPaneAptitude new.
+		aptitude: BrVerticalPaneAptitude new;
+		constraintsDo: [ :c | 
+			c horizontal matchParent.
+			c vertical matchParent ].
 ]
 
 { #category : #'instance creation' }
