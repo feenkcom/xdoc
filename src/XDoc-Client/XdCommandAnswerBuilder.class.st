@@ -85,6 +85,11 @@ XdCommandAnswerBuilder >> initializeResponse: aXdCommandResponse [
 ]
 
 { #category : #visiting }
+XdCommandAnswerBuilder >> visitXdClientCreateSpaceCommand: aCommand [
+	^ self buildResponse: aCommand
+]
+
+{ #category : #visiting }
 XdCommandAnswerBuilder >> visitXdClientDeleteXDocIdCommand: aCommand [
 	^ self buildResponse: aCommand
 ]

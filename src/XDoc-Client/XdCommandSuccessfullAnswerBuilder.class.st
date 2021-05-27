@@ -28,6 +28,13 @@ XdCommandSuccessfullAnswerBuilder >> context: anObject [
 ]
 
 { #category : #visiting }
+XdCommandSuccessfullAnswerBuilder >> visitXdClientCreateSpaceCommand: aCommand [
+	^ self 
+		buildAnswer: XdSuccessfullyCreatedRealmAnswer new 
+		withCommand: aCommand
+]
+
+{ #category : #visiting }
 XdCommandSuccessfullAnswerBuilder >> visitXdClientDeleteXDocIdCommand: aCommand [
 	^ self 
 		buildAnswer: XdSuccessfullyDeletedAnswer new 
