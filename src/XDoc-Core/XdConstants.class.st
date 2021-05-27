@@ -64,6 +64,18 @@ XdConstants class >> previewDirectoryName [
 	^ 'preview'
 ]
 
+{ #category : #'client / server' }
+XdConstants class >> realmPathSegments [
+	"Default REST path to access/modify/delete a realm"
+	^ #( 'api' 'realm' )
+]
+
+{ #category : #'client / server' }
+XdConstants class >> realmPathSegmentsPattern [
+	"Default REST path to access/modify/delete a realm"
+	^ #( 'api' 'realm' '*' )
+]
+
 { #category : #accessing }
 XdConstants class >> versionFileName [
 	^ 'format-version.txt'
