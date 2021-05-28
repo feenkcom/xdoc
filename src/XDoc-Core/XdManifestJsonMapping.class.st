@@ -95,6 +95,7 @@ XdManifestJsonMapping class >> fileInfoMappingFor: aNeoJSONMapper [
 			(mapping mapAccessor: #createdOn) valueSchema: DateAndTime.
 			(mapping mapAccessor: #manifest) valueSchema: XdManifest.
 			(mapping mapAccessor: #previewUrl to: #preview_url) valueSchema: ZnUrl.
+			(mapping mapAccessor: #relativePreviewUrl to: #relative_preview_url) valueSchema: ZnUrl.
 			(mapping mapAccessor: #xdocUrl to: #xdoc_url) valueSchema: ZnUrl.
 			].
 	self dateAndTimeMappingFor: aNeoJSONMapper.
