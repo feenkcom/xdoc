@@ -95,6 +95,11 @@ XdCommandAnswerBuilder >> visitXdClientDeleteXDocIdCommand: aCommand [
 ]
 
 { #category : #visiting }
+XdCommandAnswerBuilder >> visitXdClientEditSpaceCommand: aCommand [
+	^ self buildResponse: aCommand
+]
+
+{ #category : #visiting }
 XdCommandAnswerBuilder >> visitXdClientPingCommand: aCommand [
 	^ self buildResponse: aCommand
 ]

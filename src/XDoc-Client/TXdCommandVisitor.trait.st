@@ -19,6 +19,11 @@ TXdCommandVisitor >> visitXdClientDeleteXDocIdCommand: aCommand [
 ]
 
 { #category : #visiting }
+TXdCommandVisitor >> visitXdClientEditSpaceCommand: aCommand [
+	^ self explicitRequirement
+]
+
+{ #category : #visiting }
 TXdCommandVisitor >> visitXdClientPublishXDocCommand: aCommand [
 	^ self explicitRequirement
 ]
