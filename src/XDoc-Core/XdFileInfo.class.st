@@ -9,7 +9,8 @@ Class {
 		'pathSegment',
 		'xdocUrl',
 		'createdOn',
-		'previewUrl'
+		'previewUrl',
+		'relativePreviewUrl'
 	],
 	#category : #'XDoc-Core-Model'
 }
@@ -112,6 +113,16 @@ XdFileInfo >> realm [
 			computedRealm := segments first]. 
 		].
 	^ computedRealm.
+]
+
+{ #category : #accessing }
+XdFileInfo >> relativePreviewUrl [
+	^ relativePreviewUrl
+]
+
+{ #category : #accessing }
+XdFileInfo >> relativePreviewUrl: anUrl [
+	relativePreviewUrl := anUrl
 ]
 
 { #category : #'accessing - manifest' }
