@@ -13,7 +13,7 @@ Class {
 
 { #category : #execution }
 XdClientXDocIdFromURLCommand >> execute [
-	self id: self url segments first
+	self id: self url segments second
 ]
 
 { #category : #accessing }
