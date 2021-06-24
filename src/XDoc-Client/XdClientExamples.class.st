@@ -130,7 +130,7 @@ XdClientExamples >> delegate [
 { #category : #'action - delete' }
 XdClientExamples >> deletePath [
 	<gtExample>
-	^ ZnUrl new / XdConstants xdocPathSegments / self xdocPathSegments allButLast
+	^ ZnUrl new / XdConstants xdocPathSegments / '1'
 ]
 
 { #category : #'action - delete' }
@@ -173,6 +173,7 @@ XdClientExamples >> downloadFileInfo [
 { #category : #'action - download list' }
 XdClientExamples >> downloadList [
 	<gtExample>
+	<noTest>
 	| aCollectionOfXdFileInfo |
 	aCollectionOfXdFileInfo := self client downloadList.
 	self assert: aCollectionOfXdFileInfo notNil.
@@ -258,13 +259,13 @@ XdClientExamples >> joeDoeUsername [
 { #category : #'action - download list' }
 XdClientExamples >> listFilePath [
 	<gtExample>
-	^ '/', ('/' join: (XdConstants cdnPathSegments copyWith: XdConstants listFileName))
+	^ '/', ('/' join: ({'space'} copyWith: XdConstants listFileName))
 ]
 
 { #category : #'action - download list' }
 XdClientExamples >> listJsonContent [
 	<gtExample>
-	^ '[{"path_segment":"1","fileName":"xdoc-file.xdoc","manifest":{"title":"","description":"","author":"","attachments":[{"id":"1","filename":"index.pillar","size":146},{"id":"2","filename":"gt-logo.png","size":8192},{"id":"3","filename":"index.html","size":245},{"id":"4","filename":"index.css","size":183}],"documents":[{"type":"documenter","components":[{"link":"1"},{"link":"2"}]},{"type":"html","components":[{"link":"3"},{"link":"4"},{"link":"2"}]}]}}]'
+	^ '[{"path_segment":"space/1","fileName":"xdoc-file.xdoc","manifest":{"title":"","description":"","author":"","attachments":[{"id":"1","filename":"index.pillar","size":146},{"id":"2","filename":"gt-logo.png","size":8192},{"id":"3","filename":"index.html","size":245},{"id":"4","filename":"index.css","size":183}],"documents":[{"type":"documenter","components":[{"link":"1"},{"link":"2"}]},{"type":"html","components":[{"link":"3"},{"link":"4"},{"link":"2"}]}]}}]'
 ]
 
 { #category : #'action - publish' }
@@ -341,7 +342,7 @@ XdClientExamples >> publishXDoc_RealmAuthenticatedServer_Authenticated [
 { #category : #'action - publish' }
 XdClientExamples >> publishedResponse [
 	<gtExample>
-	^ ZnResponse created: (zincExamples serverUrl / '1') asString
+	^ ZnResponse created: (zincExamples serverUrl / 'space' / '1') asString
 ]
 
 { #category : #server }
@@ -408,7 +409,7 @@ XdClientExamples >> updateXDoc_AuthenticatedServer_BasicAuthenticated [
 	| anXdResponse aClient |
 	self setServerBasicAuthenticator.
 	aClient := self clientWithBasicAuthentication.
-	anXdResponse := aClient update: documentsExamples documentWithFigureXDoc url: (self serverUrl / '1').
+	anXdResponse := aClient update: documentsExamples documentWithFigureXDoc url: (self serverUrl / 'space' / '1').
 	self assert: anXdResponse isNotNil.
 	self assert: anXdResponse isSuccess.
 	self assert: anXdResponse isError not.
@@ -425,7 +426,7 @@ XdClientExamples >> updateXDoc_AuthenticatedServer_BearerAuthenticated [
 	| anXdResponse aClient |
 	self setServerBearerAuthenticator.
 	aClient := self clientWithBearerAuthentication.
-	anXdResponse := aClient update: documentsExamples documentWithFigureXDoc url: (self serverUrl / '1').
+	anXdResponse := aClient update: documentsExamples documentWithFigureXDoc url: (self serverUrl / 'space' / '1').
 	self assert: anXdResponse isNotNil.
 	self assert: anXdResponse isSuccess.
 	self assert: anXdResponse isError not.
@@ -461,14 +462,15 @@ XdClientExamples >> xdocFileName [
 { #category : #'action - download xdoc' }
 XdClientExamples >> xdocIdSegment [
 	<gtExample>
-	^ '1'
+	^ 'space/1'
 ]
 
 { #category : #'action - download xdoc' }
 XdClientExamples >> xdocPathSegments [
 	<gtExample>
-	^ XdConstants cdnPathSegments, {  
-		self xdocIdSegment . 
+	^ XdConstants cdnPathSegments, { 
+		'space' .
+		'1' . 
 		self xdocFileName }
 ]
 
@@ -481,7 +483,7 @@ XdClientExamples >> xdocPathString [
 { #category : #'action - download xdoc' }
 XdClientExamples >> xdocPublicUrl [
 	<gtExample>
-	^ self serverUrl / (self xdocPathSegments allButLast)
+	^ self serverUrl / (self xdocPathSegments)
 ]
 
 { #category : #'action - download xdoc' }
