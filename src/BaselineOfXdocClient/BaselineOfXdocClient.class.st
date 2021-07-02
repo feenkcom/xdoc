@@ -21,13 +21,13 @@ BaselineOfXdocClient >> baseline: spec [
 	spec for: #'common' do: [
 		spec 
 			baseline: 'XdocClientMinimal' with: [
-				spec repository: 'github://feenkcom/xdoc:v0.8.381/src' ];
+				spec repository: 'github://feenkcom/xdoc:v0.8.382/src' ];
 			baseline: 'Brick' with: [
-				spec repository: 'github://feenkcom/Brick:v0.8.342/src' ];
+				spec repository: 'github://feenkcom/Brick:v0.8.343/src' ];
 			baseline: 'GToolkitPhlow' with: [
-				spec repository: 'github://feenkcom/gtoolkit-phlow:v0.8.363/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-phlow:v0.8.364/src' ];
 			baseline: 'GToolkitSpotter' with: [
-				spec repository: 'github://feenkcom/gtoolkit-spotter:v0.8.349/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-spotter:v0.8.350/src' ].
 		spec 
 			package: 'XDoc-Extensions' with: [
 				spec requires: #('XdocClientMinimal' 'Brick' 'GToolkitPhlow' ). ];
