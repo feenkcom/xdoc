@@ -10,29 +10,32 @@ An example area is the blog feed from below.
 ${xdocs}$
 "
 Class {
-	#name : #BaselineOfXdocClient,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfXdocClient
+	#name : 'BaselineOfXdocClient',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfXdocClient'
 }
 
-{ #category : #baseline }
+{ #category : 'baseline' }
 BaselineOfXdocClient >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
-		spec 
+		spec
 			baseline: 'XdocClientMinimal' with: [
-				spec repository: 'github://feenkcom/xdoc:v0.8.413/src' ];
+				spec repository: 'github://feenkcom/xdoc:v0.8.414/src' ].
+		spec
 			baseline: 'Brick' with: [
-				spec repository: 'github://feenkcom/Brick:v0.8.371/src' ];
+				spec repository: 'github://feenkcom/Brick:v0.8.372/src' ].
+		spec
 			baseline: 'GToolkitPhlow' with: [
-				spec repository: 'github://feenkcom/gtoolkit-phlow:v0.8.395/src' ];
+				spec repository: 'github://feenkcom/gtoolkit-phlow:v0.8.396/src' ].
+		spec
 			baseline: 'GToolkitSpotter' with: [
-				spec repository: 'github://feenkcom/gtoolkit-spotter:v0.8.378/src' ].
-		spec 
-			package: 'XDoc-Extensions' with: [
-				spec requires: #('XdocClientMinimal' 'Brick' 'GToolkitPhlow' ). ];
-			package: 'XDoc-Gt4XDocClient' with: [
-				spec requires: #('XdocClientMinimal' 'Brick' 'GToolkitPhlow' 'GToolkitSpotter' ). ];
-			package: 'XDoc-Store'. ].
+				spec repository: 'github://feenkcom/gtoolkit-spotter:v0.8.379/src' ].
 
+		spec package: 'XDoc-Extensions' with: [
+			spec requires: #('XdocClientMinimal' 'Brick' 'GToolkitPhlow') ].
+		spec package: 'XDoc-Gt4XDocClient' with: [
+			spec requires: #('XdocClientMinimal' 'Brick' 'GToolkitPhlow' 'GToolkitSpotter') ].
+		spec package: 'XDoc-Store'.
+	]
 ]
