@@ -1,26 +1,26 @@
 Class {
-	#name : #XdAuthenticationCommand,
-	#superclass : #XdDelegateCommand,
-	#category : #'XDoc-Client-Commands'
+	#name : 'XdAuthenticationCommand',
+	#superclass : 'XdDelegateCommand',
+	#category : 'XDoc-Client-Commands'
 }
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 XdAuthenticationCommand >> accept: aVisitor [
 	^ aVisitor visitXdAuthenticationCommand: self
 ]
 
-{ #category : #authentication }
+{ #category : 'authentication' }
 XdAuthenticationCommand >> authenticate [
 	self subclassResponsibility
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 XdAuthenticationCommand >> execute [
 	self authenticate.
 	self executeSubCommand
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdAuthenticationCommand >> shouldReplace: aCommand [
 	<return: #Boolean>
 	^ self class = aCommand class

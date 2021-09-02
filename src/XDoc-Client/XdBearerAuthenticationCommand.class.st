@@ -1,26 +1,26 @@
 Class {
-	#name : #XdBearerAuthenticationCommand,
-	#superclass : #XdAuthenticationCommand,
+	#name : 'XdBearerAuthenticationCommand',
+	#superclass : 'XdAuthenticationCommand',
 	#instVars : [
 		'accessToken',
 		'username',
 		'password'
 	],
-	#category : #'XDoc-Client-Commands'
+	#category : 'XDoc-Client-Commands'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdBearerAuthenticationCommand >> accessToken [
 	^ accessToken
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdBearerAuthenticationCommand >> accessToken: anAccessToken [
 	self assert: [ anAccessToken notNil ].
 	accessToken := anAccessToken
 ]
 
-{ #category : #authentication }
+{ #category : 'authentication' }
 XdBearerAuthenticationCommand >> authenticate [
 	self assert: [ self accessToken notNil ].
 	

@@ -1,21 +1,21 @@
 Class {
-	#name : #XdCommandResponseAnswerContext,
-	#superclass : #Object,
+	#name : 'XdCommandResponseAnswerContext',
+	#superclass : 'Object',
 	#traits : 'TGtAssert',
 	#classTraits : 'TGtAssert classTrait',
 	#instVars : [
 		'command',
 		'commandChain'
 	],
-	#category : #'XDoc-Client-Answers - Builder'
+	#category : 'XDoc-Client-Answers - Builder'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdCommandResponseAnswerContext >> command [
 	^ command
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdCommandResponseAnswerContext >> command: anXdCommand [
 	self 
 		assert: [ anXdCommand isNotNil ] 
@@ -23,17 +23,17 @@ XdCommandResponseAnswerContext >> command: anXdCommand [
 	command := anXdCommand
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdCommandResponseAnswerContext >> commandChain [
 	^ commandChain
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdCommandResponseAnswerContext >> commandChain: anObject [
 	commandChain := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdCommandResponseAnswerContext >> gtCommandsFor: aView [
 	<gtView>
 	self commandChain ifNil: [ ^ aView empty ].

@@ -1,6 +1,6 @@
-Extension { #name : #XdSequenceNumberGenerator }
+Extension { #name : 'XdSequenceNumberGenerator' }
 
-{ #category : #'*XDoc-Extensions' }
+{ #category : '*XDoc-Extensions' }
 XdSequenceNumberGenerator >> gtSequenceExampleFor: aView [
 	<gtView>
 	self currentId ifNil: [ ^ aView empty ].

@@ -1,17 +1,17 @@
 Class {
-	#name : #XdFileService,
-	#superclass : #Object,
-	#category : #'XDoc-Client-FileService'
+	#name : 'XdFileService',
+	#superclass : 'Object',
+	#category : 'XDoc-Client-FileService'
 }
 
-{ #category : #'System-FileRegistry' }
+{ #category : 'System-FileRegistry' }
 XdFileService class >> fileReaderServicesForFile: fullName suffix: suffix [
 	<fileService>
 	(XdConstants xdocExtension = suffix) ifFalse: [ ^ #() ].
 	^ self services
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 XdFileService class >> openXDocDocument: aFileNameString [ 
 	| aFileReference |
 	aFileReference := aFileNameString asFileReference.
@@ -19,7 +19,7 @@ XdFileService class >> openXDocDocument: aFileNameString [
 	XdClient new openFileReference: aFileReference
 ]
 
-{ #category : #'System-FileRegistry' }
+{ #category : 'System-FileRegistry' }
 XdFileService class >> serviceOpenXDoc [
 	^ SimpleServiceEntry 
 		provider: self 
@@ -29,7 +29,7 @@ XdFileService class >> serviceOpenXDoc [
 		buttonLabel: 'Open XDoc'
 ]
 
-{ #category : #'System-FileRegistry' }
+{ #category : 'System-FileRegistry' }
 XdFileService class >> services [
 	^ Array with: self serviceOpenXDoc
 ]

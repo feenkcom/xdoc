@@ -1,10 +1,10 @@
 Class {
-	#name : #XdClientConstants,
-	#superclass : #Object,
-	#category : #'XDoc-Client-Utility'
+	#name : 'XdClientConstants',
+	#superclass : 'Object',
+	#category : 'XDoc-Client-Utility'
 }
 
-{ #category : #'xdoc server defaults' }
+{ #category : 'xdoc server defaults' }
 XdClientConstants class >> xdocLinkFileName [
 	^ 'link.txt'
 ]

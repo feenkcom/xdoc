@@ -1,35 +1,35 @@
 Class {
-	#name : #XdClientCreateXDocCommand,
-	#superclass : #XdClientWithResponseCommand,
+	#name : 'XdClientCreateXDocCommand',
+	#superclass : 'XdClientWithResponseCommand',
 	#instVars : [
 		'xdoc'
 	],
-	#category : #'XDoc-Client-Commands'
+	#category : 'XDoc-Client-Commands'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 XdClientCreateXDocCommand class >> isAbstract [ 
 	^ self name = #XdClientCreateXDocCommand 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientCreateXDocCommand >> publicUrl [
 	<return: #ZnUrl>
 	^ self response location asZnUrl
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientCreateXDocCommand >> xdoc [
 	<return: #XdFile>
 	^ xdoc
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientCreateXDocCommand >> xdoc: aXdFile [ 
 	xdoc := aXdFile
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 XdClientCreateXDocCommand >> xdocBytes [
 	<return: #ByteArray>
 	self flag: 'XDoc API proposeal [feenkcom/gtoolkit#888]'.
@@ -37,7 +37,7 @@ XdClientCreateXDocCommand >> xdocBytes [
 	^ self xdoc streamingStrategy bytes
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientCreateXDocCommand >> xdocEntity [
 	<return: #ZnEntity>
 	^ ZnEntity bytes: self xdocBytes

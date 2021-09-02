@@ -1,15 +1,15 @@
 Class {
-	#name : #XdCommandSuccessfullAnswerBuilder,
-	#superclass : #Object,
+	#name : 'XdCommandSuccessfullAnswerBuilder',
+	#superclass : 'Object',
 	#traits : 'TXdCommandVisitor',
 	#classTraits : 'TXdCommandVisitor classTrait',
 	#instVars : [
 		'context'
 	],
-	#category : #'XDoc-Client-Answers - Builder'
+	#category : 'XDoc-Client-Answers - Builder'
 }
 
-{ #category : #building }
+{ #category : 'building' }
 XdCommandSuccessfullAnswerBuilder >> buildAnswer: anAsnwer withCommand: aCommand [
 	^ anAsnwer
 		command: aCommand;
@@ -17,52 +17,52 @@ XdCommandSuccessfullAnswerBuilder >> buildAnswer: anAsnwer withCommand: aCommand
 		response: (XdZincResponse new response: aCommand response)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdCommandSuccessfullAnswerBuilder >> context [
 	^ context
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdCommandSuccessfullAnswerBuilder >> context: anObject [
 	context := anObject
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 XdCommandSuccessfullAnswerBuilder >> visitXdClientCreateSpaceCommand: aCommand [
 	^ self 
 		buildAnswer: XdSuccessfullyCreatedRealmAnswer new 
 		withCommand: aCommand
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 XdCommandSuccessfullAnswerBuilder >> visitXdClientDeleteXDocIdCommand: aCommand [
 	^ self 
 		buildAnswer: XdSuccessfullyDeletedAnswer new 
 		withCommand: aCommand
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 XdCommandSuccessfullAnswerBuilder >> visitXdClientEditSpaceCommand: aCommand [
 	^ self 
 		buildAnswer: XdSuccessfullyEditedRealmAnswer new 
 		withCommand: aCommand
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 XdCommandSuccessfullAnswerBuilder >> visitXdClientPingCommand: aCommand [
 	^ self 
 		buildAnswer: XdSuccessfullyPingAnswer new 
 		withCommand: aCommand
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 XdCommandSuccessfullAnswerBuilder >> visitXdClientPublishXDocCommand: aCommand [
 	^ self 
 		buildAnswer: XdSuccessfullyPublishedAnswer new 
 		withCommand: aCommand
 ]
 
-{ #category : #visiting }
+{ #category : 'visiting' }
 XdCommandSuccessfullAnswerBuilder >> visitXdClientUpdateXDocCommand: aCommand [
 	^ self 
 		buildAnswer: XdSuccessfullyUpdatedAnswer new 

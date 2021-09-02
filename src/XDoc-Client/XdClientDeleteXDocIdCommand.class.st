@@ -1,17 +1,17 @@
 Class {
-	#name : #XdClientDeleteXDocIdCommand,
-	#superclass : #XdClientWithResponseCommand,
+	#name : 'XdClientDeleteXDocIdCommand',
+	#superclass : 'XdClientWithResponseCommand',
 	#traits : 'TXdClientXDocIdInstance - {#client}',
 	#classTraits : 'TXdClientXDocIdInstance classTrait',
-	#category : #'XDoc-Client-Commands'
+	#category : 'XDoc-Client-Commands'
 }
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 XdClientDeleteXDocIdCommand >> accept: aVisitor [
 	^ aVisitor visitXdClientDeleteXDocIdCommand: self
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 XdClientDeleteXDocIdCommand >> execute [
 	self response: (self zincClient
 		url: self xdocUrl;
@@ -20,7 +20,7 @@ XdClientDeleteXDocIdCommand >> execute [
 	
 ]
 
-{ #category : #'accessing - computed' }
+{ #category : 'accessing - computed' }
 XdClientDeleteXDocIdCommand >> xdocUrl [
 	<return: #ZnUrl>
 	^ self client serverUrl / XdConstants xdocPathSegments / self xdocId

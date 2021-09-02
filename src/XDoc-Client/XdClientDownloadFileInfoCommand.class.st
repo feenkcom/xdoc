@@ -1,14 +1,14 @@
 Class {
-	#name : #XdClientDownloadFileInfoCommand,
-	#superclass : #XdClientCommand,
+	#name : 'XdClientDownloadFileInfoCommand',
+	#superclass : 'XdClientCommand',
 	#instVars : [
 		'url',
 		'fileInfo'
 	],
-	#category : #'XDoc-Client-Commands'
+	#category : 'XDoc-Client-Commands'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 XdClientDownloadFileInfoCommand >> ensureFileInfo [
 	| anIdPathSegment aRootUrl aInfoUrl aResponse segments hasRealm|
 	(XdUtility pathSegmentsInCdnPath: self url pathSegments) ifFalse: [ ^ self ].
@@ -30,24 +30,24 @@ XdClientDownloadFileInfoCommand >> ensureFileInfo [
 	self fileInfo: (XdManifestJsonMapping readFileInfo: aResponse contents)
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 XdClientDownloadFileInfoCommand >> execute [
 	self ensureFileInfo.
 	self updateXDocUrl.
 	^ self fileInfo
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientDownloadFileInfoCommand >> fileInfo [
 	^ fileInfo
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientDownloadFileInfoCommand >> fileInfo: aXdFileInfo [ 
 	fileInfo := aXdFileInfo
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 XdClientDownloadFileInfoCommand >> updateXDocUrl [
 	| aXDocUrl spaceName |
 	self fileInfo ifNil: [ ^ self ].
@@ -63,12 +63,12 @@ XdClientDownloadFileInfoCommand >> updateXDocUrl [
 	self fileInfo xdocUrl: aXDocUrl
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientDownloadFileInfoCommand >> url [
 	^ url
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientDownloadFileInfoCommand >> url: anObject [
 	url := anObject
 ]

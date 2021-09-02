@@ -1,1 +1,1 @@
-Package { #name : #'XDoc-Client' }
+Package { #name : 'XDoc-Client' }

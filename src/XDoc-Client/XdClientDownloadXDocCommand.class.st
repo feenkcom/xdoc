@@ -1,15 +1,15 @@
 Class {
-	#name : #XdClientDownloadXDocCommand,
-	#superclass : #XdClientCommand,
+	#name : 'XdClientDownloadXDocCommand',
+	#superclass : 'XdClientCommand',
 	#instVars : [
 		'url',
 		'xdFile',
 		'fileInfo'
 	],
-	#category : #'XDoc-Client-Commands'
+	#category : 'XDoc-Client-Commands'
 }
 
-{ #category : #private }
+{ #category : 'private' }
 XdClientDownloadXDocCommand >> downloadFile [
 	<return: #FileReference>
 	| aBasename |
@@ -19,7 +19,7 @@ XdClientDownloadXDocCommand >> downloadFile [
 		basename: aBasename
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 XdClientDownloadXDocCommand >> ensureFileInfo [
 	self fileInfo ifNotNil: [ ^ self ].
 	self fileInfo: (XdClientDownloadFileInfoCommand new
@@ -29,7 +29,7 @@ XdClientDownloadXDocCommand >> ensureFileInfo [
 		fileInfo)
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 XdClientDownloadXDocCommand >> ensureXDocUrl [
 	| aXDocUrl |
 	self fileInfo ifNil: [ ^ self ].
@@ -41,7 +41,7 @@ XdClientDownloadXDocCommand >> ensureXDocUrl [
 	self fileInfo xdocUrl: aXDocUrl
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 XdClientDownloadXDocCommand >> ensureXdFile [
 	| aResponse aFile |
 	self fileInfo ifNil: [ ^ self ].
@@ -59,39 +59,39 @@ XdClientDownloadXDocCommand >> ensureXdFile [
 		self xdFile publicationDate: self fileInfo createdOn ].
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 XdClientDownloadXDocCommand >> execute [
 	self ensureFileInfo.
 	self ensureXdFile.
 	^ self xdFile
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientDownloadXDocCommand >> fileInfo [
 	^ fileInfo
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientDownloadXDocCommand >> fileInfo: aXdFileInfo [ 
 	fileInfo := aXdFileInfo
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientDownloadXDocCommand >> url [
 	^ url
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientDownloadXDocCommand >> url: anObject [
 	url := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientDownloadXDocCommand >> xdFile [
 	^ xdFile
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientDownloadXDocCommand >> xdFile: anXdFile [
 	xdFile := anXdFile
 ]

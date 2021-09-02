@@ -1,39 +1,39 @@
 Class {
-	#name : #XdDelegateCommand,
-	#superclass : #XdProtoClientCommand,
+	#name : 'XdDelegateCommand',
+	#superclass : 'XdProtoClientCommand',
 	#instVars : [
 		'command'
 	],
-	#category : #'XDoc-Client-Commands'
+	#category : 'XDoc-Client-Commands'
 }
 
-{ #category : #testing }
+{ #category : 'testing' }
 XdDelegateCommand class >> isAbstract [
 	^ self name = #XdDelegateCommand 
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 XdDelegateCommand >> allCommands [
 	^ Array streamContents: [ :aStream |
 		self putCommandsInto: aStream ] 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdDelegateCommand >> command [
 	^ command
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdDelegateCommand >> command: anObject [
 	command := anObject
 ]
 
-{ #category : #executing }
+{ #category : 'executing' }
 XdDelegateCommand >> executeSubCommand [
 	self command execute
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 XdDelegateCommand >> gtCommandsFor: aView [
 	<gtView>
 	self command ifNil: [ ^ aView empty ].
@@ -42,7 +42,7 @@ XdDelegateCommand >> gtCommandsFor: aView [
 		items: [ self allCommands ]
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 XdDelegateCommand >> putCommandsInto: aStream [
 	aStream nextPut: self.
 	self command ifNil: [ ^ self ].
@@ -53,13 +53,13 @@ XdDelegateCommand >> putCommandsInto: aStream [
 	self command putCommandsInto: aStream
 ]
 
-{ #category : #'private ' }
+{ #category : 'private ' }
 XdDelegateCommand >> response [
 	<return: #ZnResponse>
 	^ self command response 
 ]
 
-{ #category : #'private ' }
+{ #category : 'private ' }
 XdDelegateCommand >> zincClient [
 	<return: #ZnClient>
 	^ self command zincClient

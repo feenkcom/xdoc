@@ -1,13 +1,13 @@
 Class {
-	#name : #GtDecoratingCommandBuilderExamples,
-	#superclass : #Object,
+	#name : 'GtDecoratingCommandBuilderExamples',
+	#superclass : 'Object',
 	#instVars : [
 		'commands'
 	],
-	#category : #'XDoc-Client-Decorating Command Builder'
+	#category : 'XDoc-Client-Decorating Command Builder'
 }
 
-{ #category : #'examples - commands' }
+{ #category : 'examples - commands' }
 GtDecoratingCommandBuilderExamples >> anotherPostExecutionExampleCommand [
 	<gtExample>
 	| aCommand aValuable |
@@ -19,7 +19,7 @@ GtDecoratingCommandBuilderExamples >> anotherPostExecutionExampleCommand [
 	^ aCommand
 ]
 
-{ #category : #'examples - commands' }
+{ #category : 'examples - commands' }
 GtDecoratingCommandBuilderExamples >> basicAnotherPostExecutionExampleCommand [
 	<gtExample>
 	| aCommand |
@@ -28,7 +28,7 @@ GtDecoratingCommandBuilderExamples >> basicAnotherPostExecutionExampleCommand [
 	^ aCommand
 ]
 
-{ #category : #'examples - builder' }
+{ #category : 'examples - builder' }
 GtDecoratingCommandBuilderExamples >> basicBuilder [
 	<gtExample>
 	| aBuilder |
@@ -37,7 +37,7 @@ GtDecoratingCommandBuilderExamples >> basicBuilder [
 	^ aBuilder
 ]
 
-{ #category : #'examples - commands' }
+{ #category : 'examples - commands' }
 GtDecoratingCommandBuilderExamples >> basicPostExecutionExampleCommand [
 	<gtExample>
 	| aCommand |
@@ -46,7 +46,7 @@ GtDecoratingCommandBuilderExamples >> basicPostExecutionExampleCommand [
 	^ aCommand
 ]
 
-{ #category : #'examples - builder' }
+{ #category : 'examples - builder' }
 GtDecoratingCommandBuilderExamples >> builderWithOnePostExecutionCommand [
 	<gtExample>
 	| aBuilder aCommand |
@@ -58,7 +58,7 @@ GtDecoratingCommandBuilderExamples >> builderWithOnePostExecutionCommand [
 	^ aBuilder
 ]
 
-{ #category : #'examples - builder' }
+{ #category : 'examples - builder' }
 GtDecoratingCommandBuilderExamples >> builderWithTwoPostExecutionCommands [
 	<gtExample>
 	| aBuilder aCommand |
@@ -70,7 +70,7 @@ GtDecoratingCommandBuilderExamples >> builderWithTwoPostExecutionCommands [
 	^ aBuilder
 ]
 
-{ #category : #'examples - builder' }
+{ #category : 'examples - builder' }
 GtDecoratingCommandBuilderExamples >> builderWithTwoPostExecutionCommands_FirstReplaced [
 	<gtExample>
 	| aBuilder aCommand |
@@ -82,7 +82,7 @@ GtDecoratingCommandBuilderExamples >> builderWithTwoPostExecutionCommands_FirstR
 	^ aBuilder
 ]
 
-{ #category : #'examples - builder' }
+{ #category : 'examples - builder' }
 GtDecoratingCommandBuilderExamples >> builderWithTwoPostExecutionCommands_SecondReplaced [
 	<gtExample>
 	| aBuilder aCommand |
@@ -94,7 +94,7 @@ GtDecoratingCommandBuilderExamples >> builderWithTwoPostExecutionCommands_Second
 	^ aBuilder
 ]
 
-{ #category : #'examples - decorated commands' }
+{ #category : 'examples - decorated commands' }
 GtDecoratingCommandBuilderExamples >> decoratedCommandWithOnePostExecutionCommand [
 	<gtExample>
 	| aBuilder aCommand aDecoratedCommand |
@@ -110,7 +110,7 @@ GtDecoratingCommandBuilderExamples >> decoratedCommandWithOnePostExecutionComman
 	^ aDecoratedCommand
 ]
 
-{ #category : #'examples - decorated commands' }
+{ #category : 'examples - decorated commands' }
 GtDecoratingCommandBuilderExamples >> decoratedCommandWithTwoPostExecutionCommands [
 	<gtExample>
 	| aBuilder aCommand aDecoratedCommand |
@@ -130,7 +130,7 @@ GtDecoratingCommandBuilderExamples >> decoratedCommandWithTwoPostExecutionComman
 	^ aDecoratedCommand
 ]
 
-{ #category : #'examples - commands' }
+{ #category : 'examples - commands' }
 GtDecoratingCommandBuilderExamples >> exampleCommand [
 	<gtExample>
 	| aCommand |
@@ -141,7 +141,7 @@ GtDecoratingCommandBuilderExamples >> exampleCommand [
 	^ aCommand
 ]
 
-{ #category : #'examples - commands' }
+{ #category : 'examples - commands' }
 GtDecoratingCommandBuilderExamples >> exampleCommandWithValuable [
 	<gtExample>
 	| aCommand aValuable |
@@ -153,7 +153,7 @@ GtDecoratingCommandBuilderExamples >> exampleCommandWithValuable [
 	^ aCommand
 ]
 
-{ #category : #'examples - execution' }
+{ #category : 'examples - execution' }
 GtDecoratingCommandBuilderExamples >> executionWithOneDecoratedCommand [
 	<gtExample>
 	| aBuilder aCommand |
@@ -164,7 +164,7 @@ GtDecoratingCommandBuilderExamples >> executionWithOneDecoratedCommand [
 	^ aCommand
 ]
 
-{ #category : #'examples - execution' }
+{ #category : 'examples - execution' }
 GtDecoratingCommandBuilderExamples >> executionWithTwoDecoratedCommands [
 	<gtExample>
 	| aBuilder aCommand |
@@ -177,7 +177,7 @@ GtDecoratingCommandBuilderExamples >> executionWithTwoDecoratedCommands [
 	^ aCommand
 ]
 
-{ #category : #'examples - execution' }
+{ #category : 'examples - execution' }
 GtDecoratingCommandBuilderExamples >> executionWithoutDecoratedCommand [
 	<gtExample>
 	| aBuilder aCommand |
@@ -188,7 +188,7 @@ GtDecoratingCommandBuilderExamples >> executionWithoutDecoratedCommand [
 	^ aCommand
 ]
 
-{ #category : #'examples - commands' }
+{ #category : 'examples - commands' }
 GtDecoratingCommandBuilderExamples >> postExecutionExampleCommand [
 	<gtExample>
 	| aCommand aValuable |

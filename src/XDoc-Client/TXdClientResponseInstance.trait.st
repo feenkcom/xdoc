@@ -1,18 +1,18 @@
 Trait {
-	#name : #TXdClientResponseInstance,
+	#name : 'TXdClientResponseInstance',
 	#instVars : [
 		'response'
 	],
-	#category : #'XDoc-Client-Traits'
+	#category : 'XDoc-Client-Traits'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TXdClientResponseInstance >> response [
 	<return: #ZnResponse>
 	^ response
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 TXdClientResponseInstance >> response: aZnResponse [
 	self 
 		assert: [ aZnResponse isNotNil ]

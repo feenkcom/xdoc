@@ -1,13 +1,13 @@
 Class {
-	#name : #XdClientDownloadListCommand,
-	#superclass : #XdClientCommand,
+	#name : 'XdClientDownloadListCommand',
+	#superclass : 'XdClientCommand',
 	#instVars : [
 		'list'
 	],
-	#category : #'XDoc-Client-Commands'
+	#category : 'XDoc-Client-Commands'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 XdClientDownloadListCommand >> execute [
 	| aResponse |
 	aResponse := ZnClient new
@@ -21,23 +21,23 @@ XdClientDownloadListCommand >> execute [
 	^ self list
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 XdClientDownloadListCommand >> initialize [
 	super initialize.
 	list := #()
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientDownloadListCommand >> list [
 	^ list
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientDownloadListCommand >> list: anObject [
 	list := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientDownloadListCommand >> listUrl [
 	<return: #ZnUrl>
 	^ self client serverUrl
