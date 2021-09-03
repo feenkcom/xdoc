@@ -1,6 +1,6 @@
-Extension { #name : #XdManifest }
+Extension { #name : 'XdManifest' }
 
-{ #category : #'*XDoc-Extensions' }
+{ #category : '*XDoc-Extensions' }
 XdManifest >> gtContentFor: aView [
 	<gtView>
 	^ aView list

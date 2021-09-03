@@ -1,10 +1,10 @@
 Class {
-	#name : #GtReplacingCommandBuilder,
-	#superclass : #GtDecoratingCommandBuilder,
-	#category : #'XDoc-Client-Decorating Command Builder'
+	#name : 'GtReplacingCommandBuilder',
+	#superclass : 'GtDecoratingCommandBuilder',
+	#category : 'XDoc-Client-Decorating Command Builder'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtReplacingCommandBuilder >> replace: aCommand [
 	| anIndex |
 	self

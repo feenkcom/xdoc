@@ -1,6 +1,6 @@
-Extension { #name : #XdFile }
+Extension { #name : 'XdFile' }
 
-{ #category : #'*XDoc-Extensions' }
+{ #category : '*XDoc-Extensions' }
 XdFile >> gtManifestFor: aView [
 	<gtView>
 	self manifest ifNil: [ ^ aView empty ].
@@ -11,7 +11,7 @@ XdFile >> gtManifestFor: aView [
 		view: #gtContentFor:
 ]
 
-{ #category : #'*XDoc-Extensions' }
+{ #category : '*XDoc-Extensions' }
 XdFile >> gtReferenceFor: aView [
 	<gtView>
 	| aList |
@@ -46,14 +46,14 @@ XdFile >> gtReferenceFor: aView [
 	^ aList
 ]
 
-{ #category : #'*XDoc-Extensions' }
+{ #category : '*XDoc-Extensions' }
 XdFile >> openInPharo [
 	"Document type should decide how to open (be displayed) in Pharo"
 	self manifest documents ifEmpty: [ ^ self ].
 	^ self manifest mainDocument openXdFileInPharo: self
 ]
 
-{ #category : #'*XDoc-Extensions' }
+{ #category : '*XDoc-Extensions' }
 XdFile >> toolInPharo [
 	"Document type should decide which tool to use in Pharo"
 	self manifest documents ifEmpty: [ ^ nil ].

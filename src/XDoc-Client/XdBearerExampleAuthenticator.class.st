@@ -1,32 +1,32 @@
 Class {
-	#name : #XdBearerExampleAuthenticator,
-	#superclass : #Object,
+	#name : 'XdBearerExampleAuthenticator',
+	#superclass : 'Object',
 	#instVars : [
 		'token'
 	],
-	#category : #'XDoc-Client-Examples'
+	#category : 'XDoc-Client-Examples'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdBearerExampleAuthenticator class >> token: aToken [
 	^ self new 
 		token: aToken
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 XdBearerExampleAuthenticator >> authHeader [
 	
 	^ 'Bearer '
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 XdBearerExampleAuthenticator >> authenticateRequest: request do: block [
 	^ (self isRequestAuthenticated: request)
 		ifTrue: [ block value ]
 		ifFalse: [ ZnResponse unauthorized: self authHeader ]
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 XdBearerExampleAuthenticator >> isRequestAuthenticated: aRequest [
 	| authorization receivedToken |
 	
@@ -38,12 +38,12 @@ XdBearerExampleAuthenticator >> isRequestAuthenticated: aRequest [
 	^ receivedToken = token
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdBearerExampleAuthenticator >> token [
 	^ token
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdBearerExampleAuthenticator >> token: anObject [
 	token := anObject
 ]

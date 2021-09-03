@@ -1,10 +1,10 @@
 Class {
-	#name : #XdSuccessfullyUpdatedAnswer,
-	#superclass : #XdSuccessfullyCreatedAnswer,
-	#category : #'XDoc-Client-Answers'
+	#name : 'XdSuccessfullyUpdatedAnswer',
+	#superclass : 'XdSuccessfullyCreatedAnswer',
+	#category : 'XDoc-Client-Answers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdSuccessfullyUpdatedAnswer >> publicUrl [
 	<return: #ZnUrl>
 	^ self command publicUrl

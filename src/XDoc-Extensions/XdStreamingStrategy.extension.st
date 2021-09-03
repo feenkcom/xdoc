@@ -1,6 +1,6 @@
-Extension { #name : #XdStreamingStrategy }
+Extension { #name : 'XdStreamingStrategy' }
 
-{ #category : #'*XDoc-Extensions' }
+{ #category : '*XDoc-Extensions' }
 XdStreamingStrategy >> gtFilesFor: aView [
 	<gtView>
 	self exists ifFalse: [ ^ aView empty ].

@@ -1,10 +1,10 @@
 Class {
-	#name : #XdSuccessfullyPublishedAnswer,
-	#superclass : #XdSuccessfullyCreatedAnswer,
-	#category : #'XDoc-Client-Answers'
+	#name : 'XdSuccessfullyPublishedAnswer',
+	#superclass : 'XdSuccessfullyCreatedAnswer',
+	#category : 'XDoc-Client-Answers'
 }
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 XdSuccessfullyPublishedAnswer >> gtPublicUrlFor: aView [
 	<gtView>
 	self command ifNil: [ ^ aView empty ].
@@ -18,7 +18,7 @@ XdSuccessfullyPublishedAnswer >> gtPublicUrlFor: aView [
 				self command publicUrlToClipboard ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdSuccessfullyPublishedAnswer >> publicUrl [
 	<return: #ZnUrl>
 	^ self command publicUrl

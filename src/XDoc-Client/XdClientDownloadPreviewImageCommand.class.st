@@ -1,13 +1,13 @@
 Class {
-	#name : #XdClientDownloadPreviewImageCommand,
-	#superclass : #XdClientCommand,
+	#name : 'XdClientDownloadPreviewImageCommand',
+	#superclass : 'XdClientCommand',
 	#instVars : [
 		'fileInfo'
 	],
-	#category : #'XDoc-Client-Commands'
+	#category : 'XDoc-Client-Commands'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 XdClientDownloadPreviewImageCommand >> execute [
 	| aPreviewForm |
 
@@ -20,17 +20,17 @@ XdClientDownloadPreviewImageCommand >> execute [
 	^ aPreviewForm
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientDownloadPreviewImageCommand >> fileInfo [
 	^ fileInfo
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientDownloadPreviewImageCommand >> fileInfo: aXdFileInfo [
 	fileInfo := aXdFileInfo
 ]
 
-{ #category : #enumerating }
+{ #category : 'enumerating' }
 XdClientDownloadPreviewImageCommand >> previewUrlDo: aBlock [
 	"Evaluate aBlock with a preview image file name if preview exists in an XDoc document"
 

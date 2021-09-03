@@ -1,14 +1,14 @@
 Class {
-	#name : #XdClientSettings,
-	#superclass : #Object,
+	#name : 'XdClientSettings',
+	#superclass : 'Object',
 	#classInstVars : [
 		'xdServerUrl',
 		'downloadDirectory'
 	],
-	#category : #'XDoc-Client-Settings'
+	#category : 'XDoc-Client-Settings'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientSettings class >> defaultLocalXdServerUrl [
 	<script: 'self xdServerUrl: self defaultLocalXdServerUrl'>
 	^ ZnUrl new 
@@ -18,19 +18,19 @@ XdClientSettings class >> defaultLocalXdServerUrl [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientSettings class >> defaultPublicXdServerUrl [
 	<script: 'self xdServerUrl: self defaultPublicXdServerUrl'>
 	^ 'https://blog.feenk.com' asZnUrl
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientSettings class >> downloadDirectory [
 	<return: #FileReference>
 	^ downloadDirectory ifNil: [ downloadDirectory := FileLocator localDirectory / 'xdocs' ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientSettings class >> settingsOn: aBuilder [ 
 	<systemsettings>
 	
@@ -39,17 +39,17 @@ XdClientSettings class >> settingsOn: aBuilder [
 		label: 'XDoc'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientSettings class >> xdServerUrl [
 	^ xdServerUrl ifNil: [ xdServerUrl := self defaultPublicXdServerUrl ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientSettings class >> xdServerUrl: aZnUrlOrString [
 	xdServerUrl := aZnUrlOrString ifNotNil: [ aZnUrlOrString asZnUrl ]
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientSettings class >> xdServerUrlSettingOn: aBuilder [ 
 	<systemsettings>
 	
@@ -61,12 +61,12 @@ XdClientSettings class >> xdServerUrlSettingOn: aBuilder [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientSettings class >> xdServerUrlString [
 	^ self xdServerUrl asString
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientSettings class >> xdServerUrlString: aString [
 	self xdServerUrl: aString
 ]

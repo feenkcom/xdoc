@@ -1,10 +1,10 @@
 Class {
-	#name : #XdFailureAnswer,
-	#superclass : #XdFailedAnswer,
-	#category : #'XDoc-Client-Answers'
+	#name : 'XdFailureAnswer',
+	#superclass : 'XdFailedAnswer',
+	#category : 'XDoc-Client-Answers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdFailureAnswer >> message [
 	^ self response message
 ]

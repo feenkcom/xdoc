@@ -1,6 +1,6 @@
 Class {
-	#name : #XdCommandAnswer,
-	#superclass : #Object,
+	#name : 'XdCommandAnswer',
+	#superclass : 'Object',
 	#traits : 'TGtAssert + TGtResponseStatus',
 	#classTraits : 'TGtAssert classTrait + TGtResponseStatus classTrait',
 	#instVars : [
@@ -8,16 +8,16 @@ Class {
 		'command',
 		'commandChain'
 	],
-	#category : #'XDoc-Client-Answers'
+	#category : 'XDoc-Client-Answers'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdCommandAnswer >> command [
 	<return: #XdClientCommand>
 	^ command
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdCommandAnswer >> command: anXdClientCommand [
 	self 
 		assert: [ anXdClientCommand isNotNil ] 
@@ -25,17 +25,17 @@ XdCommandAnswer >> command: anXdClientCommand [
 	command := anXdClientCommand
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdCommandAnswer >> commandChain [
 	^ commandChain
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdCommandAnswer >> commandChain: anObject [
 	commandChain := anObject
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 XdCommandAnswer >> gtCommandsFor: aView [
 	<gtView>
 	self commandChain ifNil: [ ^ aView empty ].
@@ -45,13 +45,13 @@ XdCommandAnswer >> gtCommandsFor: aView [
 		view: #gtCommandsFor:
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 XdCommandAnswer >> hasResponse [
 	<return: #Boolean>
 	^ self response isResponse
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 XdCommandAnswer >> initialize [
 	super initialize.
 	command := XdClientCommand null.
@@ -59,13 +59,13 @@ XdCommandAnswer >> initialize [
 	response := XdZincResponse null.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdCommandAnswer >> response [
 	<return: #XdZincResponse>
 	^ response
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdCommandAnswer >> response: aXdZincResponse [
 	self 
 		assert: [ aXdZincResponse isNotNil ] 
@@ -73,7 +73,7 @@ XdCommandAnswer >> response: aXdZincResponse [
 	response := aXdZincResponse
 ]
 
-{ #category : #'accessing - response' }
+{ #category : 'accessing - response' }
 XdCommandAnswer >> statusLineMessage [
 	^ self response statusLineMessage
 ]

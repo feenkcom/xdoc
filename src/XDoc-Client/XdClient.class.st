@@ -1,16 +1,16 @@
 Class {
-	#name : #XdClient,
-	#superclass : #XdProtoClient,
+	#name : 'XdClient',
+	#superclass : 'XdProtoClient',
 	#traits : 'TGtReplacingCommandHolder',
 	#classTraits : 'TGtReplacingCommandHolder classTrait',
 	#instVars : [
 		'serverUrl',
 		'signalProgress'
 	],
-	#category : #'XDoc-Client-Core'
+	#category : 'XDoc-Client-Core'
 }
 
-{ #category : #public }
+{ #category : 'public' }
 XdClient class >> downloadFileInfo: aZnUrlString thenDo: aBlock [
 	<return: #XdFileInfo>
 	| aFileInfo |
@@ -19,7 +19,7 @@ XdClient class >> downloadFileInfo: aZnUrlString thenDo: aBlock [
 	^ aFileInfo
 ]
 
-{ #category : #public }
+{ #category : 'public' }
 XdClient class >> downloadXDoc: aZnUrlString thenDo: aBlock [
 	<return: #XdFile>
 	| aXdFile |
@@ -28,19 +28,19 @@ XdClient class >> downloadXDoc: aZnUrlString thenDo: aBlock [
 	^ aXdFile
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 XdClient class >> gtDocumentsFor: aView [
 	<gtView>
 	^ (self new gtDocumentsFor: aView)
 			priority: -2
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClient class >> null [
 	^ XdNullClient uniqueInstance
 ]
 
-{ #category : #'private - results' }
+{ #category : 'private - results' }
 XdClient >> answerFromCommand: aCommand [
 	<return: #XdCommandAnswer>
 	^ XdCommandAnswerBuilder new
@@ -48,30 +48,30 @@ XdClient >> answerFromCommand: aCommand [
 		build
 ]
 
-{ #category : #'accessing - options - authentication' }
+{ #category : 'accessing - options - authentication' }
 XdClient >> authentication: aXdAuthenticationCommand [
 	self replacingCommand: aXdAuthenticationCommand
 ]
 
-{ #category : #'execution - decorating commands' }
+{ #category : 'execution - decorating commands' }
 XdClient >> basicExecuteCommand: aCommand [
 	^ self decoratingCommandBuilder execute: aCommand
 ]
 
-{ #category : #'accessing - options - authentication' }
+{ #category : 'accessing - options - authentication' }
 XdClient >> bearerToken: anAccessToken [
 	self authentication: (XdBearerAuthenticationCommand new
 		accessToken: anAccessToken)
 ]
 
-{ #category : #'accessing - options - decorating commands' }
+{ #category : 'accessing - options - decorating commands' }
 XdClient >> decoratingCommandBuilder [
 	^ self 
 		optionAt: self class decoratingCommandBuilderOptionName 
 		ifAbsentPut: [ self newDecoratingCommandBuilder ]
 ]
 
-{ #category : #'actions - modifying' }
+{ #category : 'actions - modifying' }
 XdClient >> deleteId: anId [
 	<return: #XdCommandAnswer>
 	"Delete an XDoc file from a public server"
@@ -82,7 +82,7 @@ XdClient >> deleteId: anId [
 	^ self executeCommand: aCommand.
 ]
 
-{ #category : #'actions - modifying' }
+{ #category : 'actions - modifying' }
 XdClient >> deleteUrl: anUrl [
 	<return: #ZnResponse>
 	"Delete an XDoc file from a public server"
@@ -95,13 +95,13 @@ XdClient >> deleteUrl: anUrl [
 	^ self deleteId: anId
 ]
 
-{ #category : #'accessing - computed' }
+{ #category : 'accessing - computed' }
 XdClient >> documents [
 	<return: #Array of: #XdFileInfo>
 	^ self downloadList
 ]
 
-{ #category : #'actions - reading' }
+{ #category : 'actions - reading' }
 XdClient >> downloadFileInfo: aZnUrl [ 
 	"Download an XDoc file info from a public server"
 	<return: #XdFileInfo>
@@ -112,7 +112,7 @@ XdClient >> downloadFileInfo: aZnUrl [
 		fileInfo
 ]
 
-{ #category : #'actions - reading' }
+{ #category : 'actions - reading' }
 XdClient >> downloadList [
 	<return: #Array of: #XdFileInfo>
 	^ XdClientDownloadListCommand new
@@ -122,7 +122,7 @@ XdClient >> downloadList [
 		list
 ]
 
-{ #category : #'actions - reading' }
+{ #category : 'actions - reading' }
 XdClient >> downloadPreviewImageUsingFileInfo: aXdFileInfo [
 	<return: #Form>
 
@@ -133,7 +133,7 @@ XdClient >> downloadPreviewImageUsingFileInfo: aXdFileInfo [
 		execute
 ]
 
-{ #category : #'actions - reading' }
+{ #category : 'actions - reading' }
 XdClient >> downloadXDoc: aZnUrl [ 
 	<return: #XdFile>
 	"Download an XDoc file from a public server"
@@ -144,7 +144,7 @@ XdClient >> downloadXDoc: aZnUrl [
 		xdFile
 ]
 
-{ #category : #'actions - reading' }
+{ #category : 'actions - reading' }
 XdClient >> downloadXDocUsingFileInfo: aXdFileInfo [ 
 	<return: #XdFile>
 	"Download an XDoc file from a public server"
@@ -156,7 +156,7 @@ XdClient >> downloadXDocUsingFileInfo: aXdFileInfo [
 		xdFile
 ]
 
-{ #category : #'execution - decorating commands' }
+{ #category : 'execution - decorating commands' }
 XdClient >> executeCommand: aCommand [
 	<return: #XdCommandAnswer>
 	^ [ 
@@ -169,28 +169,28 @@ XdClient >> executeCommand: aCommand [
 		XdExceptionAnswer new exception: anException ]
 ]
 
-{ #category : #'gt-extension' }
+{ #category : 'gt-extension' }
 XdClient >> gtDocumentListFor: aView [
 	<gtView>
 	^ aView columnedList
 		title: 'List';
 		items: [ self documents ];
-		column: 'Title' item: [ :doc | doc title];
-		column: 'Author' item: [ :doc | doc author];
-		column: 'Created on' item: [ :doc | 
+		column: 'Title' text: [ :doc | doc title];
+		column: 'Author' text: [ :doc | doc author];
+		column: 'Created on' text: [ :doc | 
 			doc createdOn 
 				ifNotNil: #asLocalStringYMDHM
 				ifNil: [ '' ] ]
 ]
 
-{ #category : #initialization }
+{ #category : 'initialization' }
 XdClient >> initialize [
 	super initialize.
 	serverUrl := XdClientSettings xdServerUrl.
 	signalProgress := false.
 ]
 
-{ #category : #'actions - modifying' }
+{ #category : 'actions - modifying' }
 XdClient >> ping [
 	<return: #XdCommandAnswer>
 	| aCommand |
@@ -199,7 +199,7 @@ XdClient >> ping [
 	^ self executeCommand: aCommand.
 ]
 
-{ #category : #'actions - modifying' }
+{ #category : 'actions - modifying' }
 XdClient >> publish: aXdFile [ 
 	"Publish an XDoc file to a public server"
 	<return: #XdCommandAnswer>
@@ -210,7 +210,7 @@ XdClient >> publish: aXdFile [
 	^ self executeCommand: aCommand.
 ]
 
-{ #category : #'actions - modifying' }
+{ #category : 'actions - modifying' }
 XdClient >> publish: aXdFile inSpace: spaceName [
 	"Publish an XDoc file to a public server"
 	<return: #XdCommandAnswer>
@@ -222,13 +222,13 @@ XdClient >> publish: aXdFile inSpace: spaceName [
 	^ self executeCommand: aCommand.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClient >> serverUrl [
 	<return: #ZnUrl>
 	^ serverUrl
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClient >> serverUrl: aZnUrl [
 	self 
 		assert: [ aZnUrl notNil ]
@@ -236,13 +236,13 @@ XdClient >> serverUrl: aZnUrl [
 	serverUrl := aZnUrl
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClient >> signalProgress [
 	<return: #Boolean>
 	^ signalProgress
 ]
 
-{ #category : #'actions - modifying' }
+{ #category : 'actions - modifying' }
 XdClient >> update: aXdFile id: anId [
 	"Update an XDoc file at a public server"
 	<return: #XdCommandAnswer>
@@ -254,7 +254,7 @@ XdClient >> update: aXdFile id: anId [
 	^ self executeCommand: aCommand.
 ]
 
-{ #category : #'actions - modifying' }
+{ #category : 'actions - modifying' }
 XdClient >> update: aXdFile url: aZnUrl [
 	"Update an XDoc file at a public server"
 	<return: #XdCommandAnswer>
@@ -267,14 +267,14 @@ XdClient >> update: aXdFile url: aZnUrl [
 	^ self update: aXdFile id: anId
 ]
 
-{ #category : #'accessing - options - authentication' }
+{ #category : 'accessing - options - authentication' }
 XdClient >> username: aUsername password: aPassword [
 	self authentication: (XdBasicAuthenticationCommand new
 		username: aUsername; 
 		password: aPassword)
 ]
 
-{ #category : #'accessing - options - authentication' }
+{ #category : 'accessing - options - authentication' }
 XdClient >> username: aUsername password: aPassword realm: aRealm [
 	self authentication: (XdBasicRealmAuthenticationCommand new
 		username: aUsername; 

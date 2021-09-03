@@ -1,17 +1,17 @@
 Class {
-	#name : #XdNullClient,
-	#superclass : #XdProtoClient,
+	#name : 'XdNullClient',
+	#superclass : 'XdProtoClient',
 	#traits : 'TGtUniqueInstance',
 	#classTraits : 'TGtUniqueInstance classTrait',
-	#category : #'XDoc-Client-Core'
+	#category : 'XDoc-Client-Core'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdNullClient >> documents [
 	^ #()
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdNullClient >> downloadXDocUsingFileInfo: aXdFileInfo [ 
 	^ XdFile empty  
 ]

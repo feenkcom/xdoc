@@ -1,34 +1,34 @@
 Class {
-	#name : #GtValuableExampleCommand,
-	#superclass : #Object,
+	#name : 'GtValuableExampleCommand',
+	#superclass : 'Object',
 	#instVars : [
 		'result',
 		'valuable'
 	],
-	#category : #'XDoc-Client-Decorating Command Builder'
+	#category : 'XDoc-Client-Decorating Command Builder'
 }
 
-{ #category : #execution }
+{ #category : 'execution' }
 GtValuableExampleCommand >> execute [
 	self result: self valuable value
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtValuableExampleCommand >> result [
 	^ result
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtValuableExampleCommand >> result: anObject [
 	result := anObject
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtValuableExampleCommand >> valuable [
 	^ valuable
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 GtValuableExampleCommand >> valuable: anObject [
 	valuable := anObject
 ]

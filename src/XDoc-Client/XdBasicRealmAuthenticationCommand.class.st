@@ -1,18 +1,18 @@
 Class {
-	#name : #XdBasicRealmAuthenticationCommand,
-	#superclass : #XdBasicAuthenticationCommand,
+	#name : 'XdBasicRealmAuthenticationCommand',
+	#superclass : 'XdBasicAuthenticationCommand',
 	#instVars : [
 		'realm'
 	],
-	#category : #'XDoc-Client-Commands'
+	#category : 'XDoc-Client-Commands'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdBasicRealmAuthenticationCommand >> realm [
 	^ realm
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdBasicRealmAuthenticationCommand >> realm: aRealm [
  realm := aRealm
 ]

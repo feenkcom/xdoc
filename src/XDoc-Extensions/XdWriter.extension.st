@@ -1,6 +1,6 @@
-Extension { #name : #XdWriter }
+Extension { #name : 'XdWriter' }
 
-{ #category : #'*XDoc-Extensions' }
+{ #category : '*XDoc-Extensions' }
 XdWriter >> gtManifestFor: aView [
 	<gtView>
 	self manifest ifNil: [ ^ aView empty ].
@@ -11,7 +11,7 @@ XdWriter >> gtManifestFor: aView [
 		view: #gtContentFor:
 ]
 
-{ #category : #'*XDoc-Extensions' }
+{ #category : '*XDoc-Extensions' }
 XdWriter >> gtMembersFor: aView [
 	<gtView>
 	self manifest ifNil: [ ^ aView empty ].

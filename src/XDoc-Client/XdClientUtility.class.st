@@ -1,10 +1,10 @@
 Class {
-	#name : #XdClientUtility,
-	#superclass : #Object,
-	#category : #'XDoc-Client-Utility'
+	#name : 'XdClientUtility',
+	#superclass : 'Object',
+	#category : 'XDoc-Client-Utility'
 }
 
-{ #category : #'api - file system operations' }
+{ #category : 'api - file system operations' }
 XdClientUtility class >> notExistingFileIn: aDirectory basename: aBasename [
 	<return: #FileReference>
 	| aCreatedDirectory aFileReference aSoleBasename aSoleExtension anIndex |

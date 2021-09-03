@@ -1,18 +1,18 @@
 Class {
-	#name : #XdClientPublishXDocCommand,
-	#superclass : #XdClientCreateXDocCommand,
+	#name : 'XdClientPublishXDocCommand',
+	#superclass : 'XdClientCreateXDocCommand',
 	#instVars : [
 		'spaceName'
 	],
-	#category : #'XDoc-Client-Commands'
+	#category : 'XDoc-Client-Commands'
 }
 
-{ #category : #visitor }
+{ #category : 'visitor' }
 XdClientPublishXDocCommand >> accept: aVisitor [
 	^ aVisitor visitXdClientPublishXDocCommand: self
 ]
 
-{ #category : #execution }
+{ #category : 'execution' }
 XdClientPublishXDocCommand >> execute [
 	| znClient |
 	znClient := self zincClient
@@ -23,19 +23,19 @@ XdClientPublishXDocCommand >> execute [
 	
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 XdClientPublishXDocCommand >> isSuccess [
 	<return: #Boolean>
 	^ self response ifNotNil: #isSuccess ifNil: false
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientPublishXDocCommand >> postUrl [
 	<return: #ZnUrl>
 	^ self client serverUrl asZnUrl withPathSegments: XdConstants xdocsPathSegments
 ]
 
-{ #category : #printing }
+{ #category : 'printing' }
 XdClientPublishXDocCommand >> printOn: aStream [
 	(self response isNotNil and: [ self response isSuccess ]) 
 		 ifTrue: [ aStream 
@@ -49,7 +49,7 @@ XdClientPublishXDocCommand >> printOn: aStream [
 		aStream nextPutAll: ' (failure)' ]
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 XdClientPublishXDocCommand >> publicUrlToClipboard [
 	| aPublishedUrl |
 	self response isSuccess ifFalse: [
@@ -60,7 +60,7 @@ XdClientPublishXDocCommand >> publicUrlToClipboard [
    self inform: aPublishedUrl asString, ' was published and the URL was copied to a clipboard'.
 ]
 
-{ #category : #actions }
+{ #category : 'actions' }
 XdClientPublishXDocCommand >> responseToClipboard [
 	| aString |
 	self response ifNil: [ ^ self inform: 'A server response is undefined' ].
@@ -73,7 +73,7 @@ XdClientPublishXDocCommand >> responseToClipboard [
    self inform: aString , ' error occurred'.
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdClientPublishXDocCommand >> spaceName: aSpaceName [
 	spaceName := aSpaceName
 ]
