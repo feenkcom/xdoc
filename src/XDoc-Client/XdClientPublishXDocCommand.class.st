@@ -2,7 +2,8 @@ Class {
 	#name : 'XdClientPublishXDocCommand',
 	#superclass : 'XdClientCreateXDocCommand',
 	#instVars : [
-		'spaceName'
+		'spaceName',
+		'spaceId'
 	],
 	#category : 'XDoc-Client-Commands'
 }
@@ -18,7 +19,8 @@ XdClientPublishXDocCommand >> execute [
 	znClient := self zincClient
 		url: self postUrl;
 		entity: self xdocEntity.
-	spaceName ifNotNil: [znClient queryAt: 'spaceName' put: spaceName ].
+	spaceName ifNotNil: [znClient queryAt: 'space_name' put: spaceName ].
+	spaceId ifNotNil: [znClient queryAt: 'space_id' put: spaceName ].
 	self response:(znClient post; response).
 	
 ]
@@ -71,6 +73,11 @@ XdClientPublishXDocCommand >> responseToClipboard [
 	aString := self response printString.
 	Clipboard clipboardText: aString.
    self inform: aString , ' error occurred'.
+]
+
+{ #category : 'accessing' }
+XdClientPublishXDocCommand >> spaceId: aSpaceId [
+	spaceId := aSpaceId
 ]
 
 { #category : 'accessing' }
