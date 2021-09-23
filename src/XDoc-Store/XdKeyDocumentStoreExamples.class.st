@@ -1,13 +1,13 @@
 Class {
-	#name : #XdKeyDocumentStoreExamples,
-	#superclass : #Object,
+	#name : 'XdKeyDocumentStoreExamples',
+	#superclass : 'Object',
 	#instVars : [
 		'documentStore'
 	],
-	#category : #'XDoc-Store-Examples'
+	#category : 'XDoc-Store-Examples'
 }
 
-{ #category : #cleanup }
+{ #category : 'cleanup' }
 XdKeyDocumentStoreExamples >> cleanUp [ 
 
 	documentStore ifNotNil: 
@@ -15,7 +15,7 @@ XdKeyDocumentStoreExamples >> cleanUp [
 		documentStore := nil ]
 ]
 
-{ #category : #'examples - date and time' }
+{ #category : 'examples - date and time' }
 XdKeyDocumentStoreExamples >> dateAndTime [
 	<gtExample>
 	| aDateAndTime |
@@ -24,7 +24,7 @@ XdKeyDocumentStoreExamples >> dateAndTime [
 	^ aDateAndTime
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 XdKeyDocumentStoreExamples >> dateAndTimeFrom [
 	<gtExample>
 	| aFileName aStore aDateAndTime |
@@ -35,7 +35,7 @@ XdKeyDocumentStoreExamples >> dateAndTimeFrom [
 	^ aDateAndTime
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 XdKeyDocumentStoreExamples >> dateAndTimeFrom_Incomplete_NoFields [
 	<gtExample>
 	| aFileName aStore aDateAndTime |
@@ -46,7 +46,7 @@ XdKeyDocumentStoreExamples >> dateAndTimeFrom_Incomplete_NoFields [
 	^ aDateAndTime
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 XdKeyDocumentStoreExamples >> dateAndTimeFrom_Incomplete_NoNumbers [
 	<gtExample>
 	| aFileName aStore aDateAndTime |
@@ -57,7 +57,7 @@ XdKeyDocumentStoreExamples >> dateAndTimeFrom_Incomplete_NoNumbers [
 	^ aDateAndTime
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 XdKeyDocumentStoreExamples >> dateAndTimeFrom_Incomplete_OnlyDate [
 	<gtExample>
 	| aFileName aStore aDateAndTime |
@@ -68,7 +68,7 @@ XdKeyDocumentStoreExamples >> dateAndTimeFrom_Incomplete_OnlyDate [
 	^ aDateAndTime
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 XdKeyDocumentStoreExamples >> dateAndTimeFrom_Incomplete_RandomFile [
 	<gtExample>
 	| aFileName aStore aDateAndTime |
@@ -79,7 +79,7 @@ XdKeyDocumentStoreExamples >> dateAndTimeFrom_Incomplete_RandomFile [
 	^ aDateAndTime
 ]
 
-{ #category : #'examples - date and time' }
+{ #category : 'examples - date and time' }
 XdKeyDocumentStoreExamples >> dateAndTimeRoundedToSeconds [
 	<gtExample>
 	| aDateAndTime aRounded |
@@ -89,7 +89,7 @@ XdKeyDocumentStoreExamples >> dateAndTimeRoundedToSeconds [
 	^ aRounded
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 XdKeyDocumentStoreExamples >> documentStore [
 	"Answer a xdoc document store in a temporary location that can be used for testing"
 	<gtExample>
@@ -110,7 +110,7 @@ XdKeyDocumentStoreExamples >> documentStore [
 	^ documentStore
 ]
 
-{ #category : #examples }
+{ #category : 'examples' }
 XdKeyDocumentStoreExamples >> filename [
 	"XdKeyDocumentStore names files using 'YYYY-MM-DD-HH-MM-SS.xdoc' in UTC time"
 	<gtExample>
@@ -125,7 +125,7 @@ XdKeyDocumentStoreExamples >> filename [
 	^ fn
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 XdKeyDocumentStoreExamples >> filenameConflictTest [
 	<gtExample>
 	"Ensure that three filenames created in quick succession don't conflict"
@@ -145,7 +145,7 @@ XdKeyDocumentStoreExamples >> filenameConflictTest [
 
 ]
 
-{ #category : #'examples - creation' }
+{ #category : 'examples - creation' }
 XdKeyDocumentStoreExamples >> sampleDocument: aString [
 	"Answer a stored text document with the supplied contents"
 	| xdfr xdWriter xdFile |
@@ -163,7 +163,7 @@ XdKeyDocumentStoreExamples >> sampleDocument: aString [
 		^ xdFile.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 XdKeyDocumentStoreExamples >> twoDocumentTest [
 	"Confirm the stores operation by creating two documents, checking their timestamps and retrieval"
 	<gtExample>
