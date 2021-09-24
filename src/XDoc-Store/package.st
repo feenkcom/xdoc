@@ -1,1 +1,1 @@
-Package { #name : #'XDoc-Store' }
+Package { #name : 'XDoc-Store' }

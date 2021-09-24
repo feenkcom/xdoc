@@ -25,24 +25,24 @@ Public API and Key Messages
 The store assumes that files are not written rapidly, i.e. less than one per second.  File name conflicts are avoided by simply incrementing the timestamp by 1 second.
 "
 Class {
-	#name : #XdKeyDocumentStore,
-	#superclass : #Object,
+	#name : 'XdKeyDocumentStore',
+	#superclass : 'Object',
 	#traits : 'TGtAssert',
 	#classTraits : 'TGtAssert classTrait',
 	#instVars : [
 		'location'
 	],
-	#category : #'XDoc-Store-Model'
+	#category : 'XDoc-Store-Model'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdKeyDocumentStore class >> default [ 
 	"Answer the default store for the sender"
 
 	^ self forKey: (thisContext sender receiver class name)
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdKeyDocumentStore class >> forKey: aString [
 	"Answer an instance for the supplied relative path name"
 
@@ -51,7 +51,7 @@ XdKeyDocumentStore class >> forKey: aString [
 		rootDirectory: XdPlaygroundSettings directory
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdKeyDocumentStore class >> forKey: aString rootDirectory: aFileReference [
 	"Answer an instance for the supplied relative path name"
 	| root |
@@ -66,7 +66,7 @@ XdKeyDocumentStore class >> forKey: aString rootDirectory: aFileReference [
 
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 XdKeyDocumentStore >> dateAndTimeFrom: aFileReference [
 	"Answer the timestamp encoded in the supplied filename"
 	
@@ -87,7 +87,7 @@ XdKeyDocumentStore >> dateAndTimeFrom: aFileReference [
 		offset: 0 asDuration.
 ]
 
-{ #category : #private }
+{ #category : 'private' }
 XdKeyDocumentStore >> filenameFor: aDateAndTime [
 	"Answer the filename used for the supplied timestamp"
 	| utc |
@@ -104,7 +104,7 @@ XdKeyDocumentStore >> filenameFor: aDateAndTime [
 		stream << '.xdoc' ].
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdKeyDocumentStore >> latestFilename [
 	"Answer the most recent document, based on file name"
 	| sorter sortedNames |
@@ -118,7 +118,7 @@ XdKeyDocumentStore >> latestFilename [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdKeyDocumentStore >> latestModifiedFilename [
 	"Answer the most recently modified document, based on file modification time"
 	| sortedNames |
@@ -131,12 +131,12 @@ XdKeyDocumentStore >> latestModifiedFilename [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdKeyDocumentStore >> location [
 	^ location
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdKeyDocumentStore >> location: aFileReference [
 	"Set the receiver's location"
 
@@ -146,7 +146,7 @@ XdKeyDocumentStore >> location: aFileReference [
 
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 XdKeyDocumentStore >> newFile [ 
 	"Answer a new file based on the current time.
 	See the class comments for further information on the file name strategy."
