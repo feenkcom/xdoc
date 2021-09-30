@@ -28,12 +28,12 @@ XDoc can be used for various purposes. Two distinct applications are the seriali
 
 "
 Class {
-	#name : 'BaselineOfXdoc',
-	#superclass : 'BaselineOf',
-	#category : 'BaselineOfXdoc'
+	#name : #BaselineOfXdoc,
+	#superclass : #BaselineOf,
+	#category : #BaselineOfXdoc
 }
 
-{ #category : 'baseline' }
+{ #category : #baseline }
 BaselineOfXdoc >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
@@ -42,13 +42,13 @@ BaselineOfXdoc >> baseline: spec [
 				spec repository: 'github://svenvc/NeoJSON:v17/repository' ].
 		spec
 			baseline: 'GToolkitFileUtility' with: [
-				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.71/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.72/src' ].
 		spec
 			baseline: 'GToolkitAssertionUtility' with: [
-				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.71/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.72/src' ].
 		spec
 			baseline: 'GToolkitBasicUtility' with: [
-				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.71/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.72/src' ].
 
 		spec package: 'XDoc-Core' with: [
 			spec requires: #('NeoJSON' 'GToolkitFileUtility' 'GToolkitAssertionUtility' 'GToolkitBasicUtility') ].

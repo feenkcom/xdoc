@@ -10,27 +10,27 @@ An example area is the blog feed from below.
 ${xdocs}$
 "
 Class {
-	#name : 'BaselineOfXdocClient',
-	#superclass : 'BaselineOf',
-	#category : 'BaselineOfXdocClient'
+	#name : #BaselineOfXdocClient,
+	#superclass : #BaselineOf,
+	#category : #BaselineOfXdocClient
 }
 
-{ #category : 'baseline' }
+{ #category : #baseline }
 BaselineOfXdocClient >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
 		spec
 			baseline: 'XdocClientMinimal' with: [
-				spec repository: 'github://feenkcom/xdoc:v0.8.437/src' ].
+				spec repository: 'github://feenkcom/xdoc:v0.8.438/src' ].
 		spec
 			baseline: 'Brick' with: [
-				spec repository: 'github://feenkcom/Brick:v0.8.391/src' ].
+				spec repository: 'github://feenkcom/Brick:v0.8.392/src' ].
 		spec
 			baseline: 'GToolkitPhlow' with: [
-				spec repository: 'github://feenkcom/gtoolkit-phlow:v0.8.417/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-phlow:v0.8.418/src' ].
 		spec
 			baseline: 'GToolkitSpotter' with: [
-				spec repository: 'github://feenkcom/gtoolkit-spotter:v0.8.399/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-spotter:v0.8.400/src' ].
 
 		spec package: 'XDoc-Extensions' with: [
 			spec requires: #('XdocClientMinimal' 'Brick' 'GToolkitPhlow') ].

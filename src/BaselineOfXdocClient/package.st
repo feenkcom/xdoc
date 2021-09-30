@@ -1,1 +1,1 @@
-Package { #name : 'BaselineOfXdocClient' }
+Package { #name : #BaselineOfXdocClient }

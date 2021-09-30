@@ -1,1 +1,1 @@
-Package { #name : 'BaselineOfXdoc' }
+Package { #name : #BaselineOfXdoc }

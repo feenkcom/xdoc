@@ -1,1 +1,1 @@
-Package { #name : 'BaselineOfXdocClientMinimal' }
+Package { #name : #BaselineOfXdocClientMinimal }
