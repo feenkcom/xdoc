@@ -89,6 +89,19 @@ XdManifest >> documents: anArrayOfDocuments [
 ]
 
 { #category : #testing }
+XdManifest >> hasAuthor [
+
+	^ self author isNotNil and: [ 
+		  self author isNotEmpty and: [ self author ~= '<unknown>' ] ]
+]
+
+{ #category : #testing }
+XdManifest >> hasDescription [
+
+	^ self description isNotNil and: [ self description isNotEmpty ]
+]
+
+{ #category : #testing }
 XdManifest >> hasHtmlDocument [
 	<return: #Boolean>
 	^ self documents 
