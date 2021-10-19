@@ -25,13 +25,14 @@ BaselineOfXdocClient class >> gtDependencyAnalysisPreloadedBaselines [
 BaselineOfXdocClient >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
-		spec 
+		spec
 			baseline: 'XdocClientMinimal' with: [
-				spec repository: 'github://feenkcom/xdoc:main/src' ];
-			package: 'XDoc-Extensions' with: [
-				spec requires: #('XdocClientMinimal' ). ];
-			package: 'XDoc-Gt4XDocClient' with: [
-				spec requires: #( 'XdocClientMinimal' ). ];
-			package: 'XDoc-Store'. ].
+				spec repository: 'github://feenkcom/xdoc:v0.8.456/src' ].
 
+		spec package: 'XDoc-Extensions' with: [
+			spec requires: #('XdocClientMinimal') ].
+		spec package: 'XDoc-Gt4XDocClient' with: [
+			spec requires: #('XdocClientMinimal') ].
+		spec package: 'XDoc-Store'.
+	]
 ]
