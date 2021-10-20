@@ -15,6 +15,12 @@ Class {
 	#category : #BaselineOfXdocClient
 }
 
+{ #category : #accessing }
+BaselineOfXdocClient class >> gtDependencyAnalysisPreloadedBaselines [
+	^ super gtDependencyAnalysisPreloadedBaselines
+		copyWith: BaselineOfGToolkit
+]
+
 { #category : #baseline }
 BaselineOfXdocClient >> baseline: spec [
 	<baseline>
@@ -22,17 +28,10 @@ BaselineOfXdocClient >> baseline: spec [
 		spec 
 			baseline: 'XdocClientMinimal' with: [
 				spec repository: 'github://feenkcom/xdoc:main/src' ];
-			baseline: 'Brick' with: [
-				spec repository: 'github://feenkcom/Brick:main/src' ];
-			baseline: 'GToolkitPhlow' with: [
-				spec repository: 'github://feenkcom/gtoolkit-phlow:main/src' ];
-			baseline: 'GToolkitSpotter' with: [
-				spec repository: 'github://feenkcom/gtoolkit-spotter:main/src' ].
-		spec 
 			package: 'XDoc-Extensions' with: [
-				spec requires: #('XdocClientMinimal' 'Brick' 'GToolkitPhlow' ). ];
+				spec requires: #('XdocClientMinimal' ). ];
 			package: 'XDoc-Gt4XDocClient' with: [
-				spec requires: #('XdocClientMinimal' 'Brick' 'GToolkitPhlow' 'GToolkitSpotter' ). ];
+				spec requires: #( 'XdocClientMinimal' ). ];
 			package: 'XDoc-Store'. ].
 
 ]
