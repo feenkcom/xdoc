@@ -1,6 +1,15 @@
 Extension { #name : #Archive }
 
 { #category : #'*XDoc-Core' }
+Archive >> gtAddDirectoryNamed: aDirectoryName [
+	| newMember |
+	newMember := ZipDirectoryMember new 
+		gtLocalFileName:  aDirectoryName.
+	self addMember: newMember.
+	^ newMember
+]
+
+{ #category : #'*XDoc-Core' }
 Archive >> gtAddStream: aReadStream as: aFileName [
 	| newMember |
 	newMember := self memberClass gtNewFromStream: aReadStream named: aFileName.
