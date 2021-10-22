@@ -1,15 +1,15 @@
 Class {
-	#name : 'XdClientPingCommand',
-	#superclass : 'XdClientWithResponseCommand',
+	#name : #XdClientPingCommand,
+	#superclass : #XdClientWithResponseCommand,
 	#category : 'XDoc-Client-Commands'
 }
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 XdClientPingCommand >> accept: aVisitor [
 	^ aVisitor visitXdClientPingCommand: self
 ]
 
-{ #category : 'execution' }
+{ #category : #execution }
 XdClientPingCommand >> execute [
 	self response: (self zincClient
 		url: self pingUrl;
@@ -17,7 +17,7 @@ XdClientPingCommand >> execute [
 		response).
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdClientPingCommand >> pingUrl [
 	<return: #ZnUrl>
 	^ self client serverUrl / 'ping'

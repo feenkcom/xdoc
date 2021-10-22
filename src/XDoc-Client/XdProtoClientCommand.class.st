@@ -1,27 +1,27 @@
 Class {
-	#name : 'XdProtoClientCommand',
-	#superclass : 'Object',
+	#name : #XdProtoClientCommand,
+	#superclass : #Object,
 	#traits : 'TGtAssert',
 	#classTraits : 'TGtAssert classTrait',
 	#category : 'XDoc-Client-Commands'
 }
 
-{ #category : 'execution' }
+{ #category : #execution }
 XdProtoClientCommand >> execute [
 	self subclassResponsibility
 ]
 
-{ #category : 'gt-extension' }
+{ #category : #'gt-extension' }
 XdProtoClientCommand >> gtCommandsFor: aView [
 	^ aView empty
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdProtoClientCommand >> name [
 	^ self printString
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdProtoClientCommand >> result [
 	^ self response
 ]

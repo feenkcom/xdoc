@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtDecoratingCommandBuilder',
-	#superclass : 'Object',
+	#name : #GtDecoratingCommandBuilder,
+	#superclass : #Object,
 	#traits : 'TGtAssert',
 	#classTraits : 'TGtAssert classTrait',
 	#instVars : [
@@ -9,7 +9,7 @@ Class {
 	#category : 'XDoc-Client-Decorating Command Builder'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDecoratingCommandBuilder >> command: aCommand [
 	self
 		assert: [ aCommand isNotNil ] 
@@ -17,17 +17,17 @@ GtDecoratingCommandBuilder >> command: aCommand [
 	self commands: (self commands copyWith: aCommand).
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDecoratingCommandBuilder >> commands [
 	^ commands
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtDecoratingCommandBuilder >> commands: anObject [
 	commands := anObject
 ]
 
-{ #category : 'private - execution' }
+{ #category : #'private - execution' }
 GtDecoratingCommandBuilder >> decorateCommand: aCommand [
 	self
 		assert: [ aCommand isNotNil ] 
@@ -38,12 +38,12 @@ GtDecoratingCommandBuilder >> decorateCommand: aCommand [
 			eachDecoratedCommand copy command: aComposition ].
 ]
 
-{ #category : 'defaults' }
+{ #category : #defaults }
 GtDecoratingCommandBuilder >> defaultCommands [
 	^ Array empty 
 ]
 
-{ #category : 'executing' }
+{ #category : #executing }
 GtDecoratingCommandBuilder >> execute: aCommand [
 	| aDecoratedCommand |
 	aDecoratedCommand := self decorateCommand: aCommand.
@@ -51,7 +51,7 @@ GtDecoratingCommandBuilder >> execute: aCommand [
 	^ aDecoratedCommand
 ]
 
-{ #category : 'gt-extension' }
+{ #category : #'gt-extension' }
 GtDecoratingCommandBuilder >> gtCommandsFor: aView [
 	<gtView>
 	self commands ifNil: [ ^ aView empty ].
@@ -61,7 +61,7 @@ GtDecoratingCommandBuilder >> gtCommandsFor: aView [
 		items: [ self commands reversed ]
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtDecoratingCommandBuilder >> initialize [
 	super initialize.
 	commands := self defaultCommands.

@@ -1,10 +1,10 @@
 Class {
-	#name : 'XdSuccessfullyCreatedAnswer',
-	#superclass : 'XdSuccessfulAnswer',
+	#name : #XdSuccessfullyCreatedAnswer,
+	#superclass : #XdSuccessfulAnswer,
 	#category : 'XDoc-Client-Answers'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 XdSuccessfullyCreatedAnswer class >> isAbstract [
 	^ self name = #XdSuccessfullyCreatedAnswer 
 ]

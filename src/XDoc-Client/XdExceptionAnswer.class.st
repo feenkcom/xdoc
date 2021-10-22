@@ -1,16 +1,16 @@
 Class {
-	#name : 'XdExceptionAnswer',
-	#superclass : 'XdFailedAnswer',
+	#name : #XdExceptionAnswer,
+	#superclass : #XdFailedAnswer,
 	#category : 'XDoc-Client-Answers'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdExceptionAnswer >> exception [
 	<return: #Exception>
 	^ self response exception
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdExceptionAnswer >> exception: anException [
 	self
 		assert: [ anException isNotNil ] 
@@ -18,7 +18,7 @@ XdExceptionAnswer >> exception: anException [
 	self response: (XdExceptionResponse new exception: anException)
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdExceptionAnswer >> message [
 	^ self exception messageText
 ]

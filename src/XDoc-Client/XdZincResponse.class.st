@@ -1,6 +1,6 @@
 Class {
-	#name : 'XdZincResponse',
-	#superclass : 'XdProtoResponse',
+	#name : #XdZincResponse,
+	#superclass : #XdProtoResponse,
 	#traits : 'TGtResponseStatus',
 	#classTraits : 'TGtResponseStatus classTrait',
 	#instVars : [
@@ -9,18 +9,18 @@ Class {
 	#category : 'XDoc-Client-Answers'
 }
 
-{ #category : 'factory' }
+{ #category : #factory }
 XdZincResponse class >> null [
 	^ XdNullResponse default
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 XdZincResponse >> isResponse [
 	<return: #Boolean>
 	^ true
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdZincResponse >> message [
 	<return: #String>
 	self response hasEntity ifFalse: [ ^ String empty ].
@@ -28,18 +28,18 @@ XdZincResponse >> message [
 	^ self response contents asString
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdZincResponse >> rawResponse [
 	<return: #ZnResponse>
 	^ self response
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdZincResponse >> response [
 	^ response
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdZincResponse >> response: aZnResponse [
 	self 
 		assert: [ aZnResponse isNotNil ] 
@@ -47,7 +47,7 @@ XdZincResponse >> response: aZnResponse [
 	response := aZnResponse
 ]
 
-{ #category : 'accessing - response' }
+{ #category : #'accessing - response' }
 XdZincResponse >> statusLineMessage [
 	^ (String streamContents: [ :out | self response statusLine writeOn: out ])
 ]

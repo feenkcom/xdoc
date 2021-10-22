@@ -1,6 +1,6 @@
 Class {
-	#name : 'XdClientXDocIdFromURLCommand',
-	#superclass : 'XdClientCommand',
+	#name : #XdClientXDocIdFromURLCommand,
+	#superclass : #XdClientCommand,
 	#instVars : [
 		'url',
 		'id'
@@ -11,28 +11,28 @@ Class {
 	#category : 'XDoc-Client-Commands'
 }
 
-{ #category : 'execution' }
+{ #category : #execution }
 XdClientXDocIdFromURLCommand >> execute [
 	self id: self url segments second
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdClientXDocIdFromURLCommand >> id [
 	^ id
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdClientXDocIdFromURLCommand >> id: anId [
 	id := anId
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdClientXDocIdFromURLCommand >> url [
 	<return: #ZnUrl>
 	^ url
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdClientXDocIdFromURLCommand >> url: aZnUrl [
 	url := aZnUrl
 ]

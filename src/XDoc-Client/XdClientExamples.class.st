@@ -1,6 +1,6 @@
 Class {
-	#name : 'XdClientExamples',
-	#superclass : 'Object',
+	#name : #XdClientExamples,
+	#superclass : #Object,
 	#instVars : [
 		'zincExamples',
 		'documentsExamples',
@@ -9,7 +9,7 @@ Class {
 	#category : 'XDoc-Client-Examples'
 }
 
-{ #category : 'server' }
+{ #category : #server }
 XdClientExamples >> basicAuthenticator [
 	<gtExample>
 	^ ZnBasicAuthenticator
@@ -17,7 +17,7 @@ XdClientExamples >> basicAuthenticator [
 		password: self joeDoePassword
 ]
 
-{ #category : 'action - delete from URL' }
+{ #category : #'action - delete from URL' }
 XdClientExamples >> basicIdFromUrlCommand [
 	<gtExample>
 	| anUrlFromUrlCommand |
@@ -27,7 +27,7 @@ XdClientExamples >> basicIdFromUrlCommand [
 	^ anUrlFromUrlCommand
 ]
 
-{ #category : 'server' }
+{ #category : #server }
 XdClientExamples >> basicRealmAuthenticator [
 	<gtExample>
 	^ ZnBasicAuthenticator
@@ -36,14 +36,14 @@ XdClientExamples >> basicRealmAuthenticator [
 		realm:'myrealm'
 ]
 
-{ #category : 'server' }
+{ #category : #server }
 XdClientExamples >> bearerAuthenticator [
 	<gtExample>
 	^ XdBearerExampleAuthenticator
 		token: self joeDoeBearerToken
 ]
 
-{ #category : 'server' }
+{ #category : #server }
 XdClientExamples >> cleanServerBasicAuthenticator [
 	<gtExample>
 	| aServer anAuthenticator |
@@ -54,7 +54,7 @@ XdClientExamples >> cleanServerBasicAuthenticator [
 	^ aServer
 ]
 
-{ #category : 'client' }
+{ #category : #client }
 XdClientExamples >> client [
 	<gtExample>
 	| aClient anUrl |
@@ -65,7 +65,7 @@ XdClientExamples >> client [
 	^ aClient
 ]
 
-{ #category : 'client' }
+{ #category : #client }
 XdClientExamples >> clientWithBasicAuthentication [
 	<gtExample>
 	| aClient anUrl |
@@ -78,7 +78,7 @@ XdClientExamples >> clientWithBasicAuthentication [
 	^ aClient
 ]
 
-{ #category : 'client' }
+{ #category : #client }
 XdClientExamples >> clientWithBasicRealmAuthentication [
 	<gtExample>
 	| aClient anUrl |
@@ -91,7 +91,7 @@ XdClientExamples >> clientWithBasicRealmAuthentication [
 	^ aClient
 ]
 
-{ #category : 'client' }
+{ #category : #client }
 XdClientExamples >> clientWithBearerAuthentication [
 	<gtExample>
 	| aClient anUrl |
@@ -104,7 +104,7 @@ XdClientExamples >> clientWithBearerAuthentication [
 	^ aClient
 ]
 
-{ #category : 'server' }
+{ #category : #server }
 XdClientExamples >> delegate [
 	<gtExample>
 	delegate ifNotNil: [ :aDelegate | ^ aDelegate ].
@@ -127,19 +127,19 @@ XdClientExamples >> delegate [
 	^ delegate
 ]
 
-{ #category : 'action - delete' }
+{ #category : #'action - delete' }
 XdClientExamples >> deletePath [
 	<gtExample>
 	^ ZnUrl new / XdConstants xdocPathSegments / '1'
 ]
 
-{ #category : 'action - delete' }
+{ #category : #'action - delete' }
 XdClientExamples >> deletePathString [
 	<gtExample>
 	^ self deletePath asString
 ]
 
-{ #category : 'action - delete' }
+{ #category : #'action - delete' }
 XdClientExamples >> deleteXDocId [
 	<gtExample>
 	| aResponse |
@@ -148,7 +148,7 @@ XdClientExamples >> deleteXDocId [
 	^ aResponse
 ]
 
-{ #category : 'action - delete from URL' }
+{ #category : #'action - delete from URL' }
 XdClientExamples >> deleteXDocUrl [
 	<gtExample>
 	| aDeleteResponse |
@@ -157,7 +157,7 @@ XdClientExamples >> deleteXDocUrl [
 	^ aDeleteResponse
 ]
 
-{ #category : 'action - download xdoc' }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> downloadFileInfo [
 	<gtExample>
 	| aXdFileInfo |
@@ -170,7 +170,7 @@ XdClientExamples >> downloadFileInfo [
 	^ aXdFileInfo
 ]
 
-{ #category : 'action - download list' }
+{ #category : #'action - download list' }
 XdClientExamples >> downloadList [
 	<gtExample>
 	<noTest>
@@ -185,7 +185,7 @@ XdClientExamples >> downloadList [
 	^ aCollectionOfXdFileInfo
 ]
 
-{ #category : 'action - download xdoc' }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> downloadXDoc [
 	<gtExample>
 	| anXdFile |
@@ -195,7 +195,7 @@ XdClientExamples >> downloadXDoc [
 	^ anXdFile
 ]
 
-{ #category : 'action - download xdoc' }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> downloadXDocUsingFileInfo [
 	<gtExample>
 	| anXdFile |
@@ -205,7 +205,7 @@ XdClientExamples >> downloadXDocUsingFileInfo [
 	^ anXdFile
 ]
 
-{ #category : 'action - download xdoc' }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> fileInfo [
 	<gtExample>
 	^ XdFileInfo new
@@ -214,7 +214,7 @@ XdClientExamples >> fileInfo [
 		fileName: self xdocFileName
 ]
 
-{ #category : 'action - download xdoc' }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> infoFilePath [
 	<gtExample>
 	^ '/', ('/' join: (XdConstants cdnPathSegments asOrderedCollection
@@ -223,58 +223,58 @@ XdClientExamples >> infoFilePath [
 			yourself))
 ]
 
-{ #category : 'action - download xdoc' }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> infoJsonContent [
 	<gtExample>
 	^ XdManifestJsonMapping writeFileInfo: self fileInfo
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 XdClientExamples >> initialize [
 	super initialize.
 	zincExamples := GtZnServerExamples new.
 	documentsExamples := XdDocumentsExamples new.
 ]
 
-{ #category : 'server' }
+{ #category : #server }
 XdClientExamples >> joeDoeBearerToken [
 	^ 'hsdhjsd235agsggd6326shsln9ygvak'
 ]
 
-{ #category : 'server' }
+{ #category : #server }
 XdClientExamples >> joeDoePassword [
 	^ 'Joe Doe''s secret password'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdClientExamples >> joeDoeRealm [
 	^ 'myrealm'
 ]
 
-{ #category : 'server' }
+{ #category : #server }
 XdClientExamples >> joeDoeUsername [
 	^ 'JoeDoe'
 ]
 
-{ #category : 'action - download list' }
+{ #category : #'action - download list' }
 XdClientExamples >> listFilePath [
 	<gtExample>
 	^ '/', ('/' join: ({'space'} copyWith: XdConstants listFileName))
 ]
 
-{ #category : 'action - download list' }
+{ #category : #'action - download list' }
 XdClientExamples >> listJsonContent [
 	<gtExample>
 	^ '[{"path_segment":"space/1","fileName":"xdoc-file.xdoc","manifest":{"title":"","description":"","author":"","attachments":[{"id":"1","filename":"index.pillar","size":146},{"id":"2","filename":"gt-logo.png","size":8192},{"id":"3","filename":"index.html","size":245},{"id":"4","filename":"index.css","size":183}],"documents":[{"type":"documenter","components":[{"link":"1"},{"link":"2"}]},{"type":"html","components":[{"link":"3"},{"link":"4"},{"link":"2"}]}]}}]'
 ]
 
-{ #category : 'action - publish' }
+{ #category : #'action - publish' }
 XdClientExamples >> publishPath [
 	<gtExample>
 	^ (ZnUrl new / XdConstants xdocsPathSegments) asString
 ]
 
-{ #category : 'action - publish' }
+{ #category : #'action - publish' }
 XdClientExamples >> publishXDoc [
 	<gtExample>
 	| aCommand |
@@ -288,7 +288,7 @@ XdClientExamples >> publishXDoc [
 	^ aCommand
 ]
 
-{ #category : 'action - publish' }
+{ #category : #'action - publish' }
 XdClientExamples >> publishXDoc_AuthenticatedServer_Authenticated [
 	<gtExample>
 	| anXdResponse aClient |
@@ -305,7 +305,7 @@ XdClientExamples >> publishXDoc_AuthenticatedServer_Authenticated [
 	^ anXdResponse
 ]
 
-{ #category : 'action - publish' }
+{ #category : #'action - publish' }
 XdClientExamples >> publishXDoc_AuthenticatedServer_Denied [
 	<gtExample>
 	| aClient anXdResponse |
@@ -322,7 +322,7 @@ XdClientExamples >> publishXDoc_AuthenticatedServer_Denied [
 	^ anXdResponse
 ]
 
-{ #category : 'action - publish' }
+{ #category : #'action - publish' }
 XdClientExamples >> publishXDoc_RealmAuthenticatedServer_Authenticated [
 	<gtExample>
 	| anXdResponse aClient |
@@ -339,20 +339,20 @@ XdClientExamples >> publishXDoc_RealmAuthenticatedServer_Authenticated [
 	^ anXdResponse
 ]
 
-{ #category : 'action - publish' }
+{ #category : #'action - publish' }
 XdClientExamples >> publishedResponse [
 	<gtExample>
 	^ ZnResponse created: (zincExamples serverUrl / 'space' / '1') asString
 ]
 
-{ #category : 'server' }
+{ #category : #server }
 XdClientExamples >> serverUrl [
 	<gtExample>
 	self startServer.
 	^ zincExamples serverUrl
 ]
 
-{ #category : 'server' }
+{ #category : #server }
 XdClientExamples >> setServerBasicAuthenticator [
 	<gtExample>
 	| aServer anAuthenticator |
@@ -363,7 +363,7 @@ XdClientExamples >> setServerBasicAuthenticator [
 	^ aServer
 ]
 
-{ #category : 'server' }
+{ #category : #server }
 XdClientExamples >> setServerBasicRealmAuthenticator [
 	<gtExample>
 	| aServer anAuthenticator |
@@ -374,7 +374,7 @@ XdClientExamples >> setServerBasicRealmAuthenticator [
 	^ aServer
 ]
 
-{ #category : 'server' }
+{ #category : #server }
 XdClientExamples >> setServerBearerAuthenticator [
 	<gtExample>
 	| aServer anAuthenticator |
@@ -385,7 +385,7 @@ XdClientExamples >> setServerBearerAuthenticator [
 	^ aServer
 ]
 
-{ #category : 'server' }
+{ #category : #server }
 XdClientExamples >> startServer [
 	<gtExample>
 	<after: #stopServer>
@@ -398,12 +398,12 @@ XdClientExamples >> startServer [
 	^ aServer
 ]
 
-{ #category : 'server' }
+{ #category : #server }
 XdClientExamples >> stopServer [
 	^ zincExamples stopServer
 ]
 
-{ #category : 'action - update' }
+{ #category : #'action - update' }
 XdClientExamples >> updateXDoc_AuthenticatedServer_BasicAuthenticated [
 	<gtExample>
 	| anXdResponse aClient |
@@ -420,7 +420,7 @@ XdClientExamples >> updateXDoc_AuthenticatedServer_BasicAuthenticated [
 	^ anXdResponse
 ]
 
-{ #category : 'action - update' }
+{ #category : #'action - update' }
 XdClientExamples >> updateXDoc_AuthenticatedServer_BearerAuthenticated [
 	<gtExample>
 	| anXdResponse aClient |
@@ -437,7 +437,7 @@ XdClientExamples >> updateXDoc_AuthenticatedServer_BearerAuthenticated [
 	^ anXdResponse
 ]
 
-{ #category : 'action - delete from URL' }
+{ #category : #'action - delete from URL' }
 XdClientExamples >> xDocIdFromUrl [
 	<gtExample>
 	| aPublishCommand anUrlFromUrlCommand aPublishedUrl anId |
@@ -453,19 +453,19 @@ XdClientExamples >> xDocIdFromUrl [
 	^ anUrlFromUrlCommand
 ]
 
-{ #category : 'action - download xdoc' }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> xdocFileName [
 	<gtExample>
 	^ 'documenter-figure.xdoc'
 ]
 
-{ #category : 'action - download xdoc' }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> xdocIdSegment [
 	<gtExample>
 	^ 'space/1'
 ]
 
-{ #category : 'action - download xdoc' }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> xdocPathSegments [
 	<gtExample>
 	^ XdConstants cdnPathSegments, { 
@@ -474,19 +474,19 @@ XdClientExamples >> xdocPathSegments [
 		self xdocFileName }
 ]
 
-{ #category : 'action - download xdoc' }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> xdocPathString [
 	<gtExample>
 	^ (ZnUrl new / self xdocPathSegments) asString
 ]
 
-{ #category : 'action - download xdoc' }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> xdocPublicUrl [
 	<gtExample>
 	^ self serverUrl / (self xdocPathSegments)
 ]
 
-{ #category : 'action - download xdoc' }
+{ #category : #'action - download xdoc' }
 XdClientExamples >> xdocUrl [
 	<gtExample>
 	^ self serverUrl withPathSegments: self xdocPathSegments

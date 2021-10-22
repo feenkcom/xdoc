@@ -1,6 +1,6 @@
 Class {
-	#name : 'XdCommandAnswerBuilder',
-	#superclass : 'Object',
+	#name : #XdCommandAnswerBuilder,
+	#superclass : #Object,
 	#traits : 'TXdCommandVisitor + TGtAssert',
 	#classTraits : 'TXdCommandVisitor classTrait + TGtAssert classTrait',
 	#instVars : [
@@ -9,25 +9,25 @@ Class {
 	#category : 'XDoc-Client-Answers - Builder'
 }
 
-{ #category : 'building' }
+{ #category : #building }
 XdCommandAnswerBuilder >> build [
 	<return: #XdCommandAnswer>
 	^ self context commandChain accept: self
 ]
 
-{ #category : 'private - building' }
+{ #category : #'private - building' }
 XdCommandAnswerBuilder >> buildAuthenticationRequiredResponse [
 	<return: #XdCommandAnswer>
 	^ self initializeResponse: XdAuthenticationRequiredAnswer new.
 ]
 
-{ #category : 'private - building' }
+{ #category : #'private - building' }
 XdCommandAnswerBuilder >> buildErrorResponse [
 	<return: #XdCommandAnswer>
 	^ self initializeResponse: XdFailureAnswer new.
 ]
 
-{ #category : 'private - building' }
+{ #category : #'private - building' }
 XdCommandAnswerBuilder >> buildResponse: aCommand [
 	| aZnResponse |
 	self context command: aCommand.
@@ -38,28 +38,28 @@ XdCommandAnswerBuilder >> buildResponse: aCommand [
 	self error: 'Response code is not handled'
 ]
 
-{ #category : 'private - building' }
+{ #category : #'private - building' }
 XdCommandAnswerBuilder >> buildSuccessfulResponse [
 	<return: #XdCommandAnswer>
 	^ self context command accept: (XdCommandSuccessfullAnswerBuilder new context: self context).
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdCommandAnswerBuilder >> commandChain: aXdCommand [
 	self context commandChain: aXdCommand
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdCommandAnswerBuilder >> context [
 	^ context
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdCommandAnswerBuilder >> context: anObject [
 	context := anObject
 ]
 
-{ #category : 'gt-extension' }
+{ #category : #'gt-extension' }
 XdCommandAnswerBuilder >> gtCommandsFor: aView [
 	<gtView>
 	self context ifNil: [ ^ aView empty ].
@@ -69,13 +69,13 @@ XdCommandAnswerBuilder >> gtCommandsFor: aView [
 		view: #gtCommandsFor:
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 XdCommandAnswerBuilder >> initialize [
 	super initialize.
 	context := XdCommandResponseAnswerContext new.
 ]
 
-{ #category : 'private - building' }
+{ #category : #'private - building' }
 XdCommandAnswerBuilder >> initializeResponse: aXdCommandResponse [
 	<return: #XdCommandAnswer>
 	^ aXdCommandResponse
@@ -84,37 +84,37 @@ XdCommandAnswerBuilder >> initializeResponse: aXdCommandResponse [
 		response: (XdZincResponse new response: self context command response)
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 XdCommandAnswerBuilder >> visitXdClientCreateSpaceCommand: aCommand [
 	^ self buildResponse: aCommand
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 XdCommandAnswerBuilder >> visitXdClientDeleteXDocIdCommand: aCommand [
 	^ self buildResponse: aCommand
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 XdCommandAnswerBuilder >> visitXdClientEditSpaceCommand: aCommand [
 	^ self buildResponse: aCommand
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 XdCommandAnswerBuilder >> visitXdClientPingCommand: aCommand [
 	^ self buildResponse: aCommand
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 XdCommandAnswerBuilder >> visitXdClientPublishXDocCommand: aCommand [
 	^ self buildResponse: aCommand
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 XdCommandAnswerBuilder >> visitXdClientUpdateXDocCommand: aCommand [
 	^ self buildResponse: aCommand
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 XdCommandAnswerBuilder >> visitXdTaskItCommand: aCommand [
 	^ XdTaskItCommandAnswer new
 		command: aCommand;

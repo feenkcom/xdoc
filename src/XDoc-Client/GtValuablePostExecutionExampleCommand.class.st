@@ -1,6 +1,6 @@
 Class {
-	#name : 'GtValuablePostExecutionExampleCommand',
-	#superclass : 'Object',
+	#name : #GtValuablePostExecutionExampleCommand,
+	#superclass : #Object,
 	#traits : 'TGtReplacingCommand',
 	#classTraits : 'TGtReplacingCommand classTrait',
 	#instVars : [
@@ -10,40 +10,40 @@ Class {
 	#category : 'XDoc-Client-Decorating Command Builder'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtValuablePostExecutionExampleCommand >> command [
 	^ command
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtValuablePostExecutionExampleCommand >> command: anObject [
 	command := anObject
 ]
 
-{ #category : 'execution' }
+{ #category : #execution }
 GtValuablePostExecutionExampleCommand >> execute [
 	self command execute.
 	self valuable value: self command.
 	
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 GtValuablePostExecutionExampleCommand >> initialize [
 	super initialize.
 	valuable := [ :aCommand | "do nothing" ].
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtValuablePostExecutionExampleCommand >> result: aValue [
 	self command result: aValue
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtValuablePostExecutionExampleCommand >> valuable [
 	^ valuable
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 GtValuablePostExecutionExampleCommand >> valuable: anObject [
 	valuable := anObject
 ]

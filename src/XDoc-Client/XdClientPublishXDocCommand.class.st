@@ -1,19 +1,25 @@
 Class {
-	#name : 'XdClientPublishXDocCommand',
-	#superclass : 'XdClientCreateXDocCommand',
+	#name : #XdClientPublishXDocCommand,
+	#superclass : #XdClientCreateXDocCommand,
 	#instVars : [
 		'spaceName',
-		'spaceId'
+		'spaceId',
+		'createDate'
 	],
-	#category : 'XDoc-Client-Commands'
+	#category : #'XDoc-Client-Commands'
 }
 
-{ #category : 'visitor' }
+{ #category : #visitor }
 XdClientPublishXDocCommand >> accept: aVisitor [
 	^ aVisitor visitXdClientPublishXDocCommand: self
 ]
 
-{ #category : 'execution' }
+{ #category : #accessing }
+XdClientPublishXDocCommand >> createDate: aDate [
+	createDate := aDate
+]
+
+{ #category : #execution }
 XdClientPublishXDocCommand >> execute [
 	| znClient |
 	znClient := self zincClient
@@ -21,23 +27,24 @@ XdClientPublishXDocCommand >> execute [
 		entity: self xdocEntity.
 	spaceName ifNotNil: [znClient queryAt: 'space_name' put: spaceName ].
 	spaceId ifNotNil: [znClient queryAt: 'space_id' put: spaceName ].
+	createDate ifNotNil: [znClient headerAt: 'X-Lepiter-CreatedOn' put: createDate asString ].
 	self response:(znClient post; response).
 	
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 XdClientPublishXDocCommand >> isSuccess [
 	<return: #Boolean>
 	^ self response ifNotNil: #isSuccess ifNil: false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdClientPublishXDocCommand >> postUrl [
 	<return: #ZnUrl>
 	^ self client serverUrl asZnUrl withPathSegments: XdConstants xdocsPathSegments
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 XdClientPublishXDocCommand >> printOn: aStream [
 	(self response isNotNil and: [ self response isSuccess ]) 
 		 ifTrue: [ aStream 
@@ -51,7 +58,7 @@ XdClientPublishXDocCommand >> printOn: aStream [
 		aStream nextPutAll: ' (failure)' ]
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 XdClientPublishXDocCommand >> publicUrlToClipboard [
 	| aPublishedUrl |
 	self response isSuccess ifFalse: [
@@ -62,7 +69,7 @@ XdClientPublishXDocCommand >> publicUrlToClipboard [
    self inform: aPublishedUrl asString, ' was published and the URL was copied to a clipboard'.
 ]
 
-{ #category : 'actions' }
+{ #category : #actions }
 XdClientPublishXDocCommand >> responseToClipboard [
 	| aString |
 	self response ifNil: [ ^ self inform: 'A server response is undefined' ].
@@ -75,12 +82,12 @@ XdClientPublishXDocCommand >> responseToClipboard [
    self inform: aString , ' error occurred'.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdClientPublishXDocCommand >> spaceId: aSpaceId [
 	spaceId := aSpaceId
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdClientPublishXDocCommand >> spaceName: aSpaceName [
 	spaceName := aSpaceName
 ]

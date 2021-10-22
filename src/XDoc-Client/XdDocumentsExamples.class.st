@@ -15,24 +15,24 @@ ZnBase64Encoder new
 ]]]
 "
 Class {
-	#name : 'XdDocumentsExamples',
-	#superclass : 'Object',
+	#name : #XdDocumentsExamples,
+	#superclass : #Object,
 	#category : 'XDoc-Client-Examples'
 }
 
-{ #category : 'documenter' }
+{ #category : #documenter }
 XdDocumentsExamples >> documentWithExistingClassEntity [
 	<gtExample>
 	^ ZnEntity bytes: self documentWithExistingClassXDocBytes
 ]
 
-{ #category : 'documenter' }
+{ #category : #documenter }
 XdDocumentsExamples >> documentWithExistingClassXDoc [
 	<gtExample>
 	^ XdFile fromBytes: self documentWithExistingClassXDocBytes
 ]
 
-{ #category : 'documenter' }
+{ #category : #documenter }
 XdDocumentsExamples >> documentWithExistingClassXDocBase64 [
 	<gtExample>
 	^ 'UEsDBBQAAAAAAGpRMk6D9LF+HQAAAB0AAAAMAAAAaW5kZXgucGlsbGFyJHtjbGFzczpHdDJEb2N1
@@ -55,31 +55,31 @@ XNYCAQAAAgEAAA0AAAAAAAAAAQAAALaB3wEAAG1hbmlmZXN0Lmpzb25QSwUGAAAAAAMAAwCtAAAA
 DAMAAAAA'
 ]
 
-{ #category : 'documenter' }
+{ #category : #documenter }
 XdDocumentsExamples >> documentWithExistingClassXDocBytes [
 	<gtExample>
 	^ self documentWithExistingClassXDocBase64 base64Decoded
 ]
 
-{ #category : 'documenter' }
+{ #category : #documenter }
 XdDocumentsExamples >> documentWithFigureEntity [
 	<gtExample>
 	^ ZnEntity bytes: self documentWithFigureXDocBytes
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdDocumentsExamples >> documentWithFigureManifestTitleEntity [
 	<gtExample>
 	^ ZnEntity bytes: self documentWithFigureManifestTitleXDocBytes 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdDocumentsExamples >> documentWithFigureManifestTitleXDoc [
 	<gtExample>
 	^ XdFile fromBytes: self documentWithFigureManifestTitleXDocBytes 
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdDocumentsExamples >> documentWithFigureManifestTitleXDocBase64 [
 	<gtExample>
 	^ 'UEsDBBQAAAAAAK6RyFDkgrASkgAAAJIAAAAMAAAAaW5kZXgucGlsbGFyISBHbGFtb3JvdXMgVG9v
@@ -244,19 +244,19 @@ AQIUAxQAAAAAAK6RyFC379yDAQAAAAEAAAASAAAAAAAAAAEAAAC2gRUiAABmb3JtYXQtdmVyc2lv
 bi50eHRQSwUGAAAAAAUABQAmAQAARiIAAAAA'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdDocumentsExamples >> documentWithFigureManifestTitleXDocBytes [
 	<gtExample>
 	^ self documentWithFigureManifestTitleXDocBase64 base64Decoded
 ]
 
-{ #category : 'documenter' }
+{ #category : #documenter }
 XdDocumentsExamples >> documentWithFigureXDoc [
 	<gtExample>
 	^ XdFile fromBytes: self documentWithFigureXDocBytes
 ]
 
-{ #category : 'documenter' }
+{ #category : #documenter }
 XdDocumentsExamples >> documentWithFigureXDocBase64 [
 	<gtExample>
 	^ 'UEsDBBQAAAAAAHlRMk7kgrASkgAAAJIAAAAMAAAAaW5kZXgucGlsbGFyISBHbGFtb3JvdXMgVG9v
@@ -417,7 +417,7 @@ GB8AAGluZGV4Lmh0bWxQSwECFAMUAAAAAAB5UTJOhe8p3E0BAABNAQAADQAAAAAAAAABAAAAtoE1
 IAAAbWFuaWZlc3QuanNvblBLBQYAAAAABAAEAOYAAACtIQAAAAA='
 ]
 
-{ #category : 'documenter' }
+{ #category : #documenter }
 XdDocumentsExamples >> documentWithFigureXDocBytes [
 	<gtExample>
 	^ self documentWithFigureXDocBase64 base64Decoded

@@ -1,5 +1,5 @@
 Class {
-	#name : 'XdAuthenticationRequiredAnswer',
-	#superclass : 'XdFailedAnswer',
+	#name : #XdAuthenticationRequiredAnswer,
+	#superclass : #XdFailedAnswer,
 	#category : 'XDoc-Client-Answers'
 }

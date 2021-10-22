@@ -1,13 +1,13 @@
-Extension { #name : 'XdFileInfo' }
+Extension { #name : #XdFileInfo }
 
-{ #category : '*XDoc-Client' }
+{ #category : #'*XDoc-Client' }
 XdFileInfo >> client [
 	^ self 
 		optionAt: self class clientOptionName 
 		ifAbsentPut: [ XdClient new ]
 ]
 
-{ #category : '*XDoc-Client' }
+{ #category : #'*XDoc-Client' }
 XdFileInfo >> client: anXdClient [
 	self 
 		assert: [ anXdClient isNotNil ] 
@@ -17,13 +17,13 @@ XdFileInfo >> client: anXdClient [
 		put: anXdClient
 ]
 
-{ #category : '*XDoc-Client' }
+{ #category : #'*XDoc-Client' }
 XdFileInfo >> downloadXDoc [
 	<return: #XdFile>
 	^ self client downloadXDocUsingFileInfo: self
 ]
 
-{ #category : '*XDoc-Client' }
+{ #category : #'*XDoc-Client' }
 XdFileInfo >> xdoc [
 	<return: #XdFile>
 	^ self 
