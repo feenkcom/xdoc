@@ -1,6 +1,6 @@
 Class {
-	#name : 'XdClientCommand',
-	#superclass : 'XdProtoClientCommand',
+	#name : #XdClientCommand,
+	#superclass : #XdProtoClientCommand,
 	#instVars : [
 		'client',
 		'signalProgress',
@@ -9,17 +9,17 @@ Class {
 	#category : 'XDoc-Client-Commands'
 }
 
-{ #category : 'factory' }
+{ #category : #factory }
 XdClientCommand class >> null [
 	^ XdNullCommand default
 ]
 
-{ #category : 'visiting' }
+{ #category : #visiting }
 XdClientCommand >> accept: aVisitor [
 	^ self subclassResponsibility
 ]
 
-{ #category : 'private ' }
+{ #category : #'private ' }
 XdClientCommand >> authenticatedZincClient [
 	<return: #ZnClient>
 	| aClient |
@@ -30,35 +30,35 @@ XdClientCommand >> authenticatedZincClient [
 	^ aClient
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdClientCommand >> client [
 	^ client
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdClientCommand >> client: anObject [
 	client := anObject
 ]
 
-{ #category : 'initialization' }
+{ #category : #initialization }
 XdClientCommand >> initialize [
 	super initialize.
 	client := XdClient null.
 	signalProgress := false.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdClientCommand >> signalProgress [
 	<return: #Boolean>
 	^ signalProgress
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdClientCommand >> signalProgress: aBoolean [
 	signalProgress := aBoolean
 ]
 
-{ #category : 'private ' }
+{ #category : #'private ' }
 XdClientCommand >> zincClient [
 	^ zincClient ifNil: [ zincClient := ZnClient new ]
 ]

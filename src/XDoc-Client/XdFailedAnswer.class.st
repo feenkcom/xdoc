@@ -1,5 +1,5 @@
 Class {
-	#name : 'XdFailedAnswer',
-	#superclass : 'XdCommandAnswer',
+	#name : #XdFailedAnswer,
+	#superclass : #XdCommandAnswer,
 	#category : 'XDoc-Client-Answers'
 }

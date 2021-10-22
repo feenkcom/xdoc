@@ -1,12 +1,12 @@
 Class {
-	#name : 'XdProtoNullCommand',
-	#superclass : 'XdProtoClientCommand',
+	#name : #XdProtoNullCommand,
+	#superclass : #XdProtoClientCommand,
 	#traits : 'TGtUniqueInstance',
 	#classTraits : 'TGtUniqueInstance classTrait',
 	#category : 'XDoc-Client-Commands'
 }
 
-{ #category : 'execution' }
+{ #category : #execution }
 XdProtoNullCommand >> execute [
 	"do nothing"
 ]

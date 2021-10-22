@@ -1,46 +1,46 @@
 Class {
-	#name : 'XdExceptionResponse',
-	#superclass : 'XdProtoResponse',
+	#name : #XdExceptionResponse,
+	#superclass : #XdProtoResponse,
 	#instVars : [
 		'exception'
 	],
 	#category : 'XDoc-Client-Answers'
 }
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdExceptionResponse >> exception [
 	^ exception
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdExceptionResponse >> exception: anObject [
 	exception := anObject
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 XdExceptionResponse >> isResponse [
 	<return: #Boolean>
 	^ true
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 XdExceptionResponse >> isSuccess [
 	^ false
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdExceptionResponse >> message [
 	<return: #String>
 	^ self exception messageText asString
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdExceptionResponse >> rawResponse [
 	<return: #Exception>
 	^ self exception
 ]
 
-{ #category : 'accessing - response' }
+{ #category : #'accessing - response' }
 XdExceptionResponse >> statusLineMessage [
 	^ self exception printString
 ]

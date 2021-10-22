@@ -1,6 +1,6 @@
 Class {
-	#name : 'XdBasicAuthenticationCommand',
-	#superclass : 'XdAuthenticationCommand',
+	#name : #XdBasicAuthenticationCommand,
+	#superclass : #XdAuthenticationCommand,
 	#instVars : [
 		'username',
 		'password'
@@ -8,22 +8,22 @@ Class {
 	#category : 'XDoc-Client-Commands'
 }
 
-{ #category : 'authentication' }
+{ #category : #authentication }
 XdBasicAuthenticationCommand >> authenticate [
 	self zincClient username: self username password: self password.
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdBasicAuthenticationCommand >> password [
 	^ password
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdBasicAuthenticationCommand >> password: anObject [
 	password := anObject
 ]
 
-{ #category : 'printing' }
+{ #category : #printing }
 XdBasicAuthenticationCommand >> printOn: aStream [
 	self username ifNil: [ ^ super printOn: aStream ].
 	aStream 
@@ -32,12 +32,12 @@ XdBasicAuthenticationCommand >> printOn: aStream [
 		nextPutAll: ' username password'
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdBasicAuthenticationCommand >> username [
 	^ username
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdBasicAuthenticationCommand >> username: anObject [
 	username := anObject
 ]

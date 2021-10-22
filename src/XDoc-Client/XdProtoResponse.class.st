@@ -1,34 +1,34 @@
 Class {
-	#name : 'XdProtoResponse',
-	#superclass : 'Object',
+	#name : #XdProtoResponse,
+	#superclass : #Object,
 	#category : 'XDoc-Client-Answers'
 }
 
-{ #category : 'testing' }
+{ #category : #testing }
 XdProtoResponse >> isResponse [
 	<return: #Boolean>
 	^ self subclassResponsibility
 ]
 
-{ #category : 'testing' }
+{ #category : #testing }
 XdProtoResponse >> isSuccess [
 	<return: #Boolean>
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdProtoResponse >> message [
 	<return: #String>
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing' }
+{ #category : #accessing }
 XdProtoResponse >> rawResponse [
 	<return: #Object>
 	^ self subclassResponsibility
 ]
 
-{ #category : 'accessing - response' }
+{ #category : #'accessing - response' }
 XdProtoResponse >> statusLineMessage [
 	<return: #String>
 	^ self subclassResponsibility
