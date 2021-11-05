@@ -8,7 +8,15 @@ XdFile >> asDocumenter [
 { #category : #'*XDoc-Gt4XDocClient' }
 XdFile >> gtLiveFor: aView [
 	<gtView>
+	| mainType |
 	self exists ifFalse: [ ^ aView empty ].
+	mainType := self manifest mainDocument type.
+	(mainType isKindOf: XdUndefinedType) ifTrue: [
+		^ aView text
+			title: 'Live';
+			priority: 0;
+			text: 'Cannot render unknown document type ''', (mainType typeString), '''.'
+	].
 	^ aView explicit
 		title: 'Live';
 		priority: 0;
