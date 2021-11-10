@@ -4,9 +4,10 @@ Class {
 	#instVars : [
 		'client',
 		'signalProgress',
-		'zincClient'
+		'zincClient',
+		'prefixSegments'
 	],
-	#category : 'XDoc-Client-Commands'
+	#category : #'XDoc-Client-Commands'
 }
 
 { #category : #factory }
@@ -45,6 +46,16 @@ XdClientCommand >> initialize [
 	super initialize.
 	client := XdClient null.
 	signalProgress := false.
+]
+
+{ #category : #accessing }
+XdClientCommand >> prefixSegments [
+	^ prefixSegments ifNil: [ #() ]
+]
+
+{ #category : #accessing }
+XdClientCommand >> prefixSegments: anArray [
+	prefixSegments := anArray
 ]
 
 { #category : #accessing }

@@ -5,7 +5,8 @@ Class {
 	#classTraits : 'TGtReplacingCommandHolder classTrait',
 	#instVars : [
 		'serverUrl',
-		'signalProgress'
+		'signalProgress',
+		'prefixSegments'
 	],
 	#category : #'XDoc-Client-Core'
 }
@@ -118,6 +119,7 @@ XdClient >> downloadList [
 	^ XdClientDownloadListCommand new
 		client: self;
 		signalProgress: self signalProgress;
+		prefixSegments: self prefixSegments;
 		execute;
 		list
 ]
@@ -197,6 +199,16 @@ XdClient >> ping [
 	aCommand := XdClientPingCommand new
 		client: self.
 	^ self executeCommand: aCommand.
+]
+
+{ #category : #accessing }
+XdClient >> prefixSegments [
+	^ prefixSegments
+]
+
+{ #category : #accessing }
+XdClient >> prefixSegments: anArray [
+	prefixSegments := anArray
 ]
 
 { #category : #'actions - modifying' }
