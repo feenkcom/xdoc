@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'list'
 	],
-	#category : 'XDoc-Client-Commands'
+	#category : #'XDoc-Client-Commands'
 }
 
 { #category : #execution }
@@ -40,7 +40,7 @@ XdClientDownloadListCommand >> list: anObject [
 { #category : #accessing }
 XdClientDownloadListCommand >> listUrl [
 	<return: #ZnUrl>
-	^ self client serverUrl
+	^ (self client serverUrl withPathSegments: self prefixSegments)
 		/ XdConstants cdnPathSegments
 		/ XdConstants listFileName
 ]
