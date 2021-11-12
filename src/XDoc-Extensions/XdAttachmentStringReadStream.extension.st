@@ -1,6 +1,6 @@
-Extension { #name : 'XdAttachmentStringReadStream' }
+Extension { #name : #XdAttachmentStringReadStream }
 
-{ #category : '*XDoc-Extensions' }
+{ #category : #'*XDoc-Extensions' }
 XdAttachmentStringReadStream >> gtContentFor: aView [
 	<gtView>
 	self streamingStrategy ifNil: [ ^ aView empty ].
