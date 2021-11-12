@@ -1,6 +1,6 @@
-Extension { #name : 'XdNavigatorContext' }
+Extension { #name : #XdNavigatorContext }
 
-{ #category : '*XDoc-Extensions' }
+{ #category : #'*XDoc-Extensions' }
 XdNavigatorContext >> gtStepsFor: aView [
 	<gtView>
 	self navigator ifNil: [ ^ aView empty ].

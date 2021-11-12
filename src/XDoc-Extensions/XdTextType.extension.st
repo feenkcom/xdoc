@@ -1,6 +1,6 @@
-Extension { #name : 'XdTextType' }
+Extension { #name : #XdTextType }
 
-{ #category : '*XDoc-Extensions' }
+{ #category : #'*XDoc-Extensions' }
 XdTextType class >> toolForDocument: aXdDocument ofXdFileInPharo: aXdFile [
 	"Return an Bloc elemment or an object that understands #asElement."
 	<return: #BlElement>

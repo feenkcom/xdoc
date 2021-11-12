@@ -1,6 +1,6 @@
-Extension { #name : 'XdFileInfo' }
+Extension { #name : #XdFileInfo }
 
-{ #category : '*XDoc-Extensions' }
+{ #category : #'*XDoc-Extensions' }
 XdFileInfo >> gtDetailsFor: aView [
 	<gtView>
 	^ aView columnedList

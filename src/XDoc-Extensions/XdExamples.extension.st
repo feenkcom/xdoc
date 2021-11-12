@@ -1,6 +1,6 @@
-Extension { #name : 'XdExamples' }
+Extension { #name : #XdExamples }
 
-{ #category : '*XDoc-Extensions' }
+{ #category : #'*XDoc-Extensions' }
 XdExamples >> xdFileLiveExtension [
 	<gtExample>
 	| aFile aPhlow |

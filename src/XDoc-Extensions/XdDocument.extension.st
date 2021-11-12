@@ -1,6 +1,6 @@
-Extension { #name : 'XdDocument' }
+Extension { #name : #XdDocument }
 
-{ #category : '*XDoc-Extensions' }
+{ #category : #'*XDoc-Extensions' }
 XdDocument >> gtComponentsFor: aView [
 	<gtView>
 	^ aView list
@@ -11,12 +11,12 @@ XdDocument >> gtComponentsFor: aView [
 				[ :eachComponent | 'Link to attachment id: ' , eachComponent link asString ]
 ]
 
-{ #category : '*XDoc-Extensions' }
+{ #category : #'*XDoc-Extensions' }
 XdDocument >> openXdFileInPharo: aXdFile [ 
 	^ self type openDocument: self ofXdFileInPharo: aXdFile
 ]
 
-{ #category : '*XDoc-Extensions' }
+{ #category : #'*XDoc-Extensions' }
 XdDocument >> toolForXdFileInPharo: aXdFile [ 
 	^ self type toolForDocument: self ofXdFileInPharo: aXdFile
 ]

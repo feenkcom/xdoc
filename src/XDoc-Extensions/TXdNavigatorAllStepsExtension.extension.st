@@ -1,6 +1,6 @@
-Extension { #name : 'TXdNavigatorAllStepsExtension' }
+Extension { #name : #TXdNavigatorAllStepsExtension }
 
-{ #category : '*XDoc-Extensions' }
+{ #category : #'*XDoc-Extensions' }
 TXdNavigatorAllStepsExtension >> gtStepsFor: aView [
 	<gtView>
 	self nextStep ifNil: [ ^ aView empty ].

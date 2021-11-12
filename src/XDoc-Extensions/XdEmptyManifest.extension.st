@@ -1,6 +1,6 @@
-Extension { #name : 'XdEmptyManifest' }
+Extension { #name : #XdEmptyManifest }
 
-{ #category : '*XDoc-Extensions' }
+{ #category : #'*XDoc-Extensions' }
 XdEmptyManifest >> gtContentFor: aView [ 
 	<gtView>
 	^ aView empty

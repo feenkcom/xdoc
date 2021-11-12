@@ -1,6 +1,6 @@
-Extension { #name : 'AbstractFileReference' }
+Extension { #name : #AbstractFileReference }
 
-{ #category : '*XDoc-Extensions' }
+{ #category : #'*XDoc-Extensions' }
 AbstractFileReference >> gtXDFileFor: aView [
 	<gtView>
 	(self isFile and: [ XdConstants xdocExtension = self extension ]) ifFalse: [ ^ aView empty ].
