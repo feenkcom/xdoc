@@ -280,6 +280,19 @@ XdClient >> update: aXdFile id: anId [
 ]
 
 { #category : #'actions - modifying' }
+XdClient >> update: aXdFile id: anId atDate: aDate [
+	"Update an XDoc file at a public server"
+	<return: #XdCommandAnswer>
+	| aCommand |
+	aCommand := XdClientUpdateXDocCommand new
+		client: self;
+		xdoc: aXdFile;
+		xdocId: anId;
+		createDate: aDate.
+	^ self executeCommand: aCommand.
+]
+
+{ #category : #'actions - modifying' }
 XdClient >> update: aXdFile url: aZnUrl [
 	"Update an XDoc file at a public server"
 	<return: #XdCommandAnswer>
@@ -290,6 +303,19 @@ XdClient >> update: aXdFile url: aZnUrl [
 		execute;
 		id.
 	^ self update: aXdFile id: anId
+]
+
+{ #category : #'actions - modifying' }
+XdClient >> update: aXdFile url: aZnUrl atDate: aDate [
+	"Update an XDoc file at a public server"
+	<return: #XdCommandAnswer>
+	| anId |
+	anId := XdClientXDocIdFromURLCommand new
+		client: self;
+		url: aZnUrl asZnUrl;
+		execute;
+		id.
+	^ self update: aXdFile id: anId atDate: aDate
 ]
 
 { #category : #'accessing - options - authentication' }
