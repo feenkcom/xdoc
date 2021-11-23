@@ -25,8 +25,7 @@ XdClientPublishXDocCommand >> execute [
 	znClient := self zincClient
 		url: self postUrl;
 		entity: self xdocEntity.
-	spaceName ifNotNil: [znClient queryAt: 'space_name' put: spaceName ].
-	spaceId ifNotNil: [znClient queryAt: 'space_id' put: spaceName ].
+	spaceId ifNotNil: [znClient queryAt: 'space_id' put: spaceId ].
 	createDate ifNotNil: [znClient headerAt: 'X-Lepiter-CreatedOn' put: createDate asString ].
 	self response:(znClient post; response).
 	

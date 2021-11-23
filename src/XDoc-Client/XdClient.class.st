@@ -223,13 +223,13 @@ XdClient >> publish: aXdFile [
 ]
 
 { #category : #'actions - modifying' }
-XdClient >> publish: aXdFile inSpace: spaceName [
+XdClient >> publish: aXdFile inSpace: spaceId [
 	"Publish an XDoc file to a public server"
 	<return: #XdCommandAnswer>
 	| aCommand |
 	aCommand := XdClientPublishXDocCommand new
 		client: self;
-		spaceName: spaceName;
+		spaceId: spaceId;
 		xdoc: aXdFile.
 	^ self executeCommand: aCommand.
 ]
