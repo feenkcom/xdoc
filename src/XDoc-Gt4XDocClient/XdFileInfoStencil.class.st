@@ -10,14 +10,13 @@ Class {
 { #category : #'api - instantiation' }
 XdFileInfoStencil >> create [
 	<return: #Object>
-	^ BlLazyElement new
+	^ BrAsyncWidget new
 		layout: BlFrameLayout new;
 		background: BlBackground transparent;
 		constraintsDo: [ :c | 
 			c horizontal matchParent.
 			c vertical matchParent ];
-		elementBuilder: [ self newToolOrEmptyElement ];
-		withGlamorousPreview.
+		stencil: [ self newToolOrEmptyElement ]
 ]
 
 { #category : #accessing }
