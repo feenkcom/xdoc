@@ -35,8 +35,7 @@ XdShareDialogAptitude >> defaultInformationHolder [
 
 { #category : #execution }
 XdShareDialogAptitude >> executeAsTaskIt: aBlock [ 
-	BlTktWorkerProvider highUIExternalResourceBoundPool 
-		schedule: aBlock
+	[ aBlock ] asAsyncFuture await
 ]
 
 { #category : #execution }
