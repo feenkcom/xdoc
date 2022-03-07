@@ -3,8 +3,13 @@ Class {
 	#superclass : #Object,
 	#traits : 'TGtAssert',
 	#classTraits : 'TGtAssert classTrait',
-	#category : 'XDoc-Client-Commands'
+	#category : #'XDoc-Client-Commands'
 }
+
+{ #category : #accessing }
+XdProtoClientCommand >> asAsyncFuture [
+	^ [ self execute ] asAsyncFuture
+]
 
 { #category : #execution }
 XdProtoClientCommand >> execute [

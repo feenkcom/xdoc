@@ -10,10 +10,32 @@ Class {
 	#category : #'XDoc-Gt4XDocClient-Dialog - Look'
 }
 
+{ #category : #accessing }
+XdShareDialogAptitude >> actions [
+	^ actions
+]
+
+{ #category : #accessing }
+XdShareDialogAptitude >> actions: aXdShareAction [
+	self 
+		assert: [ aXdShareAction isNotNil ]
+		description: [ 'Share actions must be non-nil' ].
+	actions := aXdShareAction
+]
+
+{ #category : #defaults }
+XdShareDialogAptitude >> defaultActions [
+	^ XdShareActions null
+]
+
+{ #category : #defaults }
+XdShareDialogAptitude >> defaultInformationHolder [
+	^ XdShareInformationHolder new
+]
+
 { #category : #execution }
 XdShareDialogAptitude >> executeAsTaskIt: aBlock [ 
-	BlTktWorkerProvider highUIExternalResourceBoundPool 
-		schedule: aBlock
+	[ aBlock ] asAsyncFuture await
 ]
 
 { #category : #execution }
@@ -52,6 +74,21 @@ XdShareDialogAptitude >> executeUpdateAction [
 		self pager smoothScrollToLast ]
 ]
 
+{ #category : #accessing }
+XdShareDialogAptitude >> information [
+	^ informationHolder information
+]
+
+{ #category : #accessing }
+XdShareDialogAptitude >> information: anObject [
+	informationHolder information: anObject
+]
+
+{ #category : #accessing }
+XdShareDialogAptitude >> informationHolder [
+	^ informationHolder
+]
+
 { #category : #initialization }
 XdShareDialogAptitude >> initialize [ 
 	super initialize.
@@ -64,8 +101,18 @@ XdShareDialogAptitude >> initialize [
 ]
 
 { #category : #initialization }
+XdShareDialogAptitude >> initializeActions [
+	actions := self defaultActions
+]
+
+{ #category : #initialization }
 XdShareDialogAptitude >> initializeFirstPage [
 	self pager addPage: self newInitialPage
+]
+
+{ #category : #initialization }
+XdShareDialogAptitude >> initializeInformationHolder [
+	informationHolder := self defaultInformationHolder.
 ]
 
 { #category : #initialization }

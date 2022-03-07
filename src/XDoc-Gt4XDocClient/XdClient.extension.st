@@ -19,8 +19,3 @@ XdClient >> openFileReference: aFileReference [
 		fileReference: aFileReference;
 		execute
 ]
-
-{ #category : #'*XDoc-Gt4XDocClient' }
-XdClient >> taskIt [
-	self decoratingCommand: XdTaskItCommand new
-]

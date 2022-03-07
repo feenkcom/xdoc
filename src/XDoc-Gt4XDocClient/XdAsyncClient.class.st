@@ -3,7 +3,6 @@ Class {
 	#superclass : #XdProtoClient,
 	#instVars : [
 		'client',
-		'pool',
 		'successCallbacks',
 		'failureCallbacks'
 	],
@@ -36,41 +35,33 @@ XdAsyncClient >> defaultClient [
 	^ XdClient null
 ]
 
-{ #category : #defaults }
-XdAsyncClient >> defaultPool [
-	^ BlTktWorkerProvider highUIExternalResourceBoundPool
-]
-
 { #category : #actions }
 XdAsyncClient >> documents [
-	^ self executeCommand: [ self client documents ] asBlTktCommand.
+	^ self executeCommand: [ self client documents ].
 ]
 
 { #category : #actions }
 XdAsyncClient >> downloadPreviewImageUsingFileInfo: aXdFileInfo [
-	^ self executeCommand: [ self client downloadPreviewImageUsingFileInfo: aXdFileInfo ] asBlTktCommand.
+	^ self executeCommand: [ self client downloadPreviewImageUsingFileInfo: aXdFileInfo ].
 ]
 
 { #category : #actions }
 XdAsyncClient >> downloadXDocUsingFileInfo: anXdInfo [
-	^ self executeCommand: [ self client downloadXDocUsingFileInfo: anXdInfo ] asBlTktCommand
+	^ self executeCommand: [ self client downloadXDocUsingFileInfo: anXdInfo ]
 ]
 
 { #category : #'private - execution' }
-XdAsyncClient >> executeCommand: aCommand [
-	<return: #TKTFuture>
-	| aFuture |
-	aFuture := self pool future: aCommand asBlTktCommand.
-	aFuture onSuccessDo: [ :result | self notifyResult: result ].
-	aFuture onFailureDo: [ :anException | self notifyFailure: anException ].
-	^ aFuture
+XdAsyncClient >> executeCommand: aFuture [
+	| aPromise |
+	aPromise := aFuture asAsyncFuture await.
+	aPromise then: [ :result | self notifyResult: result ] otherwise: [ :anException | self notifyFailure: anException ].
+	^ aPromise
 ]
 
 { #category : #initialization }
 XdAsyncClient >> initialize [
 	super initialize.
 	client := self defaultClient.
-	pool := self defaultPool.
 	successCallbacks := self defaultCallbacks.
 	failureCallbacks := self defaultCallbacks.
 ]
@@ -111,14 +102,4 @@ XdAsyncClient >> onSuccessDo: aCallback [
 		assert: [ aCallback notNil ] 
 		description: [ 'Async success callback must be non-nil' ].
 	successCallbacks add: aCallback.
-]
-
-{ #category : #accessing }
-XdAsyncClient >> pool [
-	^ pool
-]
-
-{ #category : #accessing }
-XdAsyncClient >> pool: anObject [
-	pool := anObject
 ]
