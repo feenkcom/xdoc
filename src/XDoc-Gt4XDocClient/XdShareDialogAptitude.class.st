@@ -35,7 +35,9 @@ XdShareDialogAptitude >> defaultInformationHolder [
 
 { #category : #execution }
 XdShareDialogAptitude >> executeAsTaskIt: aBlock [ 
-	[ aBlock ] asAsyncFuture await
+	[ aBlock value ] asAsyncFuture await 
+		then: #yourself
+		otherwise: #debug
 ]
 
 { #category : #execution }
