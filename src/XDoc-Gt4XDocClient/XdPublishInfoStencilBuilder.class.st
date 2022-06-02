@@ -7,6 +7,11 @@ Class {
 	#category : #'XDoc-Gt4XDocClient-Publish'
 }
 
+{ #category : #accessing }
+XdPublishInfoStencilBuilder class >> stencilProperties [
+	^ #(info)
+]
+
 { #category : #'api - instantiation' }
 XdPublishInfoStencilBuilder >> buildDefault [
 	<return: #BrStencil or: #BlElement>
