@@ -75,7 +75,7 @@ XdPublishInfoAptitude >> initializeRequests [
 XdPublishInfoAptitude >> newAuthorElement [
 	^ BrEditorElement new
 			aptitude: BrGlamorousInputFieldSpacingAptitude + XdPublishInfoInnerWidgetAptitude;
-			editor: (BrTextEditor new text: self info author);
+			editor: (BrTextEditorModel new text: self info author);
 			constraintsDo: [ :c | 
 				c horizontal matchParent.
 				c vertical fitContent ]
@@ -85,7 +85,7 @@ XdPublishInfoAptitude >> newAuthorElement [
 XdPublishInfoAptitude >> newDescriptionElement [
 	^ BrEditorElement new
 			aptitude: BrGlamorousTextAreaSpacingAptitude + XdPublishInfoInnerWidgetAptitude;
-			editor: (BrTextEditor new text: self info description);
+			editor: (BrTextEditorModel new text: self info description);
 			constraintsDo: [ :c | 
 				c horizontal matchParent.
 				c vertical matchParent ]
@@ -128,7 +128,7 @@ XdPublishInfoAptitude >> newPublishButtonElement [
 XdPublishInfoAptitude >> newTitleElement [
 	^ BrEditorElement new
 			aptitude: BrGlamorousInputFieldSpacingAptitude + XdPublishInfoInnerWidgetAptitude;
-			editor: (BrTextEditor new text: self info title);
+			editor: (BrTextEditorModel new text: self info title);
 			constraintsDo: [ :c | 
 				c horizontal matchParent.
 				c vertical fitContent ]
@@ -138,7 +138,7 @@ XdPublishInfoAptitude >> newTitleElement [
 XdPublishInfoAptitude >> newUsernameElement [
 	^ BrEditorElement new
 			aptitude: BrGlamorousInputFieldSpacingAptitude + XdPublishInfoInnerWidgetAptitude;
-			editor: (BrTextEditor new text: self info username);
+			editor: (BrTextEditorModel new text: self info username);
 			constraintsDo: [ :c | 
 				c horizontal matchParent.
 				c vertical fitContent ]
