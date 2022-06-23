@@ -5,7 +5,7 @@ Class {
 		'url',
 		'fileInfo'
 	],
-	#category : 'XDoc-Client-Commands'
+	#category : #'XDoc-Client-Commands'
 }
 
 { #category : #private }
@@ -49,7 +49,7 @@ XdClientDownloadFileInfoCommand >> fileInfo: aXdFileInfo [
 
 { #category : #private }
 XdClientDownloadFileInfoCommand >> updateXDocUrl [
-	| aXDocUrl spaceName |
+	| aXDocUrl |
 	self fileInfo ifNil: [ ^ self ].
 	aXDocUrl := self client serverUrl 
 		/ XdConstants cdnPathSegments .
