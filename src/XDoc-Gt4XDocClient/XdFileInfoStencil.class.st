@@ -41,8 +41,7 @@ XdFileInfoStencil >> newEmptyElement [
 { #category : #'instance creation' }
 XdFileInfoStencil >> newEmptyLabel [
 	<return: #BlElement>
-	^ BrLabel new 
-		aptitude: BrGlamorousLabelAptitude;
+	^ BrLabel new
 		text: self newEmptyLabelText;
 		constraintsDo: [ :c | 
 			c frame horizontal alignCenter.
