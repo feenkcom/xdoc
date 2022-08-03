@@ -1,13 +1,10 @@
 "
-!XDoc Client
+#XDoc Client
 
-What is XDoc? Learn here: ${class:BaselineOfXdoc}$. 
+What is XDoc? Learn here: {{gtClass:BaselineOfXdoc}}. 
 
 The client component provides the connection to server that serves XDocs.
 
-An example area is the blog feed from below.
-
-${xdocs}$
 "
 Class {
 	#name : #BaselineOfXdocClient,
