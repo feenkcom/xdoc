@@ -51,7 +51,7 @@ XdFileInfoStencil >> newEmptyLabel [
 
 { #category : #'instance creation' }
 XdFileInfoStencil >> newEmptyLabelText [
-	<return: #BlRopedText>
+	<return: #BlRunRopedText>
 	^ 'No content' asRopedText foreground: BrGlamorousColors disabledButtonTextColor
 ]
 

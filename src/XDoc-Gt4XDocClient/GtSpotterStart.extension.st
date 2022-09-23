@@ -2,7 +2,7 @@ Extension { #name : #GtSpotterStart }
 
 { #category : #'*XDoc-Gt4XDocClient' }
 GtSpotterStart >> gtSpotterXdocFor: aStep [
-	<gtSearch>
+	"<gtSearch>"
 	^ aStep listProcessor
 		priority: 30;
 		title: 'XDoc';
