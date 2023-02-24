@@ -91,9 +91,9 @@ XdBytesStreamingStrategy >> open [
 	| aDirectory |
 	self extracted ifNotNil: [ ^ self ].
 	aDirectory := self binaryReadStreamDo: [ :aStream |
-		XdUtility 
-			extractInTempDirectory: aStream
-			basename: 'xdoc-bytes' ].
+		XdUtility
+			extract: aStream
+			inTempDirectoryWithBasename: 'xdoc-bytes' ].
 	self extracted: aDirectory.
 ]
 

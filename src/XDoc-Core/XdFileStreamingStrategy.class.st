@@ -83,12 +83,14 @@ XdFileStreamingStrategy >> memberNamed: aFileName [
 { #category : #'api - streams' }
 XdFileStreamingStrategy >> open [
 	"Prepare the document for reading and editing"
+
 	| aDirectory |
 	self extracted ifNotNil: [ ^ self ].
-	aDirectory := self binaryReadStreamDo: [ :aStream |
-		XdUtility 
-			extractInTempDirectory: aStream
-			basename: self file basenameWithoutExtension ].
+	aDirectory := self
+			binaryReadStreamDo: [ :aStream | 
+				XdUtility
+					extract: aStream
+					inTempDirectoryWithBasename: self file basenameWithoutExtension ].
 	self extracted: aDirectory.
 ]
 

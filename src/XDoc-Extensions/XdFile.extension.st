@@ -1,6 +1,18 @@
 Extension { #name : #XdFile }
 
 { #category : #'*XDoc-Extensions' }
+XdFile >> gtExtractedTreeFor: aView [
+	<gtView>
+	self exists ifFalse: [ ^ aView empty ].
+
+
+	^ aView forward
+		title: 'Extracted';
+		object: [ self streamingStrategy ];
+		view: #gtExtractedTreeFor:
+]
+
+{ #category : #'*XDoc-Extensions' }
 XdFile >> gtLiveFor: aView [
 	<gtView>
 	^ aView forward
