@@ -7,16 +7,29 @@ Class {
 }
 
 { #category : #utility }
-XdUtility class >> extractInTempDirectory: aStream basename: aBasename [
+XdUtility class >> extract: aStream inDirectory: aDirectory basename: aBasename [
 	"Return a directory in which XDoc is extracted"
+
 	<return: #FileReference>
-	| anArchive aTmpDir |
+	| anArchive |
 	anArchive := ZipArchive new.
 	anArchive readFrom: aStream contents readStream.
+	aDirectory ensureCreateDirectory.
+	anArchive extractAllTo: aDirectory.
+	^ aDirectory
+]
+
+{ #category : #utility }
+XdUtility class >> extract: aStream inTempDirectoryWithBasename: aBasename [
+	"Return a directory in which XDoc is extracted"
+
+	<return: #FileReference>
+	| aTmpDir |
 	aTmpDir := FileReference newTempFilePrefix: aBasename suffix: '-extracted-dir'.
-	aTmpDir ensureCreateDirectory.
-	anArchive extractAllTo: aTmpDir.
-	^ aTmpDir
+	^ self
+		extract: aStream
+		inDirectory: aTmpDir
+		basename: aBasename
 ]
 
 { #category : #utility }
