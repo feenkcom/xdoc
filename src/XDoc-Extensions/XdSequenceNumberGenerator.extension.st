@@ -5,7 +5,7 @@ XdSequenceNumberGenerator >> gtSequenceExampleFor: aView [
 	<gtView>
 	self currentId ifNil: [ ^ aView empty ].
 	^ aView forward
-		title: 'Sequence Examples';
+		title: 'Sequence examples';
 		priority: 1;
 		object: [ | aCopy | 
 			aCopy := self copy. 

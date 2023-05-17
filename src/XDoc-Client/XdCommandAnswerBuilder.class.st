@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'context'
 	],
-	#category : 'XDoc-Client-Answers - Builder'
+	#category : #'XDoc-Client-Answers - Builder'
 }
 
 { #category : #building }
@@ -64,7 +64,7 @@ XdCommandAnswerBuilder >> gtCommandsFor: aView [
 	<gtView>
 	self context ifNil: [ ^ aView empty ].
 	^ aView forward 
-		title: 'Command Chain';
+		title: 'Command chain';
 		object: [ self context commandChain ];
 		view: #gtCommandsFor:
 ]

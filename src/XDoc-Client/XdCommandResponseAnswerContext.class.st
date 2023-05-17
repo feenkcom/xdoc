@@ -7,7 +7,7 @@ Class {
 		'command',
 		'commandChain'
 	],
-	#category : 'XDoc-Client-Answers - Builder'
+	#category : #'XDoc-Client-Answers - Builder'
 }
 
 { #category : #accessing }
@@ -38,7 +38,7 @@ XdCommandResponseAnswerContext >> gtCommandsFor: aView [
 	<gtView>
 	self commandChain ifNil: [ ^ aView empty ].
 	^ aView forward 
-		title: 'Command Chain';
+		title: 'Command chain';
 		object: [ self commandChain ];
 		view: #gtCommandsFor:
 ]

@@ -16,7 +16,7 @@ XdWriter >> gtMembersFor: aView [
 	<gtView>
 	self manifest ifNil: [ ^ aView empty ].
 	^ aView forward
-		title: 'ZIP Members';
+		title: 'ZIP members';
 		priority: 2;
 		object: [ self zip ];
 		view: #gtMembersFor:
