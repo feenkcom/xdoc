@@ -6,7 +6,7 @@ XdFile >> gtExtractedTreeFor: aView [
 	self exists ifFalse: [ ^ aView empty ].
 
 	^ aView forward
-		title: 'Extracted Files';
+		title: 'Extracted files';
 		priority: 10;
 		object: [ self streamingStrategy ];
 		view: #gtExtractedTreeFor:
@@ -39,7 +39,7 @@ XdFile >> gtReferenceFor: aView [
 	<gtView>
 	| aList |
 	aList := aView columnedList
-		title: 'ZIP Files' translated;
+		title: 'ZIP files' translated;
 		priority: 3;
 		items: [ self streamingStrategy zip members ].
 	aList

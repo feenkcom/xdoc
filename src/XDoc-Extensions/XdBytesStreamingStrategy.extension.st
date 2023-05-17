@@ -6,7 +6,7 @@ XdBytesStreamingStrategy >> gtExtractedTreeFor: aView [
 	self exists ifFalse: [ ^ aView empty ].
 
 	^ aView forward
-		title: 'Extracted Files';
+		title: 'Extracted files';
 		object: [ self
 				open;
 				extracted ];
