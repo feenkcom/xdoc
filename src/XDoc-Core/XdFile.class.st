@@ -61,6 +61,18 @@ XdFile >> extract [
 	self streamingStrategy open
 ]
 
+{ #category : #accessing }
+XdFile >> gtDisplayOn: stream [
+	super gtDisplayOn: stream.
+
+	self manifest ifNil: [ ^ self ].
+
+	stream
+		nextPut: $(;
+		nextPutAll: self manifest title asString;
+		nextPut: $)
+]
+
 { #category : #'api - testing' }
 XdFile >> hasAuthor [
 	<return: #Boolean>
