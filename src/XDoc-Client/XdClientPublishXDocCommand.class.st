@@ -72,10 +72,6 @@ XdClientPublishXDocCommand >> publicUrlToClipboard [
 XdClientPublishXDocCommand >> responseToClipboard [
 	| aString |
 	self response ifNil: [ ^ self inform: 'A server response is undefined' ].
-	Sensor shiftPressed ifTrue: [ 
-		"Debugging purpose"
-		self response inspect.
-		^ self ].
 	aString := self response printString.
 	Clipboard clipboardText: aString.
    self inform: aString , ' error occurred'.
