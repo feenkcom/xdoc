@@ -60,6 +60,7 @@ XdPlaygroundSettings class >> storedPlaygroundsDirectoryOn: aBuilder [
 		parent: #xdoc;
 		target: self;
 		type: #Directory;
+		default: self defaultDirectory;
 		description: 'Local directory with stored Playgrounds in XDoc format';
 		label: 'Directory with stored Playgrounds'
 
