@@ -33,7 +33,7 @@ BaselineOfXdoc >> baseline: spec [
 	spec for: #'common' do: [
 		spec
 			baseline: 'NeoJSON' with: [
-				spec repository: 'github://svenvc/NeoJSON:c09b91c901ec94e74c6fbd55247cce3f3d0d42b0/repository' ].
+				spec repository: 'github://svenvc/NeoJSON:c4561bac65ff63cf5471c03d0cd6b4f9e4e852f9/repository' ].
 		spec
 			baseline: 'GToolkitFileUtility' with: [
 				spec repository: 'github://feenkcom/gtoolkit-utility:v0.8.292/src' ].
