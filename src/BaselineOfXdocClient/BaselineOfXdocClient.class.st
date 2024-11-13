@@ -24,7 +24,7 @@ BaselineOfXdocClient >> baseline: spec [
 	spec for: #'common' do: [
 		spec
 			baseline: 'XdocClientMinimal' with: [
-				spec repository: 'github://feenkcom/xdoc:v0.8.800/src' ].
+				spec repository: 'github://feenkcom/xdoc:v0.8.801/src' ].
 
 		spec package: 'XDoc-Extensions' with: [
 			spec requires: #(#XdocClientMinimal) ].
