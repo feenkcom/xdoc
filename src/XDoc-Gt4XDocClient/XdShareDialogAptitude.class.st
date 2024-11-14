@@ -5,7 +5,8 @@ Class {
 	#classTraits : 'TXdShareInformationHolderAccess classTrait + TXdShareActionsAccess classTrait',
 	#instVars : [
 		'pager',
-		'document'
+		'document',
+		'futureConfiguration'
 	],
 	#category : #'XDoc-Gt4XDocClient-Dialog - Look'
 }
@@ -28,6 +29,11 @@ XdShareDialogAptitude >> defaultActions [
 	^ XdShareActions null
 ]
 
+{ #category : #accessing }
+XdShareDialogAptitude >> defaultFutureConfiguration [
+	^ XdAsyncConfiguration defaultFutureConfiguration
+]
+
 { #category : #defaults }
 XdShareDialogAptitude >> defaultInformationHolder [
 	^ XdShareInformationHolder new
@@ -35,9 +41,12 @@ XdShareDialogAptitude >> defaultInformationHolder [
 
 { #category : #execution }
 XdShareDialogAptitude >> executeAsTaskIt: aBlock [ 
-	[ aBlock value ] asAsyncFuture await 
+	| aPromise |
+	aPromise := ([ aBlock value ] asAsyncFuture await: self futureConfiguration) 
 		then: #yourself
-		otherwise: #debug
+		otherwise: #debug.
+	self widgetDo: [ :aWidget | 
+		BlPromiseTask new promise: aPromise ]
 ]
 
 { #category : #execution }
@@ -74,6 +83,18 @@ XdShareDialogAptitude >> executeUpdateAction [
 		anAnswer := self actions update.
 		self pager addPage: anAnswer asElement.
 		self pager smoothScrollToLast ]
+]
+
+{ #category : #accessing }
+XdShareDialogAptitude >> futureConfiguration [
+	<return: #AsyncFutureExecutionConfiguration>
+	^ futureConfiguration ifNil: [ 
+		futureConfiguration := self defaultFutureConfiguration ]
+]
+
+{ #category : #accessing }
+XdShareDialogAptitude >> futureConfiguration: aAsyncFutureExecutionConfiguration [
+	futureConfiguration := aAsyncFutureExecutionConfiguration
 ]
 
 { #category : #accessing }

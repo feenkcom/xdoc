@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'client',
 		'successCallbacks',
-		'failureCallbacks'
+		'failureCallbacks',
+		'futureConfiguration'
 	],
 	#category : #'XDoc-Gt4XDocClient-Client'
 }
@@ -35,6 +36,11 @@ XdAsyncClient >> defaultClient [
 	^ XdClient null
 ]
 
+{ #category : #defaults }
+XdAsyncClient >> defaultFutureConfiguration [
+	^ XdAsyncConfiguration defaultFutureConfiguration
+]
+
 { #category : #actions }
 XdAsyncClient >> documents [
 	^ self executeCommand: [ self client documents ].
@@ -53,9 +59,21 @@ XdAsyncClient >> downloadXDocUsingFileInfo: anXdInfo [
 { #category : #'private - execution' }
 XdAsyncClient >> executeCommand: aFuture [
 	| aPromise |
-	aPromise := aFuture asAsyncFuture await.
+	aPromise := aFuture asAsyncFuture await: self futureConfiguration.
 	aPromise then: [ :result | self notifyResult: result ] otherwise: [ :anException | self notifyFailure: anException ].
 	^ aPromise
+]
+
+{ #category : #accessing }
+XdAsyncClient >> futureConfiguration [
+	<return: #AsyncFutureExecutionConfiguration>
+	^ futureConfiguration ifNil: [ 
+		futureConfiguration := self defaultFutureConfiguration ]
+]
+
+{ #category : #accessing }
+XdAsyncClient >> futureConfiguration: aAsyncFutureExecutionConfiguration [
+	futureConfiguration := aAsyncFutureExecutionConfiguration
 ]
 
 { #category : #initialization }
