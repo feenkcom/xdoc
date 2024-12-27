@@ -1,7 +1,7 @@
 {
 	"repositories" : {
 		"github://svenvc/NeoJSON/repository" : "f54cfb4a931971ed356d1dfde0e135951e82daae",
-		"github://feenkcom/gtoolkit-utility/src" : "v0.8.351",
-		"github://feenkcom/gtoolkit-examples/src" : "v0.8.98"
+		"github://feenkcom/gtoolkit-utility/src" : "v0.8.352",
+		"github://feenkcom/gtoolkit-examples/src" : "v0.8.99"
 	}
 }
