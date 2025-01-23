@@ -92,7 +92,7 @@ XdConstants class >> xdocFileName [
 ]
 
 { #category : #accessing }
-XdConstants class >> xdocFileNameMaxLenght [
+XdConstants class >> xdocFileNameMaxLength [
 	^ 42
 ]
 
