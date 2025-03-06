@@ -76,7 +76,7 @@ XdSharePublishDialogStencil >> newDropdownWith: anArray labelled: aString [
 	button := self dropdownButtonLabelled: aString.
 	^ button
 		  aptitude: BrGlamorousButtonWithLabelAndIconAptitude
-			  + (BrGlamorousWithDropdownAptitude
+			  + (BrGlamorousWithExplicitDropdownAptitude
 					   handle: [ 
 						   (self dropdownButtonLabelled: aString)
 							   aptitude: BrGlamorousButtonWithLabelAndIconAptitude
