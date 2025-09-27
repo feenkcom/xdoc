@@ -3,7 +3,7 @@ Class {
 	#superclass : #XdClientCommand,
 	#traits : 'TXdClientResponseInstance',
 	#classTraits : 'TXdClientResponseInstance classTrait',
-	#category : 'XDoc-Client-Commands'
+	#category : #'XDoc-Client-Commands'
 }
 
 { #category : #testing }

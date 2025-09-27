@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'realm'
 	],
-	#category : 'XDoc-Client-Commands'
+	#category : #'XDoc-Client-Commands'
 }
 
 { #category : #accessing }

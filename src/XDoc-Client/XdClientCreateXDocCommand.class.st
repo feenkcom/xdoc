@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'xdoc'
 	],
-	#category : 'XDoc-Client-Commands'
+	#category : #'XDoc-Client-Commands'
 }
 
 { #category : #testing }

@@ -1,7 +1,7 @@
 Class {
 	#name : #XdProtoResponse,
 	#superclass : #Object,
-	#category : 'XDoc-Client-Answers'
+	#category : #'XDoc-Client-Answers'
 }
 
 { #category : #testing }

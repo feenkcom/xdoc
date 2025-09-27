@@ -3,7 +3,7 @@ Trait {
 	#instVars : [
 		'xdocId'
 	],
-	#category : 'XDoc-Client-Traits'
+	#category : #'XDoc-Client-Traits'
 }
 
 { #category : #accessing }

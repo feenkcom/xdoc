@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'token'
 	],
-	#category : 'XDoc-Client-Examples'
+	#category : #'XDoc-Client-Examples'
 }
 
 { #category : #accessing }

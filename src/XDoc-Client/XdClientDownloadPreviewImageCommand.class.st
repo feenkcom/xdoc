@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'fileInfo'
 	],
-	#category : 'XDoc-Client-Commands'
+	#category : #'XDoc-Client-Commands'
 }
 
 { #category : #execution }

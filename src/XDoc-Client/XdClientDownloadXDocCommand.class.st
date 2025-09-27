@@ -6,7 +6,7 @@ Class {
 		'xdFile',
 		'fileInfo'
 	],
-	#category : 'XDoc-Client-Commands'
+	#category : #'XDoc-Client-Commands'
 }
 
 { #category : #private }

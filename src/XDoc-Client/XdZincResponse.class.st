@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'response'
 	],
-	#category : 'XDoc-Client-Answers'
+	#category : #'XDoc-Client-Answers'
 }
 
 { #category : #factory }

@@ -2,7 +2,7 @@ Trait {
 	#name : #TGtDecoratingCommandHolder,
 	#traits : 'TGtOptions',
 	#classTraits : 'TGtOptions classTrait',
-	#category : 'XDoc-Client-Decorating Command Builder'
+	#category : #'XDoc-Client-Decorating Command Builder'
 }
 
 { #category : #'as yet unclassified' }

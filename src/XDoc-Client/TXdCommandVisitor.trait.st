@@ -1,6 +1,6 @@
 Trait {
 	#name : #TXdCommandVisitor,
-	#category : 'XDoc-Client-Answers - Builder'
+	#category : #'XDoc-Client-Answers - Builder'
 }
 
 { #category : #visiting }

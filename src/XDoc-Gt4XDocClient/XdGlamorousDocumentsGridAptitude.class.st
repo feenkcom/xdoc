@@ -83,7 +83,7 @@ XdGlamorousDocumentsGridAptitude >> initializeToolbar [
 	aRefreshButton := BrButton new
 		aptitude: BrGlamorousButtonWithIconAptitude;
 		label: 'Refresh';
-		icon: BrGlamorousIcons refresh asElement;
+		icon: BrGlamorousVectorIcons refresh asElement;
 		action: [ self refreshList ].
 	aToolbar addItem: aRefreshButton.
 	

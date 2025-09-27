@@ -115,7 +115,7 @@ XdPublishInfoAptitude >> newPublishButtonElement [
 				+ BrGlamorousButtonWithLabelAptitude
 				+ XdPublishInfoInnerWidgetAptitude;
 			label: 'Publish';
-			icon: BrGlamorousIcons tocloud asElement;
+			icon: BrGlamorousVectorIcons tocloud asElement;
 			action: (MessageSend receiver: self info selector: #publish);
 			constraintsDo: [ :c | 
 				c linear horizontal alignCenter.

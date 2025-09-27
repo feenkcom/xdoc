@@ -57,7 +57,7 @@ XdGlamorousDocumentsListAptitude >> initializeToolbar [
 	aButton := BrButton new
 		aptitude: BrGlamorousButtonWithIconAndLabelAptitude;
 		label: 'Refresh published documents';
-		icon: BrGlamorousIcons refresh asElement;
+		icon: BrGlamorousVectorIcons refresh asElement;
 		action: [ self refreshList ].
 	toolbar addItem: aButton.
 	self widget addChild: toolbar as: #toolbar.

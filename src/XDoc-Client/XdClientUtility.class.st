@@ -1,7 +1,7 @@
 Class {
 	#name : #XdClientUtility,
 	#superclass : #Object,
-	#category : 'XDoc-Client-Utility'
+	#category : #'XDoc-Client-Utility'
 }
 
 { #category : #'api - file system operations' }

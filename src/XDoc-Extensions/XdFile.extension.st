@@ -46,8 +46,8 @@ XdFile >> gtReferenceFor: aView [
 		column: 'Icon' translated
 		icon: [ :eachIcon | 
 					(eachIcon isDirectory
-						ifTrue: [ BrGlamorousIcons folder ]
-						ifFalse: [ BrGlamorousIcons file ])
+						ifTrue: [ BrGlamorousVectorIcons folder ]
+						ifFalse: [ BrGlamorousVectorIcons file ])
 					 		asElement ] .
 	aList column
 		title: 'Name' translated;

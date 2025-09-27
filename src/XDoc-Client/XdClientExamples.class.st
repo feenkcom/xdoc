@@ -6,7 +6,7 @@ Class {
 		'documentsExamples',
 		'delegate'
 	],
-	#category : 'XDoc-Client-Examples'
+	#category : #'XDoc-Client-Examples'
 }
 
 { #category : #server }

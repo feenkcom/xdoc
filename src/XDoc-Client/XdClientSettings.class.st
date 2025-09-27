@@ -5,7 +5,7 @@ Class {
 		'xdServerUrl',
 		'downloadDirectory'
 	],
-	#category : 'XDoc-Client-Settings'
+	#category : #'XDoc-Client-Settings'
 }
 
 { #category : #accessing }

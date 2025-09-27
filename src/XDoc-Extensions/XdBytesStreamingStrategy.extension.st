@@ -11,11 +11,11 @@ XdBytesStreamingStrategy >> gtExtractedTreeFor: aView [
 				open;
 				extracted ];
 		view: #gtTreeFor:;
-		actionButtonIcon: BrGlamorousIcons spawn
+		actionButtonIcon: BrGlamorousVectorIcons spawn
 			label: 'Directory'
 			tooltip: 'Open the root directory in a file browser'
 			action: [ :aButton | WebBrowser openOn: self extracted asZnUrl ];
-		actionButtonIcon: BrGlamorousIcons spawn
+		actionButtonIcon: BrGlamorousVectorIcons spawn
 			label: 'HTML'
 			tooltip: 'Open index.html in a web browser'
 			action: [ :aButton | 
