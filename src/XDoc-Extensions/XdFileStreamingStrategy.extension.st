@@ -11,7 +11,7 @@ XdFileStreamingStrategy >> gtExtractedTreeFor: aView [
 				open;
 				extracted ];
 		view: #gtTreeFor:;
-		actionButtonIcon: BrGlamorousIcons spawn
+		actionButtonIcon: BrGlamorousVectorIcons spawn
 			label: 'HTML'
 			tooltip: 'Open index.html in a web browser'
 			action: [ :aButton | aButton spawnObject: (WebBrowser openOn: self extracted fullPath) ]

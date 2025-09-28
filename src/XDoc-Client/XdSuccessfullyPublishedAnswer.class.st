@@ -1,7 +1,7 @@
 Class {
 	#name : #XdSuccessfullyPublishedAnswer,
 	#superclass : #XdSuccessfullyCreatedAnswer,
-	#category : 'XDoc-Client-Answers'
+	#category : #'XDoc-Client-Answers'
 }
 
 { #category : #'gt-extension' }
@@ -13,7 +13,7 @@ XdSuccessfullyPublishedAnswer >> gtPublicUrlFor: aView [
 		priority: 1;
 		glamorousCodeFontAndSize;
 		text: [ self command publicUrl ];
-		actionButtonIcon: BrGlamorousIcons clipboard 
+		actionButtonIcon: BrGlamorousVectorIcons clipboard 
 			action: [ :aButton | 
 				self command publicUrlToClipboard ]
 ]
