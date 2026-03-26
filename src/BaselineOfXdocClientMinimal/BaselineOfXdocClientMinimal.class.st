@@ -10,10 +10,10 @@ BaselineOfXdocClientMinimal >> baseline: spec [
 	spec for: #'common' do: [
 		spec
 			baseline: 'Xdoc' with: [
-				spec repository: 'github://feenkcom/xdoc:v0.9.30/src' ].
+				spec repository: 'github://feenkcom/xdoc:v0.9.31/src' ].
 		spec
 			baseline: 'GToolkitExamples' with: [
-				spec repository: 'github://feenkcom/gtoolkit-examples:v0.8.129/src' ].
+				spec repository: 'github://feenkcom/gtoolkit-examples:v0.8.130/src' ].
 
 		spec package: 'XDoc-Client' with: [
 			spec requires: #(#Xdoc #GToolkitExamples) ].
