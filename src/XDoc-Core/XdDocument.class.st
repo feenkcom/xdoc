@@ -43,15 +43,15 @@ XdDocument >> numberOfComponents [
 { #category : #printing }
 XdDocument >> printOn: aStream [
 	super printOn: aStream.
-	aStream 
+	aStream
 		nextPut: $(;
-		nextPutAll: (self type ifNotNil: #typeString ifNil: [ 'no-type' ]);
+		nextPutAll: (self type ifNotNil: [ :v | v typeString ] ifNil: [ 'no-type' ]);
 		nextPut: $,;
 		space.
-	self components 
-		ifNotNil: [ :anArray |
-			aStream 
-				print: anArray size; 
+	self components
+		ifNotNil: [ :anArray | 
+			aStream
+				print: anArray size;
 				space;
 				nextPutAll: ('component' asPluralBasedOn: anArray size) ]
 		ifNil: [ aStream nextPutAll: 'no-components' ].

@@ -34,7 +34,7 @@ XdClientPublishXDocCommand >> execute [
 { #category : #testing }
 XdClientPublishXDocCommand >> isSuccess [
 	<return: #Boolean>
-	^ self response ifNotNil: #isSuccess ifNil: false
+	^ self response ifNotNil: [ :v | v isSuccess ] ifNil: false
 ]
 
 { #category : #accessing }

@@ -177,12 +177,10 @@ XdClient >> gtDocumentListFor: aView [
 	^ aView columnedList
 		title: 'List';
 		items: [ self documents ];
-		column: 'Title' text: [ :doc | doc title];
-		column: 'Author' text: [ :doc | doc author];
-		column: 'Created on' text: [ :doc | 
-			doc createdOn 
-				ifNotNil: #asLocalStringYMDHM
-				ifNil: [ '' ] ]
+		column: 'Title' text: [ :doc | doc title ];
+		column: 'Author' text: [ :doc | doc author ];
+		column: 'Created on'
+			text: [ :doc | doc createdOn ifNotNil: [ :v | v asLocalStringYMDHM ] ifNil: [ '' ] ]
 ]
 
 { #category : #initialization }
