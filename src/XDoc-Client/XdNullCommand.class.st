@@ -1,5 +1,5 @@
 Class {
 	#name : #XdNullCommand,
 	#superclass : #XdProtoNullCommand,
-	#category : 'XDoc-Client-Commands'
+	#category : #'XDoc-Client-Commands'
 }

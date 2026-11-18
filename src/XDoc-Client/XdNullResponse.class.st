@@ -3,7 +3,7 @@ Class {
 	#superclass : #XdProtoResponse,
 	#traits : 'TGtUniqueInstance',
 	#classTraits : 'TGtUniqueInstance classTrait',
-	#category : 'XDoc-Client-Answers'
+	#category : #'XDoc-Client-Answers'
 }
 
 { #category : #'testing - response status' }

@@ -17,7 +17,7 @@ ZnBase64Encoder new
 Class {
 	#name : #XdDocumentsExamples,
 	#superclass : #Object,
-	#category : 'XDoc-Client-Examples'
+	#category : #'XDoc-Client-Examples'
 }
 
 { #category : #documenter }

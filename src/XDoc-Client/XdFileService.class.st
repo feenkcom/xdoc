@@ -1,7 +1,7 @@
 Class {
 	#name : #XdFileService,
 	#superclass : #Object,
-	#category : 'XDoc-Client-FileService'
+	#category : #'XDoc-Client-FileService'
 }
 
 { #category : #'System-FileRegistry' }

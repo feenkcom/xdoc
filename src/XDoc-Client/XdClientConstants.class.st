@@ -1,7 +1,7 @@
 Class {
 	#name : #XdClientConstants,
 	#superclass : #Object,
-	#category : 'XDoc-Client-Utility'
+	#category : #'XDoc-Client-Utility'
 }
 
 { #category : #'xdoc server defaults' }

@@ -3,7 +3,7 @@ Class {
 	#superclass : #XdProtoClient,
 	#traits : 'TGtUniqueInstance',
 	#classTraits : 'TGtUniqueInstance classTrait',
-	#category : 'XDoc-Client-Core'
+	#category : #'XDoc-Client-Core'
 }
 
 { #category : #accessing }

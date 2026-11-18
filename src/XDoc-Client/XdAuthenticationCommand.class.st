@@ -1,7 +1,7 @@
 Class {
 	#name : #XdAuthenticationCommand,
 	#superclass : #XdDelegateCommand,
-	#category : 'XDoc-Client-Commands'
+	#category : #'XDoc-Client-Commands'
 }
 
 { #category : #visitor }

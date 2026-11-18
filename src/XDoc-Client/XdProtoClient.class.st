@@ -3,7 +3,7 @@ Class {
 	#superclass : #Object,
 	#traits : 'TGtAssert',
 	#classTraits : 'TGtAssert classTrait',
-	#category : 'XDoc-Client-Core'
+	#category : #'XDoc-Client-Core'
 }
 
 { #category : #accessing }

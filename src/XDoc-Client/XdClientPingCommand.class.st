@@ -1,7 +1,7 @@
 Class {
 	#name : #XdClientPingCommand,
 	#superclass : #XdClientWithResponseCommand,
-	#category : 'XDoc-Client-Commands'
+	#category : #'XDoc-Client-Commands'
 }
 
 { #category : #visiting }

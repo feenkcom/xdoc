@@ -1,5 +1,5 @@
 Class {
 	#name : #XdSuccessfulAnswer,
 	#superclass : #XdCommandAnswer,
-	#category : 'XDoc-Client-Answers'
+	#category : #'XDoc-Client-Answers'
 }

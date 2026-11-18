@@ -6,7 +6,7 @@ Class {
 	#instVars : [
 		'context'
 	],
-	#category : 'XDoc-Client-Answers - Builder'
+	#category : #'XDoc-Client-Answers - Builder'
 }
 
 { #category : #building }

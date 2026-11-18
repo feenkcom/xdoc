@@ -1,7 +1,7 @@
 Class {
 	#name : #XdFailureAnswer,
 	#superclass : #XdFailedAnswer,
-	#category : 'XDoc-Client-Answers'
+	#category : #'XDoc-Client-Answers'
 }
 
 { #category : #accessing }

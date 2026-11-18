@@ -3,7 +3,7 @@ Trait {
 	#instVars : [
 		'response'
 	],
-	#category : 'XDoc-Client-Traits'
+	#category : #'XDoc-Client-Traits'
 }
 
 { #category : #accessing }

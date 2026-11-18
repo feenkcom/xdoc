@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'exception'
 	],
-	#category : 'XDoc-Client-Answers'
+	#category : #'XDoc-Client-Answers'
 }
 
 { #category : #accessing }

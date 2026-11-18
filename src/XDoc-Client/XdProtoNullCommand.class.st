@@ -3,7 +3,7 @@ Class {
 	#superclass : #XdProtoClientCommand,
 	#traits : 'TGtUniqueInstance',
 	#classTraits : 'TGtUniqueInstance classTrait',
-	#category : 'XDoc-Client-Commands'
+	#category : #'XDoc-Client-Commands'
 }
 
 { #category : #execution }
