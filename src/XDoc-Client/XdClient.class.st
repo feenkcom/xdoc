@@ -102,6 +102,18 @@ XdClient >> documents [
 	^ self downloadList
 ]
 
+{ #category : #'accessing - options - download' }
+XdClient >> downloadDirectory [
+	^ self
+		optionAt: #downloadDirectory
+		ifAbsent: [ XdClientSettings downloadDirectory ]
+]
+
+{ #category : #'accessing - options - download' }
+XdClient >> downloadDirectory: aDirectory [
+	self optionAt: #downloadDirectory put: aDirectory asFileReference
+]
+
 { #category : #'actions - reading' }
 XdClient >> downloadFileInfo: aZnUrl [ 
 	"Download an XDoc file info from a public server"

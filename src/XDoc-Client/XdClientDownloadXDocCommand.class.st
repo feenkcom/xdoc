@@ -14,8 +14,8 @@ XdClientDownloadXDocCommand >> downloadFile [
 	<return: #FileReference>
 	| aBasename |
 	aBasename := self fileInfo xdocUrl asZnUrl lastPathSegment.
-	^ XdClientUtility 
-		notExistingFileIn: XdClientSettings downloadDirectory
+	^ XdClientUtility
+		notExistingFileIn: self client downloadDirectory
 		basename: aBasename
 ]
 
