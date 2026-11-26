@@ -57,11 +57,15 @@ XdClientExamples >> cleanServerBasicAuthenticator [
 { #category : #client }
 XdClientExamples >> client [
 	<gtExample>
-	| aClient anUrl |
+	| aClient anUrl aDirectory |
+	aDirectory := XdClientSettings downloadDirectory / 'examples'
+			/ UUID new asString.
 	aClient := XdClient new.
+	aClient downloadDirectory: aDirectory.
 	anUrl := self serverUrl.
 	aClient serverUrl: anUrl.
 	self assert: aClient serverUrl equals: anUrl.
+	self assert: aClient downloadDirectory equals: aDirectory asFileReference.
 	^ aClient
 ]
 
